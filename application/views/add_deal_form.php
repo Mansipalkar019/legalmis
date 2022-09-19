@@ -667,7 +667,7 @@
          var service_id_1 = response.service_details.id;
          // if(response.service_details.brand_name == "Yes"){
             // html11 +='<div class="col-md-3" id="show_brand_content1_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-3" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></select></div></div></div><div class="col-md-3" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">*</span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows" type="button" class="btn btn-info" style="height:32px;"><i class="glyphicon glyphicon-add"></i></button></div></div><div class="row"></div>'; 
-            html11 +='<div class="col-md-3" id="show_brand_content1_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-3" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></select></div></div></div><div class="col-md-3" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows" type="button" class="btn btn-info" style="height:32px;"><i class="glyphicon glyphicon-add"></i></button></div></div><div class="row"></div>'; 
+         html11 +='<div class="col-md-3" id="show_brand_content1_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-3" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></select></div></div></div><div class="col-md-3" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:32px;"><i class="glyphicon glyphicon-add"></i></button></div></div><div class="row"></div>'; 
             
          // } else {
          //    console.log("bye");
@@ -684,7 +684,28 @@
       });
     
        $('.tokenizer').trigger('change.select2');
-      
+
+       var count1 = 0;
+      $('#addRows_'+service_id_1+'').click(function() {
+               count1++;
+               var html2 = '';
+               html2 += '<div class="col-md-3" id="show_brand_content_'+count1+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer1" multiple="multiple" style="width: 100% !important;" name="brand_name_'+count1+service_id_1+'[]" id="brand_name_'+count1+service_id_1+'" onchange="get_brand_name(this.value)"></select></div></div></div><div class="col-md-3" id="show_company_content_'+count1+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+count1+service_id_1+'[]" id="class_name_'+count1+service_id_1+'" ></select></div></div></div>';             
+               
+               //  if (count < 10) {
+                  $('#new_brands_display').append(html2);
+               //  }
+            $('#'+'brand_name_'+count1+service_id_1).select2({
+            tags: true,
+            tokenSeparators: [',', ' '],
+            });
+            $('#'+'class_name_'+count1+service_id_1).select2({
+            tags: true,
+            tokenSeparators: [',', ' '],
+            });
+            $('.tokenizer1').trigger('change.select2');
+
+            });
+           
             if(response.html != ""){
                
                $("#sub_services").html(response.html);
@@ -710,23 +731,5 @@
    //           tags: true,
    //           tokenSeparators: [',', ' '],
    //          });
-   var count1 = 0;
-      $('#addRows').click(function() {
-               count1++;
-               var html2 = '';
-               html2 += '<div class="col-md-3" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></select></div></div></div><div class="col-md-3" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div>';             
-               
-               //  if (count < 10) {
-                  $('#new_brands_display').append(html2);
-               //  }
-            $('#'+'brand_name_'+service_id_1).select2({
-            tags: true,
-            tokenSeparators: [',', ' '],
-            });
-            $('#'+'class_name_'+service_id_1).select2({
-            tags: true,
-            tokenSeparators: [',', ' '],
-            });
-            $('.tokenizer').trigger('change.select2');
-            });
+   
 </script>
