@@ -538,7 +538,7 @@ class Sales extends CI_Controller
 
     public function save_deal()
     {
-        // print_r($_POST); 
+        print_r($_POST); die;
         $services =  $this->input->post('services');
         foreach ($services as $services_key => $services_row) {
             $brand_name[$services_row] =  $this->input->post('brand_name_'.$services_row);
