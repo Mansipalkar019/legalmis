@@ -665,14 +665,9 @@
    
          var html11="";
          var service_id_1 = response.service_details.id;
-         // if(response.service_details.brand_name == "Yes"){
-            // html11 +='<div class="col-md-3" id="show_brand_content1_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-3" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></select></div></div></div><div class="col-md-3" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">*</span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows" type="button" class="btn btn-info" style="height:32px;"><i class="glyphicon glyphicon-add"></i></button></div></div><div class="row"></div>'; 
-         html11 +='<div class="col-md-3" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-3" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-3" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:32px;"><i class="glyphicon glyphicon-add"></i></button></div></div><div class="row"></div>'; 
-            
-         // } else {
-         //    console.log("bye");
-         // }
-         // console.log(html11);
+     
+         html11 +='<div class="col-md-3" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-3" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-3" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:32px;"><i class="glyphicon glyphicon-add"></i></button></div></div><input type="hidden" class="form-control"  name="count" id="count" value="0"></input><div class="row"></div>'; 
+       
       $('#brands_display').append(html11);   
       // $('#'+'brand_name_'+service_id_1).select2({
       //    tags: true,
@@ -685,38 +680,45 @@
     
        $('.tokenizer').trigger('change.select2');
 
-       var count1 = 0;
+       //var count1 = 0;
       $('#addRows_'+service_id_1+'').click(function() {
-               count1++;
+              // count1++;
+              var latest_count = $('#count').val();
+               var new_count = parseInt(latest_count) + 1;
                var html2 = '';
-               html2 += '<div class="col-md-3" id="show_brand_content_'+count1+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer1" style="width: 100% !important;" name="brand_name_'+count1+service_id_1+'[]" id="brand_name_'+count1+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-3" id="show_company_content_'+count1+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+count1+service_id_1+'[]" id="class_name_'+count1+service_id_1+'" ></select></div></div></div>';             
+               html2 += '<div id="inputnewrow_'+new_count+'"><div class="col-md-3" id="show_brand_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer1" style="width: 100% !important;" name="brand_name1_'+new_count+service_id_1+'[]" id="brand_name1_'+new_count+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-3" id="show_company_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer1" multiple="multiple" style="width: 100% !important;" name="class_name1_'+new_count+service_id_1+'[]" id="class_name1_'+new_count+service_id_1+'" ></select></div></div></div><button id="removeRow" type="button" class="btn btn-danger btn-sm removeRow" style="height:30px;margin-top:5px;">Remove</button></div>';             
                
-               //  if (count < 10) {
-                  $('#new_brands_display').append(html2);
-               //  }
+               
+               $('#new_brands_display').append(html2);
+            
             // $('#'+'brand_name_'+count1+service_id_1).select2({
             // tags: true,
             // tokenSeparators: [',', ' '],
             // });
-            $('#'+'class_name_'+count1+service_id_1).select2({
+            $('#count').val(new_count);
+            $('#'+'class_name1_'+new_count+service_id_1).select2({
             tags: true,
             tokenSeparators: [',', ' '],
             });
-            $('.tokenizer1').trigger('change.select2');
-
-            });
+          
+      
+       
 
             $(document).on('select2:unselect', '#services',function(e) {
-            var data = e.params.data;
-            var service_id = data.id;
+            var data1 = e.params.data;
+            var service_id_1 = data1.id;
             //   $('#brand_name_'+service_id). select2('destroy');
-            $('#brand_name_'+count1+service_id_1). remove();
-            $('#show_brand_content_'+count1+service_id_1).remove();
-            $('#show_company_content_'+count1+service_id_1).remove();
-            
-            // $('#'+'class_name_'+service_id). select2('remove');
+            $('#brand_name1_'+new_count+service_id_1). remove();
+            $('#show_brand_content1_'+new_count+service_id_1).remove();
+            $('#show_company_content1_'+new_count+service_id_1).remove();
+            $('#addRows_'+new_count+service_id_1).remove();
             });
-           
+
+            });
+
+            $('.tokenizer1').trigger('change.select2');
+
+         
             if(response.html != ""){
                
                $("#sub_services").html(response.html);
@@ -726,6 +728,13 @@
       }
       });
    });
+
+   $(document).on('click', '#removeRow', function() {
+            var latest_count = $('#count').val();
+            var new_count = parseInt(latest_count) - 1;
+            $('#count').val(new_count);
+            $(this).closest("div").remove();      
+         });
    
    $(document).on('select2:unselect', '#services',function(e) {
      var data = e.params.data;
@@ -737,10 +746,7 @@
      $('#removelabel_'+service_id).remove();
      $('#addRows_'+service_id).remove();
    });
+
    
-   // $(".tokenizer").select2({
-   //           tags: true,
-   //           tokenSeparators: [',', ' '],
-   //          });
    
 </script>
