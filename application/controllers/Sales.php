@@ -177,11 +177,6 @@ class Sales extends CI_Controller
         echo "<br>TODO: show deal sales info & services backend works info";
     }
 
-    // routed to show custom 4 columns page
-    // the grocery_crud url is : http://192.168.0.55/legalmis/sales/index/read/1 
-    // & the action button is default grocery_crud View grid action btn 
-    // [while we can add our own custom button; but this helps rapid development]
-    // REFER: $route['sales/index/read/(:num)'] = 'sales/read-deal/$1';
     public function read_deal($deal_row_id)
     {
         echo "Deal Row Id: {$deal_row_id}";
@@ -543,14 +538,16 @@ class Sales extends CI_Controller
 
     public function save_deal()
     {
-       
+        // print_r($_POST); 
         $services =  $this->input->post('services');
         foreach ($services as $services_key => $services_row) {
             $brand_name[$services_row] =  $this->input->post('brand_name_'.$services_row);
-
+            $class_name[$services_row] =  $this->input->post('class_name');
            
         }
+        print_r($services);
         print_r($brand_name);
+        print_r($class_name);
         // if($services_row==$brand_name){
         //     echo "in";
         // }else{
