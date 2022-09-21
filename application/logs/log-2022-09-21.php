@@ -116,6 +116,7 @@ ERROR - 2022-09-21 16:26:59 --> Severity: Notice --> Undefined offset: 2 C:\xamp
 ERROR - 2022-09-21 16:26:59 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 563
 ERROR - 2022-09-21 16:27:26 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 563
 ERROR - 2022-09-21 16:27:26 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 563
+<<<<<<< HEAD
 ERROR - 2022-09-21 16:39:33 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 557
 ERROR - 2022-09-21 16:39:33 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 557
 ERROR - 2022-09-21 16:39:33 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 557
@@ -224,3 +225,49 @@ ERROR - 2022-09-21 17:45:28 --> Severity: Warning --> ini_set(): Headers already
 ERROR - 2022-09-21 17:45:28 --> Severity: Warning --> session_set_save_handler(): Cannot change save handler when headers already sent C:\xampp\htdocs\legalmis\system\libraries\Session\Session.php 110
 ERROR - 2022-09-21 17:45:28 --> Severity: Warning --> session_start(): Cannot start session when headers already sent C:\xampp\htdocs\legalmis\system\libraries\Session\Session.php 137
 ERROR - 2022-09-21 17:45:28 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\legalmis\index.php:1) C:\xampp\htdocs\legalmis\system\helpers\url_helper.php 565
+=======
+ERROR - 2022-09-21 17:10:24 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\controllers\Sales.php 566
+ERROR - 2022-09-21 17:10:49 --> Severity: Notice --> Undefined variable: the_insert_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 547
+ERROR - 2022-09-21 17:10:49 --> Query error: Column 'sales_id' cannot be null - Invalid query: INSERT INTO `sales_services` (`sales_id`, `services_id`) VALUES (NULL, '1')
+ERROR - 2022-09-21 17:17:24 --> Severity: Notice --> Undefined variable: the_insert_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 547
+ERROR - 2022-09-21 17:17:24 --> Query error: Column 'sales_id' cannot be null - Invalid query: INSERT INTO `sales_services` (`sales_id`, `services_id`) VALUES (NULL, '1')
+ERROR - 2022-09-21 17:17:35 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\system\database\DB_driver.php 1484
+ERROR - 2022-09-21 17:17:35 --> Query error: Unknown column 'Array' in 'field list' - Invalid query: INSERT INTO `sale_service_brand` (`fk_sales_id`, `fk_service_id`, `brand_name`) VALUES ('', '3', Array)
+ERROR - 2022-09-21 17:20:05 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 563
+ERROR - 2022-09-21 17:20:25 --> Severity: error --> Exception: syntax error, unexpected '=', expecting :: (T_PAAMAYIM_NEKUDOTAYIM) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 559
+ERROR - 2022-09-21 17:21:15 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:15 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:15 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:15 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:15 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:15 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:55 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:55 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:55 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:56 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:56 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:21:56 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:22:34 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:22:34 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:22:34 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:22:34 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:22:34 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 561
+ERROR - 2022-09-21 17:50:19 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\system\database\DB_driver.php 1484
+ERROR - 2022-09-21 17:50:19 --> Query error: Unknown column 'Array' in 'field list' - Invalid query: INSERT INTO `sale_service_brand` (`fk_sales_id`, `fk_service_id`, `brand_name`) VALUES ('', 1, Array)
+ERROR - 2022-09-21 17:52:43 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 564
+ERROR - 2022-09-21 17:52:43 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 564
+ERROR - 2022-09-21 17:52:43 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 564
+ERROR - 2022-09-21 17:52:43 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 564
+ERROR - 2022-09-21 17:52:43 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 564
+ERROR - 2022-09-21 17:52:43 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 564
+ERROR - 2022-09-21 17:55:15 --> Severity: Compile Error --> Cannot use [] for reading C:\xampp\htdocs\legalmis\application\controllers\Sales.php 562
+ERROR - 2022-09-21 18:01:47 --> Severity: error --> Exception: syntax error, unexpected 'foreach' (T_FOREACH), expecting function (T_FUNCTION) or const (T_CONST) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 579
+ERROR - 2022-09-21 18:20:59 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\controllers\Sales.php 573
+ERROR - 2022-09-21 18:31:43 --> Severity: error --> Exception: syntax error, unexpected 'die' (T_EXIT), expecting function (T_FUNCTION) or const (T_CONST) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 602
+ERROR - 2022-09-21 18:39:48 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\system\database\DB_driver.php 1484
+ERROR - 2022-09-21 18:39:48 --> Query error: Unknown column 'Array' in 'field list' - Invalid query: INSERT INTO `sale_service_class` (`fk_sale_id`, `fk_service_id`, `fk_brand_id`, `class_name`) VALUES ('', 1, 1, Array)
+ERROR - 2022-09-21 18:40:52 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 579
+ERROR - 2022-09-21 18:40:52 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 579
+ERROR - 2022-09-21 18:40:52 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\legalmis\application\controllers\Sales.php 579
+ERROR - 2022-09-21 18:42:37 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 959
+>>>>>>> fb69cbc8309c53f99cd74170971e1a337283ce7f

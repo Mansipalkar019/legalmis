@@ -556,42 +556,7 @@ class Sales extends CI_Controller
   }
 
     public function save_deal()
-    {
-        //print_r($_POST); die;
-        $services =  $this->input->post('services');
-        $class_name=$this->input->post('class_name');
-       
-
-        foreach ($services as $services_key => $services_row) {
-            $brand_name[$services_row] =  $this->input->post('brand_name_'.$services_row);
-            $class_name[$services_row] =  $this->input->post('class_name_'.$services_row);
-            
-        }
-            foreach($brand_name as $brand_name_key => $brand_name_row){
-                foreach($class_name as $class_name_key => $class_name_row)
-                {                  
-                                foreach($class_name_row as $new_class_name_key => $new_class_name_row)
-                                {
-                                        $sub_class=explode('_',$new_class_name_key);
-                                }
-                } 
-            }
-                
-           // foreach($brand_name as $brand_name_key => $brand_name_row)
-                    // {
-                    //      print_r($brand_name_row);
-                    //     // if($sub_class[1] == $brand_name_key)
-                    //     // {
-                    //         echo 'class'.$sub_class[1].'brand_name'.$brand_name_key;
-                    //         // $this->db->insert("sale_service_brand", array('fk_service_id'=>$services[$brand_name_key],'brand_name'=>$brand_name_row));
-                    //         // $last_brand_id=$this->db->insert_id();
-                    //         //$this->db->insert("sale_service_class", array('fk_service_id'=>$services_row,'fk_brand_id'=>$last_brand_id));
-                    //     //}
-                    // }
-       die();
-
-     
-
+    {    
         $this->form_validation->set_rules('sale_date', 'Sale Date', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('services[]', 'Services', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('sub_services[]', 'Sub Services', 'trim|required',array('required'=>'This field is required'));
@@ -869,7 +834,52 @@ class Sales extends CI_Controller
                 ));
                 //echo $this->db->last_query();die();
                 if(!empty($the_insert_id = $this->db->insert_id())){
+                    $services =  $this->input->post('services');
+        $class_name=$this->input->post('class_name');       
 
+        foreach ($services as $services_key => $services_row) {
+            $curl_data = array(
+                'sales_id' =>$the_insert_id,
+                'services_id'=>$services_row
+            );
+
+            $this->model->insertData('sales_services',$curl_data);
+            $brand_name[$services_row] =  $this->input->post('brand_name_'.$services_row);
+            $class_name[$services_row] =  $this->input->post('class_name_'.$services_row);                    
+        }
+        foreach ($brand_name as $brand_name_key => $brand_name_row) {
+                    $brands_name  = $brand_name_row;
+                    $class_name_data = $class_name[$brand_name_key];
+                    foreach ($brands_name as $brands_name_key => $brands_name_row) {
+                        // echo '<pre>'; print_r($brands_name_key); 
+                        $insert_brand_data = array(
+                                'fk_sales_id' =>$the_insert_id,
+                                'fk_service_id'=>$brand_name_key,
+                                'brand_name'=>$brands_name_row,
+
+                            );
+
+                         $brand_last_inserted_id = $this->model->insertData('sale_service_brand',$insert_brand_data);  
+
+                        foreach ($class_name_data as $class_name_data_key => $class_name_data_row) {
+                            $class_name_datas = $class_name_data_row;
+                            if($brands_name_key == $class_name_data_key){
+                                foreach ($class_name_datas as $class_name_datas_key => $class_name_datas_row) {
+                                     $insert_class_data = array(
+                                        'fk_sale_id' =>$the_insert_id,
+                                        'fk_service_id'=>$brand_name_key,
+                                        'fk_brand_id'=>$brand_last_inserted_id,
+                                        'class_name'=>$class_name_datas_row
+
+                                    );
+                                 
+                                    $this->model->insertData('sale_service_class',$insert_class_data); 
+                                }
+                            }
+                           
+                        }
+                    }
+        } 
                     if(!empty($sub_services))
                     {
                         foreach($sub_services as $sub_services_key =>$sub_services_row){
@@ -888,29 +898,7 @@ class Sales extends CI_Controller
                             }
     
                         }
-                    }
-                   
-                    if(!empty($services))
-                    {
-                        foreach ($services as $id)
-                        {
-                            $this->db->insert("sales_services", array(
-                                'sales_id'      => $the_insert_id,
-                                'services_id'   => $id
-                            ));
-                        }
-                    }
-                   
-                    if(!empty($document_list))
-                    {
-                        foreach ($document_list as $id)
-                        {
-                            $this->db->insert("sales_document_list", array(
-                                'sales_id'              => $the_insert_id,
-                                'document_list_id'      => $id
-                            ));
-                        }
-                    }
+                    }                               
                 
                     $response['status']='success';
                     $response['error']=array('msg' => "Sale Report Inserted Successfully !");
