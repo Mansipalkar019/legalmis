@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../MpdfException.php';
+
 define("_OTL_OLD_SPEC_COMPAT_1", true);
 
 define("_DICT_NODE_TYPE_SPLIT", 0x01);
@@ -290,7 +292,10 @@ class otl
 			$this->assocMarks = array();  // assocMarks[$posarr mpos] => array(compID, ligPos)
 
 			if (!isset($this->GDEFdata[$this->fontkey]['GSUBGPOStables'])) {
-				$this->ttfOTLdata = $this->GDEFdata[$this->fontkey]['GSUBGPOStables'] = file_get_contents(_MPDF_TTFONTDATAPATH . $this->fontkey . '.GSUBGPOStables.dat', 'rb') or die('Can\'t open file ' . _MPDF_TTFONTDATAPATH . $this->fontkey . '.GSUBGPOStables.dat');
+				$this->ttfOTLdata = $this->GDEFdata[$this->fontkey]['GSUBGPOStables'] = file_get_contents(_MPDF_TTFONTDATAPATH . $this->fontkey . '.GSUBGPOStables.dat', 'rb');
+				if (!$this->ttfOTLdata) {
+					throw new MpdfException('Can\'t open file ' . _MPDF_TTFONTDATAPATH . $this->fontkey . '.GSUBGPOStables.dat');
+				}
 			} else {
 				$this->ttfOTLdata = $this->GDEFdata[$this->fontkey]['GSUBGPOStables'];
 			}
@@ -891,8 +896,8 @@ class otl
 						// so we will do one minor change here:
 						// From ICU: If the present character is a number, and the next character is a pre-number combining mark
 						// then the two characters are reordered
-						// From MS OTL spec the following are Digit modifiers (Md): 0F18�0F19, 0F3E�0F3F
-						// Digits: 0F20�0F33
+						// From MS OTL spec the following are Digit modifiers (Md): 0F18–0F19, 0F3E–0F3F
+						// Digits: 0F20–0F33
 						// On testing only 0x0F3F (pre-based mark) seems to need re-ordering
 						for ($ptr = 0; $ptr < count($this->OTLdata) - 1; $ptr++) {
 							if (INDIC::in_range($this->OTLdata[$ptr]['uni'], 0x0F20, 0x0F33) && $this->OTLdata[$ptr + 1]['uni'] == 0x0F3F) {
@@ -1607,7 +1612,7 @@ class otl
 		return 0;
 	}
 
-	function _applyGSUBsubtable($lookupID, $subtable, $ptr, $currGlyph, $currGID, $subtable_offset, $Type, $Flag, $MarkFilteringSet, $LuCoverage, $level = 0, $currentTag, $is_old_spec, $tagInt)
+	function _applyGSUBsubtable($lookupID, $subtable, $ptr, $currGlyph, $currGID, $subtable_offset, $Type, $Flag, $MarkFilteringSet, $LuCoverage, $level = 0, $currentTag = '', $is_old_spec = false, $tagInt = 0)
 	{
 		$ignore = $this->_getGCOMignoreString($Flag, $MarkFilteringSet);
 
@@ -1997,8 +2002,7 @@ class otl
 			//===========
 			// Format 3: Coverage-based Context Glyph Substitution
 			else if ($SubstFormat == 3) {
-				die("GSUB Lookup Type " . $Type . " Format " . $SubstFormat . " not TESTED YET.");
-				return 0;
+				throw new MpdfException("GSUB Lookup Type " . $Type . " Format " . $SubstFormat . " not TESTED YET.");
 			}
 		}
 
@@ -2348,7 +2352,7 @@ class otl
 		}
 
 		else {
-			die("GSUB Lookup Type " . $Type . " not supported.");
+			throw new MpdfException("GSUB Lookup Type " . $Type . " not supported.");
 		}
 	}
 
@@ -3106,7 +3110,7 @@ class otl
 		$ok = true;
 		$matches = array();
 		while ($ok) {
-			$x = ord($dict{$dictptr});
+			$x = ord($dict[$dictptr]);
 			$c = $this->OTLdata[$ptr]['uni'] & 0xFF;
 			if ($x == _DICT_INTERMEDIATE_MATCH) {
 //echo "DICT_INTERMEDIATE_MATCH: ".dechex($c).'<br />';
@@ -3125,11 +3129,11 @@ class otl
 			} else if ($x == _DICT_NODE_TYPE_LINEAR) {
 //echo "DICT_NODE_TYPE_LINEAR: ".dechex($c).'<br />';
 				$dictptr++;
-				$m = ord($dict{$dictptr});
+				$m = ord($dict[$dictptr]);
 				if ($c == $m) {
 					$ptr++;
 					if ($ptr > count($this->OTLdata) - 1) {
-						$next = ord($dict{$dictptr + 1});
+						$next = ord($dict[$dictptr + 1]);
 						if ($next == _DICT_INTERMEDIATE_MATCH || $next == _DICT_FINAL_MATCH) {
 							// Do not match if next character in text is a Mark
 							if (isset($this->OTLdata[$ptr]['uni']) && strpos($this->GlyphClassMarks, $this->OTLdata[$ptr]['hex']) === false) {
@@ -3147,13 +3151,13 @@ class otl
 			} else if ($x == _DICT_NODE_TYPE_SPLIT) {
 //echo "DICT_NODE_TYPE_SPLIT ON ".dechex($d).": ".dechex($c).'<br />';
 				$dictptr++;
-				$d = ord($dict{$dictptr});
+				$d = ord($dict[$dictptr]);
 				if ($c < $d) {
 					$dictptr += 5;
 				} else {
 					$dictptr++;
 					// Unsigned long 32-bit offset
-					$offset = (ord($dict{$dictptr}) * 16777216) + (ord($dict{$dictptr + 1}) << 16) + (ord($dict{$dictptr + 2}) << 8) + ord($dict{$dictptr + 3});
+					$offset = (ord($dict[$dictptr]) * 16777216) + (ord($dict[$dictptr + 1]) << 16) + (ord($dict[$dictptr + 2]) << 8) + ord($dict[$dictptr + 3]);
 					$dictptr = $offset;
 				}
 			} else {
@@ -3286,7 +3290,7 @@ class otl
 		return $pos;
 	}
 
-	function _applyGPOSsubtable($lookupID, $subtable, $ptr, $currGlyph, $currGID, $subtable_offset, $Type, $Flag, $MarkFilteringSet, $LuCoverage, $tag, $level = 0, $is_old_spec)
+	function _applyGPOSsubtable($lookupID, $subtable, $ptr, $currGlyph, $currGID, $subtable_offset, $Type, $Flag, $MarkFilteringSet, $LuCoverage, $tag, $level = 0, $is_old_spec = false)
 	{
 		if (($Flag & 0x0001) == 1) {
 			$dir = 'RTL';
@@ -3806,8 +3810,7 @@ class otl
 			// Format 1:
 			//===========
 			if ($PosFormat == 1) {
-				die("GPOS Lookup Type " . $Type . " Format " . $PosFormat . " not TESTED YET.");
-				return 0;
+				throw new MpdfException("GPOS Lookup Type " . $Type . " Format " . $PosFormat . " not TESTED YET.");
 			}
 			//===========
 			// Format 2:
@@ -3922,10 +3925,9 @@ class otl
 			// Format 3:
 			//===========
 			else if ($PosFormat == 3) {
-				die("GPOS Lookup Type " . $Type . " Format " . $PosFormat . " not TESTED YET.");
-				return 0;
+				throw new MpdfException("GPOS Lookup Type " . $Type . " Format " . $PosFormat . " not TESTED YET.");
 			} else {
-				die("GPOS Lookup Type " . $Type . ", Format " . $PosFormat . " not supported.");
+				throw new MpdfException("GPOS Lookup Type " . $Type . ", Format " . $PosFormat . " not supported.");
 			}
 		}
 
@@ -3937,7 +3939,7 @@ class otl
 			// Format 1:
 			//===========
 			if ($PosFormat == 1) {
-				die("GPOS Lookup Type " . $Type . " Format " . $PosFormat . " not TESTED YET.");
+				throw new MpdfException("GPOS Lookup Type " . $Type . " Format " . $PosFormat . " not TESTED YET.");
 				return 0;
 			}
 			//===========
@@ -4181,10 +4183,10 @@ class otl
 					}
 				}
 			} else {
-				die("GPOS Lookup Type " . $Type . ", Format " . $PosFormat . " not supported.");
+				throw new MpdfException("GPOS Lookup Type " . $Type . ", Format " . $PosFormat . " not supported.");
 			}
 		} else {
-			die("GPOS Lookup Type " . $Type . " not supported.");
+			throw new MpdfException("GPOS Lookup Type " . $Type . " not supported.");
 		}
 	}
 
@@ -4521,10 +4523,10 @@ class otl
 
 		// Flag & 0x0010 = UseMarkFilteringSet
 		if ($flag & 0x0010) {
-			die("This font [" . $this->fontkey . "] contains MarkGlyphSets - Not tested yet");
+			throw new MpdfException("This font [" . $this->fontkey . "] contains MarkGlyphSets - Not tested yet");
 			// Change also in ttfontsuni.php
 			if ($MarkFilteringSet == '')
-				die("This font [" . $this->fontkey . "] contains MarkGlyphSets - but MarkFilteringSet not set");
+				throw new MpdfException("This font [" . $this->fontkey . "] contains MarkGlyphSets - but MarkFilteringSet not set");
 			$str = $this->MarkGlyphSets[$MarkFilteringSet];
 		}
 
@@ -4624,7 +4626,7 @@ class otl
 	  ON    Other Neutrals      All other characters, including OBJECT REPLACEMENT CHARACTER
 	 */
 
-	function _bidiSort($ta, $str = '', $dir, &$chunkOTLdata, $useGPOS)
+	function _bidiSort($ta, $str = '', $dir = '', &$chunkOTLdata = array(), $useGPOS = '')
 	{
 
 		$pel = 0; // paragraph embedding level
@@ -4722,7 +4724,7 @@ class otl
 					$gpos = $chunkOTLdata['GPOSinfo'][$i];
 				} else
 					$gpos = '';
-				$chardata[] = array('char' => $chunkOTLdata['char_data'][$i]['uni'], 'level' => $cel, 'type' => $chardir, 'group' => $chunkOTLdata['group']{$i}, 'GPOSinfo' => $gpos);
+				$chardata[] = array('char' => $chunkOTLdata['char_data'][$i]['uni'], 'level' => $cel, 'type' => $chardir, 'group' => $chunkOTLdata['group'][$i], 'GPOSinfo' => $gpos);
 			}
 		}
 
@@ -5195,7 +5197,7 @@ class otl
 							$match = array_pop($remember);
 						}
 					}
-					//  In all cases, set the PDI�s level to the embedding level of the last entry on the directional status stack left after the steps above.
+					//  In all cases, set the PDI’s level to the embedding level of the last entry on the directional status stack left after the steps above.
 					//  NB The level assigned to an isolate initiator is always the same as that assigned to the matching PDI.
 					if ($dos != -1) {
 						$chardir = $dos;
@@ -5631,7 +5633,7 @@ class otl
 				if (isset($cOTLdata[$nc]['char_data'][$i]['orig_type'])) {
 					$carac['orig_type'] = $cOTLdata[$nc]['char_data'][$i]['orig_type'];
 				}
-				$carac['group'] = $cOTLdata[$nc]['group']{$i};
+				$carac['group'] = $cOTLdata[$nc]['group'][$i];
 				$carac['chunkid'] = $chunkorder[$nc]; // gives font id and/or object ID
 
 				$maxlevel = max((isset($carac['level']) ? $carac['level'] : 0), $maxlevel);

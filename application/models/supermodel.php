@@ -167,6 +167,21 @@ class supermodel extends CI_Model {
 		$this->_getsalesrecord_query();
 		return $this->db->count_all_results();
 	}
+	public function getsalesrecordbyid($id='')
+	{
+		$this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(sub_services.name) as subserviceid');
+        $this->db->from('sales');
+        $this->db->join('sales_services','sales_services.sales_id=sales.id','left');
+        $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
+		$this->db->join('services','services.id=sales_services.services_id','left');
+		$this->db->distinct('services');
+		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
+        $this->db->group_by('sales.id');
+        $this->db->where('sales.status',1);
+		$this->db->where('sales.id',$id);
+		$query=$this->db->get();
+        return $query->row_array();
+	}
 }
 ?>
 

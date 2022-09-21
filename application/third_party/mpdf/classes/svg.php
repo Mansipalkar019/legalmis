@@ -6,7 +6,7 @@
 //	http://www.godisaduck.com/svg2pdf_with_fpdf
 //	http://rhodopsin.blogspot.com
 //
-//	cette class etendue est open source, toute modification devra cependant etre repertori�e~
+//	cette class etendue est open source, toute modification devra cependant etre repertoriée~
 // If you wish to use Automatic Font selection within SVG's. change this definition to true.
 // This selects different fonts for different scripts used in text.
 // This can be enabled/disabled independently of the use of Automatic Font selection within mPDF generally.
@@ -35,7 +35,7 @@ class SVG
 
 	var $svg_font;  //	array - holds content of SVG fonts defined in image	// mPDF 6
 
-	var $svg_gradient; //	array - contient les infos sur les gradient fill du svg class� par id du svg
+	var $svg_gradient; //	array - contient les infos sur les gradient fill du svg classé par id du svg
 
 	var $svg_shadinglist; //	array - contient les ids des objet shading
 
@@ -45,7 +45,7 @@ class SVG
 
 	var $svg_style;  //	array contenant les style de groupes du svg
 
-	var $svg_string;  //	String contenant le tracage du svg en lui m�me.
+	var $svg_string;  //	String contenant le tracage du svg en lui même.
 
 	var $txt_data;  //    array - holds string info to write txt to image
 
@@ -1235,7 +1235,7 @@ class SVG
 		$style = '';
 		if (substr_count($critere_style['fill'], 'url') > 0 && $element != 'line') {
 			//
-			// couleur degrad�
+			// couleur degradé
 			$id_gradient = preg_replace("/url\(#([\w_]*)\)/i", "$1", $critere_style['fill']);
 			if ($id_gradient != $critere_style['fill']) {
 				if (isset($this->svg_gradient[$id_gradient])) {
@@ -1252,11 +1252,11 @@ class SVG
 		else if (strtolower($critere_style['fill']) == 'currentcolor' && $element != 'line') {
 			$col = $this->mpdf_ref->ConvertColor($critere_style['color']);
 			if ($col) {
-				if ($col{0} == 5) {
-					$critere_style['fill-opacity'] = ord($col{4} / 100);
+				if ($col[0] == 5) {
+					$critere_style['fill-opacity'] = ord($col[4] / 100);
 				} // RGBa
-				if ($col{0} == 6) {
-					$critere_style['fill-opacity'] = ord($col{5} / 100);
+				if ($col[0] == 6) {
+					$critere_style['fill-opacity'] = ord($col[5] / 100);
 				} // CMYKa
 				$path_style .= $this->mpdf_ref->SetFColor($col, true) . ' ';
 				$style .= 'F';
@@ -1264,11 +1264,11 @@ class SVG
 		} else if ($critere_style['fill'] != 'none' && $element != 'line') {
 			$col = $this->mpdf_ref->ConvertColor($critere_style['fill']);
 			if ($col) {
-				if ($col{0} == 5) {
-					$critere_style['fill-opacity'] = ord($col{4} / 100);
+				if ($col[0] == 5) {
+					$critere_style['fill-opacity'] = ord($col[4] / 100);
 				} // RGBa
-				if ($col{0} == 6) {
-					$critere_style['fill-opacity'] = ord($col{5} / 100);
+				if ($col[0] == 6) {
+					$critere_style['fill-opacity'] = ord($col[5] / 100);
 				} // CMYKa
 				$path_style .= $this->mpdf_ref->SetFColor($col, true) . ' ';
 				$style .= 'F';
@@ -1294,11 +1294,11 @@ class SVG
 		else if (strtolower($critere_style['stroke']) == 'currentcolor') {
 			$col = $this->mpdf_ref->ConvertColor($critere_style['color']);
 			if ($col) {
-				if ($col{0} == 5) {
-					$critere_style['stroke-opacity'] = ord($col{4} / 100);
+				if ($col[0] == 5) {
+					$critere_style['stroke-opacity'] = ord($col[4] / 100);
 				} // RGBa
-				if ($col{0} == 6) {
-					$critere_style['stroke-opacity'] = ord($col{5} / 100);
+				if ($col[0] == 6) {
+					$critere_style['stroke-opacity'] = ord($col[5] / 100);
 				} // CMYKa
 				$path_style .= $this->mpdf_ref->SetDColor($col, true) . ' ';
 				$style .= 'D';
@@ -1310,11 +1310,11 @@ class SVG
 			if ($col) {
 				// mPDF 5.0.051
 				// mPDF 5.3.74
-				if ($col{0} == 5) {
-					$critere_style['stroke-opacity'] = ord($col{4} / 100);
+				if ($col[0] == 5) {
+					$critere_style['stroke-opacity'] = ord($col[4] / 100);
 				} // RGBa
-				if ($col{0} == 6) {
-					$critere_style['stroke-opacity'] = ord($col{5} / 100);
+				if ($col[0] == 6) {
+					$critere_style['stroke-opacity'] = ord($col[5] / 100);
 				} // CMYKa
 				$path_style .= $this->mpdf_ref->SetDColor($col, true) . ' ';
 				$style .= 'D';
@@ -2028,7 +2028,7 @@ class SVG
 
 	//
 	//	fonction retracant les <ellipse /> et <circle />
-	//	 le cercle est trac� grave a 4 bezier cubic, les poitn de controles
+	//	 le cercle est tracé grave a 4 bezier cubic, les poitn de controles
 	//	sont deduis grace a la constante kappa * rayon
 	function svgEllipse($arguments)
 	{
@@ -2997,7 +2997,7 @@ class SVG
 				}
 				else if (strtolower($name) == 'stop') {
 					if (!$last_gradid)
-						break;
+						return;
 					$color = '#000000';
 					if (isset($attribs['style']) AND preg_match('/stop-color:\s*([^;]*)/i', $attribs['style'], $m)) {
 						$color = trim($m[1]);
@@ -3008,14 +3008,14 @@ class SVG
 					if (!$col) {
 						$col = $svg_class->mpdf_ref->ConvertColor('#000000');
 					} // In case "transparent" or "inherit" returned
-					if ($col{0} == 3 || $col{0} == 5) { // RGB
-						$color_final = sprintf('%.3F %.3F %.3F', ord($col{1}) / 255, ord($col{2}) / 255, ord($col{3}) / 255);
+					if ($col[0] == 3 || $col[0] == 5) { // RGB
+						$color_final = sprintf('%.3F %.3F %.3F', ord($col[1]) / 255, ord($col[2]) / 255, ord($col[3]) / 255);
 						$svg_class->svg_gradient[$last_gradid]['colorspace'] = 'RGB';
-					} else if ($col{0} == 4 || $col{0} == 6) { // CMYK
-						$color_final = sprintf('%.3F %.3F %.3F %.3F', ord($col{1}) / 100, ord($col{2}) / 100, ord($col{3}) / 100, ord($col{4}) / 100);
+					} else if ($col[0] == 4 || $col[0] == 6) { // CMYK
+						$color_final = sprintf('%.3F %.3F %.3F %.3F', ord($col[1]) / 100, ord($col[2]) / 100, ord($col[3]) / 100, ord($col[4]) / 100);
 						$svg_class->svg_gradient[$last_gradid]['colorspace'] = 'CMYK';
-					} else if ($col{0} == 1) { // Grayscale
-						$color_final = sprintf('%.3F', ord($col{1}) / 255);
+					} else if ($col[0] == 1) { // Grayscale
+						$color_final = sprintf('%.3F', ord($col[1]) / 255);
 						$svg_class->svg_gradient[$last_gradid]['colorspace'] = 'Gray';
 					}
 
@@ -3024,10 +3024,10 @@ class SVG
 						$stop_opacity = $m[1];
 					} else if (isset($attribs['stop-opacity'])) {
 						$stop_opacity = $attribs['stop-opacity'];
-					} else if ($col{0} == 5) { // RGBa
-						$stop_opacity = ord($col{4} / 100);
-					} else if ($col{0} == 6) { // CMYKa
-						$stop_opacity = ord($col{5} / 100);
+					} else if ($col[0] == 5) { // RGBa
+						$stop_opacity = ord($col[4] / 100);
+					} else if ($col[0] == 6) { // CMYKa
+						$stop_opacity = ord($col[5] / 100);
 					}
 
 					$tmp_color = array(
@@ -3222,7 +3222,7 @@ class SVG
 						}  // then continue like a <g>
 					case 'g':
 						$array_style = $svg_class->svgDefineStyle($attribs);
-						if (isset($array_style['transformations']) && $array_style['transformations']) {
+						if (!empty($array_style['transformations'])) {
 							// If in the middle of <text> element, add to textoutput, else WriteString
 							if ($svg_class->intext) {
 								$svg_class->textoutput .= ' q ' . $array_style['transformations'];
@@ -3280,7 +3280,7 @@ class SVG
 						}
 
 						$array_style = $svg_class->svgDefineStyle($attribs);
-						if ($array_style['transformations']) {
+						if (!empty($array_style['transformations'])) {
 							$svg_class->textoutput .= ' q ' . $array_style['transformations']; // mPDF 5.7.4
 						}
 						array_push($svg_class->svg_style, $array_style);
@@ -3408,7 +3408,7 @@ class SVG
 							$svg_class->textYorigin = $currentY;
 						}
 
-						if ($array_style['transformations']) {
+						if (!empty($array_style['transformations'])) {
 							$svg_class->textoutput .= ' q ' . $array_style['transformations'];
 						}
 						array_push($svg_class->svg_style, $array_style);
@@ -3417,7 +3417,7 @@ class SVG
 				}
 
 				//
-				//insertion des path et du style dans le flux de donn� general.
+				//insertion des path et du style dans le flux de donné general.
 				if (isset($path_cmd) && $path_cmd) {
 					// mPDF 5.0
 					list($prestyle, $poststyle) = $svg_class->svgStyle($path_style, $attribs, strtolower($name));
@@ -3467,7 +3467,7 @@ class SVG
 
 						$tmp = count($svg_class->svg_style) - 1;
 						$current_style = $svg_class->svg_style[$tmp];
-						if ($current_style['transformations']) {
+						if (!empty($current_style['transformations'])) {
 							// If in the middle of <text> element, add to textoutput, else WriteString
 							if ($svg_class->intext) {
 								$svg_class->textoutput .= " Q\n";
@@ -3501,7 +3501,7 @@ class SVG
 						$svg_class->textoutput .= $path_cmd; // mPDF 5.7.4
 						$tmp = count($svg_class->svg_style) - 1;
 						$current_style = $svg_class->svg_style[$tmp];
-						if ($current_style['transformations']) {
+						if (!empty($current_style['transformations'])) {
 							$svg_class->textoutput .= " Q\n"; // mPDF 5.7.4
 						}
 						array_pop($svg_class->svg_style);

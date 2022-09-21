@@ -31,6 +31,7 @@
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
         color: #555;
         height: 1150px;
+       
     }
     .invoice-box table {
         width: 100%;
@@ -102,29 +103,31 @@
     .rtl table tr td:nth-child(2) {
         text-align: left;
     }
+ 
 </style>
-<div class="row">
-<div class="invoice-box img-responsive" style="background-image:url('<?php echo base_url() ?>assets_admin/images/letterhead.png'); 
-  background-repeat: no-repeat;
+
+<div class="invoice-box img-responsive" style=" background-image:url('<?php echo base_url() ?>assets_admin/images/letterhead.png');
+        background-repeat: no-repeat;
   background-size: cover;">
         <table cellpadding="0" cellspacing="0" style="margin-top: 150px;">
 		
-            <tr class="top">
-                <td colspan="3">
+            <tr class="">
+                <td colspan="12">
                     <table>
                         <tr>
                             <td class="text-center">
-							<b> Proforma Invoice : NTX-72/2022-2023 </b> 
+							<b> Proforma Invoice : <?php echo $data['invoice_number'];?> </b> 
                             </td>
                         </tr>
                     </table>
                 </td>
+                
             </tr>
-            <tr class="information">
-                  <td colspan="3">
+            <!-- <tr class="information">
+                 
                     <table>
                         <tr>
-                            <td colspan="2">
+                            <td>
 							<b> Invoice to: <br> M/S.HARMI CREATION </b> <br>
                                 Company Address: <br>
                                 Plot No.43,, 1st Floor,Sarita Vihar Society,, Surbhi Vibhag, Puna<br>
@@ -146,8 +149,41 @@
                             </td>
                         </tr>
                     </table>
+               
+            </tr> -->
+            <tr class="information">
+            <td colspan="3" >
+            <table cellspacing="0px" cellpadding="2px">
+                 <tr class="">
+                
+                <td>
+                <b> Invoice to: <br> <?php echo $data['client_name'];?> </b> <br>
+                                Company Address: <br>
+                                <?php echo $data['street'];?><br>
+								<?php echo $data['city'];?>, <?php echo $data['state'];?> <?php echo $data['pincode'];?> <br><br>
+                                Mobile No:-<?php echo $data['mobile_1'];?>, <?php if($data['mobile_2'] != ''){echo $data['mobile_2'];} ?>, <?php if($data['alternate_number'] != ''){echo $data['alternate_number'];} ?> <br>
+                                Email ID:-<?php echo $data['email_address'];?><br>
+                                GSTIN:-<?php echo $data['gst_no'];?><br><br>
+                                Invoice Date:   <?php echo $data['sale_date'];?>
                 </td>
+				<td>
+                <b> Pay to: <br>Primary bank details :</b><br>
+                                Bank Account No : 106603130001272<br>
+                                IFSC Code : SVCB0000066<br>
+                                Bank: SVC Co-Operative Bank Ltd<br>
+                                Branch: Vikhroli West<br>
+                                City : Mumbai<br><br>
+                                G-PAY - +91 84529 31503<br>
+                                PAYTM - +91 84529 31503<br>
+                            </td>
+                </td>
+              
+                </tr>
+			
+            </td>
             </tr>
+			</table>
+            <tr class="">
             <td colspan="3" >
             <table cellspacing="0px" cellpadding="2px">
                  <tr class="heading">
@@ -219,6 +255,7 @@
 				 
             </tr>
             </td>
+            </tr>
 			</table>
            
         </table>
@@ -226,8 +263,8 @@
 
    
 </div>
-</div>
-<div class="row"style="margin-top:15px;">
+
+
 <div class="invoice-box img-responsive" style="background-image:url('<?php echo base_url() ?>assets_admin/images/letterhead.png'); 
   background-repeat: no-repeat;
   background-size: cover;">
@@ -266,5 +303,5 @@
     </div>
 
 </div>
-</div>
+
 <?php  $this->load->view('footer'); ?>

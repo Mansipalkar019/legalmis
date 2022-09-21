@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../MpdfException.php';
+
 class mpdfform
 {
 
@@ -1021,7 +1023,7 @@ class mpdfform
 		$this->mpdf->x += $w;
 	}
 
-	function SetFormSubmit($w, $h, $name, $value = 'Submit', $url, $title = '', $typ = 'html', $method = 'POST', $flags = array(), $background_col = false, $border_col = false, $noprint = false)
+	function SetFormSubmit($w, $h, $name, $value = 'Submit', $url = '', $title = '', $typ = 'html', $method = 'POST', $flags = array(), $background_col = false, $border_col = false, $noprint = false)
 	{
 		if (!$name) {
 			$name = 'Submit';
@@ -1273,7 +1275,7 @@ class mpdfform
 			}
 		}
 		if (!$info) {
-			die("Cannot find Button image");
+			throw new MpdfException("Cannot find Button image");
 		}
 		$this->mpdf->_newobj();
 		$this->mpdf->_out('<<');

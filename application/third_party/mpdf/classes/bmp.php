@@ -1,4 +1,5 @@
 <?php
+
 class bmp
 {
 
@@ -8,6 +9,7 @@ class bmp
 	{
 		$this->mpdf = $mpdf;
 	}
+
 	function _getBMPimage($data, $file)
 	{
 		$info = array();
@@ -37,17 +39,20 @@ class bmp
 			$info['cs'] = 'DeviceRGB';
 			$info['bpc'] = 8;
 		}
+
 		if ($this->mpdf->restrictColorSpace == 1 || $this->mpdf->PDFX || $this->mpdf->restrictColorSpace == 3) {
 			if (($this->mpdf->PDFA && !$this->mpdf->PDFAauto) || ($this->mpdf->PDFX && !$this->mpdf->PDFXauto)) {
 				$this->mpdf->PDFAXwarnings[] = "Image cannot be converted to suitable colour space for PDFA or PDFX file - " . $file . " - (Image replaced by 'no-image'.)";
 			}
 			return array('error' => "BMP Image cannot be converted to suitable colour space - " . $file . " - (Image replaced by 'no-image'.)");
 		}
+
 		$biXPelsPerMeter = $this->_fourbytes2int_le(substr($data, 38, 4)); // horizontal pixels per meter, usually set to zero
 		//$biYPelsPerMeter=$this->_fourbytes2int_le(substr($data,42,4));	// vertical pixels per meter, usually set to zero
 		$biXPelsPerMeter = round($biXPelsPerMeter / 1000 * 25.4);
 		//$biYPelsPerMeter=round($biYPelsPerMeter/1000 *25.4);
 		$info['set-dpi'] = $biXPelsPerMeter;
+
 		switch ($biCompression) {
 			case 0:
 				$str = substr($data, $bfOffBits);
@@ -81,6 +86,7 @@ class bmp
 					}
 				}
 				break;
+
 			case 16:
 				$w_row = $width * 2 + $padCnt;
 				if ($flip) {
@@ -107,10 +113,12 @@ class bmp
 					}
 				}
 				break;
+
 			case 24:
 			case 32:
 				$byteCnt = $biBitCount / 8;
 				$w_row = $width * $byteCnt + $padCnt;
+
 				if ($flip) {
 					for ($y = 0; $y < $height; $y++) {
 						$y0 = $y * $w_row;
@@ -129,6 +137,7 @@ class bmp
 					}
 				}
 				break;
+
 			default:
 				return array('error' => 'Error parsing BMP image - Unsupported image biBitCount');
 		}
@@ -140,16 +149,19 @@ class bmp
 		$info['type'] = 'bmp';
 		return $info;
 	}
+
 	function _fourbytes2int_le($s)
 	{
 		//Read a 4-byte integer from string
 		return (ord($s[3]) << 24) + (ord($s[2]) << 16) + (ord($s[1]) << 8) + ord($s[0]);
 	}
+
 	function _twobytes2int_le($s)
 	{
 		//Read a 2-byte integer from string
 		return (ord(substr($s, 1, 1)) << 8) + ord(substr($s, 0, 1));
 	}
+
 	# Decoder for RLE8 compression in windows bitmaps
 	# see http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/bitmaps_6x0u.asp
 	function rle8_decode($str, $width)
@@ -190,6 +202,7 @@ class bmp
 		}
 		return $out;
 	}
+
 	# Decoder for RLE4 compression in windows bitmaps
 	# see http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/bitmaps_6x0u.asp
 	function rle4_decode($str, $width)
@@ -234,6 +247,7 @@ class bmp
 						$pixels[] = ($j % 2 == 0 ? ($c & 240) >> 4 : $c & 15);
 			}
 		}
+
 		$out = '';
 		if (count($pixels) % 2)
 			$pixels[] = 0;
@@ -242,4 +256,5 @@ class bmp
 			$out .= chr(16 * $pixels[2 * $i] + $pixels[2 * $i + 1]);
 		return $out;
 	}
+
 }
