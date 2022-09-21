@@ -538,21 +538,35 @@ class Sales extends CI_Controller
 
     public function save_deal()
     {
-        print_r($_POST); die;
+        //print_r($_POST); die;
         $services =  $this->input->post('services');
+        $class_name=$this->input->post('class_name');
+       
+
         foreach ($services as $services_key => $services_row) {
             $brand_name[$services_row] =  $this->input->post('brand_name_'.$services_row);
-            $class_name[$services_row] =  $this->input->post('class_name');
-           
+            $class_name[$services_row] =  $this->input->post('class_name_'.$services_row);
+            
         }
-        print_r($services);
-        print_r($brand_name);
-        print_r($class_name);
-        // if($services_row==$brand_name){
-        //     echo "in";
-        // }else{
-        //     echo "out";
-        // }
+
+                foreach($class_name as $class_name_key => $class_name_row)
+                {                  
+                                foreach($class_name_row as $new_class_name_key => $new_class_name_row)
+                                {
+                                        $sub_class=explode('_',$new_class_name_key);
+                                }
+                } 
+           // foreach($brand_name as $brand_name_key => $brand_name_row)
+                    // {
+                    //      print_r($brand_name_row);
+                    //     // if($sub_class[1] == $brand_name_key)
+                    //     // {
+                    //         echo 'class'.$sub_class[1].'brand_name'.$brand_name_key;
+                    //         // $this->db->insert("sale_service_brand", array('fk_service_id'=>$services[$brand_name_key],'brand_name'=>$brand_name_row));
+                    //         // $last_brand_id=$this->db->insert_id();
+                    //         //$this->db->insert("sale_service_class", array('fk_service_id'=>$services_row,'fk_brand_id'=>$last_brand_id));
+                    //     //}
+                    // }
        die();
 
      
