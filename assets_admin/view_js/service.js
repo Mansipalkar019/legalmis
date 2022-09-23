@@ -2,13 +2,24 @@ function validate_add_banner(ele){
     hide_message_box(ele);
     var hasError = 0;
     var servicename=$('#servicename').val();
-     if(jQuery.trim(servicename) == '')
+    var terms=$('#terms').val();
+   
+    if(jQuery.trim(servicename) == '')
     {
         showError("Please Enter the Service Name","servicename");hasError=1;
         
     }
     else {
         changeError("servicename");
+    }
+
+    if(jQuery.trim(terms) == '')
+    {
+        showError("Please Enter the Terms & Condition","terms");hasError=1;
+        
+    }
+    else {
+        changeError("terms");
     }
 
     if(hasError==1){
@@ -22,6 +33,7 @@ function validate_add_banner(ele){
             //   alert(brandname);
             //  var classname = document.getElementById('classname').checked = true;
             user.product.servicename = servicename;
+            user.product.terms=terms;
             //  user.product.brandname = brandname;
             //  user.product.classname = classname;
            

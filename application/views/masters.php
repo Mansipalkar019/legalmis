@@ -39,10 +39,17 @@
                      enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate"
                      onsubmit="return validate_add_banner(this);">
                      <div class="row ml20  mb20">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                            <div class="form-group">
                               <label>Name<span class="text-danger">*</span></label>
                               <input type="text" name="servicename" dir="ltl" id="servicename" class="form-control" required="">
+                           </div>
+                        </div>
+                        <div class="col-md-3">
+                           <div class="form-group">
+                           <label>Terms & Condition:<span class="text-danger">*</span></label>
+                           <textarea id="terms" name="terms"
+                           class="form-control" ></textarea>
                            </div>
                         </div>
                         <div class="col-md-4 " id="featured">
@@ -53,6 +60,7 @@
                                    
                                  </div>
                         </div>
+                       
                         <div class="col-sm-4" style="margin-top:30px;">
                            <button class="btn btn-success">Submit</button>
                         </div>
@@ -67,6 +75,7 @@
                            <th>Name</th>
                            <th>Brand Name</th>
                            <th>Class Name</th>
+                           <th>Terms & Condition</th>
                            <th>Action</th>
                         </tr>
                      </thead>
@@ -87,6 +96,13 @@
                                        <label>Name<span class="text-danger">*</span></label>
                                        <input type="text" name="service_name" dir="ltl" id="service_name" class="form-control" required="">
                                        <input type="hidden" name="serviceid" dir="ltl" id="serviceid" class="form-control" required="">
+                                    </div>
+                                 </div>
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                    <label>Terms & Condition:<span class="text-danger">*</span></label>
+                                    <textarea id="terms1" name="terms1"
+                                    class="form-control" ></textarea>
                                     </div>
                                  </div>
                                  <div class="col-md-12 " id="featured">

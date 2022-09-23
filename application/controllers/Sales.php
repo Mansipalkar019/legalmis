@@ -43,14 +43,14 @@ class Sales extends CI_Controller
         $pdfFilePaths = base_url()."uploads/invoice/legal'".$data_row['id']."'.pdf";
         $html = $this->load->view('printinvoice/print_sale_page1',array('data' => $getsalesrecordbyid), true);
         $this->load->library('m_pdf');
-        $mpdf=new mPDF('utf-8','A4');
+        $mpdf=new mPDF();
+        // $mpdf=new mPDF('utf-8', array(300,300));
         $mpdf->showImageErrors = true;
         // $mpdf->debug = true;
         $mpdf->SetDisplayMode('fullpage');
-        $mpdf->AddPage('L', 'A4');  
+        $mpdf->AddPage('P', 'A4'); 
         $mpdf->WriteHTML($html);        
-        //$mpdf->Image(base_url().'assets_admin/images/letterhead.png', 0, 0, 210, 28.5, 'png', '', true, false);
-        $mpdf->Output($pdfFilePath,"F");
+         $mpdf->Output($pdfFilePath,"F");
         $response['path']=$pdfFilePaths; 
         $this->load->view('printinvoice/print_sale_page1');
        
@@ -557,11 +557,9 @@ class Sales extends CI_Controller
 
     public function save_deal()
     {    
+        //print_r($_FILES['image_files']);
         $this->form_validation->set_rules('sale_date', 'Sale Date', 'trim|required',array('required'=>'This field is required'));
-        $this->form_validation->set_rules('services[]', 'Services', 'trim|required',array('required'=>'This field is required'));
-        $this->form_validation->set_rules('sub_services[]', 'Sub Services', 'trim|required',array('required'=>'This field is required'));
-        $this->form_validation->set_rules('document_list[]', 'Document List', 'trim|required',array('required'=>'This field is required'));
-
+          //$this->form_validation->set_rules('image_files[]', 'Image File', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('deal_id', 'Deal Id', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('invoice_no', 'Invoice No', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('primary_caller', 'Primary Caller', 'trim|required',array('required'=>'This field is required'));
@@ -607,76 +605,75 @@ class Sales extends CI_Controller
         $this->form_validation->set_rules('round_off', 'Round Off', 'trim|required|numeric',array('required'=>'This field is required'));
         $this->form_validation->set_rules('invoice_name', 'Invoice Name', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('invoice_status', 'Invoice Status', 'trim|required',array('required'=>'This field is required'));
-        $this->form_validation->set_rules('services[]', 'Services', 'trim|required',array('required'=>'This field is required'));
-        $this->form_validation->set_rules('sub_services[]', 'Sub Services', 'trim|required',array('required'=>'This field is required'));
+        // $this->form_validation->set_rules('services[]', 'Services', 'trim|required',array('required'=>'This field is required'));
+        // $this->form_validation->set_rules('sub_services[]', 'Sub Services', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('dob', 'Date of Birth', 'trim|required',array('required'=>'This field is required'));
-        $this->form_validation->set_rules('document_list[]', 'Document List', 'trim|required',array('required'=>'This field is required'));
+        //$this->form_validation->set_rules('document_list[]', 'Document List', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('industry', 'Industry', 'trim|required',array('required'=>'This field is required'));
         //$this->form_validation->set_rules('commission', 'Commission Fees', 'trim|required',array('required'=>'This field is required'));
  
     
-    //     if ($this->form_validation->run() == FALSE)
-    //     {
-    //             $response['status'] = 'failure';
-    //             $response['error'] = array(
-    //                 'sale_date' => strip_tags(form_error('sale_date')),            
-    //                 'services' => strip_tags(form_error('services[]')),
-    //                 'sub_services' => strip_tags(form_error('sub_services[]')),
-    //                 'image_files' => strip_tags(form_error('image_files[]')),
+        if ($this->form_validation->run() == FALSE)
+        {
+                $response['status'] = 'failure';
+                $response['error'] = array(
+                    'sale_date' => strip_tags(form_error('sale_date')),            
+                    'services' => strip_tags(form_error('services[]')),
+                    'sub_services' => strip_tags(form_error('sub_services[]')),
+                    //'image_files' => strip_tags(form_error('image_files')),
+                    'deal_id' => strip_tags(form_error('deal_id')),
+                    'invoice_no' => strip_tags(form_error('invoice_no')),
+                    'primary_caller' => strip_tags(form_error('primary_caller')),
+                    'secondary_caller' => strip_tags(form_error('secondary_caller')),
+                    'lead_source' => strip_tags(form_error('lead_source')),
+                    'legal_remarks' => strip_tags(form_error('legal_remarks')),
+                    'accounts_remarks' => strip_tags(form_error('accounts_remarks')),
+                    'company_name' => strip_tags(form_error('company_name')),
+                    //'class_name' => strip_tags(form_error('class_name')),
+                    'client_name' => strip_tags(form_error('client_name')),
+                    'mobile_1' => strip_tags(form_error('mobile_1')),
+                    //'mobile_2' => strip_tags(form_error('mobile_2')),
+                    //'alternate_number' => strip_tags(form_error('alternate_number')),
+                    'email_address' => strip_tags(form_error('email_address')),
+                    //'email_address1' => strip_tags(form_error('email_address1')),
+                    'gst_no' => strip_tags(form_error('gst_no')),
+                    'street' => strip_tags(form_error('street')),
+                    'city' => strip_tags(form_error('city')),
 
-    //                 'deal_id' => strip_tags(form_error('deal_id')),
-    //                 'invoice_no' => strip_tags(form_error('invoice_no')),
-    //                 'primary_caller' => strip_tags(form_error('primary_caller')),
-    //                 'secondary_caller' => strip_tags(form_error('secondary_caller')),
-    //                 'lead_source' => strip_tags(form_error('lead_source')),
-    //                 'legal_remarks' => strip_tags(form_error('legal_remarks')),
-    //                 'accounts_remarks' => strip_tags(form_error('accounts_remarks')),
-    //                 'company_name' => strip_tags(form_error('company_name')),
-    //                 //'class_name' => strip_tags(form_error('class_name')),
-    //                 'client_name' => strip_tags(form_error('client_name')),
-    //                 'mobile_1' => strip_tags(form_error('mobile_1')),
-    //                 //'mobile_2' => strip_tags(form_error('mobile_2')),
-    //                 //'alternate_number' => strip_tags(form_error('alternate_number')),
-    //                 'email_address' => strip_tags(form_error('email_address')),
-    //                 //'email_address1' => strip_tags(form_error('email_address1')),
-    //                 'gst_no' => strip_tags(form_error('gst_no')),
-    //                 'street' => strip_tags(form_error('street')),
-    //                 'city' => strip_tags(form_error('city')),
+                    'state' => strip_tags(form_error('state')),
+                    'pincode' => strip_tags(form_error('pincode')),
+                    'deal_amount' => strip_tags(form_error('deal_amount')),
+                    'amount_received' => strip_tags(form_error('amount_received')),
+                    'outstanding' => strip_tags(form_error('outstanding')),
+                    'tcs' => strip_tags(form_error('tcs')),
+                    'govt_fees' => strip_tags(form_error('govt_fees')),
+                    'associate_fees' => strip_tags(form_error('associate_fees')),
+                    'net_income' => strip_tags(form_error('net_income')),
+                    'gst_amount' => strip_tags(form_error('gst_amount')),
+                    'outstanding_followup_date' => strip_tags(form_error('outstanding_followup_date')),
+                    'payment_mode' => strip_tags(form_error('payment_mode')),
+                    'invoice_type' => strip_tags(form_error('invoice_type')),
+                    //'brand_name' => strip_tags(form_error('brand_name')),
+                    'govt_fee' => strip_tags(form_error('govt_fee')),
+                    'professional_fees' => strip_tags(form_error('professional_fees')),
+                    'drafting_proceeding_fees' => strip_tags(form_error('drafting_proceeding_fees')),
+                    'drafting_proceeding_professional_fees' => strip_tags(form_error('drafting_proceeding_professional_fees')),
+                    'total_professional_amount' => strip_tags(form_error('total_professional_amount')),
+                    'cgst' => strip_tags(form_error('cgst')),
+                    'sgst' => strip_tags(form_error('sgst')),
+                    'igst' => strip_tags(form_error('igst')),
+                    'round_off' => strip_tags(form_error('round_off')),
+                    'invoice_name' => strip_tags(form_error('invoice_name')),
+                    'invoice_status' => strip_tags(form_error('invoice_status')),
+                    'dob' => strip_tags(form_error('dob')),
+                    'industry' => strip_tags(form_error('industry')),
+                    //'commission' => strip_tags(form_error('commission')),
 
-    //                 'state' => strip_tags(form_error('state')),
-    //                 'pincode' => strip_tags(form_error('pincode')),
-    //                 'deal_amount' => strip_tags(form_error('deal_amount')),
-    //                 'amount_received' => strip_tags(form_error('amount_received')),
-    //                 'outstanding' => strip_tags(form_error('outstanding')),
-    //                 'tcs' => strip_tags(form_error('tcs')),
-    //                 'govt_fees' => strip_tags(form_error('govt_fees')),
-    //                 'associate_fees' => strip_tags(form_error('associate_fees')),
-    //                 'net_income' => strip_tags(form_error('net_income')),
-    //                 'gst_amount' => strip_tags(form_error('gst_amount')),
-    //                 'outstanding_followup_date' => strip_tags(form_error('outstanding_followup_date')),
-    //                 'payment_mode' => strip_tags(form_error('payment_mode')),
-    //                 'invoice_type' => strip_tags(form_error('invoice_type')),
-    //                 //'brand_name' => strip_tags(form_error('brand_name')),
-    //                 'govt_fee' => strip_tags(form_error('govt_fee')),
-    //                 'professional_fees' => strip_tags(form_error('professional_fees')),
-    //                 'drafting_proceeding_fees' => strip_tags(form_error('drafting_proceeding_fees')),
-    //                 'drafting_proceeding_professional_fees' => strip_tags(form_error('drafting_proceeding_professional_fees')),
-    //                 'total_professional_amount' => strip_tags(form_error('total_professional_amount')),
-    //                 'cgst' => strip_tags(form_error('cgst')),
-    //                 'sgst' => strip_tags(form_error('sgst')),
-    //                 'igst' => strip_tags(form_error('igst')),
-    //                 'round_off' => strip_tags(form_error('round_off')),
-    //                 'invoice_name' => strip_tags(form_error('invoice_name')),
-    //                 'invoice_status' => strip_tags(form_error('invoice_status')),
-    //                 'dob' => strip_tags(form_error('dob')),
-    //                 'industry' => strip_tags(form_error('industry')),
-    //                 //'commission' => strip_tags(form_error('commission')),
-
-    //             );
+                );
                
-    //    }
-    //     else
-    //     {
+       }
+        else
+        {
            $product_gallery=$temp= array();
             $sale_date          = $this->input->post('sale_date');
             $client_name        = $this->input->post('client_name');
@@ -762,7 +759,13 @@ class Sales extends CI_Controller
                         }
            $screenshotimages=implode(',',$temp);
 
-           $matches=$net_income+$associate_fees;
+           if(!empty($net_income))
+           {
+            $matches=$net_income+$associate_fees;
+           }
+           else{
+            $matches=0;
+           }
             //echo $matches;die();
 
             if($govt_fees != $govt_fee)
@@ -837,49 +840,59 @@ class Sales extends CI_Controller
                     $services =  $this->input->post('services');
         $class_name=$this->input->post('class_name');       
 
-        foreach ($services as $services_key => $services_row) {
-            $curl_data = array(
-                'sales_id' =>$the_insert_id,
-                'services_id'=>$services_row
-            );
-
-            $this->model->insertData('sales_services',$curl_data);
-            $brand_name[$services_row] =  $this->input->post('brand_name_'.$services_row);
-            $class_name[$services_row] =  $this->input->post('class_name_'.$services_row);                    
+        if(!empty($services))
+        {
+            foreach ($services as $services_key => $services_row) {
+                $curl_data = array(
+                    'sales_id' =>$the_insert_id,
+                    'services_id'=>$services_row
+                );
+    
+                $this->model->insertData('sales_services',$curl_data);
+                $brand_name[$services_row] =  $this->input->post('brand_name_'.$services_row);
+                $class_name[$services_row] =  $this->input->post('class_name_'.$services_row);                    
+            }
         }
-        foreach ($brand_name as $brand_name_key => $brand_name_row) {
-                    $brands_name  = $brand_name_row;
-                    $class_name_data = $class_name[$brand_name_key];
-                    foreach ($brands_name as $brands_name_key => $brands_name_row) {
-                        // echo '<pre>'; print_r($brands_name_key); 
-                        $insert_brand_data = array(
-                                'fk_sales_id' =>$the_insert_id,
-                                'fk_service_id'=>$brand_name_key,
-                                'brand_name'=>$brands_name_row,
+      
 
-                            );
+        if(!empty($brand_name))
+        {
+            foreach ($brand_name as $brand_name_key => $brand_name_row) {
+                $brands_name  = $brand_name_row;
+                $class_name_data = $class_name[$brand_name_key];
+                foreach ($brands_name as $brands_name_key => $brands_name_row) {
+                    // echo '<pre>'; print_r($brands_name_key); 
+                    $insert_brand_data = array(
+                            'fk_sales_id' =>$the_insert_id,
+                            'fk_service_id'=>$brand_name_key,
+                            'brand_name'=>$brands_name_row,
 
-                         $brand_last_inserted_id = $this->model->insertData('sale_service_brand',$insert_brand_data);  
+                        );
 
-                        foreach ($class_name_data as $class_name_data_key => $class_name_data_row) {
-                            $class_name_datas = $class_name_data_row;
-                            if($brands_name_key == $class_name_data_key){
-                                foreach ($class_name_datas as $class_name_datas_key => $class_name_datas_row) {
-                                     $insert_class_data = array(
-                                        'fk_sale_id' =>$the_insert_id,
-                                        'fk_service_id'=>$brand_name_key,
-                                        'fk_brand_id'=>$brand_last_inserted_id,
-                                        'class_name'=>$class_name_datas_row
+                     $brand_last_inserted_id = $this->model->insertData('sale_service_brand',$insert_brand_data);  
+                if(!empty($class_name_data)){
+                    foreach ($class_name_data as $class_name_data_key => $class_name_data_row) {
+                        $class_name_datas = $class_name_data_row;
+                        if($brands_name_key == $class_name_data_key){
+                            foreach ($class_name_datas as $class_name_datas_key => $class_name_datas_row) {
+                                 $insert_class_data = array(
+                                    'fk_sale_id' =>$the_insert_id,
+                                    'fk_service_id'=>$brand_name_key,
+                                    'fk_brand_id'=>$brand_last_inserted_id,
+                                    'class_name'=>$class_name_datas_row
 
-                                    );
-                                 
-                                    $this->model->insertData('sale_service_class',$insert_class_data); 
-                                }
+                                );
+                             
+                                $this->model->insertData('sale_service_class',$insert_class_data); 
                             }
-                           
                         }
+                       
                     }
+                    }
+                }
         } 
+        }
+        
                     if(!empty($sub_services))
                     {
                         foreach($sub_services as $sub_services_key =>$sub_services_row){
@@ -909,8 +922,8 @@ class Sales extends CI_Controller
                 }
                 
             }
-        //}
-        print_r($response);die();
+        }
+        //print_r($response);die();
         echo json_encode($response);
        
     }
@@ -1134,27 +1147,31 @@ class Sales extends CI_Controller
     function dealid()
     {
         $hello = 1;
-        $startDate = date('Y-m-d',strtotime('first day of april'));
-        $endDate = date('Y-m-d',strtotime('next year, first day of april,'));
-       //$startDate = (new DateTime('first day of april', new DateTimeZone("Asia/Kolkata")));
-        //$endDate= (new DateTime('next year, first day of april,', new DateTimeZone("Asia/Kolkata")));
-       
-        $currentdate='2023-04-01';
+        $startDate = date('Y-m-d H:i:s',strtotime('first day of april'));
+        //$endDate = date('Y-m-d H:i:s',strtotime('next year, first day of april,'));
+        $endDate='2023-04-01 23:00:59';
+        $currentdate='2023-04-01 23:00:59';
+        //echo $currentdate;die();
         //$date = date('Y-m-d H:i:s');
-     
-        for ($i=0; $i <= 10; $i++) { 
+
+        $i = 0;
+        while ($i < 4) {
+            echo "$i";
+            $i++;
             if($currentdate == $endDate)
-            {
-                $i=0;
-             
-            } 
-            if($i < 9)
-            {
-                echo '0'.$hello++;
+            { 
+                $i=0; 
             }
-           
-            echo "<br>";
-        }
+         }
+        
+        // for ($i=0; $i < 10; $i++) {
+        //     echo $hello++; 
+        //      if($currentdate == $endDate)
+        //     {
+        //         $i=0; 
+        //     }
+        //     echo "<br>";
+        // }
        
     }
 }

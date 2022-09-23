@@ -80,6 +80,7 @@ class Masters extends CI_Controller
         $nestedData[]=$category_details_row['name'];
         $nestedData[]=$category_details_row['brand_name'];
         $nestedData[]=$category_details_row['class_name'];
+        $nestedData[]=$category_details_row['terms'];
         $edit = '<span><a href="javascript:void(0);" >
         <i class="glyphicon glyphicon-pencil a_category_view" aria-hidden="true" data-toggle="modal"
         data-target="#myModal" id="'.$category_details_row['id'].'"></i> </a></span>&nbsp;&nbsp;';
@@ -95,7 +96,7 @@ class Masters extends CI_Controller
     public function get_all_services()
     {
         $service_id=$_POST['id'];
-        $totalData=  $this->model->selectWhereData('services',array('id'=>$service_id),array('id','name','brand_name','class_name'));
+        $totalData=  $this->model->selectWhereData('services',array('id'=>$service_id),array('id','name','brand_name','class_name','terms'));
       
         echo json_encode($totalData);
     }
@@ -109,7 +110,9 @@ class Masters extends CI_Controller
             $service_name = $array_entity['servicename'];
             $brand_name = $array_entity['brandname'];
             $class_name = $array_entity['classname'];
-            $service_name_exist = $this->model->getData("services", array('name' => $service_name,'status' => '1'));
+            $terms = $array_entity['terms'];
+            print_r($terms);die();
+            $service_name_exist = $this->model->getData("services", array('name' => $service_name,'terms' => $terms,'status' => '1'));
             if(isset($service_name_exist) && !empty($service_name_exist))
             {
                 $data['status'] = '0';

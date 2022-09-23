@@ -25,7 +25,7 @@ $("#sale_report_form").submit(function(e) {
              dangerMode: true,
              timer: 1500
           });
-          location.reload();
+          window.location.replace(bases_url+'Sales');
            } else if (response.status == 'failure') {
             error_msg(response.error);
             //alert('inserted Unsuccessfully');
