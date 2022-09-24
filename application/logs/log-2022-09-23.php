@@ -40,3 +40,4 @@ ERROR - 2022-09-23 17:32:53 --> Severity: Notice --> Undefined index: terms C:\x
 ERROR - 2022-09-23 17:32:57 --> Severity: Notice --> Undefined index: terms C:\xampp\htdocs\legalmis\application\controllers\Masters.php 113
 ERROR - 2022-09-23 17:33:06 --> Severity: Notice --> Undefined index: terms C:\xampp\htdocs\legalmis\application\controllers\Masters.php 113
 ERROR - 2022-09-23 17:34:37 --> Severity: Notice --> Undefined index: terms C:\xampp\htdocs\legalmis\application\controllers\Masters.php 113
+ERROR - 2022-09-23 17:44:10 --> Severity: Compile Error --> Cannot use empty array elements in arrays C:\xampp\htdocs\legalmis\application\controllers\Masters.php 121
