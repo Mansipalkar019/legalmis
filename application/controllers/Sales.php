@@ -34,15 +34,16 @@ class Sales extends CI_Controller
         else redirect('dashboard');
         $sales_id=base64_decode($_GET['id']);
         $getsalesrecordbyid=$this->supermodel->getsalesrecordbyid($sales_id);
-        //print_r($getsalesrecordbyid);die();
+        // print_r($getsalesrecordbyid);die();
         error_reporting(0);
         ini_set('memory_limit', '256M');
         ini_set("pcre.backtrack_limit", "1000000");
         // $this->load->view('admin/stock_pdf_reports');
         $pdfFilePath = FCPATH."uploads/invoice/legal.pdf";
         $pdfFilePaths = base_url()."uploads/invoice/legal'".$data_row['id']."'.pdf";
-        $html = $this->load->view('printinvoice/print_sale_page1',array('data' => $getsalesrecordbyid), true);
+       
         $this->load->library('m_pdf');
+         $html = $this->load->view('printinvoice/print_sale_page1',array('data' => $getsalesrecordbyid), true);
         $mpdf=new mPDF();
         // $mpdf=new mPDF('utf-8', array(300,300));
         $mpdf->showImageErrors = true;
@@ -50,7 +51,8 @@ class Sales extends CI_Controller
         $mpdf->SetDisplayMode('fullpage');
         $mpdf->AddPage('P', 'A4'); 
         $mpdf->WriteHTML($html);        
-         $mpdf->Output($pdfFilePath,"F");
+          ob_end_clean();
+         $mpdf->Output($pdfFilePath,"I");
         $response['path']=$pdfFilePaths; 
         $this->load->view('printinvoice/print_sale_page1');
        
@@ -60,9 +62,7 @@ class Sales extends CI_Controller
     {
         if ($this->role_id == 1 || $this->role_id == 3); // grant access
         else redirect('dashboard');
-        
-        $this->load->view('printinvoice/print_sale_page2');
-       
+        $this->load->view('printinvoice/print_sale_page2'); 
     }
 
     public function print_sales3()
@@ -88,8 +88,8 @@ class Sales extends CI_Controller
                 $edit = '<span><a href="javascript:void(0);" ><i class="glyphicon glyphicon-pencil a_category_view" aria-hidden="true" data-toggle="modal"
                 data-target="#myModal" id="'.$data_row['id'].'"></i> </a></span>&nbsp;&nbsp;';
 
-                $invoice = '<span><a href="'.base_url().'Sales/print_sales1?id='.base64_encode($data_row['id']).'">
-                <i class="glyphicon glyphicon-pencil invoice_view" aria-hidden="true" 
+                $invoice = '<span><a href="'.base_url().'Sales/print_sales1?id='.base64_encode($data_row['id']).'" target="_blank">
+                <i class="glyphicon glyphicon-download-alt invoice_view" aria-hidden="true" 
                  ></i> </a></span>&nbsp;&nbsp;';
 
                 $delete = "<span><a href='#' onclick='delete_sales_report(this," . $data_row['id'] . ")'><i class='glyphicon glyphicon-trash'></i></a></span>";

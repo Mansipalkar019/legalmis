@@ -16,6 +16,11 @@
    
    }
    .invoice-box table {
+<<<<<<< HEAD
+=======
+     max-width: 890px;
+   margin: auto;
+>>>>>>> e8161a5ddd39427a11984582747659a5a2823840
    width: 100%;
    line-height: inherit;
    text-align: left;
@@ -83,11 +88,12 @@
    .rtl table tr td:nth-child(2) {
    text-align: left;
    }
+  
 </style>
 
-<div class="container invoice-box img-responsive"  style="background-image:url('<?php echo base_url() ?>assets_admin/images/letterhead.png'); 
+<div class="container invoice-box img-responsive" style="background-image:url('<?php echo base_url() ?>assets_admin/images/letterhead.png'); 
    background-repeat: no-repeat;
-   background-size: cover;">
+   background-size: 1950px 2850px;">
    
    <table cellpadding="0" cellspacing="0" style="margin-top: 150px;">
       <tr class="">
@@ -189,8 +195,8 @@
 </div>
 
 <div class="container invoice-box img-responsive" style="background-image:url('<?php echo base_url() ?>assets_admin/images/letterhead.png'); 
-   background-repeat: no-repeat;
-   background-size: cover;">
+   background-repeat: no-repeat; 
+   background-size: 1950px 2850px;">
    <table cellpadding="0" cellspacing="0" style="margin-top: 200px;border:none !important">
       <tr class="information" style="border:none;">
          <td colspan="3">
