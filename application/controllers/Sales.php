@@ -160,8 +160,15 @@ class Sales extends CI_Controller
         $data['sales_data'] = $this->supermodel->edit_sales_data($id);
         $data['sale_service'] = $this->supermodel->get_sale_service($id);
         $data['sale_sub_service'] = $this->supermodel->get_sale_sub_service($id);
-        $data['sale_service_brand'] = $this->supermodel->get_sale_service_brand($id);
-        $data['sale_service_class'] = $this->supermodel->get_sale_service_class($id);
+        // $data['sale_service_brand'] = $this->supermodel->get_sale_service_brand($id);
+        $sale_service_brand = $this->model->selectWhereData('sale_service_brand',array('fk_sales_id'=>$id),array('*'),false);
+
+        foreach ($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row) {
+            $sale_service_brand[$sale_service_brand_key]['sale_service_class'] = $this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$id,'fk_brand_id'=>$sale_service_brand_row['id'],),array('*'),false);
+        }
+        // echo '<pre>'; print_r($sale_service_brand); exit;
+        $data['sale_service_brand'] = $sale_service_brand;
+        // $data['sale_service_class'] = $this->supermodel->get_sale_service_class($id);
         $data['state'] = $this->model->getData('tbl_states');
         $data['city'] = $this->model->selectWhereData('tbl_cities',array('state_id'=>$data['sales_data']['state']),array('*'),false);
         $data['pincode'] = $this->model->selectWhereData('location',array('city'=>$data['sales_data']['city']),array('*'),false);

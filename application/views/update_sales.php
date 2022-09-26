@@ -408,10 +408,10 @@
                            <div class="row">
                               <?php
                                     $html = "";
-                                    $brand_name = explode(',',$sale_service_brand['brand_name']);
-                                    $fk_service_id = explode(',',$sale_service_brand['fk_service_id']);
-                                    foreach($brand_name as $brand_name_key => $brand_name_row){
-                                          echo '<div class="col-md-6" id="show_brand_content_'.$brand_name_key.'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'.$brand_name_key.'[]" id="brand_name_'.$brand_name_key.'" value="'.$brand_name_row.'" onchange="get_brand_name(this.value)"></input></div></div></div>';
+                                    // $brand_name = explode(',',$sale_service_brand['brand_name']);
+                                    // $fk_service_id = explode(',',$sale_service_brand['fk_service_id']);
+                                    foreach($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row){
+                                          echo '<div class="col-md-5" id="show_brand_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'.$sale_service_brand_key.'[]" id="brand_name_'.$sale_service_brand_key.'" value="'.$sale_service_brand_row['brand_name'].'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-5" id="show_company_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'.$sale_service_brand_key.'['.$sale_service_brand_key.'][]" id="class_name" onchange="get_class_name(this.value)"></select></div></div></div>';
                                     }
                               ?>
                            </div>
@@ -451,6 +451,12 @@
           placeholder: " Select Sub Services",
           allowClear: true
       });
+       $('#'+'class_name').select2({
+         tags: true,
+         tokenSeparators: [',', ' '],
+      });
+    
+       $('.tokenizer').trigger('change.select2');
            function getcity(city) {
            $.ajax({
            url: '<?php echo base_url(); ?>Sales/getcity',
