@@ -111,7 +111,7 @@ class supermodel extends CI_Model {
 		$this->db->limit($rowperpage,$rowno);
 		if(!empty($from_date))
 		{
-			$this->db->where('sales.sale_date >',$from_date);
+			$this->db->where('sales.sale_date >=',$from_date);
 		}
 		if(!empty($to_date))
 		{
@@ -124,7 +124,6 @@ class supermodel extends CI_Model {
 		$this->db->group_by('sales.id');
         $this->db->order_by('sales.id',"DESC");
         $query=$this->db->get();
-		echo $this->db->last_query();die();
 		return $query->result_array();
     }
 
@@ -144,7 +143,7 @@ class supermodel extends CI_Model {
 		$this->db->limit($rowperpage,$rowno);
 		if(!empty($from_date))
 		{
-			$this->db->where('sales.sale_date >',$from_date);
+			$this->db->where('sales.sale_date >=',$from_date);
 		}
 		if(!empty($to_date))
 		{
@@ -175,7 +174,7 @@ class supermodel extends CI_Model {
        $this->db->limit($rowperpage,$rowno);
 	   if(!empty($from_date))
 	   {
-		   $this->db->where('sales.sale_date >',$from_date);
+		   $this->db->where('sales.sale_date >=',$from_date);
 	   }
 	   if(!empty($to_date))
 	   {
@@ -258,6 +257,33 @@ class supermodel extends CI_Model {
 		$this->db->group_by('sale_service_brand.id');
         $this->db->order_by('sale_service_brand.id',"DESC");
 		return $this->db->count_all_results();
+    }
+
+	function download_salesrecord($from_date="",$to_date="")
+    {
+        $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename,GROUP_CONCAT(DISTINCT(sale_service_brand.brand_name)) as brandname');
+        $this->db->from('sales');
+        $this->db->join('sales_services','sales_services.sales_id=sales.id','left');
+        $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
+		$this->db->join('services','services.id=sales_services.services_id','left');
+		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
+		$this->db->join('sale_service_brand','sale_service_brand.fk_sales_id=sales.id','left');
+		$this->db->distinct('services');
+		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
+        $this->db->where('sales.status',1);
+		if(!empty($from_date))
+		{
+			$this->db->where('sales.sale_date >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('sales.sale_date <=',$to_date);
+		}
+	
+		$this->db->group_by('sales.id');
+        $this->db->order_by('sales.id',"DESC");
+        $query=$this->db->get();
+		return $query->result_array();
     }
 }
 ?>

@@ -931,3 +931,8 @@ ERROR - 2022-09-26 15:00:20 --> Severity: Warning --> in_array() expects paramet
 ERROR - 2022-09-26 15:00:20 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 386
 ERROR - 2022-09-26 15:00:20 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 386
 >>>>>>> 1d33d86d104220bc0c033d71cedc2145b7a9ce5a
+ERROR - 2022-09-26 15:33:59 --> 404 Page Not Found: Sale/index
+ERROR - 2022-09-26 15:47:46 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION) or const (T_CONST) C:\xampp\htdocs\legalmis\application\models\supermodel.php 209
+ERROR - 2022-09-26 15:47:54 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION) or const (T_CONST) C:\xampp\htdocs\legalmis\application\models\supermodel.php 209
+ERROR - 2022-09-26 15:48:03 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION) or const (T_CONST) C:\xampp\htdocs\legalmis\application\models\supermodel.php 209
+ERROR - 2022-09-26 18:09:03 --> Severity: Compile Error --> Cannot redeclare Sales::getsalesrecord() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 73

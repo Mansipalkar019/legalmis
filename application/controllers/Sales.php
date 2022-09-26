@@ -64,25 +64,31 @@ class Sales extends CI_Controller
        
     }
 
+    public function sales_exceldownload()
+    {
+        $from_date=$_POST['from_date'];
+        $to_date=$_POST['to_date'];
+        $totalData=$this->supermodel->download_salesrecord($from_date,$to_date);  
+        echo "<pre>";
+        print_r($totalData);die();
+    }
 
     public function getsalesrecord()
     {
-       
         $data[] = $_POST;  
-        $fromdate = $_POST['from_date'];
-        $from_date = date("Y-m-d", strtotime($from_date));
-        echo $from_date;die();
-        $todate = $_POST['to_date'];
-        $to_date = date("Y-m-d", strtotime($to_date));
-        $rowno = $_POST['start'];
-        $rowperpage = $_POST['length'];
-        $search_text = $_POST['search']['value'];   
+        // echo "<pre>";
+        // print_r($data);die();
+        $from_date = $data[0]['from_date'];
+        $to_date = $data[0]['to_date'];
+        
+        $rowno = $data[0]['start'];
+        $rowperpage = $data[0]['length'];
+        $search_text = $data[0]['search']['value'];   
         $totalData=$this->supermodel->getsalesrecord($from_date,$to_date,$rowno,$rowperpage,$search_text);   
-       
         $count_filtered=$this->supermodel->sale_record_count_filtered($from_date,$to_date,$rowno,$rowperpage,$search_text);
         $count_all = $this->supermodel->sale_record_count_all($from_date,$to_date,$rowno,$rowperpage,$search_text);
         $data_array=array();
-       
+        
         foreach($totalData as $category_details_key => $data_row)
         {
            
@@ -95,7 +101,7 @@ class Sales extends CI_Controller
 
                 $delete = "<span><a href='#' onclick='delete_sales_report(this," . $data_row['id'] . ")'><i class='glyphicon glyphicon-trash'></i></a></span>";
                 
-                $services='<span><a href="javascript:void(0);" onclick="edit_person('."'".$data_row['id']."'".')"><i class="" id="'.$data_row['id'].'"></i>'.$data_row['serviceid'].'</a></span>&nbsp;&nbsp;';
+                $services='<span><a href="javascript:void(0);" class="edit_service_data" id="'.$data_row['id'].'"><i class="" ></i>'.$data_row['serviceid'].'</a></span>&nbsp;&nbsp;';
                 $nestedData=array();
                 $nestedData[] =  $edit . $invoice . $delete;
                 $nestedData[] = ++$category_details_key;
@@ -1517,11 +1523,12 @@ class Sales extends CI_Controller
 	}
 
 
-    public function getsalesrecord1($id)
+    public function getsalesrecord1()
     {
-        $data[] = json_encode($_GET);  
-        //  echo "<pre>";
-        // print_r($data);die();  
+        $data[] = json_encode($_POST);  
+      
+        $id = $_POST['id'];
+    
         $rowno = $_GET['start'];
         $rowperpage = $_GET['length'];
         $search_text = $_GET['search']['value']; 

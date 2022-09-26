@@ -36,19 +36,16 @@
                      <input type="text" class="form-control mr-2 datepicker" name="to_date" id="to_date" style="width:150px;" placeholder="DD/MM/YYYY">
                   </div>
                   <div class="form-group">
-                  <button class="btn btn-success btn-sm"  type="submit"><i class="fa fa-search" aria-hidden="true" style="width: 200px;">&nbsp;<span>Search</span> </i></button>
+                  <button class="btn btn-success btn-sm"  type="button" id="btn-search-by-date"><i class="fa fa-search" aria-hidden="true" style="width: 200px;">&nbsp;<span>Search</span> </i></button>
                   </div>
-                
-                  <!-- <a href="<?php echo base_url();?>booking/reset?reset=1" class="btn btn-danger mr-2 "><i class="fa fa-search" aria-hidden="true">Reset</i></a> -->
-               </form>
+            </form>
                <hr>
                <div class="container-fluid" >
-                  <form class="form-inline" method="post" action="<?php echo base_url(); ?>booking/excel_data">
-                 
+                
                   <div style="overflow-y: auto;">
                   <table id="doc_list_datatable" class="table table-striped table-bordered data-table"  cellspacing="0" width="100%">
                   <div class="form-group" style="float:right;">
-                  <button class="btn btn-success btn-sm" id="btn-search-by-date"  type="submit"><i class="fa fa-search" aria-hidden="true" style="width: 200px;">&nbsp;<span>Export to Excel</span> </i></button>
+                  <button class="btn btn-success btn-sm" type="button" id="btn-excel-download" ><i class="fa fa-search" aria-hidden="true" style="width: 200px;">&nbsp;<span>Export to Excel</span> </i></a>
                  </div>
                   <thead>
                         <tr>
@@ -97,6 +94,35 @@
                         </tr>
                      </thead>
                 </table>
+
+                <div class="modal fade" id="modal_form" role="dialog" data-easein="bounceDownIns">
+    <div class="modal-dialog modal-lg" style="width:auto !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Services</h3>
+            </div>
+            <div class="modal-body form">
+              
+                    <input type="hidden" value="" name="id" class="id"/> 
+                    <div style="overflow-x:auto;">
+          <table class="table table-striped table-bordered data-table brand_list_datatable"  cellspacing="0" width="100%">
+                <thead>
+                        <tr>
+                           <th>Id</th>
+                           <th>Service</th>
+                           <th>Brand Name</th>
+                           <th>Class Name</th>
+                        </tr>
+                     </thead>
+                </table>
+              
+            </div>
+        
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
                   </div>
                   
                </div>
@@ -109,38 +135,8 @@
 <?php $this->load->view('footer'); ?>
 <script src="<?php echo base_url();?>assets_admin/view_js/documentlist.js"></script>
 <script type="text/javascript">
-
-function edit_person(id)
-{
-    save_method = 'update';
-   
-    $.ajax({
-        url : "<?php echo site_url('Sales/getbrandclasslst/')?>/" + id,
-        type: "GET",
-        dataType: "JSON",
-        success: function(data)
-        {
-            $('.id').val(data);
-
-            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-
-            $('#brand_list_datatable').DataTable({
-            processing: true,
-            serverSide: true,
-           'ajax': {
-        'url': "<?php echo site_url('Sales/getsalesrecord1/')?>/" + id,
-        "data": function (data) {
-        }
-    },  
-            });
-
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert('Error get data from ajax');
-        }
-    });
-}
+$("#to_date").datepicker({ dateFormat: 'dd/mm/Y' });
+$("#from_date").datepicker({ dateFormat: 'dd/mm/Y'});
 
     $(".chosen-select").chosen({width: "95%"}); 
    function resizeChosen() {
@@ -148,28 +144,66 @@ function edit_person(id)
             $(this).attr('style', 'width: 100%');
         });
     }
-    $(document).ready(function () {
-    var table = $('#doc_list_datatable').DataTable();
-    $('#doc_list_datatable').parent().addClass('table-responsive');
 
- 
-    
-});
-$("#to_date").datepicker({ dateFormat: 'dd/mm/Y' });
-$("#from_date").datepicker({ dateFormat: 'dd/mm/Y'});
 var simpletable = $('#doc_list_datatable').DataTable({
    
-    'ajax': {
-        'url': "<?= base_url() ?>Sales/getsalesrecord",
-        "data": function (data) {
-            alert($('#from_date').val());
-            data.from_date = $('#from_date').val();
-            data.to_date = $('#to_date').val();
-        }
-    }, 
+   'ajax': {
+       'url': "<?= base_url() ?>Sales/getsalesrecord",
+       'method': "POST",
+       'dataType':'json',
+       "data": function (data) {
+           data.from_date = $('#from_date').val();
+           data.to_date = $('#to_date').val();
+       }
+   }, 
+   createdRow: function (row, data, index) {
+        $('td', row).eq(2).addClass('text-capitalize');
+    },
 });
 
+
+
 $('#btn-search-by-date').click(function () { //button filter event click
-        simpletable.ajax.reload(null, false); //just reload table
-    });
+       simpletable.ajax.reload(null, false); //just reload table
+   });
+   
+    
+   $(document).on('click','.edit_service_data',function (){
+      var id = $(this).attr("id");
+   var brand_list_datatable = $('.brand_list_datatable').DataTable({
+      destroy: true,
+   'ajax': {
+       'url': "<?= base_url() ?>Sales/getsalesrecord1",
+       'method': "POST",
+       'dataType':'json',
+       "data": function (data) {
+           data.id = id;
+       }
+   }, 
+   createdRow: function (row, data, index) {
+        $('td', row).eq(2).addClass('text-capitalize');
+    },
+});
+$('#modal_form').modal('show'); 
+   });
+
+   $('#btn-excel-download').click(function () { 
+      var from_date=$('#from_date').val();
+      var to_date=$('#to_date').val();
+      $.ajax({
+				type:"POST",
+				async: "true",
+				url:"<?php echo base_url(); ?>Sales/sales_exceldownload",
+				dataType:"json",
+				data:{
+					fromdate:from_date,
+               todate:to_date
+				},
+				success: function(response)
+				{
+				
+				}
+			});
+   });
+
 </script>
