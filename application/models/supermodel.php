@@ -182,6 +182,52 @@ class supermodel extends CI_Model {
 		$query=$this->db->get();
         return $query->row_array();
 	}
+
+	public function edit_sales_data($id='')
+	{
+		$this->db->select('sales.*');
+        $this->db->from('sales');
+		$this->db->where('sales.id',$id);
+		$this->db->where('sales.status',1);
+		$query=$this->db->get();
+        return $query->row_array();
+	}
+	public function get_sale_service($id='')
+	{
+		$this->db->select('GROUP_CONCAT(sales_services.id) as sales_services_id,GROUP_CONCAT(sales_services.services_id) as services_id');
+        $this->db->from('sales_services');
+		$this->db->where('sales_services.sales_id',$id);
+		$this->db->group_by('sales_services.sales_id');
+		$query=$this->db->get();
+        return $query->row_array();
+	}
+	public function get_sale_sub_service($id='')
+	{
+		$this->db->select('GROUP_CONCAT(sales_sub_services.id) as sales_sub_services_id,GROUP_CONCAT(sales_sub_services.sub_services_id) as sub_services_id');
+        $this->db->from('sales_sub_services');
+		$this->db->where('sales_sub_services.sales_id',$id);
+		$this->db->group_by('sales_sub_services.sales_id');
+		$query=$this->db->get();
+        return $query->row_array();
+	}
+	public function get_sale_service_brand($id='')
+	{
+		$this->db->select('GROUP_CONCAT(sale_service_brand.id) as sale_service_brand_id,GROUP_CONCAT(sale_service_brand.brand_name) as brand_name,GROUP_CONCAT(sale_service_brand.fk_service_id) as fk_service_id');
+        $this->db->from('sale_service_brand');
+		$this->db->where('sale_service_brand.fk_sales_id',$id);
+		$this->db->group_by('sale_service_brand.fk_sales_id');
+		$query=$this->db->get();
+        return $query->row_array();
+	}
+	public function get_sale_service_class($id='')
+	{
+		$this->db->select('GROUP_CONCAT(sale_service_class.id) as sale_service_class_id,GROUP_CONCAT(sale_service_class.class_name) as class_name,GROUP_CONCAT(sale_service_class.fk_service_id) as fk_service_id,GROUP_CONCAT(sale_service_class.fk_brand_id) as fk_brand_id');
+        $this->db->from('sale_service_class');
+		$this->db->where('sale_service_class.fk_sale_id',$id);
+		$this->db->group_by('sale_service_class.fk_sale_id');
+		$query=$this->db->get();
+        return $query->row_array();
+	}
 }
 ?>
 
