@@ -155,7 +155,26 @@ class Sales extends CI_Controller
         // Output to JSON format
         echo json_encode($output);    
     }
-
+    // Update Sales Details
+    public function edit_sales()
+    {
+        $id = base64_decode($_GET['id']);
+        $this->load->model('supermodel');
+         $data['services_list'] = $this->model->getData('services', array('status' => '1'));
+        $data['sub_services_list'] = $this->model->getData('sub_services', array('status' => '1'));
+        
+        $data['sales_data'] = $this->supermodel->edit_sales_data($id);
+        $data['sale_service'] = $this->supermodel->get_sale_service($id);
+        $data['sale_sub_service'] = $this->supermodel->get_sale_sub_service($id);
+        $data['sale_service_brand'] = $this->supermodel->get_sale_service_brand($id);
+        $data['sale_service_class'] = $this->supermodel->get_sale_service_class($id);
+        $data['state'] = $this->model->getData('tbl_states');
+        $data['city'] = $this->model->selectWhereData('tbl_cities',array('state_id'=>$data['sales_data']['state']),array('*'),false);
+        $data['pincode'] = $this->model->selectWhereData('location',array('city'=>$data['sales_data']['city']),array('*'),false);
+        $data['customer_executive']  = $this->model->selectWhereData('customer_executive', array('status' => '1'),array('id','name'),false);
+        // echo '<pre>'; print_r($data); exit;
+        $this->load->view('update_sales',$data);
+    }
     // only for Rashi and Administrator as of now
     public function sales_info()
     {
