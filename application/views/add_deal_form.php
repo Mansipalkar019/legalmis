@@ -243,7 +243,7 @@
                      <div class="form-group">
                         <label>Govt fees:<span class="text-danger">*</span></label>
                         <input type="text" name="govt_fees" id="govt_fees"
-                           class="form-control cal_outstanding" onkeypress="return isNumber(event)">
+                           class="form-control" onkeypress="return isNumber(event)">
                         <span class="error_msg" id="govt_fees_error"></span>
                      </div>
                   </div>
@@ -360,7 +360,7 @@
                            <?php
                               foreach($payment_mode as $payment_mode_key => $payment_mode_row) 
                               {?>
-                           <option value=<?php echo  $payment_mode_row['id'] ?> ><?php echo  $payment_mode_row['name'] ?></option>
+                           <option value=<?php echo  $payment_mode_row['name'] ?> ><?php echo  $payment_mode_row['name'] ?></option>
                            <?php } ?>
                         </select>
                         <span class="error_msg" id="payment_mode_error"></span>

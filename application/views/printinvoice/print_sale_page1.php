@@ -16,11 +16,8 @@
    
    }
    .invoice-box table {
-<<<<<<< HEAD
-=======
      max-width: 890px;
    margin: auto;
->>>>>>> e8161a5ddd39427a11984582747659a5a2823840
    width: 100%;
    line-height: inherit;
    text-align: left;
@@ -90,35 +87,34 @@
    }
   
 </style>
-
+<?php //echo "<pre>";print_r($data['termcond']);die();?>
 <div class="container invoice-box img-responsive" style="background-image:url('<?php echo base_url() ?>assets_admin/images/letterhead.png'); 
    background-repeat: no-repeat;
    background-size: 1950px 2850px;">
-   
    <table cellpadding="0" cellspacing="0" style="margin-top: 150px;">
-      <tr class="">
-         <td colspan="12" class="text-center">
-            <b> Proforma Invoice : <?php echo $data['invoice_number'];?> </b>  
+      <tr>
+         <td style="text-align:center;">
+            <b> Proforma Invoice : <?php echo $data['getsalesrecordbyid']['invoice_number'];?> </b>  
          </td>
       </tr>
    </table>
    <table cellspacing="0px" cellpadding="2px">
       <tr class="information">
          <td  colspan="3">
-            <b> Invoice to: <br> <?php echo $data['client_name'];?> </b> <br>
+            <b> Invoice to: <br> <?php echo $data['getsalesrecordbyid']['client_name'];?> </b> <br>
             Company Address: <br>
-            <?php echo $data['street'];?><br>
-            <?php echo $data['city'];?>, <?php echo $data['state'];?> <?php echo $data['pincode'];?> <br><br>
-            Mobile No:-<?php echo $data['mobile_1'];?>, <?php if($data['mobile_2'] != ''){echo $data['mobile_2'];} ?>, <?php if($data['alternate_number'] != ''){echo $data['alternate_number'];} ?> <br>
-            Email ID:-<?php echo $data['email_address'];?><br>
-            GSTIN:-<?php echo $data['gst_no'];?><br><br>
-            Invoice Date:   <?php echo $data['sale_date'];?>
+            <?php echo $data['getsalesrecordbyid']['street'];?><br>
+            <?php echo $data['getsalesrecordbyid']['city'];?>, <?php echo $data['getsalesrecordbyid']['state'];?> <?php echo $data['getsalesrecordbyid']['pincode'];?> <br><br>
+            Mobile No:-<?php echo $data['getsalesrecordbyid']['mobile_1'];?>, <?php if($data['getsalesrecordbyid']['mobile_2'] != ''){echo $data['getsalesrecordbyid']['mobile_2'];} ?>, <?php if($data['getsalesrecordbyid']['alternate_number'] != ''){echo $data['getsalesrecordbyid']['alternate_number'];} ?> <br>
+            Email ID:-<?php echo $data['getsalesrecordbyid']['email_address'];?><br>
+            GSTIN:-<?php echo $data['getsalesrecordbyid']['gst_no'];?><br><br>
+            Invoice Date:   <?php echo $data['getsalesrecordbyid']['sale_date'];?>
          </td>
          <td>
             <b> Pay to: <br>Primary bank details :</b><br>
             Bank Account No : 106603130001272<br>
             IFSC Code : SVCB0000066<br>
-            Bank: SVC Co-Operative Bank Ltd<br>
+            Bank: SVC Co-Operative Bank Ltd<br><br>
             Branch: Vikhroli West<br>
             City : Mumbai<br><br>
             G-PAY - +91 84529 31503<br>
@@ -145,29 +141,49 @@
             Amount
          </td>
       </tr>
-      <tr class="item">
+      <?php if($data['getsalesrecordbyid']['govt_fee'] != 0){ ?>
+         <tr class="item">
          <td style="width:10%;">
             1
          </td>
          <td style="width:25%; text-align:center;">
-            Trademark Process (Drafting,Proceeding & Professional Fees)
+            Govt Fees
          </td>
          <td style="width:10%; text-align:center;">
-            10800
+         <?php echo $data['getsalesrecordbyid']['govt_fee']; ?>
          </td>
          <td style="width:15%; text-align:center;">
             1
          </td>
          <td style="width:15%; text-align:center;">
-            10800
+         <?php echo $data['getsalesrecordbyid']['govt_fee']; ?>
          </td>
       </tr>
+      <?php } ?>
+      
       <tr class="item">
          <td style="width:10%;">
             2
          </td>
          <td style="width:25%; text-align:center;">
-            (HSN CODE:-998213)
+            Trademark Process (Drafting,Proceeding & Professional Fees)
+         </td>
+         <td style="width:10%; text-align:right;">
+         <?php echo $data['getsalesrecordbyid']['total_professional_amount']; ?>
+         </td>
+         <td style="width:15%; text-align:right;">
+            1
+         </td>
+         <td style="width:15%; text-align:right;">
+         <?php echo $data['getsalesrecordbyid']['total_professional_amount']; ?>
+         </td>
+      </tr>
+      <tr class="item">
+         <td style="width:10%;">
+            3
+         </td>
+         <td style="width:25%; text-align:center;">
+            (HSN CODE:-0)
          </td>
          <td style="width:10%; text-align:right;">
             0
@@ -178,20 +194,101 @@
             0
          </td>
       </tr>
+      <?php if($data['getsalesrecordbyid']['cgst'] != 0 && $data['getsalesrecordbyid']['sgst'] != 0){ ?>
+         <tr class="item">
+         <td style="width:10%;">
+            4
+         </td>
+         <td style="width:25%; text-align:center;">
+            CGST
+         </td>
+         <td style="width:10%; text-align:right;">
+         <?php echo $data['getsalesrecordbyid']['cgst']; ?>
+         </td>
+         <td style="width:15%; text-align:right;">
+            1
+         </td>
+         <td style="width:15%; text-align:right;">
+         <?php echo $data['getsalesrecordbyid']['cgst']; ?>
+         </td>
+      </tr>
       <tr class="item">
-         <td style="width:10%; text-align:right;" colspan="3">
+         <td style="width:10%;">
+            5
+         </td>
+         <td style="width:25%; text-align:center;">
+            SGST
+         </td>
+         <td style="width:10%; text-align:right;">
+         <?php echo $data['getsalesrecordbyid']['sgst']; ?>
          </td>
          <td style="width:15%; text-align:right;">
-            Grand Total
+           1
          </td>
          <td style="width:15%; text-align:right;">
-            10800
+         <?php echo $data['getsalesrecordbyid']['sgst']; ?>
+         </td>
+      </tr>
+      <?php } ?>
+      <?php if($data['getsalesrecordbyid']['igst'] != 0 ){ ?>
+      <tr class="item">
+         <td style="width:10%;">
+            4
+         </td>
+         <td style="width:25%; text-align:center;">
+            IGST
+         </td>
+         <td style="width:10%; text-align:right;">
+         <?php echo $data['getsalesrecordbyid']['igst']; ?>
+         </td>
+         <td style="width:15%; text-align:right;">
+            1
+         </td>
+         <td style="width:15%; text-align:right;">
+         <?php echo $data['getsalesrecordbyid']['igst']; ?>
+         </td>
+      </tr>
+      <?php } ?>
+      <tr class="item">
+         <td style="width:10%;text-align:right;background: #302875;color:white;" colspan="3">
+         </td>
+         <td style="width:15%;text-align:right;background: #302875;color:white;font-weight: bold;font-size:12px;">
+          Round off
+         </td>
+         <td style="width:15%; text-align:right;">
+         <?php echo $data['getsalesrecordbyid']['round_off']; ?>
+         </td>
+      </tr>
+      <tr class="item">
+         <td style="width:10%; text-align:right;background: #302875;color:white;" colspan="3" class="">
+         </td>
+         <td style="width:15%; text-align:right;background: #302875;color:white;font-weight: bold;font-size:12px;">
+          Grand Total
+         </td>
+         <td style="width:15%; text-align:right;">
+         <?php echo round($data['getsalesrecordbyid']['govt_fee']+$data['getsalesrecordbyid']['total_professional_amount']+$data['getsalesrecordbyid']['cgst']+$data['getsalesrecordbyid']['sgst']+$data['getsalesrecordbyid']['igst']); ?>
          </td>
       </tr>
       </td>
       </tr>
    </table>
-
+   <table cellspacing="0px" cellpadding="2px">
+      <tr class="information">
+         <td  colspan="3">
+            <b>Secondary Bank details :</b> <br>
+            Payee Name: BDS Services Pvt Ltd <br>
+            Bank Account No : 9313790257<br>
+            IFSC : KKBK0001429<br>
+            Bank : KOTAK MAHINDRA BANK LTD<br>
+         </td>
+         <td>
+            Branch : Vikhroli (W)
+         </td>
+         <td>
+            City : Mumbai
+         </td>
+      </tr>
+   </table>
 </div>
 
 <div class="container invoice-box img-responsive" style="background-image:url('<?php echo base_url() ?>assets_admin/images/letterhead.png'); 
@@ -200,19 +297,15 @@
    <table cellpadding="0" cellspacing="0" style="margin-top: 200px;border:none !important">
       <tr class="information" style="border:none;">
          <td colspan="3">
-            <b>Terms & conditions apply – TM Registration</b> <br>
-            1) Fees decided to be paid in advance shall not be refundable after 24hours. <br>
-            2) No charges applicable for Search Report<br>
-            3) Trademark registration, acceptability depends wholly on the authority of the government authorities, and BDS Legal<br>Services cannot take any responsibility nor liability for the same.<br>
-            4) Once the application has been made, the TM receipt will be shared with you within an expected period of 7-15 working days. <br>
-            5) While applying for a Trademark, the government may if it thinks fit raise an objection or a query towards your application,<br>
-            on the grounds of it being similar to another Trademark already registered. Any Objections received towards the said<br>
-            application shall involve an extra service on the part of the BDS Legal Team to prepare a defence for the application to be<br>
-            accepted and will entail a court proceeding, which will be chargeable at an extra cost of Rs.2000/- <br>
-            6) Opposition will also attract an extra charge of Rs. 2700/- as government fees and Rs. 5000/- as our professional fees, for two court hearings.<br>
-            7) This Trademark application will come with a complimentary online certificate. <br>
-            8) R certificate is an additional service provided at BDS Legal Services, for an additional charge of Rs. 1000/-
+           <?php 
+           foreach($data['termcond'] as $term_key => $term_row)
+           { ?>
+            <b>Terms & conditions apply – <?php echo $term_row['name'];?></b> <br>
+            <p><?php echo $term_row['terms'];?><br></p> 
+           <?php } ?>
+           
          </td>
       </tr>
    </table>
+   
 </div>

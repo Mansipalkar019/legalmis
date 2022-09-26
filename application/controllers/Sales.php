@@ -34,20 +34,26 @@ class Sales extends CI_Controller
         else redirect('dashboard');
         $sales_id=base64_decode($_GET['id']);
         $getsalesrecordbyid=$this->supermodel->getsalesrecordbyid($sales_id);
-        // print_r($getsalesrecordbyid);die();
+        $services=explode(',',$getsalesrecordbyid['serviceid']);
+        foreach($services as $services_key =>$services_row)
+        {
+            $termcond[]=$this->model->selectWhereData('services',array('name'=>$services_row),array('terms','name'));
+        
+        }
+        $data1= array(
+            'getsalesrecordbyid'=>$getsalesrecordbyid,
+            'termcond'=>$termcond
+        );
         error_reporting(0);
         ini_set('memory_limit', '256M');
         ini_set("pcre.backtrack_limit", "1000000");
         // $this->load->view('admin/stock_pdf_reports');
         $pdfFilePath = FCPATH."uploads/invoice/legal.pdf";
         $pdfFilePaths = base_url()."uploads/invoice/legal'".$data_row['id']."'.pdf";
-       
         $this->load->library('m_pdf');
-         $html = $this->load->view('printinvoice/print_sale_page1',array('data' => $getsalesrecordbyid), true);
+        $html = $this->load->view('printinvoice/print_sale_page1',array('data' => $data1), true);
         $mpdf=new mPDF();
-        // $mpdf=new mPDF('utf-8', array(300,300));
         $mpdf->showImageErrors = true;
-        // $mpdf->debug = true;
         $mpdf->SetDisplayMode('fullpage');
         $mpdf->AddPage('P', 'A4'); 
         $mpdf->WriteHTML($html);        
@@ -58,33 +64,28 @@ class Sales extends CI_Controller
        
     }
 
-    public function print_sales2()
-    {
-        if ($this->role_id == 1 || $this->role_id == 3); // grant access
-        else redirect('dashboard');
-        $this->load->view('printinvoice/print_sale_page2'); 
-    }
-
-    public function print_sales3()
-    {
-        if ($this->role_id == 1 || $this->role_id == 3); // grant access
-        else redirect('dashboard');
-      
-        $this->load->view('printinvoice/print_sale_page3');
-       
-    }
 
     public function getsalesrecord()
     {
        
-        $data[] = json_encode($_POST);       
-        $totalData=$this->supermodel->getsalesrecord();   
-        $count_filtered=$this->supermodel->sale_record_count_filtered();
-        $count_all = $this->supermodel->sale_record_count_all();
+        $data[] = $_POST;  
+        $fromdate = $_POST['from_date'];
+        $from_date = date("Y-m-d", strtotime($from_date));
+        echo $from_date;die();
+        $todate = $_POST['to_date'];
+        $to_date = date("Y-m-d", strtotime($to_date));
+        $rowno = $_POST['start'];
+        $rowperpage = $_POST['length'];
+        $search_text = $_POST['search']['value'];   
+        $totalData=$this->supermodel->getsalesrecord($from_date,$to_date,$rowno,$rowperpage,$search_text);   
+       
+        $count_filtered=$this->supermodel->sale_record_count_filtered($from_date,$to_date,$rowno,$rowperpage,$search_text);
+        $count_all = $this->supermodel->sale_record_count_all($from_date,$to_date,$rowno,$rowperpage,$search_text);
         $data_array=array();
-        $nestedData=array();
+       
         foreach($totalData as $category_details_key => $data_row)
         {
+           
                 $edit = '<span><a href="javascript:void(0);" ><i class="glyphicon glyphicon-pencil a_category_view" aria-hidden="true" data-toggle="modal"
                 data-target="#myModal" id="'.$data_row['id'].'"></i> </a></span>&nbsp;&nbsp;';
 
@@ -93,26 +94,27 @@ class Sales extends CI_Controller
                  ></i> </a></span>&nbsp;&nbsp;';
 
                 $delete = "<span><a href='#' onclick='delete_sales_report(this," . $data_row['id'] . ")'><i class='glyphicon glyphicon-trash'></i></a></span>";
+                
+                $services='<span><a href="javascript:void(0);" onclick="edit_person('."'".$data_row['id']."'".')"><i class="" id="'.$data_row['id'].'"></i>'.$data_row['serviceid'].'</a></span>&nbsp;&nbsp;';
+                $nestedData=array();
                 $nestedData[] =  $edit . $invoice . $delete;
                 $nestedData[] = ++$category_details_key;
                 $nestedData[] = $data_row['company_name'];
-                $nestedData[] = $data_row['brand_name'];
-                $nestedData[] = $data_row['class_name'];
                 $nestedData[] = $data_row['sale_date'];
                 $nestedData[] = $data_row['client_name'];
-                $nestedData[] = $data_row['serviceid'];
+                $nestedData[] = $services;
                 $nestedData[] = $data_row['subserviceid'];
                 $nestedData[] = $data_row['mobile_1'].', '.$data_row['mobile_2'].', '.$data_row['alternate_number'];
                 $nestedData[] = $data_row['email_address'].', '.$data_row['alternate_number'];
                 $nestedData[] = $data_row['gst_no'];
                 $nestedData[] = $data_row['deal_id'];
                 $nestedData[] = $data_row['invoice_number'];
-                $nestedData[] = $data_row['primary_caller'];
-                $nestedData[] = $data_row['secondary_caller'];
-                $nestedData[] = $data_row['lead_source'];
+                // $nestedData[] = $data_row['primary_caller'];
+                // $nestedData[] = $data_row['secondary_caller'];
+                // $nestedData[] = $data_row['lead_source'];
                 $nestedData[] = $data_row['street'];
                 $nestedData[] = $data_row['city'];
-                $nestedData[] = $data_row['state'];
+                $nestedData[] = $data_row['statename'];
                 $nestedData[] = $data_row['pincode'];
                 $nestedData[] = $data_row['payment_mode'];
                 $nestedData[] = $data_row['deal_amount'];
@@ -124,10 +126,10 @@ class Sales extends CI_Controller
                 $nestedData[] = $data_row['net_income'];
                 $nestedData[] = $data_row['gst_amount'];
                 $nestedData[] = $data_row['outstanding_followup_date'];
-                $nestedData[] = $data_row['remarks'];
-                $nestedData[] = $data_row['invoice_status'];
-                $nestedData[] = $data_row['invoice_name'];
-                $nestedData[] = $data_row['invoice_type'];
+               
+                // $nestedData[] = $data_row['invoice_status'];
+                // $nestedData[] = $data_row['invoice_name'];
+                // $nestedData[] = $data_row['invoice_type'];
                 $nestedData[] = $data_row['govt_fee'];
                 $nestedData[] = $data_row['professional_fees'];
                 $nestedData[] = $data_row['drafting_proceeding_fees'];
@@ -136,14 +138,17 @@ class Sales extends CI_Controller
                 $nestedData[] = $data_row['cgst'];
                 $nestedData[] = $data_row['sgst'];
                 $nestedData[] = $data_row['igst'];
-                $nestedData[] = $data_row['round_off'];           
+                $nestedData[] = $data_row['round_off'];  
+                $nestedData[] = $data_row['remarks'];         
             
                 $data_array[] = $nestedData;
+              
        }
+       
       $output = array(
-            "draw" => $_POST['draw'],
-            "recordsTotal" => $count_all,
-            "recordsFiltered" => $count_filtered,
+            "draw" => intval($_POST['draw']),
+            "recordsTotal" => intval($count_all),
+            "recordsFiltered" => intval($count_filtered),
             "data" => $data_array,
         );
         
@@ -555,8 +560,8 @@ class Sales extends CI_Controller
     echo json_encode($data);
   }
 
-    public function save_deal()
-    {    
+  public function save_deal()
+    {   
         //print_r($_FILES['image_files']);
         $this->form_validation->set_rules('sale_date', 'Sale Date', 'trim|required',array('required'=>'This field is required'));
           //$this->form_validation->set_rules('image_files[]', 'Image File', 'trim|required',array('required'=>'This field is required'));
@@ -567,7 +572,7 @@ class Sales extends CI_Controller
         $this->form_validation->set_rules('lead_source', 'Lead Source', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('legal_remarks', 'Legal Remark', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('accounts_remarks', 'Account Remark', 'trim|required',array('required'=>'This field is required'));
-        
+       
         $this->form_validation->set_rules('company_name', 'Company Name', 'trim|required',array('required'=>'This field is required'));
         //$this->form_validation->set_rules('brand_name', 'Brand Name', 'trim|required|is_unique[sales.brand_name]',array('required'=>'This field is required'));
         //$this->form_validation->set_rules('class_name', 'Class Name', 'trim|required',array('required'=>'This field is required'));
@@ -577,7 +582,7 @@ class Sales extends CI_Controller
         //$this->form_validation->set_rules('alternate_number', 'Alternate Number', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('email_address', 'Email Address', 'trim|required|valid_email|encode_php_tags',array('required'=>'This field is required'));
         //$this->form_validation->set_rules('email_address1', 'Alternate Address', 'trim|required|valid_email|encode_php_tags',array('required'=>'This field is required'));
-        
+       
         $this->form_validation->set_rules('gst_no', 'GST No.', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('street', 'Street', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('city', 'City', 'trim|required',array('required'=>'This field is required'));
@@ -611,13 +616,13 @@ class Sales extends CI_Controller
         //$this->form_validation->set_rules('document_list[]', 'Document List', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('industry', 'Industry', 'trim|required',array('required'=>'This field is required'));
         //$this->form_validation->set_rules('commission', 'Commission Fees', 'trim|required',array('required'=>'This field is required'));
- 
-    
+
+   
         if ($this->form_validation->run() == FALSE)
         {
                 $response['status'] = 'failure';
                 $response['error'] = array(
-                    'sale_date' => strip_tags(form_error('sale_date')),            
+                    'sale_date' => strip_tags(form_error('sale_date')),           
                     'services' => strip_tags(form_error('services[]')),
                     'sub_services' => strip_tags(form_error('sub_services[]')),
                     //'image_files' => strip_tags(form_error('image_files')),
@@ -670,7 +675,7 @@ class Sales extends CI_Controller
                     //'commission' => strip_tags(form_error('commission')),
 
                 );
-               
+              
        }
         else
         {
@@ -712,7 +717,7 @@ class Sales extends CI_Controller
             $primary_caller     = $this->input->post('primary_caller');
             $secondary_caller   = $this->input->post('secondary_caller');
             $services           = $this->input->post('services[]');
-            $sub_services       = $this->input->post('sub_services[]'); 
+            $sub_services       = $this->input->post('sub_services[]');
             $document_list      = $this->input->post('document_list[]');
             $payment_mode       = $this->input->post('payment_mode');
             $invoice_type       = $this->input->post('invoice_type');
@@ -726,9 +731,10 @@ class Sales extends CI_Controller
             $igst               = $this->input->post('igst');
             $round_off          = $this->input->post('round_off');
             $invoice_name       = $this->input->post('invoice_name');
+            $invoice_no      = $this->input->post('invoice_no');
             $invoice_status     = $this->input->post('invoice_status');
-           
-           
+          
+          
             $sub_services     = $this->input->post('sub_services');
             $image_files     = $this->input->post('image_files[]');
             $sale_date          = date('Y-m-d', strtotime($sale_date));
@@ -772,7 +778,7 @@ class Sales extends CI_Controller
             {
                 $response['status']='failure';
                 $response['error']=array('msg' => "Goverment Fees Dose Not Match !");
-                
+               
             }else if($total_professional_amount != $matches)
             {
                 $response['status']='failure';
@@ -820,6 +826,7 @@ class Sales extends CI_Controller
                     'accounts_remarks'      => $accounts_remarks,
                     'invoice_status'        => $invoice_status,
                     'invoice_name'          => $invoice_name,
+                    'invoice_number'        =>$invoice_no,
                     'invoice_type'          => $invoice_type,
                     'govt_fee'              => $govt_fee,
                     'professional_fees' => $professional_fees,
@@ -838,7 +845,7 @@ class Sales extends CI_Controller
                 //echo $this->db->last_query();die();
                 if(!empty($the_insert_id = $this->db->insert_id())){
                     $services =  $this->input->post('services');
-        $class_name=$this->input->post('class_name');       
+        $class_name=$this->input->post('class_name');      
 
         if(!empty($services))
         {
@@ -847,13 +854,13 @@ class Sales extends CI_Controller
                     'sales_id' =>$the_insert_id,
                     'services_id'=>$services_row
                 );
-    
+   
                 $this->model->insertData('sales_services',$curl_data);
                 $brand_name[$services_row] =  $this->input->post('brand_name_'.$services_row);
-                $class_name[$services_row] =  $this->input->post('class_name_'.$services_row);                    
+                $class_name[$services_row] =  $this->input->post('class_name_'.$services_row);                   
             }
         }
-      
+     
 
         if(!empty($brand_name))
         {
@@ -861,7 +868,7 @@ class Sales extends CI_Controller
                 $brands_name  = $brand_name_row;
                 $class_name_data = $class_name[$brand_name_key];
                 foreach ($brands_name as $brands_name_key => $brands_name_row) {
-                    // echo '<pre>'; print_r($brands_name_key); 
+                    // echo '<pre>'; print_r($brands_name_key);
                     $insert_brand_data = array(
                             'fk_sales_id' =>$the_insert_id,
                             'fk_service_id'=>$brand_name_key,
@@ -869,7 +876,7 @@ class Sales extends CI_Controller
 
                         );
 
-                     $brand_last_inserted_id = $this->model->insertData('sale_service_brand',$insert_brand_data);  
+                     $brand_last_inserted_id = $this->model->insertData('sale_service_brand',$insert_brand_data); 
                 if(!empty($class_name_data)){
                     foreach ($class_name_data as $class_name_data_key => $class_name_data_row) {
                         $class_name_datas = $class_name_data_row;
@@ -882,22 +889,22 @@ class Sales extends CI_Controller
                                     'class_name'=>$class_name_datas_row
 
                                 );
-                             
-                                $this->model->insertData('sale_service_class',$insert_class_data); 
+                            
+                                $this->model->insertData('sale_service_class',$insert_class_data);
                             }
                         }
-                       
+                      
                     }
                     }
                 }
-        } 
         }
-        
+        }
+       
                     if(!empty($sub_services))
                     {
                         foreach($sub_services as $sub_services_key =>$sub_services_row){
                             $sub_services= explode('_',$sub_services_row);
-                        
+                       
                             foreach($services as $services_key =>$services_row)
                             {
                                 if($sub_services[1]==$services_row)
@@ -909,24 +916,397 @@ class Sales extends CI_Controller
                                     ));
                                 }
                             }
-    
+   
                         }
-                    }                               
-                
+                    }                              
+               
                     $response['status']='success';
                     $response['error']=array('msg' => "Sale Report Inserted Successfully !");
                 }
                 else{
                     $response['status']='failure';
-                    $response['error']=array('msg' => "Sale Report Inserted UnSuccessfully !"); 
+                    $response['error']=array('msg' => "Sale Report Inserted UnSuccessfully !");
                 }
-                
+               
             }
         }
         //print_r($response);die();
         echo json_encode($response);
-       
+      
     }
+
+    // public function save_deal()
+    // {    
+    //     //print_r($_FILES['image_files']);
+    //     $this->form_validation->set_rules('sale_date', 'Sale Date', 'trim|required',array('required'=>'This field is required'));
+    //       //$this->form_validation->set_rules('image_files[]', 'Image File', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('deal_id', 'Deal Id', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('invoice_no', 'Invoice No', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('primary_caller', 'Primary Caller', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('secondary_caller', 'Secondary Caller', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('lead_source', 'Lead Source', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('legal_remarks', 'Legal Remark', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('accounts_remarks', 'Account Remark', 'trim|required',array('required'=>'This field is required'));
+        
+    //     $this->form_validation->set_rules('company_name', 'Company Name', 'trim|required',array('required'=>'This field is required'));
+    //     //$this->form_validation->set_rules('brand_name', 'Brand Name', 'trim|required|is_unique[sales.brand_name]',array('required'=>'This field is required'));
+    //     //$this->form_validation->set_rules('class_name', 'Class Name', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('client_name', 'Client Name', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('mobile_1', 'Mobile 1', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     //$this->form_validation->set_rules('mobile_2', 'Mobile 2', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     //$this->form_validation->set_rules('alternate_number', 'Alternate Number', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('email_address', 'Email Address', 'trim|required|valid_email|encode_php_tags',array('required'=>'This field is required'));
+    //     //$this->form_validation->set_rules('email_address1', 'Alternate Address', 'trim|required|valid_email|encode_php_tags',array('required'=>'This field is required'));
+        
+    //     $this->form_validation->set_rules('gst_no', 'GST No.', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('street', 'Street', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('city', 'City', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('state', 'State', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('pincode', 'Pincode', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('deal_amount', 'Deal Amount', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('amount_received', 'Amount Received', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('outstanding', 'Outstanding', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('tcs', 'TCS', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('govt_fees', 'GOVT Fees', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('associate_fees', 'Associate Fees', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('net_income', 'Net Income', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('gst_amount', 'GST Amount', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('outstanding_followup_date', 'Outstanding Followup Date', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('invoice_type', 'Invoice Type', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('govt_fee', 'GOVT Fee', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('professional_fees', 'Professional Fees', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('drafting_proceeding_fees', 'Drafting Proceeding Fees', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('drafting_proceeding_professional_fees', 'Drafting Proceeding Professional Fees', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('total_professional_amount', 'Total Professional Amount', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('cgst', 'CGST', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('sgst', 'SGST', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('igst', 'IGST', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('round_off', 'Round Off', 'trim|required|numeric',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('invoice_name', 'Invoice Name', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('invoice_status', 'Invoice Status', 'trim|required',array('required'=>'This field is required'));
+    //     // $this->form_validation->set_rules('services[]', 'Services', 'trim|required',array('required'=>'This field is required'));
+    //     // $this->form_validation->set_rules('sub_services[]', 'Sub Services', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('dob', 'Date of Birth', 'trim|required',array('required'=>'This field is required'));
+    //     //$this->form_validation->set_rules('document_list[]', 'Document List', 'trim|required',array('required'=>'This field is required'));
+    //     $this->form_validation->set_rules('industry', 'Industry', 'trim|required',array('required'=>'This field is required'));
+    //     //$this->form_validation->set_rules('commission', 'Commission Fees', 'trim|required',array('required'=>'This field is required'));
+ 
+    
+    //     if ($this->form_validation->run() == FALSE)
+    //     {
+    //             $response['status'] = 'failure';
+    //             $response['error'] = array(
+    //                 'sale_date' => strip_tags(form_error('sale_date')),            
+    //                 'services' => strip_tags(form_error('services[]')),
+    //                 'sub_services' => strip_tags(form_error('sub_services[]')),
+    //                 //'image_files' => strip_tags(form_error('image_files')),
+    //                 'deal_id' => strip_tags(form_error('deal_id')),
+    //                 'invoice_no' => strip_tags(form_error('invoice_no')),
+    //                 'primary_caller' => strip_tags(form_error('primary_caller')),
+    //                 'secondary_caller' => strip_tags(form_error('secondary_caller')),
+    //                 'lead_source' => strip_tags(form_error('lead_source')),
+    //                 'legal_remarks' => strip_tags(form_error('legal_remarks')),
+    //                 'accounts_remarks' => strip_tags(form_error('accounts_remarks')),
+    //                 'company_name' => strip_tags(form_error('company_name')),
+    //                 //'class_name' => strip_tags(form_error('class_name')),
+    //                 'client_name' => strip_tags(form_error('client_name')),
+    //                 'mobile_1' => strip_tags(form_error('mobile_1')),
+    //                 //'mobile_2' => strip_tags(form_error('mobile_2')),
+    //                 //'alternate_number' => strip_tags(form_error('alternate_number')),
+    //                 'email_address' => strip_tags(form_error('email_address')),
+    //                 //'email_address1' => strip_tags(form_error('email_address1')),
+    //                 'gst_no' => strip_tags(form_error('gst_no')),
+    //                 'street' => strip_tags(form_error('street')),
+    //                 'city' => strip_tags(form_error('city')),
+
+    //                 'state' => strip_tags(form_error('state')),
+    //                 'pincode' => strip_tags(form_error('pincode')),
+    //                 'deal_amount' => strip_tags(form_error('deal_amount')),
+    //                 'amount_received' => strip_tags(form_error('amount_received')),
+    //                 'outstanding' => strip_tags(form_error('outstanding')),
+    //                 'tcs' => strip_tags(form_error('tcs')),
+    //                 'govt_fees' => strip_tags(form_error('govt_fees')),
+    //                 'associate_fees' => strip_tags(form_error('associate_fees')),
+    //                 'net_income' => strip_tags(form_error('net_income')),
+    //                 'gst_amount' => strip_tags(form_error('gst_amount')),
+    //                 'outstanding_followup_date' => strip_tags(form_error('outstanding_followup_date')),
+    //                 'payment_mode' => strip_tags(form_error('payment_mode')),
+    //                 'invoice_type' => strip_tags(form_error('invoice_type')),
+    //                 //'brand_name' => strip_tags(form_error('brand_name')),
+    //                 'govt_fee' => strip_tags(form_error('govt_fee')),
+    //                 'professional_fees' => strip_tags(form_error('professional_fees')),
+    //                 'drafting_proceeding_fees' => strip_tags(form_error('drafting_proceeding_fees')),
+    //                 'drafting_proceeding_professional_fees' => strip_tags(form_error('drafting_proceeding_professional_fees')),
+    //                 'total_professional_amount' => strip_tags(form_error('total_professional_amount')),
+    //                 'cgst' => strip_tags(form_error('cgst')),
+    //                 'sgst' => strip_tags(form_error('sgst')),
+    //                 'igst' => strip_tags(form_error('igst')),
+    //                 'round_off' => strip_tags(form_error('round_off')),
+    //                 'invoice_name' => strip_tags(form_error('invoice_name')),
+    //                 'invoice_status' => strip_tags(form_error('invoice_status')),
+    //                 'dob' => strip_tags(form_error('dob')),
+    //                 'industry' => strip_tags(form_error('industry')),
+    //                 //'commission' => strip_tags(form_error('commission')),
+
+    //             );
+               
+    //    }
+    //     else
+    //     {
+    //        $product_gallery=$temp= array();
+    //         $sale_date          = $this->input->post('sale_date');
+    //         $client_name        = $this->input->post('client_name');
+    //         $deal_id            = $this->input->post('deal_id');
+    //         $mobile_1           = $this->input->post('mobile_1');
+    //         $mobile_2           = $this->input->post('mobile_2');
+    //         $alternate_number   = $this->input->post('alternate_number');
+    //         $email_address      = $this->input->post('email_address');
+    //         $email_address1      = $this->input->post('email_address1');
+    //         $street             = $this->input->post('street');
+    //         $city               = $this->input->post('city');
+    //         $state              = $this->input->post('state');
+    //         $pincode            = $this->input->post('pincode');
+    //         //$commission            = $this->input->post('commission');
+    //         $dob            = $this->input->post('dob');
+    //         $industry            = $this->input->post('industry');
+    //         $gst_no             = $this->input->post('gst_no');
+    //         $clients_id         = 0;
+    //         $updated_by         = $this->user_id;
+    //         $invoice_number     = $this->input->post('invoice_number');
+    //         $lead_source        = $this->input->post('lead_source');
+    //         $legal_remarks      = $this->input->post('legal_remarks');
+    //         $accounts_remarks   = $this->input->post('accounts_remarks');
+    //         $company_name       = $this->input->post('company_name');
+    //         //$brand_name         = $this->input->post('brand_name');
+    //         //$class_name         = $this->input->post('class_name');
+    //         $deal_amount        = $this->input->post('deal_amount');
+    //         $amount_received    = $this->input->post('amount_received');
+    //         $outstanding        = $this->input->post('outstanding');
+    //         $tcs                = $this->input->post('tcs');
+    //         $govt_fees          = $this->input->post('govt_fees');
+    //         $associate_fees     = $this->input->post('associate_fees');
+    //         $net_income         = $this->input->post('net_income');
+    //         $gst_amount         = $this->input->post('gst_amount');
+    //         $outstanding_followup_date = $this->input->post('outstanding_followup_date');
+    //         $primary_caller     = $this->input->post('primary_caller');
+    //         $secondary_caller   = $this->input->post('secondary_caller');
+    //         $services           = $this->input->post('services[]');
+    //         $sub_services       = $this->input->post('sub_services[]'); 
+    //         $document_list      = $this->input->post('document_list[]');
+    //         $payment_mode       = $this->input->post('payment_mode');
+    //         $invoice_type       = $this->input->post('invoice_type');
+    //         $govt_fee           = $this->input->post('govt_fee');
+    //         $professional_fees  = $this->input->post('professional_fees');
+    //         $drafting_proceeding_fees = $this->input->post('drafting_proceeding_fees');
+    //         $drafting_proceeding_professional_fees = $this->input->post('drafting_proceeding_professional_fees');
+    //         $total_professional_amount = $this->input->post('total_professional_amount');
+    //         $cgst               = $this->input->post('cgst');
+    //         $sgst               = $this->input->post('sgst');
+    //         $igst               = $this->input->post('igst');
+    //         $round_off          = $this->input->post('round_off');
+    //         $invoice_name       = $this->input->post('invoice_name');
+    //         $invoice_status     = $this->input->post('invoice_status');
+           
+           
+    //         $sub_services     = $this->input->post('sub_services');
+    //         $image_files     = $this->input->post('image_files[]');
+    //         $sale_date          = date('Y-m-d', strtotime($sale_date));
+    //         $outstanding_followup_date = date('Y-m-d', strtotime($outstanding_followup_date));
+    //         $pdfpath = base_url() . "uploads/invoice/".$deal_id."legal_invoice.pdf";
+
+    //         $countfiles = count($_FILES['image_files']['name']);
+    //                     for ($i = 0;$i < $countfiles;$i++) {
+    //                         if (!empty($_FILES['image_files']['name'][$i])) {
+    //                             $_FILES['file']['name'] = $_FILES['image_files']['name'][$i];
+    //                             $_FILES['file']['type'] = $_FILES['image_files']['type'][$i];
+    //                             $_FILES['file']['tmp_name'] = $_FILES['image_files']['tmp_name'][$i];
+    //                             $_FILES['file']['error'] = $_FILES['image_files']['error'][$i];
+    //                             $_FILES['file']['size'] = $_FILES['image_files']['size'][$i];
+    //                             $config['upload_path'] = './uploads/images/';
+    //                             $config['allowed_types'] = 'jpg|jpeg|png';
+    //                             $config['file_name'] ='LEG_'.$company_name.'_'.$_FILES['image_files']['name'][$i];
+    //                             $this->load->library('upload', $config);
+    //                             if ($this->upload->do_upload('file')) {
+    //                                 $uploadData = $this->upload->data();
+    //                                 $filename ='LEG_'.$company_name.'_'.$uploadData['file_name'];
+    //                                 //$product_gallery['img_name'] = $filename;
+    //                                 //$product_gallery1 = './uploads/images/' . $filename;
+    //                                 $product_gallery = 'uploads/images/' . $filename;
+    //                                 array_push($temp,$product_gallery);
+    //                             }
+    //                         }
+    //                     }
+    //        $screenshotimages=implode(',',$temp);
+
+    //        if(!empty($net_income))
+    //        {
+    //         $matches=$net_income+$associate_fees;
+    //        }
+    //        else{
+    //         $matches=0;
+    //        }
+    //         //echo $matches;die();
+
+    //         if($govt_fees != $govt_fee)
+    //         {
+    //             $response['status']='failure';
+    //             $response['error']=array('msg' => "Goverment Fees Dose Not Match !");
+                
+    //         }else if($total_professional_amount != $matches)
+    //         {
+    //             $response['status']='failure';
+    //             $response['error']=array('msg' => "Net Income Does Not Match with the Professional Amount  !");
+    //         }else{
+    //             $this->db->insert("sales", array(
+    //                 'company_name'          => $company_name,
+    //                 //'brand_name'            => $brand_name,
+    //                 //'class_name'            => $class_name,
+    //                 'sale_date'             => $sale_date,
+    //                 'client_name'           => $client_name,
+    //                 'mobile_1'              => $mobile_1,
+    //                 'mobile_2'              => $mobile_2,
+    //                 'alternate_number'      => $alternate_number,
+    //                 'email_address'         => $email_address,
+    //                 'alternate_email'        => $email_address1,
+    //                 'gst_no'                => $gst_no,
+    //                 'deal_id'               => $deal_id,
+    //                 'invoice_number'        => $invoice_number,
+    //                 'primary_caller'        => $primary_caller,
+    //                 'secondary_caller'      => $secondary_caller,
+    //                 'lead_source'           => $lead_source,
+    //                 'street'                => $street,
+    //                 'city'                  => $city,
+    //                 'state'                 => $state,
+    //                 'pincode'               => $pincode,
+    //                 //'commission'            => $commission,
+    //                 'date_of_birth'         => $dob,
+    //                 'industry'              => $industry,
+    //                 // 'clients_id'            => $client,
+    //                 //'services'          => $services,
+    //                 //'sub_services'          => $sub_services,
+    //                 'payment_mode'          => $payment_mode,
+    //                 //'document_list'          => $document_list,
+    //                 'deal_amount'           => $deal_amount,
+    //                 'amount_received'       => $amount_received,
+    //                 'outstanding'           => $outstanding,
+    //                 'tcs'                   => $tcs,
+    //                 'govt_fees'             => $govt_fees,
+    //                 'associate_fees'        => $associate_fees,
+    //                 'net_income'            => $net_income,
+    //                 'gst_amount'            => $gst_amount,
+    //                 'outstanding_followup_date' => $outstanding_followup_date,
+    //                 'legal_remarks'         => $legal_remarks,
+    //                 'accounts_remarks'      => $accounts_remarks,
+    //                 'invoice_status'        => $invoice_status,
+    //                 'invoice_name'          => $invoice_name,
+    //                 'invoice_type'          => $invoice_type,
+    //                 'govt_fee'              => $govt_fee,
+    //                 'professional_fees' => $professional_fees,
+    //                 'drafting_proceeding_fees' => $drafting_proceeding_fees,
+    //                 'drafting_proceeding_professional_fees' => $drafting_proceeding_professional_fees,
+    //                 'total_professional_amount' => $total_professional_amount,
+    //                 'cgst'                  => $cgst,
+    //                 'sgst'                  => $sgst,
+    //                 'igst'                  => $igst,
+    //                 'round_off'             => $round_off,
+    //                 // 'clients_id'            => $clients_id,
+    //                 'updated_by'            => $updated_by,
+    //                 'image_url'             =>$screenshotimages,
+    //                 'pdfpath'               =>$pdfpath,
+    //             ));
+    //             //echo $this->db->last_query();die();
+    //             if(!empty($the_insert_id = $this->db->insert_id())){
+    //                 $services =  $this->input->post('services');
+    //     $class_name=$this->input->post('class_name');       
+
+    //     if(!empty($services))
+    //     {
+    //         foreach ($services as $services_key => $services_row) {
+    //             $curl_data = array(
+    //                 'sales_id' =>$the_insert_id,
+    //                 'services_id'=>$services_row
+    //             );
+    
+    //             $this->model->insertData('sales_services',$curl_data);
+    //             $brand_name[$services_row] =  $this->input->post('brand_name_'.$services_row);
+    //             $class_name[$services_row] =  $this->input->post('class_name_'.$services_row);                    
+    //         }
+    //     }
+      
+
+    //     if(!empty($brand_name))
+    //     {
+    //         foreach ($brand_name as $brand_name_key => $brand_name_row) {
+    //             $brands_name  = $brand_name_row;
+    //             $class_name_data = $class_name[$brand_name_key];
+    //             foreach ($brands_name as $brands_name_key => $brands_name_row) {
+    //                  echo '<pre>'; print_r($brands_name_key); 
+    //                 $insert_brand_data = array(
+    //                         'fk_sales_id' =>$the_insert_id,
+    //                         'fk_service_id'=>$brand_name_key,
+    //                         'brand_name'=>$brands_name_row,
+
+    //                     );
+
+    //                  $brand_last_inserted_id = $this->model->insertData('sale_service_brand',$insert_brand_data);  
+    //             if(!empty($class_name_data)){
+    //                 foreach ($class_name_data as $class_name_data_key => $class_name_data_row) {
+    //                     $class_name_datas = $class_name_data_row;
+    //                     if($brands_name_key == $class_name_data_key){
+    //                         foreach ($class_name_datas as $class_name_datas_key => $class_name_datas_row) {
+    //                              $insert_class_data = array(
+    //                                 'fk_sale_id' =>$the_insert_id,
+    //                                 'fk_service_id'=>$brand_name_key,
+    //                                 'fk_brand_id'=>$brand_last_inserted_id,
+    //                                 'class_name'=>$class_name_datas_row
+
+    //                             );
+                             
+    //                             $this->model->insertData('sale_service_class',$insert_class_data); 
+    //                         }
+    //                     }
+                       
+    //                 }
+    //                 }
+    //             }
+    //     } 
+    //     }
+        
+    //                 if(!empty($sub_services))
+    //                 {
+    //                     foreach($sub_services as $sub_services_key =>$sub_services_row){
+    //                         $sub_services= explode('_',$sub_services_row);
+                        
+    //                         foreach($services as $services_key =>$services_row)
+    //                         {
+    //                             if($sub_services[1]==$services_row)
+    //                             {
+    //                                 $this->db->insert("sales_sub_services", array(
+    //                                     'sales_id'          => $the_insert_id,
+    //                                     'services_id'       => $services_row,
+    //                                     'sub_services_id'   => $sub_services[0]
+    //                                 ));
+    //                             }
+    //                         }
+    
+    //                     }
+    //                 }                               
+                
+    //                 $response['status']='success';
+    //                 $response['error']=array('msg' => "Sale Report Inserted Successfully !");
+    //             }
+    //             else{
+    //                 $response['status']='failure';
+    //                 $response['error']=array('msg' => "Sale Report Inserted UnSuccessfully !"); 
+    //             }
+                
+    //         }
+    //     }
+    //     //print_r($response);die();
+    //     echo json_encode($response);
+       
+    // }
 
     public function get_sub_services()
     {
@@ -1109,6 +1489,50 @@ class Sales extends CI_Controller
             $response['status']='success';
             $response['error']=$msg;
           }           
+    }
+
+    public function getbrandclasslst($id)
+	{
+       $data = $id;
+       echo json_encode($data);
+	}
+
+
+    public function getsalesrecord1($id)
+    {
+        $data[] = json_encode($_GET);  
+        //  echo "<pre>";
+        // print_r($data);die();  
+        $rowno = $_GET['start'];
+        $rowperpage = $_GET['length'];
+        $search_text = $_GET['search']['value']; 
+        //echo $search_text;die();
+        $totalData=$this->supermodel->get_brandandclass_bysale($id,$rowno,$rowperpage,$search_text);     
+        $count_filtered=$this->supermodel->get_brandandclass_count_filtered($id,$rowno,$rowperpage,$search_text);
+        $count_all = $this->supermodel->get_brandandclass_countall($id,$rowno,$rowperpage,$search_text);
+        $data_array=array();
+       
+        foreach($totalData as $category_details_key => $data_row)
+        {
+           
+                $nestedData=array();
+                $nestedData[] = ++$category_details_key;
+                $nestedData[] = $data_row['services'];
+                $nestedData[] = $data_row['brand_name'];
+                $nestedData[] = $data_row['class_name'];
+                $data_array[] = $nestedData;
+              
+       }
+       
+      $output = array(
+            "draw" => intval($_POST['draw']),
+            "recordsTotal" => intval($count_all),
+            "recordsFiltered" => intval($count_filtered),
+            "data" => $data_array,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);    
     }
 
     public function get_background_data()

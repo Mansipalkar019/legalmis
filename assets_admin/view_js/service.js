@@ -3,6 +3,7 @@ function validate_add_banner(ele){
     var hasError = 0;
     var servicename=$('#servicename').val();
     var terms=$('#terms').val();
+    alert(terms);
     if(jQuery.trim(servicename) == '')
     {
         showError("Please Enter the Service Name","servicename");hasError=1;
@@ -259,9 +260,11 @@ $(document).on('click', '.a_category_view', function () {
           },
           dataType: "json",
           success: function (data) {
+            console.log(data['terms']);
                 $('#serviceid').val(data['id']);
                 $('#service_name').val(data['name']);
-                $('#terms1').val(data['terms']);
+                //$('#terms1').val(data['terms']);
+                $("#terms1").summernote("code", data["terms"]);
                 if(data['brand_name'] == "Yes")
                 {
                     $('.brand').prop('checked', true);

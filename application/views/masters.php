@@ -45,13 +45,7 @@
                               <input type="text" name="servicename" dir="ltl" id="servicename" class="form-control" required="">
                            </div>
                         </div>
-                        <div class="col-md-3">
-                           <div class="form-group">
-                           <label>Terms & Condition:<span class="text-danger">*</span></label>
-                           <textarea id="terms" name="terms"
-                           class="form-control" ></textarea>
-                           </div>
-                        </div>
+                       
                         <div class="col-md-4 " id="featured">
                                  <label>Select Attributes: </label><br>
                                  <div class="form-group">
@@ -60,7 +54,15 @@
                                    
                                  </div>
                         </div>
-                       
+                        </div>
+                        <div class="row">
+                        <div class="col-md-12">
+                           <div class="form-group">
+                           <label>Terms & Condition:<span class="text-danger">*</span></label>
+                           <textarea id="terms" name="terms"
+                           class="form-control" ></textarea>
+                           </div>
+                        </div>
                         <div class="col-sm-4" style="margin-top:30px;">
                            <button class="btn btn-success">Submit</button>
                         </div>
@@ -158,10 +160,13 @@ var simpletable = $('#service_datatable').DataTable({
         "data": function (data) {
         }
     }, 
-    // createdRow: function (row, data, index) {
-    //     $('td', row).eq(2).addClass('text-capitalize');
-    // },
+   //  createdRow: function (row, data, index) {
+   //      $('td', row).eq(2).addClass('text-capitalize');
+   //  },
 });
-
+$(document).ready(function() {
+        $('#terms').summernote();
+        $('#terms1').summernote();
+    });
 
 </script>
