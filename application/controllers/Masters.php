@@ -111,14 +111,14 @@ class Masters extends CI_Controller
             $brand_name = $array_entity['brandname'];
             $class_name = $array_entity['classname'];
             $terms = $array_entity['terms'];
-            print_r($terms);die();
-            $service_name_exist = $this->model->getData("services", array('name' => $service_name,'terms' => $terms,'status' => '1'));
+          
+            $service_name_exist = $this->model->getData("services", array('name' => $service_name,'status' => '1'));
             if(isset($service_name_exist) && !empty($service_name_exist))
             {
                 $data['status'] = '0';
                 $data['msg'] = 'Service Name already Exist.';
             }else{
-                 $service_id = $this->model->insertData('services', array('name' => $service_name,'brand_name' => $brand_name,'class_name' => $class_name));
+                 $service_id = $this->model->insertData('services', array('name' => $service_name,'terms' => $terms,'brand_name' => $brand_name,'class_name' => $class_name));
                 if($service_id  > 0)
                 {
                     $data['status'] = '1';
@@ -152,7 +152,8 @@ class Masters extends CI_Controller
                 $service_id = $array_entity['serviceid'];
                 $brandname = $array_entity['brandname'];
                 $classname = $array_entity['classname'];
-                $this->model->updateData('services',array('name'=>$service_name,'brand_name'=>$brandname,'class_name'=>$classname), array('id' => $service_id));
+                $terms = $array_entity['terms1'];
+                $this->model->updateData('services',array('name'=>$service_name,'brand_name'=>$brandname,'class_name'=>$classname,'terms'=>$terms), array('id' => $service_id));
                    
                 $data['status'] = '1';
                 $data['msg'] = 'Service has been updated successfully.';

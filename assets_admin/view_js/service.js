@@ -3,7 +3,7 @@ function validate_add_banner(ele){
     var hasError = 0;
     var servicename=$('#servicename').val();
     var terms=$('#terms').val();
-   
+    alert(terms);
     if(jQuery.trim(servicename) == '')
     {
         showError("Please Enter the Service Name","servicename");hasError=1;
@@ -143,13 +143,19 @@ function validate_update_services(ele){
 	var hasError = 0;
 	var serviceid = $("#serviceid").val();
 	var service_name = $("#service_name").val();
-
+    var terms1 = $("#terms1").val();
    
 	if(jQuery.trim(service_name)==''){
 		 showError("Please Enter Service Name","service_name"); hasError = 1; 
 	}else{
 		changeError("service_name");
 	}
+
+    if(jQuery.trim(terms1)==''){
+        showError("Please Enter Service Name","terms1"); hasError = 1; 
+   }else{
+       changeError("terms1");
+   }
 
 	if(hasError==1){
 		return false;
@@ -158,6 +164,7 @@ function validate_update_services(ele){
 			user.product = {};
 			user.product.serviceid = serviceid;
 			user.product.service_name = service_name;
+            user.product.terms1 = terms1;
             if (document.getElementById('brand').checked == true) {
                 user.product.brandname="Yes";
             } else {
@@ -253,8 +260,11 @@ $(document).on('click', '.a_category_view', function () {
           },
           dataType: "json",
           success: function (data) {
+            console.log(data['terms']);
                 $('#serviceid').val(data['id']);
                 $('#service_name').val(data['name']);
+                //$('#terms1').val(data['terms']);
+                $("#terms1").summernote("code", data["terms"]);
                 if(data['brand_name'] == "Yes")
                 {
                     $('.brand').prop('checked', true);

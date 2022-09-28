@@ -40,6 +40,9 @@ ERROR - 2022-09-23 17:32:53 --> Severity: Notice --> Undefined index: terms C:\x
 ERROR - 2022-09-23 17:32:57 --> Severity: Notice --> Undefined index: terms C:\xampp\htdocs\legalmis\application\controllers\Masters.php 113
 ERROR - 2022-09-23 17:33:06 --> Severity: Notice --> Undefined index: terms C:\xampp\htdocs\legalmis\application\controllers\Masters.php 113
 ERROR - 2022-09-23 17:34:37 --> Severity: Notice --> Undefined index: terms C:\xampp\htdocs\legalmis\application\controllers\Masters.php 113
+<<<<<<< HEAD
+ERROR - 2022-09-23 17:44:10 --> Severity: Compile Error --> Cannot use empty array elements in arrays C:\xampp\htdocs\legalmis\application\controllers\Masters.php 121
+=======
 ERROR - 2022-09-23 17:52:17 --> Severity: error --> Exception: Invalid size representation "100% !important" C:\xampp\htdocs\legalmis\application\third_party\mpdf\mpdf.php 30562
 ERROR - 2022-09-23 17:52:28 --> Severity: error --> Exception: Invalid size representation "100% !important;" C:\xampp\htdocs\legalmis\application\third_party\mpdf\mpdf.php 30562
 ERROR - 2022-09-23 17:52:29 --> Severity: error --> Exception: Invalid size representation "100% !important;" C:\xampp\htdocs\legalmis\application\third_party\mpdf\mpdf.php 30562
@@ -77,3 +80,4 @@ ERROR - 2022-09-23 18:47:51 --> Severity: error --> Exception: Unable to create 
 ERROR - 2022-09-23 18:47:54 --> Severity: error --> Exception: Unable to create output file: C:\xampp\htdocs\legalmis\uploads/invoice/legal.pdf C:\xampp\htdocs\legalmis\application\third_party\mpdf\mpdf.php 9442
 ERROR - 2022-09-23 18:47:57 --> Severity: error --> Exception: Unable to create output file: C:\xampp\htdocs\legalmis\uploads/invoice/legal.pdf C:\xampp\htdocs\legalmis\application\third_party\mpdf\mpdf.php 9442
 ERROR - 2022-09-23 18:50:45 --> Severity: error --> Exception: Unable to create output file: C:\xampp\htdocs\legalmis\uploads/invoice/legal.pdf C:\xampp\htdocs\legalmis\application\third_party\mpdf\mpdf.php 9442
+>>>>>>> e8161a5ddd39427a11984582747659a5a2823840

@@ -96,75 +96,94 @@ class supermodel extends CI_Model {
 		}
 	}
 
-	public function _getsalesrecord_query()
-    {    
-        $column_order = array('id');
-        $column_search = array('id');
+	function getsalesrecord($from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
+    {
+        $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename');
+        $this->db->from('sales');
+        $this->db->join('sales_services','sales_services.sales_id=sales.id','left');
+        $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
+		$this->db->join('services','services.id=sales_services.services_id','left');
+		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
+		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
+        $this->db->where('sales.status',1);
+		$this->db->limit($rowperpage,$rowno);
+		if(!empty($from_date))
+		{
+			$this->db->where('sales.sale_date >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('sales.sale_date <=',$to_date);
+		}
+		if(!empty($search_text))
+		{
+			$this->db->where("(sales.client_name LIKE '%".$search_text."%' OR sales.company_name LIKE '%".$search_text."%' OR sales.mobile_1 LIKE '%".$search_text."%' OR sales.email_address LIKE '%".$search_text."%' OR sales.invoice_number LIKE '%".$search_text."%' OR sales.deal_id LIKE '%".$search_text."%' OR sales.services LIKE '%".$search_text."%' OR sales.sub_services LIKE '%".$search_text."%' OR sales.mobile_2 LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		$this->db->group_by('sales.id');
+        $this->db->order_by('sales.id',"DESC");
+        $query=$this->db->get();
+		return $query->result_array();
+    }
 
-		$this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(sub_services.name) as subserviceid');
+	function sale_record_count_filtered($from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
+	{
+		$this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename');
         $this->db->from('sales');
         $this->db->join('sales_services','sales_services.sales_id=sales.id','left');
         $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
 		$this->db->join('services','services.id=sales_services.services_id','left');
 		$this->db->distinct('services');
 		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
-        $this->db->group_by('sales.id');
+		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
         $this->db->where('sales.status',1);
       
-        $this->db->order_by('sales.id',"DESC");
-        $i = 0; 
-        foreach ($column_search as $item) // loop column 
-        {
-            if(@$_POST['search']['value']) // if datatable send POST for search
-            {                 
-                if($i===0) // first loop
-                {
-                    $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-
-                    $this->db->like($item, @$_POST['search']['value']);
-                }
-                else
-                {
-                    $this->db->or_like($item, @$_POST['search']['value']);
-                } 
-
-                if(count($this->column_search) - 1 == $i) //last loop
-
-                    $this->db->group_end(); //close bracket
-            }
-
-            $i++;
-        }     
-
-        if(!empty(@$_POST['order'])) // here order processing
-        {
-            $this->db->order_by($column_order[@$_POST['order']['0']['column']], @$_POST['order']['0']['dir']);
-        } 
-
-        else if(isset($this->order))
-        {
-            $order = $this->order;
-            $this->db->order_by(key($order), $order[key($order)]);
-        }
-    }
-
-	function getsalesrecord()
-    {
-        $this->_getsalesrecord_query();
-        $query=$this->db->get();
-		return $query->result_array();
-    }
-
-	function sale_record_count_filtered()
-	{
-		$this->_getsalesrecord_query();
+       
+		$this->db->limit($rowperpage,$rowno);
+		if(!empty($from_date))
+		{
+			$this->db->where('sales.sale_date >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('sales.sale_date <=',$to_date);
+		}
+		if(!empty($search_text))
+		{
+			$this->db->where("(sales.client_name LIKE '%".$search_text."%' OR sales.company_name LIKE '%".$search_text."%' OR sales.mobile_1 LIKE '%".$search_text."%' OR sales.email_address LIKE '%".$search_text."%' OR sales.invoice_number LIKE '%".$search_text."%' OR sales.deal_id LIKE '%".$search_text."%' OR sales.services LIKE '%".$search_text."%' OR sales.sub_services LIKE '%".$search_text."%' OR sales.mobile_2 LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		$this->db->group_by('sales.id');
+		$this->db->order_by('sales.id',"DESC");
         $query=$this->db->get();
 		return $query->num_rows();
 	}
 
-	function sale_record_count_all()
+	function sale_record_count_all($from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
 	{
-		$this->_getsalesrecord_query();
+		$this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename');
+        $this->db->from('sales');
+        $this->db->join('sales_services','sales_services.sales_id=sales.id','left');
+        $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
+		$this->db->join('services','services.id=sales_services.services_id','left');
+		$this->db->distinct('services');
+		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
+		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
+        $this->db->where('sales.status',1);
+      
+       $this->db->limit($rowperpage,$rowno);
+	   if(!empty($from_date))
+	   {
+		   $this->db->where('sales.sale_date >=',$from_date);
+	   }
+	   if(!empty($to_date))
+	   {
+		   $this->db->where('sales.sale_date <=',$to_date);
+	   }
+	   if(!empty($search_text))
+	   {
+		   $this->db->where("(sales.client_name LIKE '%".$search_text."%' OR sales.company_name LIKE '%".$search_text."%' OR sales.mobile_1 LIKE '%".$search_text."%' OR sales.email_address LIKE '%".$search_text."%' OR sales.invoice_number LIKE '%".$search_text."%' OR sales.deal_id LIKE '%".$search_text."%' OR sales.services LIKE '%".$search_text."%' OR sales.sub_services LIKE '%".$search_text."%' OR sales.mobile_2 LIKE '%".$search_text."%')", NULL, FALSE); 
+	   }
+		$this->db->group_by('sales.id');
+		$this->db->order_by('sales.id',"DESC");
 		return $this->db->count_all_results();
 	}
 	public function getsalesrecordbyid($id='')
@@ -180,53 +199,100 @@ class supermodel extends CI_Model {
         $this->db->where('sales.status',1);
 		$this->db->where('sales.id',$id);
 		$query=$this->db->get();
+		//echo $this->db->last_query();die();
         return $query->row_array();
 	}
 
-	public function edit_sales_data($id='')
-	{
-		$this->db->select('sales.*');
-        $this->db->from('sales');
-		$this->db->where('sales.id',$id);
-		$this->db->where('sales.status',1);
-		$query=$this->db->get();
-        return $query->row_array();
-	}
-	public function get_sale_service($id='')
-	{
-		$this->db->select('GROUP_CONCAT(sales_services.id) as sales_services_id,GROUP_CONCAT(sales_services.services_id) as services_id');
-        $this->db->from('sales_services');
-		$this->db->where('sales_services.sales_id',$id);
-		$this->db->group_by('sales_services.sales_id');
-		$query=$this->db->get();
-        return $query->row_array();
-	}
-	public function get_sale_sub_service($id='')
-	{
-		$this->db->select('GROUP_CONCAT(sales_sub_services.id) as sales_sub_services_id,GROUP_CONCAT(sales_sub_services.sub_services_id) as sub_services_id');
-        $this->db->from('sales_sub_services');
-		$this->db->where('sales_sub_services.sales_id',$id);
-		$this->db->group_by('sales_sub_services.sales_id');
-		$query=$this->db->get();
-        return $query->row_array();
-	}
-	public function get_sale_service_brand($id='')
-	{
-		$this->db->select('GROUP_CONCAT(sale_service_brand.id) as sale_service_brand_id,GROUP_CONCAT(sale_service_brand.brand_name) as brand_name,GROUP_CONCAT(sale_service_brand.fk_service_id) as fk_service_id');
+	function get_brandandclass_bysale($id,$rowno="",$rowperpage="",$search_text="")
+    {
+        $this->db->select('GROUP_CONCAT(DISTINCT(services.name)) as services,GROUP_CONCAT(DISTINCT(sale_service_brand.brand_name)) as brand_name,GROUP_CONCAT(DISTINCT(sale_service_class.class_name)) as class_name');
         $this->db->from('sale_service_brand');
+		$this->db->join('sale_service_class','sale_service_class.fk_brand_id=sale_service_brand.id','left');
+		$this->db->join('services','services.id=sale_service_brand.fk_service_id','left');
 		$this->db->where('sale_service_brand.fk_sales_id',$id);
-		$this->db->group_by('sale_service_brand.fk_sales_id');
+		$this->db->limit($rowperpage,$rowno);
+		if($search_text != '')
+		{
+			$this->db->where("(sale_service_brand.brand_name LIKE '%".$search_text."%' OR sale_service_class.class_name LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		$this->db->group_by('sale_service_brand.id');
+        $this->db->order_by('sale_service_brand.id',"DESC");
+		
+        $query=$this->db->get();
+		return $query->result_array();
+    }
+
+	function get_brandandclass_count_filtered($id,$rowno="",$rowperpage="",$search_text="")
+    {
+		$this->db->select('GROUP_CONCAT(DISTINCT(services.name)) as services,GROUP_CONCAT(DISTINCT(sale_service_brand.brand_name)) as brand_name,GROUP_CONCAT(DISTINCT(sale_service_class.class_name)) as class_name');
+        $this->db->from('sale_service_brand');
+		$this->db->join('sale_service_class','sale_service_class.fk_brand_id=sale_service_brand.id','left');
+		$this->db->join('services','services.id=sale_service_brand.fk_service_id','left');
+		$this->db->where('sale_service_brand.fk_sales_id',$id);
+		$this->db->limit($rowperpage,$rowno);
+		if($search_text != '')
+		{
+			$this->db->where("(sale_service_brand.brand_name LIKE '%".$search_text."%' OR sale_service_class.class_name LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		$this->db->group_by('sale_service_brand.id');
+        $this->db->order_by('sale_service_brand.id',"DESC");
 		$query=$this->db->get();
-        return $query->row_array();
-	}
-	public function get_sale_service_class($id='')
+		return $query->num_rows();
+    }
+
+	function get_brandandclass_countall($id,$rowno="",$rowperpage="",$search_text="")
+    {
+		$this->db->select('GROUP_CONCAT(DISTINCT(services.name)) as services,GROUP_CONCAT(DISTINCT(sale_service_brand.brand_name)) as brand_name,GROUP_CONCAT(DISTINCT(sale_service_class.class_name)) as class_name');
+        $this->db->from('sale_service_brand');
+		$this->db->join('sale_service_class','sale_service_class.fk_brand_id=sale_service_brand.id','left');
+		$this->db->join('services','services.id=sale_service_brand.fk_service_id','left');
+		$this->db->where('sale_service_brand.fk_sales_id',$id);
+		$this->db->limit($rowperpage,$rowno);
+		if($search_text != '')
+		{
+			$this->db->where("(sale_service_brand.brand_name LIKE '%".$search_text."%' OR sale_service_class.class_name LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		$this->db->group_by('sale_service_brand.id');
+        $this->db->order_by('sale_service_brand.id',"DESC");
+		return $this->db->count_all_results();
+    }
+
+	function download_salesrecord($from_date="",$to_date="")
+    {
+        $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as servicename,GROUP_CONCAT(DISTINCT(sales_services.services_id)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename,GROUP_CONCAT(DISTINCT(sale_service_brand.brand_name)) as brandname,GROUP_CONCAT(DISTINCT(sale_service_brand.id)) as brandid');
+        $this->db->from('sales');
+		$this->db->join('sales_services','sales_services.sales_id=sales.id','left');
+		$this->db->join('services','services.id=sales_services.services_id','left');
+        $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');	
+		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
+		$this->db->join('sale_service_brand','sale_service_brand.fk_sales_id=sales.id','left');
+		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
+        $this->db->where('sales.status',1);
+		if(!empty($from_date))
+		{
+			$this->db->where('sales.sale_date >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('sales.sale_date <=',$to_date);
+		}
+	
+		$this->db->group_by('sales.id');
+        //$this->db->order_by('sales.id',"DESC");
+        $query=$this->db->get();
+		return $query->result_array();
+    }
+
+	public function get_brand_class_name($id="")
 	{
-		$this->db->select('GROUP_CONCAT(sale_service_class.id) as sale_service_class_id,GROUP_CONCAT(sale_service_class.class_name) as class_name,GROUP_CONCAT(sale_service_class.fk_service_id) as fk_service_id,GROUP_CONCAT(sale_service_class.fk_brand_id) as fk_brand_id');
+		$this->db->select('sale_service_class.*,GROUP_CONCAT(sale_service_class.class_name) as class_name');
         $this->db->from('sale_service_class');
-		$this->db->where('sale_service_class.fk_sale_id',$id);
-		$this->db->group_by('sale_service_class.fk_sale_id');
-		$query=$this->db->get();
-        return $query->row_array();
+        $this->db->where('sale_service_class.fk_brand_id',$id);
+	
+		$this->db->group_by('sale_service_class.fk_brand_id');
+        //$this->db->order_by('sales.id',"DESC");
+        $query=$this->db->get();
+		return $query->row_array();
 	}
 }
 ?>

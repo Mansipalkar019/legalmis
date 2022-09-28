@@ -1,5 +1,181 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
+<<<<<<< HEAD
+ERROR - 2022-09-26 10:13:10 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:13:10 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:13:28 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:13:28 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:13:37 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:13:37 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:14:02 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:14:02 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:14:37 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:14:37 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:14:38 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:14:38 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:15:15 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:15:15 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:15:16 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:15:16 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:15:17 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:15:17 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:15:49 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:15:49 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:16:32 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:16:32 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:16:33 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:16:33 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:16:33 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:16:33 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 10:17:52 --> Query error: Unknown column 'services.terms' in 'field list' - Invalid query: SELECT DISTINCT `sales`.*, GROUP_CONCAT(DISTINCT(services.name)) as serviceid, GROUP_CONCAT(DISTINCT(services.terms)) as term, GROUP_CONCAT(sub_services.name) as subserviceid
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `sales_sub_services` ON `sales_sub_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`status` = 1
+AND `sales`.`id` = '3'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-26 10:17:52 --> Severity: error --> Exception: Call to a member function row_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 181
+ERROR - 2022-09-26 11:28:04 --> Severity: error --> Exception: syntax error, unexpected 'error_reporting' (T_STRING) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 48
+ERROR - 2022-09-26 11:54:09 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 301
+ERROR - 2022-09-26 11:54:21 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 301
+ERROR - 2022-09-26 11:54:46 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 301
+ERROR - 2022-09-26 11:55:12 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 301
+ERROR - 2022-09-26 11:55:20 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 301
+ERROR - 2022-09-26 11:55:36 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 301
+ERROR - 2022-09-26 11:55:37 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 301
+ERROR - 2022-09-26 11:55:57 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 301
+ERROR - 2022-09-26 11:56:01 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 301
+ERROR - 2022-09-26 11:56:19 --> Severity: error --> Exception: syntax error, unexpected ')' C:\xampp\htdocs\legalmis\application\views\printinvoice\print_sale_page1.php 300
+ERROR - 2022-09-26 12:42:41 --> Severity: Warning --> Use of undefined constant base_path - assumed 'base_path' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\legalmis\application\views\sales-index.php 32
+ERROR - 2022-09-26 12:42:41 --> Severity: Warning --> Use of undefined constant base_path - assumed 'base_path' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\legalmis\application\views\sales-index.php 72
+ERROR - 2022-09-26 12:42:41 --> 404 Page Not Found: Base_pathassets/img
+ERROR - 2022-09-26 12:42:42 --> 404 Page Not Found: Booking/getlocwisebooking
+ERROR - 2022-09-26 12:43:44 --> Severity: Warning --> Use of undefined constant base_path - assumed 'base_path' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\legalmis\application\views\sales-index.php 29
+ERROR - 2022-09-26 12:43:44 --> Severity: Warning --> Use of undefined constant base_path - assumed 'base_path' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\legalmis\application\views\sales-index.php 61
+ERROR - 2022-09-26 12:43:44 --> 404 Page Not Found: Base_pathassets/img
+ERROR - 2022-09-26 12:43:45 --> 404 Page Not Found: Booking/getlocwisebooking
+ERROR - 2022-09-26 12:45:14 --> Severity: Warning --> Use of undefined constant base_path - assumed 'base_path' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\legalmis\application\views\sales-index.php 44
+ERROR - 2022-09-26 12:45:14 --> 404 Page Not Found: Base_pathassets/img
+ERROR - 2022-09-26 12:45:15 --> 404 Page Not Found: Booking/getlocwisebooking
+ERROR - 2022-09-26 12:45:25 --> Severity: Warning --> Use of undefined constant base_path - assumed 'base_path' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\legalmis\application\views\sales-index.php 44
+ERROR - 2022-09-26 12:45:25 --> 404 Page Not Found: Base_pathassets/img
+ERROR - 2022-09-26 12:45:26 --> 404 Page Not Found: Booking/getlocwisebooking
+ERROR - 2022-09-26 12:46:15 --> 404 Page Not Found: Booking/getlocwisebooking
+ERROR - 2022-09-26 13:24:38 --> 404 Page Not Found: Booking/from_location_wise_booking_statements
+ERROR - 2022-09-26 13:25:00 --> 404 Page Not Found: Booking/from_location_wise_booking_statements
+ERROR - 2022-09-26 13:35:04 --> 404 Page Not Found: Booking/from_location_wise_booking_statements
+ERROR - 2022-09-26 13:35:08 --> 404 Page Not Found: Booking/from_location_wise_booking_statements
+ERROR - 2022-09-26 13:43:21 --> Severity: Warning --> Illegal string offset 'from_date' C:\xampp\htdocs\legalmis\application\controllers\Sales.php 72
+ERROR - 2022-09-26 13:51:39 --> Severity: Warning --> Illegal string offset 'from_date' C:\xampp\htdocs\legalmis\application\controllers\Sales.php 72
+ERROR - 2022-09-26 13:52:02 --> Severity: Warning --> Illegal string offset 'from_date' C:\xampp\htdocs\legalmis\application\controllers\Sales.php 72
+ERROR - 2022-09-26 13:52:58 --> Severity: Warning --> Illegal string offset 'from_date' C:\xampp\htdocs\legalmis\application\controllers\Sales.php 73
+=======
 ERROR - 2022-09-26 10:56:23 --> Severity: Notice --> Undefined index: gst_amount  C:\xampp\htdocs\legalmis\application\views\update_sales.php 299
 ERROR - 2022-09-26 10:56:23 --> Severity: Notice --> Undefined index: gst_amount  C:\xampp\htdocs\legalmis\application\views\update_sales.php 307
 ERROR - 2022-09-26 10:56:58 --> Severity: Notice --> Undefined index: gst_amount  C:\xampp\htdocs\legalmis\application\views\update_sales.php 299
@@ -754,6 +930,7 @@ ERROR - 2022-09-26 15:00:20 --> Severity: Warning --> in_array() expects paramet
 ERROR - 2022-09-26 15:00:20 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 386
 ERROR - 2022-09-26 15:00:20 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 386
 ERROR - 2022-09-26 15:00:20 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 386
+<<<<<<< HEAD
 ERROR - 2022-09-26 15:19:57 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(sale_service_class.id) as sale_service_class_id, GROUP_CONCAT(sale_service_c...' at line 1 - Invalid query: SELECT GROUP_CONCAT(sale_service_brand.id) as sale_service_brand_id, GROUP_CONCAT(sale_service_brand.brand_name) as brand_name, GROUP_CONCAT(sale_service_brand.fk_service_id) as fk_service_idGROUP_CONCAT(sale_service_class.id) as sale_service_class_id, GROUP_CONCAT(sale_service_class.class_name) as class_name, GROUP_CONCAT(sale_service_class.fk_service_id) as fk_service_id, GROUP_CONCAT(sale_service_class.fk_brand_id) as fk_brand_id
 FROM `sale_service_brand`
 LEFT JOIN `sale_service_class` ON `sale_service_class`.`fk_brand_id`=`sale_service_brand`.`id`
@@ -889,3 +1066,11 @@ ERROR - 2022-09-26 16:24:38 --> Severity: Warning --> in_array() expects paramet
 ERROR - 2022-09-26 16:24:38 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 386
 ERROR - 2022-09-26 16:24:38 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 386
 ERROR - 2022-09-26 16:24:38 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 386
+=======
+>>>>>>> 1d33d86d104220bc0c033d71cedc2145b7a9ce5a
+ERROR - 2022-09-26 15:33:59 --> 404 Page Not Found: Sale/index
+ERROR - 2022-09-26 15:47:46 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION) or const (T_CONST) C:\xampp\htdocs\legalmis\application\models\supermodel.php 209
+ERROR - 2022-09-26 15:47:54 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION) or const (T_CONST) C:\xampp\htdocs\legalmis\application\models\supermodel.php 209
+ERROR - 2022-09-26 15:48:03 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION) or const (T_CONST) C:\xampp\htdocs\legalmis\application\models\supermodel.php 209
+ERROR - 2022-09-26 18:09:03 --> Severity: Compile Error --> Cannot redeclare Sales::getsalesrecord() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 73
+>>>>>>> 6ff29a7c1edd2721f2a7625a9d9e150201fb65c6
