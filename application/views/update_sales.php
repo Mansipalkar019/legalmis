@@ -37,6 +37,7 @@
                         </h4>
                         <div class="card-body" style="padding: 20px;">
                            <div class="row">
+                              <input type="hidden" name="id" id="id" value="<?=$id?>">
                               <div class="col-md-3">
                                  <div class="form-group">
                                     <label>Sale Date:<span class="text-danger">*</span></label>
@@ -411,7 +412,10 @@
                                     // $brand_name = explode(',',$sale_service_brand['brand_name']);
                                     // $fk_service_id = explode(',',$sale_service_brand['fk_service_id']);
                                     foreach($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row){
-                                          echo '<div class="col-md-5" id="show_brand_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'.$sale_service_brand_key.'[]" id="brand_name_'.$sale_service_brand_key.'" value="'.$sale_service_brand_row['brand_name'].'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-5" id="show_company_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'.$sale_service_brand_key.'['.$sale_service_brand_key.'][]" id="class_name" onchange="get_class_name(this.value)"></select></div></div></div>';
+                                          echo '<div class="col-md-5" id="show_brand_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'.$sale_service_brand_key.'[]" id="brand_name_'.$sale_service_brand_key.'" value="'.$sale_service_brand_row['brand_name'].'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-5" id="show_company_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" 
+
+
+                                          " name="class_name_'.$sale_service_brand_key.'['.$sale_service_brand_key.'][]" id="class_name_'.$sale_service_brand_key.'" onchange="get_class_name(this.value)"></select></div></div></div>';
                                     }
                               ?>
                            </div>
@@ -486,6 +490,182 @@
            }
            });
            } 
+            function get_brand_name(city) {
+   $('#brand_name').each(function(x,v){
+   var brand_list =[];
+    var grp = [];
+     $(v).find('option:selected').each(function(i, selected){
+        var brand_name=$(selected).text();
+        brand_list.push($(selected).val());
+     });
+     grp.push(brand_list)
+   });
+   }
+   
+   function get_class_name(city) {
+   $('#class_name').each(function(x,v){
+   var class_list =[];
+     var grp = [];
+     $(v).find('option:selected').each(function(i, selected){
+        var class_name=$(selected).text();
+        class_list.push($(selected).val());
+     });
+     grp.push(class_list)
+   });
+   }
+   $(document).ready(function () {
+      var id = $('#id').val();
+      var options = document.getElementById('services').selectedOptions;
+      var values = Array.from(options).map(({ value }) => value);
+      var text = Array.from(options).map(({ text }) => text);
+   
+       var count = values.length;
+      if(count > 1)
+      {
+         $.each( values, function( key, value ) {           
+            $('#count'+value+'').val(0);               
+        
+          // $.ajax({
+          //      url: '<?php echo base_url(); ?>Sales/get_brand_details',
+          //      type: 'post',
+          //      dataType: "json",
+          //      data: {sales_id: value},
+          //      success: function( response ) {  
+                 
+          //         var sale_service_brand = response.sale_service_brand;
+          //          console.log(sale_service_brand);
+          //           $.each( sale_service_brand, function( sale_service_brand_key, sale_service_brand_row ) {    
+          //             $('#'+'class_name_'+sale_service_brand_key).select2({
+          //            tags: true,
+          //            tokenSeparators: [',', ' '],
+          //         });
+                
+          //         $('.tokenizer').trigger('change.select2');
+          //           });
+          //         //  var service_id_1 = response.service_details.id;
+          //         //  // console.log(service_id_1);
+                  
+          //      }
+          //   });
+           });
+            
+      }
+
+   });
+   
+   $(document).on('select2:select','#services', function(e) {
+      var data = e.params.data;
+      var service_id = data.id;
+      var count = $(this).select2('data').length;
+      if(count > 1)
+      {
+          $('#count'+service_id+'').val(0);
+      }
+      $.ajax({
+      url: '<?php echo base_url(); ?>Sales/getselectedservices_new',
+      type: 'post',
+      dataType: "json",
+      data: {service_id: service_id},
+      success: function( response ) {  
+         var html11="";
+         var service_id_1 = response.service_details.id;
+         if(response.service_details.brand_name == "Yes" && response.service_details.class_name == "NA")
+         {
+            html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>'; 
+   
+         }
+
+         if(response.service_details.class_name == "Yes" && response.service_details.class_name == "Yes")
+         {
+             html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-4" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[0][]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>'; 
+         }
+         
+         $('#brands_display').append(html11);   
+        
+      // $('#'+'brand_name_'+service_id_1).select2({
+      //    tags: true,
+      //    tokenSeparators: [',', ' '],
+      // });
+      $('#'+'class_name_'+service_id_1).select2({
+         tags: true,
+         tokenSeparators: [',', ' '],
+      });
+    
+       $('.tokenizer').trigger('change.select2');
+
+     
+      $('#addRows_'+service_id_1+'').click(function() {
+              
+               var latest_count = $('#count'+service_id_1+'').val();
+             
+               var new_count = parseInt(latest_count) + 1;
+              
+               var html2 = '';             
+               if(response.service_details.brand_name == "Yes" && response.service_details.class_name == "NA")
+               {
+                  html2 += '<div class="row"><div id="inputnewrow_'+new_count+'"><div class="col-md-3" id="show_brand_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Brand Name For '+response.service_details.name+'<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer1" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name1_'+new_count+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div></div><button id="removeRow" type="button" class="btn btn-danger btn-sm removeRow" style="height:30px;margin-top:5px;">Remove</button></div></div></div>';    
+               }
+
+               if(response.service_details.class_name == "Yes" && response.service_details.class_name == "Yes")
+               {
+                  html2 += '<div class="row"><div id="inputnewrow_'+new_count+'"><div class="col-md-3" id="show_brand_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Brand Name For '+response.service_details.name+'<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer1" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name1_'+new_count+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-3" id="show_company_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Class Name For '+response.service_details.name+'<span class="text-danger">* </span></label><div><select class="form-control tokenizer1" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'['+new_count+'][]" id="class_name1_'+new_count+service_id_1+'" ></select></div></div></div><button id="removeRow" type="button" class="btn btn-danger btn-sm removeRow" style="height:30px;margin-top:5px;">Remove</button></div></div></div>';   
+               }
+                      
+               
+               $('#new_brands_display_'+service_id_1+'').append(html2);
+            
+            // $('#'+'brand_name_'+count1+service_id_1).select2({
+            // tags: true,
+            // tokenSeparators: [',', ' '],
+            // });
+            $('#count'+service_id_1+'').val(new_count);
+            $('#'+'class_name1_'+new_count+service_id_1).select2({
+            tags: true,
+            tokenSeparators: [',', ' '],
+            });
+          
+      
+            $(document).on('select2:unselect', '#services',function(e) {
+            var data1 = e.params.data;
+            var service_id_1 = data1.id;
+            //   $('#brand_name_'+service_id). select2('destroy');
+            $('#brand_name1_'+new_count+service_id_1). remove();
+            $('#show_brand_content1_'+new_count+service_id_1).remove();
+            $('#show_company_content1_'+new_count+service_id_1).remove();
+            $('#addRows_'+new_count+service_id_1).remove();
+            $('#removeRow').remove();
+            });
+
+            });
+
+            $('.tokenizer1').trigger('change.select2');
+
+         
+            if(response.html != ""){
+               
+               $("#sub_services").html(response.html);
+               $('#sub_services').trigger('change.select2');
+            }
+      }
+      });
+   });
+
+   $(document).on('click', '#removeRow', function() {
+            var latest_count = $('#count').val();
+            var new_count = parseInt(latest_count) - 1;
+            $('#count').val(new_count);
+            $(this).closest("div").remove();      
+         });
+   
+   $(document).on('select2:unselect', '#services',function(e) {
+     var data = e.params.data;
+     var service_id = data.id
+     $('#brand_name_'+service_id). remove();
+     $('#show_brand_content_'+service_id).remove();
+     $('#show_company_content_'+service_id).remove();
+     $('#removelabel_'+service_id).remove();
+     $('#addRows_'+service_id).remove();
+   });
            
       </script>
    </body>

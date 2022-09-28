@@ -77,7 +77,7 @@ class Sales extends CI_Controller
     public function getsalesrecord()
     {
        
-        $data[] = json_encode($_POST);       
+        $data[] = json_encode($_POST);   
         $totalData=$this->supermodel->getsalesrecord();   
         $count_filtered=$this->supermodel->sale_record_count_filtered();
         $count_all = $this->supermodel->sale_record_count_all();
@@ -173,8 +173,24 @@ class Sales extends CI_Controller
         $data['city'] = $this->model->selectWhereData('tbl_cities',array('state_id'=>$data['sales_data']['state']),array('*'),false);
         $data['pincode'] = $this->model->selectWhereData('location',array('city'=>$data['sales_data']['city']),array('*'),false);
         $data['customer_executive']  = $this->model->selectWhereData('customer_executive', array('status' => '1'),array('id','name'),false);
+        $data['id']=$id;
         // echo '<pre>'; print_r($data); exit;
         $this->load->view('update_sales',$data);
+    }
+
+    public function get_brand_details()
+    {
+         $id = $this->input->post('sales_id');
+
+         $sale_service_brand = $this->model->selectWhereData('sale_service_brand',array('fk_service_id'=>$id),array('*'),false);
+
+            foreach ($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row) {
+                $sale_service_brand[$sale_service_brand_key]['sale_service_class'] = $this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$id,'fk_brand_id'=>$sale_service_brand_row['id'],),array('*'),false);
+            }
+        // echo '<pre>'; print_r($sale_service_brand); exit;
+        $data['sale_service_brand'] = $sale_service_brand;
+
+        echo json_encode($data);
     }
     // only for Rashi and Administrator as of now
     public function sales_info()
@@ -389,8 +405,7 @@ class Sales extends CI_Controller
       if(!empty($check)){
         foreach ($check as $key => $bdd) {
             $html .= "<option value='".$bdd['id'].'_'.$bdd['service_id']."'>".$bdd['name']."</option>";
-          }
-          
+          }          
         }
         $data1['service_details']=$service_details; 
     if(!empty($html)){
