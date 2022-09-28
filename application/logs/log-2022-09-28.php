@@ -124,3 +124,96 @@ ERROR - 2022-09-28 12:52:52 --> Severity: Notice --> Undefined index: start C:\x
 ERROR - 2022-09-28 12:52:52 --> Severity: Notice --> Undefined index: length C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1645
 ERROR - 2022-09-28 12:52:52 --> Severity: Notice --> Undefined index: search C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1646
 ERROR - 2022-09-28 12:52:52 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1646
+ERROR - 2022-09-28 13:56:43 --> Query error: Unknown column 'sales_services.services_id' in 'field list' - Invalid query: SELECT `sales`.*, GROUP_CONCAT(services.name) as servicename, GROUP_CONCAT(sales_services.services_id) as serviceid, GROUP_CONCAT(sub_services.name) as subservicename
+FROM `sales`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`id` = '1'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-28 13:56:43 --> Severity: error --> Exception: Call to a member function result_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 295
+ERROR - 2022-09-28 13:56:51 --> Query error: Unknown column 'sales_services.services_id' in 'field list' - Invalid query: SELECT `sales`.*, GROUP_CONCAT(services.name) as servicename, GROUP_CONCAT(sales_services.services_id) as serviceid, GROUP_CONCAT(sub_services.name) as subservicename
+FROM `sales`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`id` = '1'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-28 13:56:51 --> Severity: error --> Exception: Call to a member function result_array() on bool C:\xampp\htdocs\legalmis\application\models\supermodel.php 295
+ERROR - 2022-09-28 13:57:01 --> Query error: Unknown column 'sales_services.services_id' in 'field list' - Invalid query: SELECT `sales`.*, GROUP_CONCAT(services.name) as servicename, GROUP_CONCAT(sales_services.services_id) as serviceid, GROUP_CONCAT(sub_services.name) as subservicename
+FROM `sales`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`id` = '1'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-28 13:57:40 --> Query error: Unknown column 'sales_sub_services.sub_services_id' in 'on clause' - Invalid query: SELECT `sales`.*, GROUP_CONCAT(services.name) as servicename, GROUP_CONCAT(sales_services.services_id) as serviceid, GROUP_CONCAT(sub_services.name) as subservicename
+FROM `sales`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`sub_services_id`
+WHERE `sales`.`id` = '1'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-28 15:18:36 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE `sales_sub_services`.`services_id` = ''
+GROUP BY `sales`.`id`' at line 4 - Invalid query: SELECT GROUP_CONCAT(sub_services.name) as subservicename, GROUP_CONCAT(sales_sub_services.services_id) as subserviceid
+FROM `sales_sub_services`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.
+WHERE `sales_sub_services`.`services_id` = ''
+GROUP BY `sales`.`id`
+ERROR - 2022-09-28 15:18:50 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE `sales_sub_services`.`services_id` = ''
+GROUP BY `sales_sub_services`.`id`' at line 4 - Invalid query: SELECT GROUP_CONCAT(sub_services.name) as subservicename, GROUP_CONCAT(sales_sub_services.services_id) as subserviceid
+FROM `sales_sub_services`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.
+WHERE `sales_sub_services`.`services_id` = ''
+GROUP BY `sales_sub_services`.`id`
+ERROR - 2022-09-28 15:19:27 --> Query error: Unknown column 'sub_services.name' in 'field list' - Invalid query: SELECT GROUP_CONCAT(sub_services.name) as subservicename, GROUP_CONCAT(sales_sub_services.services_id) as subserviceid
+FROM `sales_sub_services`
+WHERE `sales_sub_services`.`services_id` = ''
+GROUP BY `sales_sub_services`.`id`
+ERROR - 2022-09-28 15:50:07 --> Query error: Not unique table/alias: 'sales_services' - Invalid query: SELECT GROUP_CONCAT(services.name) as servicename, GROUP_CONCAT(sales_services.services_id) as serviceid
+FROM `sales_services`
+LEFT JOIN `sales_services` ON `sales_services`.`sales_id`=`sales`.`id`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+WHERE `sales_services`.`servies_id` = '1'
+GROUP BY `sales_services`.`id`
+ERROR - 2022-09-28 15:50:29 --> Query error: Unknown column 'sales_services.servies_id' in 'where clause' - Invalid query: SELECT GROUP_CONCAT(services.name) as servicename, GROUP_CONCAT(sales_services.services_id) as serviceid
+FROM `sales_services`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+WHERE `sales_services`.`servies_id` = '1'
+GROUP BY `sales_services`.`id`
+ERROR - 2022-09-28 16:51:57 --> Severity: Notice --> Undefined index: start C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1658
+ERROR - 2022-09-28 16:51:57 --> Severity: Notice --> Undefined index: length C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1659
+ERROR - 2022-09-28 16:51:57 --> Severity: Notice --> Undefined index: search C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 16:51:57 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 16:52:04 --> Severity: Notice --> Undefined index: start C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1658
+ERROR - 2022-09-28 16:52:04 --> Severity: Notice --> Undefined index: length C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1659
+ERROR - 2022-09-28 16:52:04 --> Severity: Notice --> Undefined index: search C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 16:52:04 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 16:52:31 --> Severity: Notice --> Undefined index: start C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1658
+ERROR - 2022-09-28 16:52:31 --> Severity: Notice --> Undefined index: length C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1659
+ERROR - 2022-09-28 16:52:31 --> Severity: Notice --> Undefined index: search C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 16:52:31 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 16:53:10 --> Severity: Notice --> Undefined index: start C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1658
+ERROR - 2022-09-28 16:53:10 --> Severity: Notice --> Undefined index: length C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1659
+ERROR - 2022-09-28 16:53:10 --> Severity: Notice --> Undefined index: search C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 16:53:10 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 17:30:44 --> Severity: Notice --> Undefined index: start C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1658
+ERROR - 2022-09-28 17:30:44 --> Severity: Notice --> Undefined index: length C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1659
+ERROR - 2022-09-28 17:30:44 --> Severity: Notice --> Undefined index: search C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 17:30:44 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 17:42:38 --> Severity: Notice --> Undefined index: start C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1658
+ERROR - 2022-09-28 17:42:38 --> Severity: Notice --> Undefined index: length C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1659
+ERROR - 2022-09-28 17:42:38 --> Severity: Notice --> Undefined index: search C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 17:42:38 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1660
+ERROR - 2022-09-28 17:47:22 --> Query error: Unknown column 'sales.id' in 'group statement' - Invalid query: SELECT GROUP_CONCAT(services.name) as servicename, GROUP_CONCAT(sales_services.services_id) as serviceid
+FROM `sales_services`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+WHERE `sales_services`.`id` = '1'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-28 17:50:38 --> Query error: Unknown column 'sales.id' in 'group statement' - Invalid query: SELECT GROUP_CONCAT(services.name) as servicename, GROUP_CONCAT(sales_services.services_id) as serviceid
+FROM `sales_services`
+LEFT JOIN `services` ON `services`.`id`=`sales_services`.`services_id`
+WHERE `sales_services`.`id` = '1'
+GROUP BY `sales`.`id`
+ERROR - 2022-09-28 18:36:54 --> Query error: Unknown column 'sales_sub_services.services_id' in 'field list' - Invalid query: SELECT GROUP_CONCAT(sub_services.name) as servicename, GROUP_CONCAT(sales_sub_services.services_id) as serviceid
+FROM `sales`
+LEFT JOIN `sub_services` ON `sub_services`.`id`=`sales_sub_services`.`services_id`
+WHERE `sales_sub_services`.`services_id` = '8'
+GROUP BY `sales`.`id`

@@ -116,16 +116,26 @@ class Sales extends CI_Controller
        // set Row
        $rowCount = 2;
        $i=0;
-
        foreach($totalData as $totalData_key => $totalData_row)
        {
            $brand_id=explode(',',$totalData[$totalData_key]['brandid']);
            $brand_name=explode(',',$totalData[$totalData_key]['brandname']);
+           $services = $this->supermodel->sale_service($totalData_row['id']);
+          
+           $service_id=explode(',',$services[0]['serviceid']);
+       
+           $service_name=explode(',',$services[0]['service_name']);
+           foreach($service_id as $service_key => $service_id_row)
+           {
+             $totalData[$totalData_key]['subservice'][] = $this->supermodel->sale_subservice($service_id_row);
+           } 
+
            foreach($brand_id as $brands_id_key =>$brand_id_row)
            {
 
             //    $totalData[$totalData_key]['classname'][]=$this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$totalData_row['id'],'fk_brand_id'=>$brand_id_row['brandid']),array('*'));
             $totalData[$totalData_key]['classname'][] = $this->supermodel->get_brand_class_name($brand_id_row);
+           
             //   echo"<pre>";
             //   print_r($totalData);
            } 
@@ -140,6 +150,7 @@ class Sales extends CI_Controller
                 }
                
            } 
+
            
         
         //    $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $i);
