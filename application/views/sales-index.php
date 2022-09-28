@@ -138,15 +138,23 @@
 $("#to_date").datepicker({ dateFormat: 'dd/mm/Y' });
 $("#from_date").datepicker({ dateFormat: 'dd/mm/Y'});
 
-    $(".chosen-select").chosen({width: "95%"}); 
-   function resizeChosen() {
-        $(".chosen-container").each(function () {
-            $(this).attr('style', 'width: 100%');
-        });
-    }
+$(".chosen-select").chosen({width: "95%"}); 
+function resizeChosen() {
+   $(".chosen-container").each(function () {
+      $(this).attr('style', 'width: 100%');
+   });
+}
 
 var simpletable = $('#doc_list_datatable').DataTable({
-   
+    "responsive": true,
+    'processing': true,
+    'serverSide': true,
+    'serverMethod': 'post',
+    'language': {
+        'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>',
+        searchPlaceholder: "Enter Deal Id"
+        
+    },
    'ajax': {
        'url': "<?= base_url() ?>Sales/getsalesrecord",
        'method': "POST",
@@ -161,8 +169,6 @@ var simpletable = $('#doc_list_datatable').DataTable({
     },
 });
 
-
-
 $('#btn-search-by-date').click(function () { //button filter event click
        simpletable.ajax.reload(null, false); //just reload table
    });
@@ -170,8 +176,19 @@ $('#btn-search-by-date').click(function () { //button filter event click
     
    $(document).on('click','.edit_service_data',function (){
       var id = $(this).attr("id");
+
    var brand_list_datatable = $('.brand_list_datatable').DataTable({
+     
       destroy: true,
+      "responsive": true,
+    'processing': true,
+    'serverSide': true,
+    'serverMethod': 'post',
+    'language': {
+        'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>',
+        searchPlaceholder: "Enter Deal Id"
+        
+    },
    'ajax': {
        'url': "<?= base_url() ?>Sales/getsalesrecord1",
        'method': "POST",
@@ -205,5 +222,4 @@ $('#modal_form').modal('show');
 				}
 			});
    });
-
 </script>

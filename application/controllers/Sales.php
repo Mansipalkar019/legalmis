@@ -184,33 +184,34 @@ class Sales extends CI_Controller
 
     public function getsalesrecord()
     {
-        $data[] = $_POST;  
+       
+        $data[] = json_encode($_POST);  
         // echo "<pre>";
         // print_r($data);die();
-        $from_date = $data[0]['from_date'];
-        $to_date = $data[0]['to_date'];
+        $from_date = $_POST['from_date'];
+        $to_date = $_POST['to_date'];
         
-        $rowno = $data[0]['start'];
-        $rowperpage = $data[0]['length'];
-        $search_text = $data[0]['search']['value'];   
+        $rowno = $_POST['start'];
+        $rowperpage = $_POST['length'];
+        $search_text = $_POST['search']['value'];   
         $totalData=$this->supermodel->getsalesrecord($from_date,$to_date,$rowno,$rowperpage,$search_text);   
         $count_filtered=$this->supermodel->sale_record_count_filtered($from_date,$to_date,$rowno,$rowperpage,$search_text);
         $count_all = $this->supermodel->sale_record_count_all($from_date,$to_date,$rowno,$rowperpage,$search_text);
         $data_array=array();
-        
+       
         foreach($totalData as $category_details_key => $data_row)
         {
            
-                $edit = '<span><a href="javascript:void(0);" ><i class="glyphicon glyphicon-pencil a_category_view" aria-hidden="true" data-toggle="modal"
-                data-target="#myModal" id="'.$data_row['id'].'"></i> </a></span>&nbsp;&nbsp;';
+            $edit = '<span><a href="javascript:void(0);" ><i class="glyphicon glyphicon-pencil a_category_view" aria-hidden="true" data-toggle="modal"
+            data-target="#myModal" id="'.$data_row['id'].'"></i> </a></span>&nbsp;&nbsp;';
 
-                $invoice = '<span><a href="'.base_url().'Sales/print_sales1?id='.base64_encode($data_row['id']).'" target="_blank">
-                <i class="glyphicon glyphicon-download-alt invoice_view" aria-hidden="true" 
-                 ></i> </a></span>&nbsp;&nbsp;';
+            $invoice = '<span><a href="'.base_url().'Sales/print_sales1?id='.base64_encode($data_row['id']).'" target="_blank">
+            <i class="glyphicon glyphicon-download-alt invoice_view" aria-hidden="true" 
+             ></i> </a></span>&nbsp;&nbsp;';
 
-                $delete = "<span><a href='#' onclick='delete_sales_report(this," . $data_row['id'] . ")'><i class='glyphicon glyphicon-trash'></i></a></span>";
-                
-                $services='<span><a href="javascript:void(0);" class="edit_service_data" id="'.$data_row['id'].'"><i class="" ></i>'.$data_row['serviceid'].'</a></span>&nbsp;&nbsp;';
+            $delete = "<span><a href='#' onclick='delete_sales_report(this," . $data_row['id'] . ")'><i class='glyphicon glyphicon-trash'></i></a></span>";
+            
+            $services='<span><a href="javascript:void(0);" class="edit_service_data" id="'.$data_row['id'].'"><i class="" ></i>'.$data_row['serviceid'].'</a></span>&nbsp;&nbsp;';
                 $nestedData=array();
                 $nestedData[] =  $edit . $invoice . $delete;
                 $nestedData[] = ++$category_details_key;
@@ -270,6 +271,8 @@ class Sales extends CI_Controller
         // Output to JSON format
         echo json_encode($output);    
     }
+
+
     // Update Sales Details
     public function edit_sales()
     {

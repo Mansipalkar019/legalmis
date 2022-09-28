@@ -96,7 +96,6 @@ class supermodel extends CI_Model {
 		}
 	}
 
-
 	function getsalesrecord($from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
     {
         $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename');
@@ -105,7 +104,6 @@ class supermodel extends CI_Model {
         $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
 		$this->db->join('services','services.id=sales_services.services_id','left');
 		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
-		$this->db->distinct('services');
 		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
         $this->db->where('sales.status',1);
 		$this->db->limit($rowperpage,$rowno);
