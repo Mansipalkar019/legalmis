@@ -500,3 +500,626 @@ ERROR - 2022-09-28 12:52:52 --> Severity: Notice --> Trying to access array offs
 ERROR - 2022-09-28 12:55:31 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 188
 ERROR - 2022-09-28 12:55:42 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 188
 ERROR - 2022-09-28 12:55:46 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 188
+ERROR - 2022-09-28 13:33:21 --> Severity: error --> Exception: Call to undefined method supermodel::edit_sales_data() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 283
+ERROR - 2022-09-28 13:33:54 --> Severity: Compile Error --> Cannot redeclare Sales::edit_sales() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 1762
+ERROR - 2022-09-28 13:34:30 --> Severity: error --> Exception: Call to undefined method supermodel::edit_sales_data() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 283
+ERROR - 2022-09-28 13:34:45 --> Severity: error --> Exception: Call to undefined method supermodel::edit_sales_data() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 283
+ERROR - 2022-09-28 13:35:17 --> Severity: error --> Exception: Call to undefined method supermodel::get_sale_service() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 284
+ERROR - 2022-09-28 13:35:18 --> Severity: error --> Exception: Call to undefined method supermodel::get_sale_service() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 284
+ERROR - 2022-09-28 13:35:19 --> Severity: error --> Exception: Call to undefined method supermodel::get_sale_service() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 284
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 13:35:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:25 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:35:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:09 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:11 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:12 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:14 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:14 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:37:14 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:31 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:31 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:31 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:32 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:33 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:38:53 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:13 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 14:39:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:34 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:02:51 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:03:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 417
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 416
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 416
+ERROR - 2022-09-28 15:10:37 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 416
+ERROR - 2022-09-28 15:15:46 --> Severity: error --> Exception: syntax error, unexpected end of file C:\xampp\htdocs\legalmis\application\views\update_sales.php 681
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 15:15:57 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\views\update_sales.php 420
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 15:27:23 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:42:44 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:45:07 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:45:07 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:45:07 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:46:13 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:46:13 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:46:13 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:46:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:46:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:46:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:56:21 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:56:21 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 15:56:21 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 16:57:57 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 16:57:57 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 16:57:57 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 17:02:51 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 17:02:51 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 17:02:51 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 17:37:22 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 294
+ERROR - 2022-09-28 17:37:22 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 294
+ERROR - 2022-09-28 17:37:22 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 294
+ERROR - 2022-09-28 17:37:22 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 294
+ERROR - 2022-09-28 17:37:22 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 294
+ERROR - 2022-09-28 17:37:22 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 294
+ERROR - 2022-09-28 17:37:22 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 294
+ERROR - 2022-09-28 17:37:22 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 294
+ERROR - 2022-09-28 17:37:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 293
+ERROR - 2022-09-28 17:38:17 --> Severity: error --> Exception: syntax error, unexpected ''<pre>'' (T_CONSTANT_ENCAPSED_STRING) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:39:09 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 17:39:09 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 17:39:09 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 17:39:09 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 17:39:09 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 17:39:09 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 17:39:09 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 17:39:09 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 295
+ERROR - 2022-09-28 17:42:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:42:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:42:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:47:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:47:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:47:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:47:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:47:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:47:25 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:47:25 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:47:25 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:25 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:25 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:25 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:25 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:48 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:48 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:48 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:48 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:48 --> Severity: Notice --> Undefined index: fk_brand_id C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:48 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:48 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:48 --> Severity: Notice --> Trying to access array offset on value of type bool C:\xampp\htdocs\legalmis\application\controllers\Sales.php 291
+ERROR - 2022-09-28 17:48:58 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:48:58 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:48:58 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:49:24 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:49:24 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:49:24 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:55:58 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:55:58 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 17:55:58 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:03:40 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:03:40 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:03:40 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:04:20 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:04:20 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:04:20 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:29:34 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:29:34 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:29:34 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:30:08 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:30:08 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:30:08 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:31:53 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:31:53 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:31:53 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 18:32:30 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 415
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 18:32:30 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 415
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 18:32:30 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 415
+ERROR - 2022-09-28 18:32:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\update_sales.php 419
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:17 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 415
+ERROR - 2022-09-28 18:33:17 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 415
+ERROR - 2022-09-28 18:33:17 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 415
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:33:45 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:40 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:34:40 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:34:40 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:34:40 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:40 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:34:51 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:34:51 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:34:51 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:35:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:08 --> Severity: error --> Exception: syntax error, unexpected '@' C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:36:14 --> Severity: error --> Exception: syntax error, unexpected '@' C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:36:20 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:36:20 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:36:20 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:36:20 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:20 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:21 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:21 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:21 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:21 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:21 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:21 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:21 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:21 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:36:56 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:36:56 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:36:56 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:35 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:37:35 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:37:35 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:37:55 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:37:55 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:37:55 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:37:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:56 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:56 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:56 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:37:56 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:38:41 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:38:41 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:38:41 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:21 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:39:21 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:39:21 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Undefined index: class_name C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Undefined index: class_name C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:39:50 --> Severity: Notice --> Undefined index: class_name C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:39 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:41:39 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:41:39 --> Severity: Notice --> Undefined index: sale_service_class C:\xampp\htdocs\legalmis\application\views\update_sales.php 418
+ERROR - 2022-09-28 18:41:48 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:41:48 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:41:48 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\controllers\Sales.php 290
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387
+ERROR - 2022-09-28 18:41:49 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 387

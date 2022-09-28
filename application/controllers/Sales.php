@@ -202,8 +202,7 @@ class Sales extends CI_Controller
         foreach($totalData as $category_details_key => $data_row)
         {
            
-            $edit = '<span><a href="javascript:void(0);" ><i class="glyphicon glyphicon-pencil a_category_view" aria-hidden="true" data-toggle="modal"
-            data-target="#myModal" id="'.$data_row['id'].'"></i> </a></span>&nbsp;&nbsp;';
+            $edit = '<span><a href="'.base_url()."Sales/edit_sales?id=".base64_encode($data_row['id']).'" ><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a></span>&nbsp;&nbsp;';
 
             $invoice = '<span><a href="'.base_url().'Sales/print_sales1?id='.base64_encode($data_row['id']).'" target="_blank">
             <i class="glyphicon glyphicon-download-alt invoice_view" aria-hidden="true" 
@@ -271,8 +270,6 @@ class Sales extends CI_Controller
         // Output to JSON format
         echo json_encode($output);    
     }
-
-
     // Update Sales Details
     public function edit_sales()
     {
@@ -288,9 +285,21 @@ class Sales extends CI_Controller
         $sale_service_brand = $this->model->selectWhereData('sale_service_brand',array('fk_sales_id'=>$id),array('*'),false);
 
         foreach ($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row) {
-            $sale_service_brand[$sale_service_brand_key]['sale_service_class'] = $this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$id,'fk_brand_id'=>$sale_service_brand_row['id'],),array('*'),false);
-        }
-        // echo '<pre>'; print_r($sale_service_brand); exit;
+            // $sale_service_brand[$sale_service_brand_key]['sale_service_class'] = $this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$id,'fk_brand_id'=>$sale_service_brand_row['id'],),array('*'),false);
+             $sale_service_class = $this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$id,'fk_brand_id'=>$sale_service_brand_row['id'],),array('*'),false);
+              foreach (@$sale_service_class as $sale_service_class_key => $sale_service_class_row) {
+
+                     if($sale_service_brand_row['id']==$sale_service_class_row['fk_brand_id']){
+                        // echo '<pre>'; print_r($sale_service_brand_row['id']); 
+                        // echo '<pre>'; print_r($sale_service_class_row['fk_brand_id']); 
+
+
+                        $sale_service_brand[$sale_service_brand_key]['class_name'][] = $sale_service_class_row['class_name'];
+                        $sale_service_brand[$sale_service_brand_key]['sale_service_class']  = implode(",",$sale_service_brand[$sale_service_brand_key]['class_name']);
+                     }            
+                }             
+             }  
+        // exit;
         $data['sale_service_brand'] = $sale_service_brand;
         // $data['sale_service_class'] = $this->supermodel->get_sale_service_class($id);
         $data['state'] = $this->model->getData('tbl_states');
@@ -1758,4 +1767,6 @@ class Sales extends CI_Controller
         // }
        
     }
+
+    
 }

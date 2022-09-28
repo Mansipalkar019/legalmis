@@ -406,19 +406,19 @@
                               </div>
                            </div>
                            <hr>
-                           <div class="row">
+                           
                               <?php
                                     $html = "";
                                     // $brand_name = explode(',',$sale_service_brand['brand_name']);
                                     // $fk_service_id = explode(',',$sale_service_brand['fk_service_id']);
                                     foreach($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row){
-                                          echo '<div class="col-md-5" id="show_brand_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'.$sale_service_brand_key.'[]" id="brand_name_'.$sale_service_brand_key.'" value="'.$sale_service_brand_row['brand_name'].'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-5" id="show_company_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" 
-
-
-                                          " name="class_name_'.$sale_service_brand_key.'['.$sale_service_brand_key.'][]" id="class_name_'.$sale_service_brand_key.'" onchange="get_class_name(this.value)"></select></div></div></div>';
-                                    }
+                                      
+                                      
+                                          echo '<div class="row"><div class="col-md-6" id="show_brand_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'.$sale_service_brand_key.'[]" id="brand_name_'.$sale_service_brand_key.'" value="'.$sale_service_brand_row['brand_name'].'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-6" id="show_company_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><select class="form-control tokenizer class_name" multiple="multiple" 
+                                          " name="class_name_'.$sale_service_brand_key.'['.$sale_service_brand_key.'][]" id="class_name_'.$sale_service_brand_key.'" onchange="get_class_name(this.value)"><option value="'.@$sale_service_brand_row['sale_service_class'].'">'.@$sale_service_brand_row['sale_service_class'].'</option></select></div></div></div>';
+                                   }
                               ?>
-                           </div>
+                           
 
                            </div>
                         </div>
@@ -514,16 +514,22 @@
    });
    }
    $(document).ready(function () {
-      var id = $('#id').val();
-      var options = document.getElementById('services').selectedOptions;
-      var values = Array.from(options).map(({ value }) => value);
-      var text = Array.from(options).map(({ text }) => text);
+       $('.class_name').select2({
+                     tags: true,
+                     tokenSeparators: [',', ' '],
+                  });
+                
+                  $('.tokenizer').trigger('change.select2');
+      // var id = $('#id').val();
+      // var options = document.getElementById('services').selectedOptions;
+      // var values = Array.from(options).map(({ value }) => value);
+      // var text = Array.from(options).map(({ text }) => text);
    
-       var count = values.length;
-      if(count > 1)
-      {
-         $.each( values, function( key, value ) {           
-            $('#count'+value+'').val(0);               
+      //  var count = values.length;
+      // if(count > 1)
+      // {
+      //    $.each( values, function( key, value ) {           
+      //       $('#count'+value+'').val(0);               
         
           // $.ajax({
           //      url: '<?php echo base_url(); ?>Sales/get_brand_details',
@@ -547,9 +553,9 @@
                   
           //      }
           //   });
-           });
+      //      });
             
-      }
+      // }
 
    });
    
@@ -577,7 +583,7 @@
 
          if(response.service_details.class_name == "Yes" && response.service_details.class_name == "Yes")
          {
-             html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-4" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[0][]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>'; 
+             html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-4" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer " multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[0][]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>'; 
          }
          
          $('#brands_display').append(html11);   
