@@ -66,11 +66,120 @@ class Sales extends CI_Controller
 
     public function sales_exceldownload()
     {
+        error_reporting(0);
         $from_date=$_POST['from_date'];
         $to_date=$_POST['to_date'];
-        $totalData=$this->supermodel->download_salesrecord($from_date,$to_date);  
-        echo "<pre>";
-        print_r($totalData);die();
+       
+      // create file name
+      $fileName = 'salereport.xlsx'; 
+       // load excel library
+       $this->load->library('excel');
+       $totalData=$this->supermodel->download_salesrecord($from_date,$to_date);  
+      
+       $objPHPExcel = new PHPExcel();
+       $objPHPExcel->setActiveSheetIndex(0);
+       // set Header
+       $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'ID');
+       $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'DATE');
+       $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'SERVICES');
+       $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'COMPANY NAME');
+       $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'BRAND NAME');
+       $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'CLIENT NAME');     
+       $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'MOBILE NUMBER');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'EMAIL ID');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'GST NO');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'DEAL ID');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'REPRESENTATIVE');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'SOURCE');     
+       $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'CITY');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'STATE');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'MODE');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'DEAL AMOUNT');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'AMOUNT RECEIVED');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('R1', 'OUTSTANDING');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('S1', 'TCS');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('T1', 'GOVT FEES');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('U1', 'ASSOCIATE FEES');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('V1', 'NET INCOME');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('W1', 'GOVT FEES');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('X1', 'PROFESSIONAL FEES');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('Y1', 'DRAFTING/ PROCEEDING FEES');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('Z1', 'DRAFTING/ PROCEEDING/ PROFESSIONAL FEES');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('AA1', 'CGST 9%');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('AB1', 'SGST 9%'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AC1', 'IGST 18%'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AD1', 'ROUND OFF'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AE1', 'INVOICE'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AF1', 'LEGAL REMARKS'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AG1', 'ACCOUNT REMARKS'); 
+
+       // set Row
+       $rowCount = 2;
+       $i=0;
+
+       foreach($totalData as $totalData_key => $totalData_row)
+       {
+           $brand_id=explode(',',$totalData[$totalData_key]['brandid']);
+           $brand_name=explode(',',$totalData[$totalData_key]['brandname']);
+           foreach($brand_id as $brands_id_key =>$brand_id_row)
+           {
+
+            //    $totalData[$totalData_key]['classname'][]=$this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$totalData_row['id'],'fk_brand_id'=>$brand_id_row['brandid']),array('*'));
+            $totalData[$totalData_key]['classname'][] = $this->supermodel->get_brand_class_name($brand_id_row);
+            //   echo"<pre>";
+            //   print_r($totalData);
+           } 
+           foreach($totalData[$totalData_key]['classname'] as $classname_key =>$classname_row)
+           {
+                if($classname_row['fk_sale_id']== $totalData_row['id']){
+                    if(in_array($classname_row['fk_brand_id'],$brand_id))
+                    {
+                        $totalData[$totalData_key]['brand_class_name'][]=$brand_name[$classname_key].'('.$classname_row['class_name'].')';
+                        $totalData[$totalData_key]['brand_class'] =implode(",",$totalData[$totalData_key]['brand_class_name']);
+                    }                  
+                }
+               
+           } 
+           
+        
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $i);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $totalData_row['sale_date']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $totalData_row['servicename']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $totalData_row['company_name']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['brand_class']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['client_name']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['mobile_1'].','.$totalData_row['mobile_2'].','.$totalData_row['alternate_number']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['email_address']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['gst_no']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['deal_id']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
+        //    $rowCount++; $i++;
+      
+       }
+      
+       echo "<pre>";
+       print_r($totalData);
+      die;
+        $filename = "tutsmake". date("Y-m-d-H-i-s").".csv";
+		header('Content-Type: application/vnd.ms-excel'); 
+		header('Content-Disposition: attachment;filename="'.$filename.'"');
+		header('Cache-Control: max-age=0'); 
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');  
+		$objWriter->save('php://output'); 
     }
 
     public function getsalesrecord()

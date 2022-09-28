@@ -261,14 +261,13 @@ class supermodel extends CI_Model {
 
 	function download_salesrecord($from_date="",$to_date="")
     {
-        $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename,GROUP_CONCAT(DISTINCT(sale_service_brand.brand_name)) as brandname');
+        $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as servicename,GROUP_CONCAT(DISTINCT(sales_services.services_id)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename,GROUP_CONCAT(DISTINCT(sale_service_brand.brand_name)) as brandname,GROUP_CONCAT(DISTINCT(sale_service_brand.id)) as brandid');
         $this->db->from('sales');
-        $this->db->join('sales_services','sales_services.sales_id=sales.id','left');
-        $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
+		$this->db->join('sales_services','sales_services.sales_id=sales.id','left');
 		$this->db->join('services','services.id=sales_services.services_id','left');
+        $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');	
 		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
 		$this->db->join('sale_service_brand','sale_service_brand.fk_sales_id=sales.id','left');
-		$this->db->distinct('services');
 		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
         $this->db->where('sales.status',1);
 		if(!empty($from_date))
@@ -281,10 +280,22 @@ class supermodel extends CI_Model {
 		}
 	
 		$this->db->group_by('sales.id');
-        $this->db->order_by('sales.id',"DESC");
+        //$this->db->order_by('sales.id',"DESC");
         $query=$this->db->get();
 		return $query->result_array();
     }
+
+	public function get_brand_class_name($id="")
+	{
+		$this->db->select('sale_service_class.*,GROUP_CONCAT(sale_service_class.class_name) as class_name');
+        $this->db->from('sale_service_class');
+        $this->db->where('sale_service_class.fk_brand_id',$id);
+	
+		$this->db->group_by('sale_service_class.fk_brand_id');
+        //$this->db->order_by('sales.id',"DESC");
+        $query=$this->db->get();
+		return $query->row_array();
+	}
 }
 ?>
 

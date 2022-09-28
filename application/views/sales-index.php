@@ -13,7 +13,7 @@
 <div class="container-fluid first-body bdy">
    <div class="container-fluid">
       <div class="row">
-         <div class="col-md-6">
+         <div class="col-md-12">
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Sales</a></li>
