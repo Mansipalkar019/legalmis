@@ -759,9 +759,7 @@
    
    $(document).on('select2:unselect', '#services',function(e) {
      var data = e.params.data;
-     var service_id = data.id;
-     
-   //   $('#brand_name_'+service_id). select2('destroy');
+     var service_id = data.id
      $('#brand_name_'+service_id). remove();
      $('#show_brand_content_'+service_id).remove();
      $('#show_company_content_'+service_id).remove();
