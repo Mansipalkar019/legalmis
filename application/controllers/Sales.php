@@ -275,7 +275,7 @@ class Sales extends CI_Controller
     {
         $id = base64_decode($_GET['id']);
         $this->load->model('supermodel');
-         $data['services_list'] = $this->model->getData('services', array('status' => '1'));
+        $data['services_list'] = $this->model->getData('services', array('status' => '1'));
         $data['sub_services_list'] = $this->model->getData('sub_services', array('status' => '1'));
         
         $data['sales_data'] = $this->supermodel->edit_sales_data($id);
@@ -314,15 +314,12 @@ class Sales extends CI_Controller
     public function get_brand_details()
     {
          $id = $this->input->post('sales_id');
-
          $sale_service_brand = $this->model->selectWhereData('sale_service_brand',array('fk_service_id'=>$id),array('*'),false);
-
             foreach ($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row) {
                 $sale_service_brand[$sale_service_brand_key]['sale_service_class'] = $this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$id,'fk_brand_id'=>$sale_service_brand_row['id'],),array('*'),false);
             }
         // echo '<pre>'; print_r($sale_service_brand); exit;
         $data['sale_service_brand'] = $sale_service_brand;
-
         echo json_encode($data);
     }
     // only for Rashi and Administrator as of now
