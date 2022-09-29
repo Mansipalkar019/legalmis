@@ -116,19 +116,46 @@ class Sales extends CI_Controller
        // set Row
        $rowCount = 2;
        $i=0;
-
        foreach($totalData as $totalData_key => $totalData_row)
        {
            $brand_id=explode(',',$totalData[$totalData_key]['brandid']);
            $brand_name=explode(',',$totalData[$totalData_key]['brandname']);
+           $services = $this->supermodel->sale_service($totalData_row['id']);
+          
+           $service_id=explode(',',$services[0]['serviceid']);
+        
+           $service_name=explode(',',$services[0]['servicename']);
+           
+           foreach($service_id as $service_key => $service_id_row)
+           {
+                $totalData[$totalData_key]['subservice'][] = $this->supermodel->sale_subservice($totalData_row['id'],$service_id_row);  
+            } 
+
+           foreach($totalData[$totalData_key]['subservice'] as $subservices_key => $subservices_row)
+           {    
+                // echo "<pre>";
+                // print_r($subservices_row);
+                 foreach($subservices_row as $subservicekey => $subservicerow)
+                {
+                    echo "<pre>";
+                    print_r($subservicerow);
+                   if($subservicerow['sales_id'] == $totalData_row['id'])
+                   {
+                    if(in_array($subservicerow['subserviceid'],$service_id))
+                    {
+                        $totalData[$totalData_key]['servicesubservice'][]=$service_name[$subservicekey].'('.$subservicerow['subservicename'].')';
+                        //print_r($totalData[$totalData_key]['servicesubservice']);
+                        $totalData[$totalData_key]['servicesubservices'] =implode(",",$totalData[$totalData_key]['servicesubservice']);
+                    }     
+                   }
+                }
+           }
+
            foreach($brand_id as $brands_id_key =>$brand_id_row)
            {
-
-            //    $totalData[$totalData_key]['classname'][]=$this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$totalData_row['id'],'fk_brand_id'=>$brand_id_row['brandid']),array('*'));
             $totalData[$totalData_key]['classname'][] = $this->supermodel->get_brand_class_name($brand_id_row);
-            //   echo"<pre>";
-            //   print_r($totalData);
            } 
+
            foreach($totalData[$totalData_key]['classname'] as $classname_key =>$classname_row)
            {
                 if($classname_row['fk_sale_id']== $totalData_row['id']){
@@ -140,6 +167,7 @@ class Sales extends CI_Controller
                 }
                
            } 
+
            
         
         //    $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $i);
