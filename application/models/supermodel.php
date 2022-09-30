@@ -298,7 +298,7 @@ class supermodel extends CI_Model {
 
 	function  sale_subservice($sale_id,$service_id="")
     {
-        $this->db->select('GROUP_CONCAT(sub_services.name) as subservicename,GROUP_CONCAT(sales_sub_services.sub_services_id ) as subserviceid,GROUP_CONCAT(sales_sub_services.sales_id ) as sales_id');
+        $this->db->select('GROUP_CONCAT(sub_services.name) as subservicename,GROUP_CONCAT(sales_sub_services.sub_services_id ) as subserviceid,GROUP_CONCAT(sales_sub_services.sales_id ) as sales_id,GROUP_CONCAT(sales_sub_services.services_id) as servicesid,');
         $this->db->from('sales_sub_services');
 		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id ','left');
 		$this->db->where('sales_sub_services.sales_id ',$sale_id);

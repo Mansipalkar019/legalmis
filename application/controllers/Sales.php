@@ -105,13 +105,14 @@ class Sales extends CI_Controller
        $objPHPExcel->getActiveSheet()->SetCellValue('X1', 'PROFESSIONAL FEES');   
        $objPHPExcel->getActiveSheet()->SetCellValue('Y1', 'DRAFTING/ PROCEEDING FEES');   
        $objPHPExcel->getActiveSheet()->SetCellValue('Z1', 'DRAFTING/ PROCEEDING/ PROFESSIONAL FEES');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('AA1', 'CGST 9%');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('AB1', 'SGST 9%'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AC1', 'IGST 18%'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AD1', 'ROUND OFF'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AE1', 'INVOICE'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AF1', 'LEGAL REMARKS'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AG1', 'ACCOUNT REMARKS'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AA1', 'TOTAL PROFESSIONAL AMOUNT');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('AB1', 'CGST 9%');   
+       $objPHPExcel->getActiveSheet()->SetCellValue('AC1', 'SGST 9%'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AD1', 'IGST 18%'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AE1', 'ROUND OFF'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AF1', 'INVOICE'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AG1', 'LEGAL REMARKS'); 
+       $objPHPExcel->getActiveSheet()->SetCellValue('AH1', 'ACCOUNT REMARKS'); 
 
        // set Row
        $rowCount = 2;
@@ -123,28 +124,22 @@ class Sales extends CI_Controller
            $services = $this->supermodel->sale_service($totalData_row['id']);
           
            $service_id=explode(',',$services[0]['serviceid']);
-        
            $service_name=explode(',',$services[0]['servicename']);
            
            foreach($service_id as $service_key => $service_id_row)
            {
                 $totalData[$totalData_key]['subservice'][] = $this->supermodel->sale_subservice($totalData_row['id'],$service_id_row);  
             } 
-
            foreach($totalData[$totalData_key]['subservice'] as $subservices_key => $subservices_row)
            {    
-                // echo "<pre>";
-                // print_r($subservices_row);
                  foreach($subservices_row as $subservicekey => $subservicerow)
                 {
-                    echo "<pre>";
-                    print_r($subservicerow);
+                    //print_r($subservicerow);
                    if($subservicerow['sales_id'] == $totalData_row['id'])
                    {
                     if(in_array($subservicerow['subserviceid'],$service_id))
                     {
                         $totalData[$totalData_key]['servicesubservice'][]=$service_name[$subservicekey].'('.$subservicerow['subservicename'].')';
-                        //print_r($totalData[$totalData_key]['servicesubservice']);
                         $totalData[$totalData_key]['servicesubservices'] =implode(",",$totalData[$totalData_key]['servicesubservice']);
                     }     
                    }
@@ -168,41 +163,49 @@ class Sales extends CI_Controller
                
            } 
 
-           
-        
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $i);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $totalData_row['sale_date']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $totalData_row['servicename']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $totalData_row['company_name']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['brand_class']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['client_name']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['mobile_1'].','.$totalData_row['mobile_2'].','.$totalData_row['alternate_number']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['email_address']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['gst_no']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['deal_id']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['']);
-        //    $rowCount++; $i++;
+           $objPHPExcel->getActiveSheet()->SetCellValue('A1' . $rowCount, $i);
+           $objPHPExcel->getActiveSheet()->SetCellValue('B1' . $rowCount, $totalData_row['sale_date']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('C1' . $rowCount, $totalData_row['servicename']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('D1' . $rowCount, $totalData_row['company_name']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('E1' . $rowCount, $totalData_row['brand_class']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('F1' . $rowCount, $totalData_row['client_name']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('G1' . $rowCount, $totalData_row['mobile_1'].','.$totalData_row['mobile_2'].','.$totalData_row['alternate_number']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('H1' . $rowCount, $totalData_row['email_address']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('I1' . $rowCount, $totalData_row['gst_no']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('J1' . $rowCount, $totalData_row['deal_id']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('K1' . $rowCount, $totalData_row['primary_caller']); 
+           $objPHPExcel->getActiveSheet()->SetCellValue('L1' . $rowCount, $totalData_row['lead_source']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('M1' . $rowCount, $totalData_row['city']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('N1' . $rowCount, $totalData_row['state']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('O1' . $rowCount, $totalData_row['payment_mode']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('P1' . $rowCount, $totalData_row['deal_amount']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('Q1' . $rowCount, $totalData_row['amount_received']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('R1' . $rowCount, $totalData_row['outstanding']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('S1' . $rowCount, $totalData_row['tcs']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('T1' . $rowCount, $totalData_row['govt_fees']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('U1' . $rowCount, $totalData_row['associate_fees']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('V1' . $rowCount, $totalData_row['net_income']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('W1' . $rowCount, $totalData_row['govt_fee']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('X1' . $rowCount, $totalData_row['professional_fees']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('Y1' . $rowCount, $totalData_row['drafting_proceeding_fees']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('Z1' . $rowCount, $totalData_row['drafting_proceeding_professional_fees']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('AA2' . $rowCount, $totalData_row['total_professional_amount']);
+           $objPHPExcel->getActiveSheet()->SetCellValue('AB1' . $rowCount, $totalData_row['cgst']);  
+           $objPHPExcel->getActiveSheet()->SetCellValue('AC1' . $rowCount, $totalData_row['sgst']);  
+           $objPHPExcel->getActiveSheet()->SetCellValue('AD1' . $rowCount, $totalData_row['igst']);  
+           $objPHPExcel->getActiveSheet()->SetCellValue('AE1' . $rowCount, $totalData_row['round_off']);  
+           $objPHPExcel->getActiveSheet()->SetCellValue('AF1' . $rowCount, $totalData_row['invoice_name']);  
+           $objPHPExcel->getActiveSheet()->SetCellValue('AG1' . $rowCount, $totalData_row['legal_remarks']);  
+           $objPHPExcel->getActiveSheet()->SetCellValue('AH1' . $rowCount, $totalData_row['accounts_remarks']);     
+           $rowCount++; $i++;
       
        }
       
        echo "<pre>";
        print_r($totalData);
       die;
-        $filename = "tutsmake". date("Y-m-d-H-i-s").".csv";
+        //$filename = "tutsmake". date("Y-m-d-H-i-s").".csv";
+        $filename=base_url()."uploads/invoice/legal_invoice.csv";
 		header('Content-Type: application/vnd.ms-excel'); 
 		header('Content-Disposition: attachment;filename="'.$filename.'"');
 		header('Cache-Control: max-age=0'); 
@@ -239,7 +242,9 @@ class Sales extends CI_Controller
             $delete = "<span><a href='#' onclick='delete_sales_report(this," . $data_row['id'] . ")'><i class='glyphicon glyphicon-trash'></i></a></span>";
             
             $services='<span><a href="javascript:void(0);" class="edit_service_data" id="'.$data_row['id'].'"><i class="" ></i>'.$data_row['serviceid'].'</a></span>&nbsp;&nbsp;';
-                $nestedData=array();
+               
+            $image_documents='<span><a href="javascript:void(0);" class="edit_image_document" id="'.$data_row['id'].'"><i class="" ></i>'.$data_row['image_url'].'</a></span>&nbsp;&nbsp;';
+            $nestedData=array();
                 $nestedData[] =  $edit . $invoice . $delete;
                 $nestedData[] = ++$category_details_key;
                 $nestedData[] = $data_row['company_name'];
@@ -248,7 +253,8 @@ class Sales extends CI_Controller
                 $nestedData[] = $services;
                 $nestedData[] = $data_row['subserviceid'];
                 $nestedData[] = $data_row['mobile_1'].', '.$data_row['mobile_2'].', '.$data_row['alternate_number'];
-                $nestedData[] = $data_row['email_address'].', '.$data_row['alternate_number'];
+                $nestedData[] = $data_row['email_address'].', '.$data_row['alternate_email'];
+                $nestedData[] = $image_documents;
                 $nestedData[] = $data_row['gst_no'];
                 $nestedData[] = $data_row['deal_id'];
                 $nestedData[] = $data_row['invoice_number'];
@@ -375,7 +381,7 @@ class Sales extends CI_Controller
     public function delete_service()
     {
         $user_id = $_POST['id'];
-        if($this->model->updateData('sales', array('status' => '1'), array('id' => $user_id)))
+        if($this->model->updateData('sales', array('status' => '0'), array('id' => $user_id)))
         {
             $response['status']='success';
             $response['error']="It was succesfully deleted";
@@ -947,11 +953,11 @@ class Sales extends CI_Controller
                                 $_FILES['file']['size'] = $_FILES['image_files']['size'][$i];
                                 $config['upload_path'] = './uploads/images/';
                                 $config['allowed_types'] = 'jpg|jpeg|png';
-                                $config['file_name'] ='LEG_'.$company_name.'_'.$_FILES['image_files']['name'][$i];
+                                $config['file_name'] ='LEG_'.$_FILES['image_files']['name'][$i];
                                 $this->load->library('upload', $config);
                                 if ($this->upload->do_upload('file')) {
                                     $uploadData = $this->upload->data();
-                                    $filename ='LEG_'.$company_name.'_'.$uploadData['file_name'];
+                                    $filename ='LEG_'.$uploadData['file_name'];
                                     //$product_gallery['img_name'] = $filename;
                                     //$product_gallery1 = './uploads/images/' . $filename;
                                     $product_gallery = 'uploads/images/' . $filename;
@@ -1693,6 +1699,13 @@ class Sales extends CI_Controller
        echo json_encode($data);
 	}
 
+    public function getsalesdocimages()
+	{
+       $sale_id =$this->input->post('id');
+       $data=$this->model->selectWhereData('sales',array('id'=>$sale_id),array('image_url'));
+       $image_doc=explode(',',$data['image_url']);
+       echo json_encode($image_doc);
+	}
 
     public function getsalesrecord1()
     {
