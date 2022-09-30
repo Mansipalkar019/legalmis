@@ -325,6 +325,7 @@ class Sales extends CI_Controller
     public function get_brand_details()
     {
          $id = $this->input->post('sales_id');
+         // echo '<pre>'; print_r($id); exit;
          $sale_service_brand = $this->model->selectWhereData('sale_service_brand',array('fk_service_id'=>$id),array('*'),false);
             foreach ($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row) {
                 $sale_service_brand[$sale_service_brand_key]['sale_service_class'] = $this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$id,'fk_brand_id'=>$sale_service_brand_row['id'],),array('*'),false);
@@ -1788,16 +1789,14 @@ class Sales extends CI_Controller
         $id = base64_decode($_GET['id']);
         $this->load->model('supermodel');
         $data['services_list'] = $this->model->getData('services', array('status' => '1'));
-        
         $data['sales_data'] = $this->supermodel->edit_sales_data($id);
         $data['sale_service'] = $this->supermodel->get_sale_service($id);
         $sale_service_id =  explode(',',$data['sale_service']['services_id']);
         foreach ($sale_service_id as $sale_service_id_key => $sale_service_id_row) {
-                    $data['sub_services_list'] = $this->model->getData('sub_services', array('status' => '1','service_id'=>$sale_service_id_row));
+                $data['sub_services_list'] = $this->model->getData('sub_services', array('status' => '1','service_id'=>$sale_service_id_row));
         }
         $data['sale_sub_service'] = $this->supermodel->get_sale_sub_service($id);
         $sale_service_brand = $this->model->selectWhereData('sale_service_brand',array('fk_sales_id'=>$id),array('*'),false);
-
         foreach ($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row) {
                     $sale_service_class = $this->model->selectWhereData('sale_service_class',array('fk_sale_id'=>$id,'fk_brand_id'=>$sale_service_brand_row['id'],),array('*'),false);
                     if(!empty($sale_service_class)){
@@ -1806,29 +1805,22 @@ class Sales extends CI_Controller
                             if($sale_service_brand_row['id']==$sale_service_class_row['fk_brand_id']){
                        
                                 $sale_service_brand[$sale_service_brand_key]['class_name'][] = $sale_service_class_row['class_name'];
+                                $sale_service_brand[$sale_service_brand_key]['class_name_id'][] = $sale_service_class_row['id'];
                                 $sale_service_brand[$sale_service_brand_key]['sale_service_class']  = implode(",",$sale_service_brand[$sale_service_brand_key]['class_name']);
-                     }            
-                }  
-            }
-                        
+                                $sale_service_brand[$sale_service_brand_key]['sale_service_class_name_id']  = implode(",",$sale_service_brand[$sale_service_brand_key]['class_name_id']);
+                            }            
+                        }  
+                    }                        
              }  
-        // exit;
         $data['sale_service_brand'] = $sale_service_brand;
-        // $data['sale_service_class'] = $this->supermodel->get_sale_service_class($id);
         $data['state'] = $this->model->getData('tbl_states');
         $data['city'] = $this->model->selectWhereData('tbl_cities',array('state_id'=>$data['sales_data']['state']),array('*'),false);
         $data['pincode'] = $this->model->selectWhereData('location',array('city'=>$data['sales_data']['city']),array('*'),false);
         $data['customer_executive']  = $this->model->selectWhereData('customer_executive', array('status' => '1'),array('id','name'),false);
-         // FETCH: get all the payment mode names
         $data['payment_mode'] = $this->model->getData('payment_mode', array('status' => '1'));
-
-        // FETCH: get all the invoice status names
         $data['invoice_status'] = $this->model->getData('invoice_status', array('status' => '1'));
-
-        // FETCH: get all the invoice type names
         $data['invoice_type'] = $this->model->getData('invoice_type', array('status' => '1'));
         $data['id']=$id;
-        // echo '<pre>'; print_r($data); exit;
         $this->load->view('update_sales',$data);
     }
      function alpha_dash_space($fullname){
@@ -1887,107 +1879,109 @@ class Sales extends CI_Controller
        $sgst = $this->input->post('sgst');
        $igst = $this->input->post('igst');
        $round_off = $this->input->post('round_off');
-       
-        // $this->form_validation->set_rules('sale_date', 'Sales', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('client_name', 'Client Name', 'required|trim|callback_alpha_dash_space', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('deal_id', 'Deal Id', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('mobile_1', 'Mobile No. 1', 'required|trim|numeric|exact_length[10]', array('required' => 'You must provide a %s','numeric' => 'Contact Number should be 10 digit number','exact_length' => 'Contact Number should be 10 digit number',));
-        // $this->form_validation->set_rules('mobile_2', 'Mobile No. 2', 'required|trim|numeric|exact_length[10]', array('required' => 'You must provide a %s','numeric' => 'Contact Number should be 10 digit number','exact_length' => 'Contact Number should be 10 digit number',));
-        // $this->form_validation->set_rules('alternate_number', 'Alternate Number', 'required|trim|numeric|exact_length[10]', array('required' => 'You must provide a %s','numeric' => 'Contact Number should be 10 digit number','exact_length' => 'Contact Number should be 10 digit number',));
-        // $this->form_validation->set_rules('email_address', 'Email Address', 'required|trim|valid_email', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('email_address1', 'Alternate Email Address', 'required|trim|valid_email', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('street', 'Street', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('state', 'State', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('city', 'City', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('pincode', 'Pincode', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('gst_no', 'GST No', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('dob', 'DOB', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('industry', 'Industry', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('invoice_no', 'Invoice Number', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('lead_source', 'Lead Source', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('legal_remarks', 'Legal Remark', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('accounts_remarks', 'Account Remark', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('company_name', 'Company Name', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('deal_amount', 'Deal Amount', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('amount_received', 'Amount Received', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('outstanding', 'Outstanding', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('tcs', 'TCS', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('govt_fees', 'Govt. Fees', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('associate_fees', 'Associate fees', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('net_income', 'Net Income', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('gst_amount', 'GST Amount', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('outstanding_followup_date', 'Outstanding followup date', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('primary_caller', 'Primary Caller', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('secondary_caller', 'Secondary Caller', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('invoice_type', 'Invoice Type', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('invoice_status', 'Invoice Status', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('invoice_name', 'Invoice Name', 'required|trim|callback_alpha_dash_space', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('govt_fee', 'GOVT Fee', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('professional_fees', 'Professional Fees', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('drafting_proceeding_fees', 'Drafting / Proceeding Fees', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('drafting_proceeding_professional_fees', 'Drafting / Proceeding / Professional Fees', 'required|trim', array('required' => 'You must provide a %s',));
-        // $this->form_validation->set_rules('total_professional_amount', 'Total Professional Amount', 'required|trim', array('required' => 'You must provide a %s',));
+       $round_off = $this->input->post('round_off');
+       $round_off = $this->input->post('round_off');
+       echo '<pre>'; print_r($_POST); exit;
+        $this->form_validation->set_rules('sale_date', 'Sales', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('client_name', 'Client Name', 'required|trim|callback_alpha_dash_space', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('deal_id', 'Deal Id', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('mobile_1', 'Mobile No. 1', 'required|trim|numeric|exact_length[10]', array('required' => 'You must provide a %s','numeric' => 'Contact Number should be 10 digit number','exact_length' => 'Contact Number should be 10 digit number',));
+        $this->form_validation->set_rules('mobile_2', 'Mobile No. 2', 'required|trim|numeric|exact_length[10]', array('required' => 'You must provide a %s','numeric' => 'Contact Number should be 10 digit number','exact_length' => 'Contact Number should be 10 digit number',));
+        $this->form_validation->set_rules('alternate_number', 'Alternate Number', 'required|trim|numeric|exact_length[10]', array('required' => 'You must provide a %s','numeric' => 'Contact Number should be 10 digit number','exact_length' => 'Contact Number should be 10 digit number',));
+        $this->form_validation->set_rules('email_address', 'Email Address', 'required|trim|valid_email', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('email_address1', 'Alternate Email Address', 'required|trim|valid_email', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('street', 'Street', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('state', 'State', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('city', 'City', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('pincode', 'Pincode', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('gst_no', 'GST No', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('dob', 'DOB', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('industry', 'Industry', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('invoice_no', 'Invoice Number', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('lead_source', 'Lead Source', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('legal_remarks', 'Legal Remark', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('accounts_remarks', 'Account Remark', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('company_name', 'Company Name', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('deal_amount', 'Deal Amount', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('amount_received', 'Amount Received', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('outstanding', 'Outstanding', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('tcs', 'TCS', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('govt_fees', 'Govt. Fees', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('associate_fees', 'Associate fees', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('net_income', 'Net Income', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('gst_amount', 'GST Amount', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('outstanding_followup_date', 'Outstanding followup date', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('primary_caller', 'Primary Caller', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('secondary_caller', 'Secondary Caller', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('invoice_type', 'Invoice Type', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('invoice_status', 'Invoice Status', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('invoice_name', 'Invoice Name', 'required|trim|callback_alpha_dash_space', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('govt_fee', 'GOVT Fee', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('professional_fees', 'Professional Fees', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('drafting_proceeding_fees', 'Drafting / Proceeding Fees', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('drafting_proceeding_professional_fees', 'Drafting / Proceeding / Professional Fees', 'required|trim', array('required' => 'You must provide a %s',));
+        $this->form_validation->set_rules('total_professional_amount', 'Total Professional Amount', 'required|trim', array('required' => 'You must provide a %s',));
 
-        // // if($state==22){
-        // //     $this->form_validation->set_rules('cgst', 'CGST', 'required|trim', array('required' => 'You must provide a %s',));
-        // //     $this->form_validation->set_rules('sgst', 'SGST', 'required|trim', array('required' => 'You must provide a %s',));
-        // //     $this->form_validation->set_rules('igst', 'IGST', 'trim', array('required' => 'You must provide a %s',));
-        // // }else{
-        // //     $this->form_validation->set_rules('cgst', 'CGST', 'trim', array('required' => 'You must provide a %s',));
-        // //     $this->form_validation->set_rules('sgst', 'SGST', 'trim', array('required' => 'You must provide a %s',));
-        // //     $this->form_validation->set_rules('igst', 'IGST', 'required|trim', array('required' => 'You must provide a %s',));
-        // // }
-        // $this->form_validation->set_rules('round_off', 'Round Off', 'required|trim', array('required' => 'You must provide a %s',));
-        // if ($this->form_validation->run() == false) {
-        //     $response['status'] = 'failure';
-        //     $response['error'] = array(
-        //         'sale_date' => strip_tags(form_error('sale_date')),
-        //         'client_name' => strip_tags(form_error('client_name')),
-        //         'deal_id' => strip_tags(form_error('deal_id')),
-        //         'mobile_1' => strip_tags(form_error('mobile_1')),
-        //         'mobile_2' => strip_tags(form_error('mobile_2')),
-        //         'alternate_number' => strip_tags(form_error('alternate_number')),
-        //         'email_address' => strip_tags(form_error('email_address')),
-        //         'email_address1' => strip_tags(form_error('email_address1')),
-        //         'street' => strip_tags(form_error('street')),
-        //         'state' => strip_tags(form_error('state')),
-        //         'city' => strip_tags(form_error('city')),
-        //         'pincode' => strip_tags(form_error('pincode')),
-        //         'gst_no' => strip_tags(form_error('gst_no')),
-        //         'dob' => strip_tags(form_error('dob')),
-        //         'industry' => strip_tags(form_error('industry')),
-        //         'invoice_no' => strip_tags(form_error('invoice_no')),
-        //         'lead_source' => strip_tags(form_error('lead_source')),
-        //         'legal_remarks' => strip_tags(form_error('legal_remarks')),
-        //         'accounts_remarks' => strip_tags(form_error('accounts_remarks')),
-        //         'company_name' => strip_tags(form_error('company_name')),
-        //         'deal_amount' => strip_tags(form_error('deal_amount')),
-        //         'amount_received' => strip_tags(form_error('amount_received')),
-        //         'outstanding' => strip_tags(form_error('outstanding')),
-        //         'tcs' => strip_tags(form_error('tcs')),
-        //         'govt_fees' => strip_tags(form_error('govt_fees')),
-        //         'associate_fees' => strip_tags(form_error('associate_fees')),
-        //         'net_income' => strip_tags(form_error('net_income')),
-        //         'gst_amount' => strip_tags(form_error('gst_amount')),
-        //         'outstanding_followup_date' => strip_tags(form_error('outstanding_followup_date')),
-        //         'primary_caller' => strip_tags(form_error('primary_caller')),
-        //         'secondary_caller' => strip_tags(form_error('secondary_caller')),
-        //         'payment_mode' => strip_tags(form_error('payment_mode')),
-        //         'invoice_type' => strip_tags(form_error('invoice_type')),
-        //         'invoice_status' => strip_tags(form_error('invoice_status')),
-        //         'invoice_name' => strip_tags(form_error('invoice_name')),
-        //         'govt_fee' => strip_tags(form_error('govt_fee')),
-        //         'professional_fees' => strip_tags(form_error('professional_fees')),
-        //         'drafting_proceeding_fees' => strip_tags(form_error('drafting_proceeding_fees')),
-        //         'drafting_proceeding_professional_fees' => strip_tags(form_error('drafting_proceeding_professional_fees')),
-        //         'total_professional_amount' => strip_tags(form_error('total_professional_amount')),
-        //         // 'cgst' => strip_tags(form_error('cgst')),
-        //         // 'sgst' => strip_tags(form_error('sgst')),
-        //         // 'igst' => strip_tags(form_error('igst')),
-        //         'round_off' => strip_tags(form_error('round_off')),  
-        //     );
+        // if($state==22){
+        //     $this->form_validation->set_rules('cgst', 'CGST', 'required|trim', array('required' => 'You must provide a %s',));
+        //     $this->form_validation->set_rules('sgst', 'SGST', 'required|trim', array('required' => 'You must provide a %s',));
+        //     $this->form_validation->set_rules('igst', 'IGST', 'trim', array('required' => 'You must provide a %s',));
         // }else{
+        //     $this->form_validation->set_rules('cgst', 'CGST', 'trim', array('required' => 'You must provide a %s',));
+        //     $this->form_validation->set_rules('sgst', 'SGST', 'trim', array('required' => 'You must provide a %s',));
+        //     $this->form_validation->set_rules('igst', 'IGST', 'required|trim', array('required' => 'You must provide a %s',));
+        // }
+        $this->form_validation->set_rules('round_off', 'Round Off', 'required|trim', array('required' => 'You must provide a %s',));
+        if ($this->form_validation->run() == false) {
+            $response['status'] = 'failure';
+            $response['error'] = array(
+                'sale_date' => strip_tags(form_error('sale_date')),
+                'client_name' => strip_tags(form_error('client_name')),
+                'deal_id' => strip_tags(form_error('deal_id')),
+                'mobile_1' => strip_tags(form_error('mobile_1')),
+                'mobile_2' => strip_tags(form_error('mobile_2')),
+                'alternate_number' => strip_tags(form_error('alternate_number')),
+                'email_address' => strip_tags(form_error('email_address')),
+                'email_address1' => strip_tags(form_error('email_address1')),
+                'street' => strip_tags(form_error('street')),
+                'state' => strip_tags(form_error('state')),
+                'city' => strip_tags(form_error('city')),
+                'pincode' => strip_tags(form_error('pincode')),
+                'gst_no' => strip_tags(form_error('gst_no')),
+                'dob' => strip_tags(form_error('dob')),
+                'industry' => strip_tags(form_error('industry')),
+                'invoice_no' => strip_tags(form_error('invoice_no')),
+                'lead_source' => strip_tags(form_error('lead_source')),
+                'legal_remarks' => strip_tags(form_error('legal_remarks')),
+                'accounts_remarks' => strip_tags(form_error('accounts_remarks')),
+                'company_name' => strip_tags(form_error('company_name')),
+                'deal_amount' => strip_tags(form_error('deal_amount')),
+                'amount_received' => strip_tags(form_error('amount_received')),
+                'outstanding' => strip_tags(form_error('outstanding')),
+                'tcs' => strip_tags(form_error('tcs')),
+                'govt_fees' => strip_tags(form_error('govt_fees')),
+                'associate_fees' => strip_tags(form_error('associate_fees')),
+                'net_income' => strip_tags(form_error('net_income')),
+                'gst_amount' => strip_tags(form_error('gst_amount')),
+                'outstanding_followup_date' => strip_tags(form_error('outstanding_followup_date')),
+                'primary_caller' => strip_tags(form_error('primary_caller')),
+                'secondary_caller' => strip_tags(form_error('secondary_caller')),
+                'payment_mode' => strip_tags(form_error('payment_mode')),
+                'invoice_type' => strip_tags(form_error('invoice_type')),
+                'invoice_status' => strip_tags(form_error('invoice_status')),
+                'invoice_name' => strip_tags(form_error('invoice_name')),
+                'govt_fee' => strip_tags(form_error('govt_fee')),
+                'professional_fees' => strip_tags(form_error('professional_fees')),
+                'drafting_proceeding_fees' => strip_tags(form_error('drafting_proceeding_fees')),
+                'drafting_proceeding_professional_fees' => strip_tags(form_error('drafting_proceeding_professional_fees')),
+                'total_professional_amount' => strip_tags(form_error('total_professional_amount')),
+                // 'cgst' => strip_tags(form_error('cgst')),
+                // 'sgst' => strip_tags(form_error('sgst')),
+                // 'igst' => strip_tags(form_error('igst')),
+                'round_off' => strip_tags(form_error('round_off')),  
+            );
+        }else{
             $curl_data = array(
                     'sale_date'=>$sale_date,
                     'client_name'=>$client_name,
@@ -2034,9 +2028,9 @@ class Sales extends CI_Controller
                     'igst'=>$igst,
                     'round_off'=>$round_off,
                 );
-            echo '<pre>'; print_r($curl_data); exit;
+            // echo '<pre>'; print_r($curl_data); exit;
                $this->model->updateData('sales',$curl_data,array('id'=>$id));
-        // }
+        }
 
     }
     
