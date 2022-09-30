@@ -200,8 +200,8 @@ class Sales extends CI_Controller
       
        }
       
-       // echo "<pre>";
-       // print_r($totalData);
+       echo "<pre>";
+       print_r($totalData);
       die;
         //$filename = "tutsmake". date("Y-m-d-H-i-s").".csv";
         $filename=base_url()."uploads/invoice/legal_invoice.csv";
@@ -236,15 +236,15 @@ class Sales extends CI_Controller
 
             $invoice = '<span><a href="'.base_url().'Sales/print_sales1?id='.base64_encode($data_row['id']).'" target="_blank">
             <i class="glyphicon glyphicon-download-alt invoice_view" aria-hidden="true" 
-             ></i> </a></span>&nbsp;&nbsp;';
+             ></i> </a></span>&nbsp;<br><br>';
 
-            $delete = "<span><a href='#' onclick='delete_sales_report(this," . $data_row['id'] . ")'><i class='glyphicon glyphicon-trash'></i></a></span>";
-            
+            $delete="<span><a href='#' onclick='delete_sales_report(this," . $data_row['id'] . ")' ><i class='glyphicon glyphicon-trash'></i> </a></span>&nbsp;&nbsp;";
+           
             $services='<span><a href="javascript:void(0);" class="edit_service_data" id="'.$data_row['id'].'"><i class="" ></i>'.$data_row['serviceid'].'</a></span>&nbsp;&nbsp;';
                
-            $image_documents='<span><a href="javascript:void(0);" class="edit_image_document" id="'.$data_row['id'].'"><i class="" ></i>'.$data_row['image_url'].'</a></span>&nbsp;&nbsp;';
+            $image_documents='<span><a href="'.base_url()."Sales/doc_gallery?id=".base64_encode($data_row['id']).'" id="'.$data_row['id'].'"><i class="glyphicon glyphicon-th-large" ></i></a></span>&nbsp;&nbsp;';
             $nestedData=array();
-                $nestedData[] =  $edit . $invoice . $delete;
+                $nestedData[] =  $edit . $invoice . $delete . $image_documents;
                 $nestedData[] = ++$category_details_key;
                 $nestedData[] = $data_row['company_name'];
                 $nestedData[] = $data_row['sale_date'];
@@ -253,7 +253,6 @@ class Sales extends CI_Controller
                 $nestedData[] = $data_row['subserviceid'];
                 $nestedData[] = $data_row['mobile_1'].', '.$data_row['mobile_2'].', '.$data_row['alternate_number'];
                 $nestedData[] = $data_row['email_address'].', '.$data_row['alternate_email'];
-                $nestedData[] = $image_documents;
                 $nestedData[] = $data_row['gst_no'];
                 $nestedData[] = $data_row['deal_id'];
                 $nestedData[] = $data_row['invoice_number'];
@@ -304,7 +303,17 @@ class Sales extends CI_Controller
         echo json_encode($output);    
     }
     
-
+  public function doc_gallery()
+    {
+        if ($this->role_id == 1 || $this->role_id == 3); // grant access
+        else redirect('dashboard');
+        $sales_id=base64_decode($_GET['id']);
+        $get_doc_list = $this->model->selectWhereData('sales',array('id'=>$sales_id),array('image_url'),false);
+        $data['doc_list']=explode(',',$get_doc_list[0]['image_url']); 
+       
+        $this->load->view('doc_gallery',$data);
+       
+    }
     public function get_brand_details()
     {
          $id = $this->input->post('sales_id');

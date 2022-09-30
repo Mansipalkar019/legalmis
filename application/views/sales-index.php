@@ -58,7 +58,6 @@
                            <th>Sub Service</th>
                            <th>Contact No</th>
                            <th>Email</th>
-                           <th>Documents</th>
                            <th>Gst No</th>
                            <th>Deal Id</th>
                            <th>Invoice Number</th>
