@@ -75,7 +75,7 @@ class Sales extends CI_Controller
        // load excel library
        $this->load->library('excel');
        $totalData=$this->supermodel->download_salesrecord($from_date,$to_date);  
-      
+      // echo '<pre>'; print_r($totalData); exit;
        $objPHPExcel = new PHPExcel();
        $objPHPExcel->setActiveSheetIndex(0);
        // set Header
@@ -125,22 +125,24 @@ class Sales extends CI_Controller
          
            $service_id=explode(',',$services[0]['serviceid']);
            $service_name=explode(',',$services[0]['servicename']);
+           
            foreach($service_id as $service_key => $service_id_row)
            {
-                $totalData[$totalData_key]['subservice'][] = $this->supermodel->sale_subservice($totalData_row['id'],$service_id_row);  
+                $totalData[$totalData_key]['subservice'][] = $this->supermodel->sale_subservice($totalData_row['id'],$service_id_row);
             } 
            foreach($totalData[$totalData_key]['subservice'] as $subservices_key => $subservices_row)
-           {    
-                 foreach($subservices_row as $subservicekey => $subservicerow)
+           {               
+                foreach($subservices_row as $subservice_key => $subservicerow)
                 {
-                    //print_r($subservicerow);
                    if($subservicerow['sales_id'] == $totalData_row['id'])
                    {
-                    if(in_array($subservicerow['subserviceid'],$service_id))
-                    {
-                        $totalData[$totalData_key]['servicesubservice'][]=$service_name[$subservicekey].'('.$subservicerow['subservicename'].')';
-                        $totalData[$totalData_key]['servicesubservices'] =implode(",",$totalData[$totalData_key]['servicesubservice']);
-                    }     
+                        if(in_array($subservicerow['servicesid'],$service_id))
+                        {
+                            $totalData[$totalData_key]['servicesubservice'][]=$service_name[$subservices_key].'('.$subservicerow['subservicename'].')';
+                         
+                            $totalData[$totalData_key]['servicesubservices'] =implode(",",$totalData[$totalData_key]['servicesubservice']);
+
+                     }     
                    }
                 }
            }
@@ -158,8 +160,7 @@ class Sales extends CI_Controller
                         $totalData[$totalData_key]['brand_class_name'][]=$brand_name[$classname_key].'('.$classname_row['class_name'].')';
                         $totalData[$totalData_key]['brand_class'] =implode(",",$totalData[$totalData_key]['brand_class_name']);
                     }                  
-                }
-               
+                }               
            } 
 
            $objPHPExcel->getActiveSheet()->SetCellValue('A1' . $rowCount, $i);
@@ -200,16 +201,32 @@ class Sales extends CI_Controller
       
        }
       
-       echo "<pre>";
-       print_r($totalData);
-      die;
-        //$filename = "tutsmake". date("Y-m-d-H-i-s").".csv";
-        $filename=base_url()."uploads/invoice/legal_invoice.csv";
-		header('Content-Type: application/vnd.ms-excel'); 
-		header('Content-Disposition: attachment;filename="'.$filename.'"');
-		header('Cache-Control: max-age=0'); 
-		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');  
-		$objWriter->save('php://output'); 
+      
+  //       //$filename = "tutsmake". date("Y-m-d-H-i-s").".csv";
+  //       $filename=base_url()."uploads/invoice/legal_invoice.csv";
+		// header('Content-Type: application/vnd.ms-excel'); 
+		// header('Content-Disposition: attachment;filename="'.$filename.'"');
+		// header('Cache-Control: max-age=0'); 
+		// $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');  
+		// $objWriter->save('php://output'); 
+        // create the writer
+        $filename = FCPATH . "uploads/invoice/legal_invoice.xls";
+        // $filename1 = base_url()."uploads/report_excel/".$date."_"."jmd_cash_data".".xls";
+
+                                header("Pragma: public");
+                                header("Expires: 0");
+                                header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+                                header("Content-Type: application/force-download");
+                                header("Content-Type: application/octet-stream");
+                                header("Content-Type: application/download");
+                                header("Content-Disposition: attachment;filename=$filename");
+                                header("Content-Transfer-Encoding: binary ");
+                            $object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel2007');
+
+                            ob_get_clean();
+                            $object_writer->save($filename);
+                            $response['url'] = base_url()."uploads/invoice/legal_invoice.xls";
+                            echo json_encode($response,true);
     }
 
     public function getsalesrecord()
