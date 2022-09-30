@@ -723,6 +723,12 @@
          dataType: "json",
          data: {service_id: service_id},
          success: function( response ) {  
+             if(response.html){
+               $("#sub_services").html(response.html);
+               $('#sub_services').trigger('change.select2');
+            }else{
+               $('#sub_services').select2('destroy');
+            }
          var html11="";
          var service_id_1 = response.service_details.id;
          if(response.service_details.brand_name == "Yes" && response.service_details.class_name == "NA")
@@ -785,10 +791,7 @@
             });
          
             $('.tokenizer1').trigger('change.select2');         
-            if(response.html != ""){
-               $("#sub_services").html(response.html);
-               $('#sub_services').trigger('change.select2');
-            }
+
          }
          });
          });

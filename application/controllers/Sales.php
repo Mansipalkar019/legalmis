@@ -2000,7 +2000,7 @@ class Sales extends CI_Controller
                     'igst'=>$igst,
                     'round_off'=>$round_off,
                 );
-            // echo '<pre>'; print_r($curl_data); exit;
+            echo '<pre>'; print_r($curl_data); exit;
                $this->model->updateData('sales',$curl_data,array('id'=>$id));
         // }
 

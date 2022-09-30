@@ -682,3 +682,5 @@ ERROR - 2022-09-29 17:23:29 --> Severity: Warning --> in_array() expects paramet
 ERROR - 2022-09-29 17:23:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 388
 ERROR - 2022-09-29 17:23:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 388
 ERROR - 2022-09-29 17:23:29 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given C:\xampp\htdocs\legalmis\application\views\update_sales.php 388
+ERROR - 2022-09-29 18:17:33 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 532
+ERROR - 2022-09-29 18:17:38 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) C:\xampp\htdocs\legalmis\application\controllers\Sales.php 532
