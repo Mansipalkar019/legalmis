@@ -335,4 +335,49 @@ $("#upload_excel_form").submit(function(e) {
     });
     
 
- 
+ $("#update_sale_deal_form").submit(function(e) {
+   e.preventDefault();
+   var formData = new FormData($("#update_sale_deal_form")[0]);
+   var attributeForm = $(this);
+   jQuery.ajax({
+       dataType: "json",
+       type: "POST",
+       url: attributeForm.attr("action"),
+       data: formData,
+       cache: false,
+       processData: false,
+       contentType: false,
+       mimeType: "multipart/form-data",
+       beforeSend: function() {
+           //document.getElementById('loader').style.visibility = "visible";
+           // $("#loader").fadeIn("slow");
+       },
+       success: function(response) {
+         if (response.status == 'success') {
+            //alert('inserted successfully');
+            swal({
+             title: "success",
+             text: response.status.msg,
+             icon: "success",
+             dangerMode: true,
+             timer: 1500
+          });
+          window.location.replace(bases_url+'Sales');
+           } else if (response.status == 'failure') {
+            error_msg(response.error);
+            //alert('inserted Unsuccessfully');
+            swal({
+             title: "Warning",
+             text: response.error.msg,
+             icon: "warning",
+             dangerMode: true,
+             timer: 1500
+          });
+           }  else {
+               window.location.replace(response["url"]);
+           }
+       },
+       error: function(error, message) {},
+   });
+   return false;
+});
