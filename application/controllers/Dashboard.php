@@ -7,7 +7,12 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         date_default_timezone_set('Asia/Kolkata');
-       if (!$this->session->has_userdata('user_id')) redirect('');
+       if ($this->session->userdata('role_id') == 3){
+        redirect('AddBackendUsers');
+       }
+       elseif($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2){
+        redirect('dashboard');
+       }
     }
 
     public function index()

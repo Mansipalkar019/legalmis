@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'https://192.168.0.55/legalmis/';
-$config['base_url'] = 'http://localhost/legalmis/';
+$config['base_url'] = 'http://localhost/legalmis';
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -67,7 +67,7 @@
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<span class="caret"></span></a>
           <ul class="dropdown-menu">
-          <li><a href="<?= site_url('sales/add-deal') ?>">Add Users</a></li>
+          <li><a href="<?= site_url('AddBackendUsers') ?>">Add Users</a></li>
           <li><a href="<?= site_url('sales') ?>">Assign Services</a></li>
           </ul>
         </li>

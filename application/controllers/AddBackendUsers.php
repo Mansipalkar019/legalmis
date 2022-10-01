@@ -10,12 +10,14 @@ class AddBackendUsers extends CI_Controller
         date_default_timezone_set('Asia/Kolkata');
         $this->load->model('model');
         $this->load->model('supermodel');
-        if (!$this->session->has_userdata('user_id')) redirect('');
-
-        $role_id = $this->session->userdata('role_id');
-        $user_id = $this->session->userdata('user_id');
-        if ($role_id == 1 || $role_id == 3); // grant access
-        redirect('');
+        if ($this->session->userdata('role_id') == 3){
+            redirect(base_url()."AddBackendUsers");
+            return false;
+           }
+           elseif($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2){
+            redirect(base_url()."dashboard");
+            return false;
+        }
     }
 
     public function index()

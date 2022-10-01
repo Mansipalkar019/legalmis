@@ -74,3 +74,28 @@ ERROR - 2022-10-01 16:32:17 --> Severity: Notice --> Trying to access array offs
 ERROR - 2022-10-01 16:32:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\legalmis\application\controllers\Welcome.php 49
 ERROR - 2022-10-01 16:32:17 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\legalmis\system\core\Exceptions.php:272) C:\xampp\htdocs\legalmis\system\helpers\url_helper.php 565
 ERROR - 2022-10-01 16:32:30 --> 404 Page Not Found: BackendUsers/index
+ERROR - 2022-10-01 17:12:33 --> Severity: Notice --> Undefined variable: payment_mode C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 361
+ERROR - 2022-10-01 17:12:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 361
+ERROR - 2022-10-01 17:12:33 --> Severity: Notice --> Undefined variable: invoice_type C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 375
+ERROR - 2022-10-01 17:12:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 375
+ERROR - 2022-10-01 17:12:33 --> Severity: Notice --> Undefined variable: invoice_status C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 389
+ERROR - 2022-10-01 17:12:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 389
+ERROR - 2022-10-01 17:12:33 --> Severity: Notice --> Undefined variable: payment_mode C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 361
+ERROR - 2022-10-01 17:12:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 361
+ERROR - 2022-10-01 17:12:33 --> Severity: Notice --> Undefined variable: invoice_type C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 375
+ERROR - 2022-10-01 17:12:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 375
+ERROR - 2022-10-01 17:12:33 --> Severity: Notice --> Undefined variable: invoice_status C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 389
+ERROR - 2022-10-01 17:12:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 389
+ERROR - 2022-10-01 17:13:50 --> Severity: Notice --> Undefined variable: payment_mode C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 361
+ERROR - 2022-10-01 17:13:50 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 361
+ERROR - 2022-10-01 17:13:50 --> Severity: Notice --> Undefined variable: invoice_type C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 375
+ERROR - 2022-10-01 17:13:50 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 375
+ERROR - 2022-10-01 17:13:50 --> Severity: Notice --> Undefined variable: invoice_status C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 389
+ERROR - 2022-10-01 17:13:50 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\legalmis\application\views\addbackendusers.php 389
+ERROR - 2022-10-01 17:27:10 --> 404 Page Not Found: Wwwgooglecom/index
+ERROR - 2022-10-01 17:27:16 --> 404 Page Not Found: Wwwgooglecom/index
+ERROR - 2022-10-01 17:27:17 --> 404 Page Not Found: Wwwgooglecom/index
+ERROR - 2022-10-01 17:27:17 --> 404 Page Not Found: Wwwgooglecom/index
+ERROR - 2022-10-01 17:27:18 --> 404 Page Not Found: Wwwgooglecom/index
+ERROR - 2022-10-01 17:27:20 --> 404 Page Not Found: Wwwgooglecom/index
+ERROR - 2022-10-01 17:27:24 --> 404 Page Not Found: Wwwgooglecom/index
