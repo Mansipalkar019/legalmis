@@ -13,7 +13,9 @@ class customerexecutive extends CI_Controller
         if (!$this->session->has_userdata('user_id')) redirect('');
 
         $this->role_id = intval($this->encryption->decrypt($this->session->userdata('role_id')));
-        if ($this->role_id != 1) redirect(''); // grant access
+        $this->user_id = intval($this->encryption->decrypt($this->session->userdata('user_id')));
+        if ($this->role_id == 1 || $this->role_id == 3); // grant access
+        else redirect('');
     }
 
    

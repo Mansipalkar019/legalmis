@@ -57,6 +57,13 @@ class Masters extends CI_Controller
         
     }
 
+    public function roles()
+    {
+        $data['roles']=$this->model->getAllData('roles');
+        $this->load->view('services/roles',$data);
+        
+    }
+
     public function getallservices()
     {
        
@@ -499,6 +506,135 @@ class Masters extends CI_Controller
          }
          echo json_encode($data);
      }
+
+     public function add_role()
+     {
+         $jsonObj = $_POST['jsonObj'];
+         $array_data = json_decode($jsonObj, true);
+         $array_entity=$array_data['product'];
+         if (isset($array_entity) && !empty($array_entity)) {
+             $user_name = $array_entity['user_name'];
+             $password = $this->encryption->encrypt($array_entity['password']);
+            
+             $roles = $array_entity['roles'];
+             $role_name= $this->model->getData("roles", array('id' => $roles,'status' => '1'));
+             $service_name_exist = $this->model->getData("users", array('roles_name' => $user_name,'status' => '1'));
+             if(isset($service_name_exist) && !empty($service_name_exist))
+             {
+                 $data['status'] = '0';
+                 $data['msg'] = 'User Name already Exist.';
+             }else{
+                 $service_id = $this->model->insertData('users', array('username' => $user_name,'password'=>$password,'roles_name'=>$role_name[0]['roles'],'roles_id'=>$roles,'status'=>'1'));
+                 if($service_id  > 0)
+                 {
+                     $data['status'] = '1';
+                     $data['msg'] = 'New User Name has been added successfully.';
+                 }else{
+                     $data['status'] = '0';
+                     $data['msg'] = 'Something went wrong while submitting User Name.';  
+                 }
+             }
+         }else{
+                 $data['status'] = '0';
+                 $data['msg'] = 'Invalid User Name';
+         }
+         echo json_encode($data);
+     }
+
+     public function getallroles()
+     {
+        $data[] = json_encode($_POST);
+        $totalData=  $this->model->getAllData('users');
+       
+        // echo '<pre>'; print_r($totalData); exit;
+        $sql="SELECT * FROM users WHERE status='1'";
+        if(!empty($data['search']['value']))
+        {
+             $sql.="WHERE users.username LIKE '%".$_POST['search']['value']."%'";
+        }
+      
+        $totalFiltered=$this->model->count_by_query($sql);
+        $sql.= " ORDER BY users.user_id " . $_POST['order'][0]['dir'] . " LIMIT " . $_POST['start'] . " ," . $_POST['length'] . " ";
+        $category_details = $this->model->getSqlData($sql);
+        $data_array=array();
+        foreach($category_details as $category_details_key => $category_details_row)
+        {
+         $nestedData=array();
+         $nestedData[]=++$category_details_key;
+         $nestedData[]=$category_details_row['roles_name'];
+         $nestedData[]=$category_details_row['username'];
+         $edit = '<span><a href="javascript:void(0);" >
+         <i class="glyphicon glyphicon-pencil a_category_view" aria-hidden="true" data-toggle="modal"
+         data-target="#roleModal" id="'.$category_details_row['user_id'].'"></i> </a></span>&nbsp;&nbsp;';
+         $delete = "<span><a href='#' onclick='delete_role(this," . $category_details_row['user_id'] . ")'><i class='glyphicon glyphicon-trash'></i></a></span>";
+         $nestedData[] =  $edit . $delete;
+         $data_array[] = $nestedData;
+        }
+        $json_data = array("draw" => intval($_POST['draw']), "recordsTotal" => intval($totalData), "recordsFiltered" => intval($totalFiltered), "data" => $data_array);
+     //    echo "<pre>";
+     //    print_r($json_data);die();
+        echo json_encode($json_data);
+     }
+
+     public function get_all_roles()
+     {
+        $service_id=$_POST['id'];
+        $totalData=  $this->model->selectWhereData('users',array('user_id'=>$service_id),array('user_id','username','password','roles_name','roles_id'));
+        $totalData['decryptpassword'] = $this->encryption->decrypt($totalData['password']);
+        echo json_encode($totalData);
+     }
+
+     public function delete_roles()
+     {
+       $jsonObj=$_POST['jsonObj'];
+       $array_data=json_decode($jsonObj,true);
+       $array_entity=$array_data['product'];
+       if(isset($array_entity) && !empty($array_entity))
+       {
+         $service_id=$array_entity['role_id'];
+         $this->model->updateData('users',array('status'=>'0'),array('user_id'=>$service_id));
+         $data['status'] = '1';
+         $data['msg'] = 'Role has been deleted successfully.';
+       }
+       else{
+         $data['status'] = '0';
+         $data['msg'] = 'Invalid Role details.';
+       }
+       echo json_encode($data);
+     }
+
+
+     public function Update_roles()
+     {
+         $jsonObj = $_POST['jsonObj'];
+         $array_data = json_decode($jsonObj, true);
+         $array_entity=$array_data['product'];
+         $service_name_exist = $this->model->getData("users", array('username =' => $array_entity['user_name'], 'status' => '1'));
+       
+        //  if(isset($service_name_exist) && !empty($service_name_exist))
+        //  {
+        //     $data['status'] = '0';
+        //     $data['msg'] = 'Role Name already Exist';
+        //  }else{
+            if (isset($array_entity) && !empty($array_entity)) {
+                $user_name = $array_entity['user_name'];
+                $password = $array_entity['password'];
+                $user_id = $array_entity['user_id'];
+                $roles = $array_entity['roles1'];
+                $role_name= $this->model->getData("roles", array('id' => $roles,'status' => '1'));
+                $this->model->updateData('users',array('username'=>$user_name,'password'=>$password,'roles_name'=>$role_name[0]['roles'],'roles_id'=>$roles), array('user_id' => $user_id));
+                $data['status'] = '1';
+                $data['msg'] = 'Role has been updated successfully.';
+                  
+            }else{
+                    $data['status'] = '0';
+                    $data['msg'] = 'Failed to Update Role';
+            }
+         //}
+       
+         echo json_encode($data);
+     }
+ 
  
      public function Update_Doclist()
      {

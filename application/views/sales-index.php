@@ -170,7 +170,7 @@ var simpletable = $('#doc_list_datatable').DataTable({
     'serverMethod': 'post',
     'language': {
         'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>',
-        searchPlaceholder: "Enter Deal Id"
+        searchPlaceholder: ""
         
     },
    'ajax': {
@@ -204,8 +204,6 @@ $('#btn-search-by-date').click(function () { //button filter event click
     'serverMethod': 'post',
     'language': {
         'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>',
-        searchPlaceholder: "Enter Deal Id"
-        
     },
    'ajax': {
        'url': "<?= base_url() ?>Sales/getsalesrecord1",
@@ -259,7 +257,7 @@ $('#modal_form').modal('show');
 				},
 				success: function(response)
 				{
-				
+               window.location.replace(response['url']);
 				}
 			});
    });

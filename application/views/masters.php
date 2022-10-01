@@ -28,7 +28,10 @@
                <li role="presentation"><a href="<?= base_url();?>Masters/invoicetype" aria-controls="invoicetype" role="tab" >Invoice Type</a></li>
                <li role="presentation"><a href="<?= base_url();?>Masters/invoicestatus" aria-controls="invoicestatus" role="tab" >Invoice Status</a></li>
                <li role="presentation"><a href="<?= base_url();?>Masters/cust_executive" aria-controls="cust_executive" role="tab" >Customer Executive</a></li>
-            </ul>
+               <?php if(intval($this->encryption->decrypt($this->session->userdata('role_id'))) == 1 || intval($this->encryption->decrypt($this->session->userdata('role_id'))) == 2) { ?>
+                  <li role="presentation"><a href="<?= base_url();?>Masters/Roles" aria-controls="cust_executive" role="tab" >Add Roles</a></li>
+               <?php } ?>
+              </ul>
             <!-- Tab panes -->
             <div class="tab-content tabs">
                <div role="tabpanel" class="tab-pane fade in active" id="service">
@@ -120,8 +123,9 @@
                                  <button type="submit" class="btn btn-success">Submit</button>
                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                               </div>
+                              </form>
                         </div>
-                        </form>
+                       
                      </div>
                   </div>
                </div>

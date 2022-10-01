@@ -14,10 +14,11 @@
     <!-- <script type="text/javascript" 
     src="https://code.jquery.com/jquery-3.5.1.js">
     </script> -->
-    <link rel="stylesheet" href="<?php echo base_url();?>assets_admin/lib/dropzone/dropzone.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets_admin/css/style.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets_admin/css/prism.css">
+<link rel="stylesheet" href="<?php echo base_url();?>assets_admin/lib/dropzone/dropzone.css">
+<link rel="stylesheet" href="<?php echo base_url();?>assets_admin/css/style.css">
+<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets_admin/css/prism.css">
 <!-- <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets_admin/css/chosen.css"> -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo base_url();?>assets_admin/datepicker/datepicker.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets_admin/css/simplelightbox.min.css">

@@ -1883,3 +1883,25 @@ page[size="A4"] {
   width: 21cm;
   height: 29.7cm; 
 }
+
+.sl-wrapper .sl-navigation button.sl-prev {
+  left: 20px;
+  font-size: 7rem !important;
+}
+.sl-wrapper .sl-close {
+  font-size: 5rem !important;
+}
+.sl-wrapper .sl-counter {
+  font-size: 2rem !important;
+}
+.sl-overlay {
+  background: #fff;
+  opacity: inherit !important;
+}
+.sl-wrapper .sl-navigation button.sl-next {
+  right: 20px;
+  font-size: 7rem !important;
+}
+.gallery{
+  margin-left: 30px;
+}

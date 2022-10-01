@@ -259,12 +259,13 @@ class supermodel extends CI_Model {
 
 	function download_salesrecord($from_date="",$to_date="")
     {
-        $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as servicename,GROUP_CONCAT(DISTINCT(sales_services.services_id)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename,GROUP_CONCAT(DISTINCT(sale_service_brand.brand_name)) as brandname,GROUP_CONCAT(DISTINCT(sale_service_brand.id)) as brandid');
+        $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as servicename,GROUP_CONCAT(DISTINCT(sales_services.services_id)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename,GROUP_CONCAT(DISTINCT(sale_service_brand.brand_name)) as brandname,GROUP_CONCAT(DISTINCT(sale_service_brand.id)) as brandid,customer_executive.name as cust_exec_name');
         $this->db->from('sales');
 		$this->db->join('sales_services','sales_services.sales_id=sales.id','left');
 		$this->db->join('services','services.id=sales_services.services_id','left');
         $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');	
 		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
+		$this->db->join('customer_executive','sales.primary_caller=customer_executive.id','left');
 		$this->db->join('sale_service_brand','sale_service_brand.fk_sales_id=sales.id','left');
 		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
         $this->db->where('sales.status',1);
@@ -364,6 +365,8 @@ class supermodel extends CI_Model {
 		$query=$this->db->get();
         return $query->row_array();
 	}
+
+
 }
 ?>
 

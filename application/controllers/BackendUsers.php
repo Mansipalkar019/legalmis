@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller
+class BackendUsers extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
         date_default_timezone_set('Asia/Kolkata');
-       if (!$this->session->has_userdata('user_id')) redirect('');
+        if (!$this->session->has_userdata('user_id')) redirect('');
     }
 
     public function index()

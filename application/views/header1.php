@@ -52,32 +52,13 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav ">
       <li class="active"><a href="<?= site_url('dashboard') ?>">Home</a></li>
-    
-        <?php if($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2){?>
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sales <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-          <li><a href="<?= site_url('sales/add-deal') ?>">Add Sale/Deal</a></li>
-          <li><a href="<?= site_url('sales') ?>">View all Sale/Deal</a></li>
-          </ul>
-        </li>
-        <li class="active"><a href="<?= site_url('Masters') ?>">Masters</a></li>
-       
-        <?php }elseif($this->session->userdata('role_id') == 3){?>
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-          <li><a href="<?= site_url('sales/add-deal') ?>">Add Users</a></li>
-          <li><a href="<?= site_url('sales') ?>">Assign Services</a></li>
-          </ul>
-        </li>
-        <?php } ?>
+        <li class="active"><a href="<?= site_url('Masters') ?>">Create Users</a></li>
         <li><a href="<?= site_url('dashboard/logout') ?>">Logout</a></li>
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-user"> </span><?= $this->session->userdata('username') ?></a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"> </span><?= $this->session->userdata('role_name') ?></a></li>
+      <li><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-user"></span><?= $this->encryption->decrypt($this->session->userdata('username')) ?></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span><?= $this->encryption->decrypt($this->session->userdata('role_name')) ?></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
