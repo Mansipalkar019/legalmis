@@ -410,166 +410,173 @@
                            <?php
                               $html = "";
                               foreach($sale_service_brand as $sale_service_brand_key => $sale_service_brand_row){              
-                                    echo '<div class="row"><div class="col-md-6" id="show_brand_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'.$sale_service_brand_key.'[]" id="brand_name_'.$sale_service_brand_key.'" value="'.$sale_service_brand_row['brand_name'].'" onchange="get_brand_name(this.value)"></input></div></div></div>';?>
-                                    <?php if(!empty($sale_service_brand_row['class_name'])){ echo '<div class="col-md-6" id="show_company_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><select class="form-control tokenizer class_name" multiple="multiple" 
-                                    " name="class_name_'.$sale_service_brand_key.'['.$sale_service_brand_key.'][]" id="class_name_'.$sale_service_brand_key.'" onchange="get_class_name(this.value)">';?><?php foreach($sale_service_brand_row['class_name'] as $class_name_key => $class_name_row){ echo'<option value="'.@$class_name_row.'">'.@$class_name_row.'</option>'; } ?><?='</select></div></div>';?><?php }?> <?php echo'</div>';
+                                    echo '<div class="row"><div class="col-md-6" id="show_brand_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'.$sale_service_brand_key.'[]" id="brand_name_'.$sale_service_brand_key.'" value="'.$sale_service_brand_row['brand_name'].'" onchange="get_brand_name(this.value)"> <input type="text" class="form-control" name="brand_id_'.$sale_service_brand_key.'[]" id="brand_id_'.$sale_service_brand_key.'" value="'.$sale_service_brand_row['id'].'" ></div></div></div>';?>
+                           <?php if(!empty($sale_service_brand_row['class_name'])){ echo '<div class="col-md-6" id="show_company_content_'.$sale_service_brand_key.'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><select class="form-control tokenizer class_name" multiple="multiple" 
+                              " name="class_name_'.$sale_service_brand_key.'['.$sale_service_brand_key.'][]" id="class_name_'.$sale_service_brand_key.'" onchange="get_class_name(this.value)">';?><?php foreach($sale_service_brand_row['class_name'] as $class_name_key => $class_name_row){ echo'<option value="'.@$class_name_row.'">'.@$class_name_row.'</option>'; } ?><?='</select></div></div>';?><?php }
+                                 if(!empty($sale_service_brand_row['class_name_id'])){
+                                   foreach($sale_service_brand_row['class_name_id'] as $class_name_id_key => $class_name_id_row){
+                                    echo '<input type="text" id="class_name_id" name="class_name_id_'.$sale_service_brand_key.'['.$sale_service_brand_key.'][]" value="'.$class_name_id_row.'">';
+                                   }
+                                 }
+                              ?> <?php echo'</div>';
                               }
                               ?>
                            <hr>
                            <div class="row" id="brands_display">
                            </div>
-                             <div class="row">
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Payment mode:<span class="text-danger">*</span></label>
-                        <select id="payment_mode" class="selectpicker form-control" name="payment_mode" title="select Primary Caller..." data-max-options="1" max-options-text="Only 1 selection is allowed">
-                           <option value="">Select Payment Mode:</option>
-                           <?php
-                              foreach($payment_mode as $payment_mode_key => $payment_mode_row) 
-                              {
-                                    $selected="";
-                                    if($payment_mode_row['id']== $sales_data['payment_mode']){
-                                       $selected ="selected";
-                                    }else{
-                                       $selected ="";
-                                    }
-                                 ?>
-                           <option value=<?php echo  $payment_mode_row['id'] ?> <?=$selected?>><?php echo  $payment_mode_row['name'] ?></option>
-                           <?php } ?>
-                        </select>
-                        <span class="error_msg" id="payment_mode_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Invoice Type:<span class="text-danger">*</span></label>
-                        <select id="invoice_type" class="selectpicker form-control" name="invoice_type" title="select Primary Caller..." data-max-options="1" max-options-text="Only 1 selection is allowed">
-                           <option value="">Select Invoice Type</option>
-                           <?php
-                              foreach($invoice_type as $invoice_type_key => $invoice_type_row) 
-                              {  
-                                    $selected="";
-                                    if($invoice_type_row['id']== $sales_data['invoice_type']){
-                                       $selected ="selected";
-                                    }else{
-                                       $selected ="";
-                                    }
-                                    ?>
-                           <option value=<?php echo  $invoice_type_row['id'] ?> <?=$selected?>><?php echo  $invoice_type_row['name'] ?></option>
-                           <?php } ?>
-                        </select>
-                        <span class="error_msg" id="invoice_type_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Invoice status:<span class="text-danger">*</span></label>
-                        <select id="invoice_status" class="selectpicker form-control" name="invoice_status" title="select Primary Caller..." data-max-options="1" max-options-text="Only 1 selection is allowed">
-                           <option value="">Select Invoice status</option>
-                           <?php
-                              foreach($invoice_status as $invoice_status_key => $invoice_status_row) 
-                              {
-                                    $selected="";
-                                    if($invoice_status_row['id']== $sales_data['invoice_status']){
-                                       $selected ="selected";
-                                    }else{
-                                       $selected ="";
-                                    }
-                                 ?>
-                           <option value=<?php echo  $invoice_status_row['id'] ?> <?=$selected?> ><?php echo  $invoice_status_row['name'] ?></option>
-                           <?php } ?>
-                        </select>
-                        <span class="error_msg" id="invoice_status_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Invoice Name:<span class="text-danger">*</span></label>
-                        <input type="text" name="invoice_name" id="invoice_name" class="form-control" value="<?=$sales_data['invoice_name']?>">
-                        <span class="error_msg" id="invoice_name_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Govt Fees:<span class="text-danger">*</span></label>
-                        <input type="text" name="govt_fee" id="govt_fee" value="<?=$sales_data['govt_fee']?>"
-                           class="form-control" onkeypress="return isNumber(event)">
-                        <span class="error_msg" id="govt_fee_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Professional Fees:<span class="text-danger">*</span></label>
-                        <input type="text" name="professional_fees"
-                           id="professional_fees" class="form-control total_professional_amt"  onkeypress="return isNumber(event)" value="<?=$sales_data['total_professional_amount']?>">
-                        <span class="error_msg" id="professional_fees_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Drafting / Proceeding Fees:<span class="text-danger">*</span></label>
-                        <input type="text" name="drafting_proceeding_fees" id="drafting_proceeding_fees"  value="<?=$sales_data['drafting_proceeding_fees']?>"
-                           class="form-control total_professional_amt"  onkeypress="return isNumber(event)">
-                        <span class="error_msg" id="drafting_proceeding_fees_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Drafting / Proceeding / Professional Fees:<span class="text-danger">*</span></label>
-                        <input type="text" name="drafting_proceeding_professional_fees" id="drafting_proceeding_professional_fees" 
-                           class="form-control total_professional_amt"  onkeypress="return isNumber(event)"  value="<?=$sales_data['drafting_proceeding_professional_fees']?>">
-                        <span class="error_msg" id="drafting_proceeding_professional_fees_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Total Professional Amount:<span class="text-danger">*</span></label>
-                        <input type="text" name="total_professional_amount"  id="total_professional_amount" value="<?=$sales_data['total_professional_amount']?>"
-                           class="form-control" onkeypress="return isNumber(event)" readonly>
-                        <span class="error_msg" id="total_professional_amount_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>CGST 9%:<span class="text-danger">*</span></label>
-                        <input type="text" name="cgst" id="cgst"
-                           class="form-control" onkeypress="return isNumber(event)" value="<?=$sales_data['cgst']?>">
-                        <span class="error_msg" id="cgst_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>SGST 9%:<span class="text-danger">*</span></label>
-                        <input type="text" name="sgst" id="sgst"
-                           class="form-control" onkeypress="return isNumber(event)" value="<?=$sales_data['sgst']?>">
-                        <span class="error_msg" id="sgst_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>IGST 18%:<span class="text-danger">*</span></label>
-                        <input type="text" name="igst" id="igst"
-                           class="form-control" onkeypress="return isNumber(event)" value="<?=$sales_data['igst']?>">
-                        <span class="error_msg" id="igst_error"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Round Off:<span class="text-danger">*</span></label>
-                        <input type="text" name="round_off" id="round_off"
-                           class="form-control" onkeypress="return isNumber(event)" value="<?=$sales_data['round_off']?>">
-                        <span class="error_msg" id="round_off_error"></span>
-                     </div>
-                  </div>
-               </div>
+                           <hr>
+                           <div class="row">
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Payment mode:<span class="text-danger">*</span></label>
+                                    <select id="payment_mode" class="selectpicker form-control" name="payment_mode" title="select Primary Caller..." data-max-options="1" max-options-text="Only 1 selection is allowed">
+                                       <option value="">Select Payment Mode:</option>
+                                       <?php
+                                          foreach($payment_mode as $payment_mode_key => $payment_mode_row) 
+                                          {
+                                                $selected="";
+                                                if($payment_mode_row['id']== $sales_data['payment_mode']){
+                                                   $selected ="selected";
+                                                }else{
+                                                   $selected ="";
+                                                }
+                                             ?>
+                                       <option value=<?php echo  $payment_mode_row['id'] ?> <?=$selected?>><?php echo  $payment_mode_row['name'] ?></option>
+                                       <?php } ?>
+                                    </select>
+                                    <span class="error_msg" id="payment_mode_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Invoice Type:<span class="text-danger">*</span></label>
+                                    <select id="invoice_type" class="selectpicker form-control" name="invoice_type" title="select Primary Caller..." data-max-options="1" max-options-text="Only 1 selection is allowed">
+                                       <option value="">Select Invoice Type</option>
+                                       <?php
+                                          foreach($invoice_type as $invoice_type_key => $invoice_type_row) 
+                                          {  
+                                                $selected="";
+                                                if($invoice_type_row['id']== $sales_data['invoice_type']){
+                                                   $selected ="selected";
+                                                }else{
+                                                   $selected ="";
+                                                }
+                                                ?>
+                                       <option value=<?php echo  $invoice_type_row['id'] ?> <?=$selected?>><?php echo  $invoice_type_row['name'] ?></option>
+                                       <?php } ?>
+                                    </select>
+                                    <span class="error_msg" id="invoice_type_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Invoice status:<span class="text-danger">*</span></label>
+                                    <select id="invoice_status" class="selectpicker form-control" name="invoice_status" title="select Primary Caller..." data-max-options="1" max-options-text="Only 1 selection is allowed">
+                                       <option value="">Select Invoice status</option>
+                                       <?php
+                                          foreach($invoice_status as $invoice_status_key => $invoice_status_row) 
+                                          {
+                                                $selected="";
+                                                if($invoice_status_row['id']== $sales_data['invoice_status']){
+                                                   $selected ="selected";
+                                                }else{
+                                                   $selected ="";
+                                                }
+                                             ?>
+                                       <option value=<?php echo  $invoice_status_row['id'] ?> <?=$selected?> ><?php echo  $invoice_status_row['name'] ?></option>
+                                       <?php } ?>
+                                    </select>
+                                    <span class="error_msg" id="invoice_status_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Invoice Name:<span class="text-danger">*</span></label>
+                                    <input type="text" name="invoice_name" id="invoice_name" class="form-control" value="<?=$sales_data['invoice_name']?>">
+                                    <span class="error_msg" id="invoice_name_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Govt Fees:<span class="text-danger">*</span></label>
+                                    <input type="text" name="govt_fee" id="govt_fee" value="<?=$sales_data['govt_fee']?>"
+                                       class="form-control" onkeypress="return isNumber(event)">
+                                    <span class="error_msg" id="govt_fee_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Professional Fees:<span class="text-danger">*</span></label>
+                                    <input type="text" name="professional_fees"
+                                       id="professional_fees" class="form-control total_professional_amt"  onkeypress="return isNumber(event)" value="<?=$sales_data['total_professional_amount']?>">
+                                    <span class="error_msg" id="professional_fees_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Drafting / Proceeding Fees:<span class="text-danger">*</span></label>
+                                    <input type="text" name="drafting_proceeding_fees" id="drafting_proceeding_fees"  value="<?=$sales_data['drafting_proceeding_fees']?>"
+                                       class="form-control total_professional_amt"  onkeypress="return isNumber(event)">
+                                    <span class="error_msg" id="drafting_proceeding_fees_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Drafting / Proceeding / Professional Fees:<span class="text-danger">*</span></label>
+                                    <input type="text" name="drafting_proceeding_professional_fees" id="drafting_proceeding_professional_fees" 
+                                       class="form-control total_professional_amt"  onkeypress="return isNumber(event)"  value="<?=$sales_data['drafting_proceeding_professional_fees']?>">
+                                    <span class="error_msg" id="drafting_proceeding_professional_fees_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Total Professional Amount:<span class="text-danger">*</span></label>
+                                    <input type="text" name="total_professional_amount"  id="total_professional_amount" value="<?=$sales_data['total_professional_amount']?>"
+                                       class="form-control" onkeypress="return isNumber(event)" readonly>
+                                    <span class="error_msg" id="total_professional_amount_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>CGST 9%:<span class="text-danger">*</span></label>
+                                    <input type="text" name="cgst" id="cgst"
+                                       class="form-control" onkeypress="return isNumber(event)" value="<?=$sales_data['cgst']?>">
+                                    <span class="error_msg" id="cgst_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>SGST 9%:<span class="text-danger">*</span></label>
+                                    <input type="text" name="sgst" id="sgst"
+                                       class="form-control" onkeypress="return isNumber(event)" value="<?=$sales_data['sgst']?>">
+                                    <span class="error_msg" id="sgst_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>IGST 18%:<span class="text-danger">*</span></label>
+                                    <input type="text" name="igst" id="igst"
+                                       class="form-control" onkeypress="return isNumber(event)" value="<?=$sales_data['igst']?>">
+                                    <span class="error_msg" id="igst_error"></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Round Off:<span class="text-danger">*</span></label>
+                                    <input type="text" name="round_off" id="round_off"
+                                       class="form-control" onkeypress="return isNumber(event)" value="<?=$sales_data['round_off']?>">
+                                    <span class="error_msg" id="round_off_error"></span>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                         <div class="row">
-            <div class="col-md-4" >
-               <div class="form-group"  style="margin-top: 35px;">
-                  <input type="submit" name="submit_button" id="submit_button" class="btn btn-primary" value="Save" />
-               </div>
-            </div>
-         </div>
+                        <div class="row">
+                           <div class="col-md-4" >
+                              <div class="form-group"  style="margin-top: 35px;">
+                                 <input type="submit" name="submit_button" id="submit_button" class="btn btn-primary" value="Save" />
+                              </div>
+                           </div>
+                        </div>
                         <?php echo form_close() ?>
                      </div>
                   </div>
@@ -664,48 +671,95 @@
          });
          }
          $(document).ready(function () {
-         $('.class_name').select2({
+                  $('.class_name').select2({
                      tags: true,
                      tokenSeparators: [',', ' '],
                   });
                 
                   $('.tokenizer').trigger('change.select2');
-         // var id = $('#id').val();
-         // var options = document.getElementById('services').selectedOptions;
-         // var values = Array.from(options).map(({ value }) => value);
-         // var text = Array.from(options).map(({ text }) => text);
+         var id = $('#id').val();
+         var options = document.getElementById('services').selectedOptions;
+         var values = Array.from(options).map(({ value }) => value);
+         var text = Array.from(options).map(({ text }) => text);
+          var count = values.length;
          
-         //  var count = values.length;
-         // if(count > 1)
-         // {
-         //    $.each( values, function( key, value ) {           
-         //       $('#count'+value+'').val(0);               
-         
-          // $.ajax({
-          //      url: '<?php echo base_url(); ?>Sales/get_brand_details',
-          //      type: 'post',
-          //      dataType: "json",
-          //      data: {sales_id: value},
-          //      success: function( response ) {  
-                 
-          //         var sale_service_brand = response.sale_service_brand;
-          //          console.log(sale_service_brand);
-          //           $.each( sale_service_brand, function( sale_service_brand_key, sale_service_brand_row ) {    
-          //             $('#'+'class_name_'+sale_service_brand_key).select2({
-          //            tags: true,
-          //            tokenSeparators: [',', ' '],
-          //         });
-                
-          //         $('.tokenizer').trigger('change.select2');
-          //           });
-          //         //  var service_id_1 = response.service_details.id;
-          //         //  // console.log(service_id_1);
-                  
-          //      }
-          //   });
-         //      });
+         if(count > 1)
+         {
+            $.each( values, function( key, value ) { 
+            $('#count'+value+'').val(0);            
+                $.ajax({
+                     url: '<?php echo base_url(); ?>Sales/getselectedservices_new',
+                     type: 'post',
+                     dataType: "json",
+                     data: {service_id: value},
+                     success: function( response ) {  
+                       
+                           if(response.html){
+                              $("#sub_services").html(response.html);
+                              $('#sub_services').trigger('change.select2');
+                           }else{
+                             $("#sub_services").html(" ");
+                              $('#sub_services').trigger('change.select2');
+                           }
+                           var html11="";
+                           var service_id_1 = response.service_details.id;
+                            if(response.service_details.brand_name == "Yes" && response.service_details.class_name == "NA")
+                           {
+                              html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>'; 
+                           }
+                           if(response.service_details.class_name == "Yes" && response.service_details.class_name == "Yes")
+                           {
+                               html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-4" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer " multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[0][]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>'; 
+                           }         
+                           $('#brands_display').append(html11);   
+                           $('#'+'class_name_'+service_id_1).select2({
+                                 tags: true,
+                                 tokenSeparators: [',', ' '],
+                           });
+                           $('.tokenizer').trigger('change.select2');
+                           $('#addRows_'+service_id_1+'').click(function() {
+                           var latest_count = $('#count'+service_id_1+'').val();
+                           var new_count = parseInt(latest_count) + 1;
+                           var html2 = '';             
+                           if(response.service_details.brand_name == "Yes" && response.service_details.class_name == "NA")
+                           {
+                              html2 += '<div class="row"><div id="inputnewrow_'+new_count+'"><div class="col-md-3" id="show_brand_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Brand Name For '+response.service_details.name+'<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer1" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name1_'+new_count+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div></div><button id="removeRow" type="button" class="btn btn-danger btn-sm removeRow" style="height:30px;margin-top:5px;">Remove</button></div></div></div>';    
+                           }
+                     
+                           if(response.service_details.class_name == "Yes" && response.service_details.class_name == "Yes")
+                           {
+                              html2 += '<div class="row"><div id="inputnewrow_'+new_count+'"><div class="col-md-3" id="show_brand_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Brand Name For '+response.service_details.name+'<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer1" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name1_'+new_count+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-3" id="show_company_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Class Name For '+response.service_details.name+'<span class="text-danger">* </span></label><div><select class="form-control tokenizer1" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'['+new_count+'][]" id="class_name1_'+new_count+service_id_1+'" </select></div></div></div><button id="removeRow" type="button" class="btn btn-danger btn-sm removeRow" style="height:30px;margin-top:5px;">Remove</button></div></div></div>';   
+                           }             
+                           $('#new_brands_display_'+service_id_1+'').append(html2);
+                        
+                        // $('#'+'brand_name_'+count1+service_id_1).select2({
+                        // tags: true,
+                        // tokenSeparators: [',', ' '],
+                        // });
+                        $('#count'+service_id_1+'').val(new_count);
+                           $('#'+'class_name1_'+new_count+service_id_1).select2({
+                              tags: true,
+                              tokenSeparators: [',', ' '],
+                           });         
+                     
+                           $(document).on('select2:unselect', '#services',function(e) {
+                              var data1 = e.params.data;
+                              var service_id_1 = data1.id;
+                              //   $('#brand_name_'+service_id). select2('destroy');
+                              $('#brand_name1_'+new_count+service_id_1). remove();
+                              $('#show_brand_content1_'+new_count+service_id_1).remove();
+                              $('#show_company_content1_'+new_count+service_id_1).remove();
+                              $('#addRows_'+new_count+service_id_1).remove();
+                              $('#removeRow').remove();
+                           });
+                     
+                        });
+                     },
+
+                  });
+               });
             
-         // }
+            }
          
          });
          
@@ -726,8 +780,6 @@
              if(response.html){
                $("#sub_services").html(response.html);
                $('#sub_services').trigger('change.select2');
-            }else{
-               $('#sub_services').select2('destroy');
             }
          var html11="";
          var service_id_1 = response.service_details.id;
@@ -791,26 +843,26 @@
             });
          
             $('.tokenizer1').trigger('change.select2');         
-
+         
          }
          });
          });
          
          $(document).on('click', '#removeRow', function() {
-            var latest_count = $('#count').val();
-            var new_count = parseInt(latest_count) - 1;
-            $('#count').val(new_count);
-            $(this).closest("div").remove();      
+               var latest_count = $('#count').val();
+               var new_count = parseInt(latest_count) - 1;
+               $('#count').val(new_count);
+               $(this).closest("div").remove();      
          });
          
          $(document).on('select2:unselect', '#services',function(e) {
-         var data = e.params.data;
-         var service_id = data.id
-         $('#brand_name_'+service_id). remove();
-         $('#show_brand_content_'+service_id).remove();
-         $('#show_company_content_'+service_id).remove();
-         $('#removelabel_'+service_id).remove();
-         $('#addRows_'+service_id).remove();
+               var data = e.params.data;
+               var service_id = data.id
+               $('#brand_name_'+service_id). remove();
+               $('#show_brand_content_'+service_id).remove();
+               $('#show_company_content_'+service_id).remove();
+               $('#removelabel_'+service_id).remove();
+               $('#addRows_'+service_id).remove();
          });
            
       </script>
