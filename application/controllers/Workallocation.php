@@ -24,10 +24,10 @@ class Workallocation extends CI_Controller
 
     public function add_work_allocation()
     {
-        print_r($this->input->post('servicename'));
-        $this->form_validation->set_rules('user', 'User Name', 'trim|required',array('required'=>' %s  is required'));
-        $this->form_validation->set_rules('service[]', 'Services', 'trim|required',array('required'=>'%s field is required'));
        
+        
+        $this->form_validation->set_rules('dealid', 'Deal Id', 'trim|required',array('required'=>' %s  is required'));
+      
         if($this->form_validation->run() == FALSE)
         {
             $response['status'] = 'failure';
@@ -37,24 +37,30 @@ class Workallocation extends CI_Controller
               
             );
         }else{
-            $user=$this->input->post('user');
-            $service=$this->input->post('service[]');
-            //print_r($service);die();
-            foreach($service as $service_key => $service_row)
-            {
-                $user_data=array(
-                    'user'=>$user,
-                    'service'=>$service_row,
+
+            $services=$this->input->post('servicename');
+            //print_r($services);die();
+            foreach($services as $services_key => $services_row){
+                $users[$services_row]=$this->input->post('user_name_'.$services_row);
+    
+            }
+            foreach($users as $user_key =>$user_row){
+                foreach($user_row as $user_row_key =>$user_row_rows)
+                {
+                    $user_data=array(
+                    'user'=>$user_row_rows,
+                    'service'=>$user_key,
                     'status'=>'1',
                     'created_on'=>date('Y-m-d'),
-                );
-                if($this->model->insertData('allocated_service_users',$user_data))
-                {
-                    $response['status']='success';
-                    $response['error']=array('msg' => "Service Allocated Successfully !");
-                }else{
-                    $response['status']='failure';
-                    $response['error']=array('msg' => "Service Allocated UnSuccessfully !"); 
+                    );
+                    if($this->model->insertData('allocated_service_users',$user_data))
+                      {
+                          $response['status']='success';
+                          $response['error']=array('msg' => "Service Allocated Successfully !");
+                      }else{
+                          $response['status']='failure';
+                          $response['error']=array('msg' => "Service Allocated UnSuccessfully !"); 
+                      }
                 }
             }
             
