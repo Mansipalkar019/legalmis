@@ -7,26 +7,24 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         date_default_timezone_set('Asia/Kolkata');
-       if ($this->session->userdata('role_id') == 3){
-        redirect('AddBackendUsers');
-       }
-       elseif($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2){
-        redirect('dashboard');
-       }
+    //    if ($this->session->userdata('role_id') == 3){
+    //     redirect('AddBackendUsers');
+    //    }
+    //    elseif($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2){
+    //     redirect('dashboard');
+    //    }
     }
 
     public function index()
     {
-        // TODO: show dashboard components / modules / features / etc
-        $this->load->view('header', array('title' => "Dashboard | " . CRM__NAME, 'active' => "dashboard"));
+       $this->load->view('header', array('title' => "Dashboard | " . CRM__NAME, 'active' => "dashboard"));
         $this->load->view('dashboard');
         $this->load->view('footer');
     }
 
     public function logout()
 	{
-        // destroy and logout user session
-		$this->session->sess_destroy();
+     	$this->session->sess_destroy();
 		redirect('');
 	}
 }

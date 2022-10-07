@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 ini_set("memory_limit", "-1");
-class Sales extends CI_Controller
+class ViewSales extends CI_Controller
 {
     var $role_id, $user_id;
     
@@ -16,201 +16,8 @@ class Sales extends CI_Controller
     public function index()
     {
        
-        $this->load->view('sales-index');
+        $this->load->view('view_sales');
        
-    }
-
-    public function print_sales1()
-    {
-       
-        $sales_id=base64_decode($_GET['id']);
-        $getsalesrecordbyid=$this->supermodel->getsalesrecordbyid($sales_id);
-        $state=$getsalesrecordbyid['state'];
-        $getsalesrecordbyid['state']=$this->model->selectWhereData('tbl_states',array('id'=>$state),array('name'));
-        $services=explode(',',$getsalesrecordbyid['serviceid']);
-        foreach($services as $services_key =>$services_row)
-        {
-            $termcond[]=$this->model->selectWhereData('services',array('name'=>$services_row),array('terms','name'));
-        
-        }
-        $data1= array(
-            'getsalesrecordbyid'=>$getsalesrecordbyid,
-            'termcond'=>$termcond
-        );
-       
-        error_reporting(0);
-        ini_set('memory_limit', '256M');
-        ini_set("pcre.backtrack_limit", "1000000");
-        // $this->load->view('admin/stock_pdf_reports');
-        $pdfFilePath = FCPATH."uploads/invoice/legal.pdf";
-        $pdfFilePaths = base_url()."uploads/invoice/legal'".$data_row['id']."'.pdf";
-        $this->load->library('m_pdf');
-        $html = $this->load->view('printinvoice/print_sale_page1',array('data' => $data1), true);
-        $mpdf=new mPDF();
-        $mpdf->showImageErrors = true;
-        $mpdf->SetDisplayMode('fullpage');
-        $mpdf->AddPage('P', 'A4'); 
-        $mpdf->WriteHTML($html);        
-          ob_end_clean();
-         $mpdf->Output($pdfFilePath,"I");
-        $response['path']=$pdfFilePaths; 
-        $this->load->view('printinvoice/print_sale_page1');
-       
-    }
-
-    public function sales_exceldownload()
-    {
-        error_reporting(0);
-        $from_date=$_POST['from_date'];
-        $to_date=$_POST['to_date'];
-       
-      // create file name
-      $fileName = 'salereport.xlsx'; 
-       // load excel library
-       $this->load->library('excel');
-       $totalData=$this->supermodel->download_salesrecord($from_date,$to_date);  
-      // echo '<pre>'; print_r($totalData); exit;
-       $objPHPExcel = new PHPExcel();
-       $objPHPExcel->setActiveSheetIndex(0);
-       // set Header
-       $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'ID');
-       $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'DATE');
-       $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'SERVICES');
-       $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'COMPANY NAME');
-       $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'BRAND NAME');
-       $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'CLIENT NAME');     
-       $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'MOBILE NUMBER');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'EMAIL ID');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'GST NO');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'DEAL ID');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'REPRESENTATIVE');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'SOURCE');     
-       $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'CITY');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'STATE');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'MODE');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'DEAL AMOUNT');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'AMOUNT RECEIVED');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('R1', 'OUTSTANDING');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('S1', 'TCS');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('T1', 'GOVT FEES');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('U1', 'ASSOCIATE FEES');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('V1', 'NET INCOME');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('W1', 'GOVT FEES');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('X1', 'PROFESSIONAL FEES');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('Y1', 'DRAFTING/ PROCEEDING FEES');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('Z1', 'DRAFTING/ PROCEEDING/ PROFESSIONAL FEES');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('AA1', 'TOTAL PROFESSIONAL AMOUNT');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('AB1', 'CGST 9%');   
-       $objPHPExcel->getActiveSheet()->SetCellValue('AC1', 'SGST 9%'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AD1', 'IGST 18%'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AE1', 'ROUND OFF'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AF1', 'INVOICE'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AG1', 'LEGAL REMARKS'); 
-       $objPHPExcel->getActiveSheet()->SetCellValue('AH1', 'ACCOUNT REMARKS'); 
-
-      
-       foreach($totalData as $totalData_key => $totalData_row)
-       {
-                
-           $brand_id=explode(',',$totalData[$totalData_key]['brandid']);
-           $brand_name=explode(',',$totalData[$totalData_key]['brandname']);
-           $services = $this->supermodel->sale_service($totalData_row['id']);
-         
-           $service_id=explode(',',$services[0]['serviceid']);
-           $service_name=explode(',',$services[0]['servicename']);
-           
-           foreach($service_id as $service_key => $service_id_row)
-           {
-                $totalData[$totalData_key]['subservice'][] = $this->supermodel->sale_subservice($totalData_row['id'],$service_id_row);
-            } 
-           foreach($totalData[$totalData_key]['subservice'] as $subservices_key => $subservices_row)
-           {               
-                foreach($subservices_row as $subservice_key => $subservicerow)
-                {
-                    
-                   if($subservicerow['sales_id'] == $totalData_row['id'])
-                   {
-                        if(in_array($subservicerow['servicesid'],$service_id))
-                        {
-                            $totalData[$totalData_key]['servicesubservice'][]=$service_name[$subservices_key].'('.$subservicerow['subservicename'].')';
-                         
-                            $totalData[$totalData_key]['servicesubservices'] =implode(",",$totalData[$totalData_key]['servicesubservice']);
-                           
-                     }     
-                   }
-                }
-           }
-
-           foreach($brand_id as $brands_id_key =>$brand_id_row)
-           {
-            $totalData[$totalData_key]['classname'][] = $this->supermodel->get_brand_class_name($brand_id_row);
-           } 
-
-           foreach($totalData[$totalData_key]['classname'] as $classname_key =>$classname_row)
-           {
-                if($classname_row['fk_sale_id']== $totalData_row['id']){
-                    if(in_array($classname_row['fk_brand_id'],$brand_id))
-                    {
-                        $totalData[$totalData_key]['brand_class_name'][]=$brand_name[$classname_key].'('.$classname_row['class_name'].')';
-                        $totalData[$totalData_key]['brand_class'] =implode(",",$totalData[$totalData_key]['brand_class_name']);
-                    }                  
-                }               
-           } 
-          
-       }
-       
-       $rowCount = 2;
-        $i=1;
-       foreach($totalData as $totalData_key => $totalData_row)
-       {
-
-        $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $i);
-        $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $totalData_row['sale_date']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $totalData_row['servicesubservices']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $totalData_row['company_name']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $totalData_row['brand_class']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $totalData_row['client_name']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $totalData_row['mobile_'].','.$totalData_row['mobile_2'].','.$totalData_row['alternate_number']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $totalData_row['email_address']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $totalData_row['gst_no']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $totalData_row['deal_id']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $totalData_row['cust_exec_name']); 
-        $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $totalData_row['lead_source']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $totalData_row['city']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $totalData_row['statename']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $totalData_row['payment_mode']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $totalData_row['deal_amount']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount, $totalData_row['amount_received']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount, $totalData_row['outstanding']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('S' . $rowCount, $totalData_row['tcs']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('T' . $rowCount, $totalData_row['govt_fees']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('U' . $rowCount, $totalData_row['associate_fees']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('V' . $rowCount, $totalData_row['net_income']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('W' . $rowCount, $totalData_row['govt_fee']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('X' . $rowCount, $totalData_row['professional_fees']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('Y' . $rowCount, $totalData_row['drafting_proceeding_fees']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('Z' . $rowCount, $totalData_row['drafting_proceeding_professional_fees']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('AA' . $rowCount, $totalData_row['total_professional_amount']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('AB' . $rowCount, $totalData_row['cgst']);  
-        $objPHPExcel->getActiveSheet()->SetCellValue('AC' . $rowCount, $totalData_row['sgst']);  
-        $objPHPExcel->getActiveSheet()->SetCellValue('AD' . $rowCount, $totalData_row['igst']);  
-        $objPHPExcel->getActiveSheet()->SetCellValue('AE' . $rowCount, $totalData_row['round_off']);  
-        $objPHPExcel->getActiveSheet()->SetCellValue('AF' . $rowCount, $totalData_row['invoice_name']);  
-        $objPHPExcel->getActiveSheet()->SetCellValue('AG' . $rowCount, $totalData_row['legal_remarks']);  
-        $objPHPExcel->getActiveSheet()->SetCellValue('AH' . $rowCount, $totalData_row['accounts_remarks']);     
-        $rowCount++; $i++;
-       }
-    
-        $filename = FCPATH . "uploads/invoice/legal_invoice.xls";
-
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="01simple.xls"');
-        header('Cache-Control: max-age=0');
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-        $objWriter->save($filename);
-        
-        $response['url'] = base_url()."uploads/invoice/legal_invoice.xls";
-        echo json_encode($response,true);
     }
 
     public function getsalesrecord()
@@ -232,20 +39,16 @@ class Sales extends CI_Controller
        
         foreach($totalData as $category_details_key => $data_row)
         {
-           
-            $edit = '<span><a href="'.base_url()."Sales/edit_sales?id=".base64_encode($data_row['id']).'" ><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a></span>&nbsp;&nbsp;';
-
+          
             $invoice = '<span><a href="'.base_url().'Sales/print_sales1?id='.base64_encode($data_row['id']).'" target="_blank">
             <i class="glyphicon glyphicon-download-alt invoice_view" aria-hidden="true" 
-             ></i> </a></span>&nbsp;<br><br>';
+             ></i> </a></span>&nbsp;&nbsp;&nbsp;';
 
-            $delete="<span><a href='#' onclick='delete_sales_report(this," . $data_row['id'] . ")' ><i class='glyphicon glyphicon-trash'></i> </a></span>&nbsp;&nbsp;";
-           
             $services='<span><a href="javascript:void(0);" class="edit_service_data" id="'.$data_row['id'].'"><i class="" ></i>'.$data_row['serviceid'].'</a></span>&nbsp;&nbsp;';
                
             $image_documents='<span><a href="'.base_url()."Sales/doc_gallery?id=".base64_encode($data_row['id']).'" id="'.$data_row['id'].'"><i class="glyphicon glyphicon-th-large" ></i></a></span>&nbsp;&nbsp;';
             $nestedData=array();
-                $nestedData[] =  $edit . $invoice . $delete . $image_documents;
+                $nestedData[] =   $invoice . $image_documents;
                 $nestedData[] = ++$category_details_key;
                 $nestedData[] = $data_row['company_name'];
                 $nestedData[] = $data_row['sale_date'];
@@ -726,30 +529,12 @@ class Sales extends CI_Controller
     echo json_encode($data);
   }
 
-
-//   function check_order_no($order_no) {      
-    
-//     if($this->input->post('deal_id'))
-//         $id = $this->input->post('deal_id');
-//     else
-//         $id = '';
-//     $result = $this->supermodel->check_unique_order_no($id, $order_no);
-//     echo $result;die();
-//     if($result == 0)
-//         $response = true;
-//     else {
-//         $this->form_validation->set_message('deal_id', 'Order no already exist');
-//         $response = false;
-//     }
-//     return $response;
-// }
-
   public function save_deal()
     {   
         //print_r($_FILES['image_files']);
         $this->form_validation->set_rules('sale_date', 'Sale Date', 'trim|required',array('required'=>'This field is required'));
           //$this->form_validation->set_rules('image_files[]', 'Image File', 'trim|required',array('required'=>'This field is required'));
-        //$this->form_validation->set_rules('deal_id', 'Deal Id', 'trim|required',array('required'=>'This field is required'));
+        $this->form_validation->set_rules('deal_id', 'Deal Id', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('invoice_no', 'Invoice No', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('primary_caller', 'Primary Caller', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('secondary_caller', 'Secondary Caller', 'trim|required',array('required'=>'This field is required'));
@@ -800,7 +585,7 @@ class Sales extends CI_Controller
         //$this->form_validation->set_rules('document_list[]', 'Document List', 'trim|required',array('required'=>'This field is required'));
         $this->form_validation->set_rules('industry', 'Industry', 'trim|required',array('required'=>'This field is required'));
         //$this->form_validation->set_rules('commission', 'Commission Fees', 'trim|required',array('required'=>'This field is required'));
-        $this->form_validation->set_rules('deal_id', 'Deal Id', 'required|callback_check_order_no');
+
    
         if ($this->form_validation->run() == FALSE)
         {
@@ -1522,7 +1307,7 @@ class Sales extends CI_Controller
        $round_off = $this->input->post('round_off');
        $round_off = $this->input->post('round_off');
        $round_off = $this->input->post('round_off');
-       //echo '<pre>'; print_r($_POST); exit;
+       echo '<pre>'; print_r($_POST); exit;
         $this->form_validation->set_rules('sale_date', 'Sales', 'required|trim', array('required' => 'You must provide a %s',));
         $this->form_validation->set_rules('client_name', 'Client Name', 'required|trim|callback_alpha_dash_space', array('required' => 'You must provide a %s',));
         $this->form_validation->set_rules('deal_id', 'Deal Id', 'required|trim', array('required' => 'You must provide a %s',));

@@ -30,7 +30,7 @@
                <li role="presentation"><a href="<?= base_url();?>Masters/invoicetype" aria-controls="invoicetype" role="tab" >Invoice Type</a></li>
                <li role="presentation"><a href="<?= base_url();?>Masters/invoicestatus" aria-controls="invoicestatus" role="tab" >Invoice Status</a></li>
                <li role="presentation"><a href="<?= base_url();?>Masters/cust_executive" aria-controls="cust_executive" role="tab" >Customer Executive</a></li>
-               <?php if(intval($this->encryption->decrypt($this->session->userdata('role_id'))) == 1) { ?>
+               <?php if($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2) { ?>
                <li role="presentation"  class="active"><a href="<?= base_url();?>Masters/Roles" aria-controls="cust_executive" role="tab" >Add Roles</a></li>
                <?php } ?>
             </ul>
@@ -44,6 +44,38 @@
                             <div class="alert alert-danger" style="display:none;"></div>
                             <div class="col-sm-4 ml20">
                             <div class="form-group">
+                              <label>First Name:<span class="text-danger">*</span></label>
+                              <input type="text" name="firstname" id="firstname"
+                                 class="form-control">
+                              <span class="error_msg" id="firstname_error"></span>
+                           </div>
+                           </div>
+                           <div class="col-sm-4 ml20">
+                           <div class="form-group">
+                              <label>Last Name:<span class="text-danger">*</span></label>
+                              <input type="text" name="lastname" id="lastname"
+                                 class="form-control" >
+                              <span class="error_msg" id="lastname_error"></span>
+                           </div>
+                           </div>
+                           <div class="col-sm-4 ml20">
+                           <div class="form-group">
+                              <label>Mobile No:<span class="text-danger">*</span></label>
+                              <input type="text" name="mobile_no" id="mobile_no"
+                                 class="form-control"  onkeypress="return isNumber(event)" maxlength=10>
+                              <span class="error_msg" id="mobile_no_error"></span>
+                           </div>
+                           </div>
+                           <div class="col-sm-4 ml20">
+                           <div class="form-group">
+                              <label>Email Id:<span class="text-danger">*</span></label>
+                              <input type="text" name="email" id="email"
+                                 class="form-control">
+                              <span class="error_msg" id="email_error"></span>
+                           </div>
+                           </div>
+                            <div class="col-sm-4 ml20">
+                            <div class="form-group">
                                 <label>Enter User Name<span class="text-danger">*</span></label>
                                 <input type="text" name="user_name" dir="ltl"
                                     id="user_name" class="form-control" required="">
@@ -54,7 +86,7 @@
                                 <label>Enter Password<span class="text-danger">*</span></label>
                                 <input type="password" name="password" dir="ltl"
                                     id="password" class="form-control" required="">
-                                    <span toggle="#password" class="glyphicon glyphicon-eye-open field-icon toggle-password"></span>
+                                    <span toggle="#password" class="glyphicon glyphicon-eye-close field-icon toggle-password"></span>
                             </div>
                             </div>
                             <div class="col-sm-4">
@@ -83,7 +115,7 @@
                                 </div>
                             </div>
                      </div>
-                     <br>
+                     
                   </form>
                   <hr>
                   <table id="roles_datatable" class="table table-striped table-bordered" style="width:100%">
@@ -108,7 +140,37 @@
                               onsubmit="return validate_update_roles(this);">
                               <div class="modal-body">
                               <input type="hidden" name="user_id" id="user_id" class="form-control" required="">  
-                                <div class="form-group">
+                              <div class="form-group">
+                                    <label>First Name:<span class="text-danger">*</span></label>
+                                    <input type="text" name="firstname1" id="firstname1"
+                                       class="form-control">
+                                    <span class="error_msg" id="firstname1_error"></span>
+                                    <input type="hidden" name="userid" id="userid"
+                                       class="form-control">
+                                 </div>
+                              
+                                 <div class="form-group">
+                                    <label>Last Name:<span class="text-danger">*</span></label>
+                                    <input type="text" name="lastname1" id="lastname1"
+                                       class="form-control" >
+                                    <span class="error_msg" id="lastname1_error"></span>
+                                 </div>
+
+                                 <div class="form-group">
+                                    <label>Mobile No:<span class="text-danger">*</span></label>
+                                    <input type="text" name="mobile_no1" id="mobile_no1"
+                                       class="form-control"  onkeypress="return isNumber(event)" maxlength=10>
+                                    <span class="error_msg" id="mobile_no1_error" maxlength="10"></span>
+                                 </div>
+
+                                 <div class="form-group">
+                                    <label>Email Id:<span class="text-danger">*</span></label>
+                                    <input type="text" name="email1" id="email1"
+                                       class="form-control">
+                                    <span class="error_msg" id="email1_error"></span>
+                                 </div>  
+                              
+                              <div class="form-group">
                                 <label>Select Role<span class="text-danger">*</span></label>
                                     <select class="form-control" id="roles1"
                                         name="roles1">
@@ -131,7 +193,7 @@
                                     <label>Enter Password<span class="text-danger">*</span></label>
                                     <input type="password" name="password1" dir="ltl"
                                     id="password1" class="form-control" required="">
-                                    <span toggle="#password" class="glyphicon glyphicon-eye-open field-icon toggle-password"></span>
+                                    <span toggle="#password1" class="glyphicon glyphicon-eye-close field-icon toggle-password1"></span>
                                  
                                 </div>
                               </div>
@@ -193,8 +255,17 @@
    });
 
 $(".toggle-password").click(function() {
+$(this).toggleClass('glyphicon glyphicon-eye-close').toggleClass('glyphicon glyphicon-eye-open');
+var input = $($(this).attr("toggle"));
+if (input.attr("type") == "password") {
+  input.attr("type", "text");
+} else {
+  input.attr("type", "password");
+}
+});
 
-$(this).toggleClass("glyphicon glyphicon-eye-close");
+$(".toggle-password1").click(function() {
+$(this).toggleClass('glyphicon glyphicon-eye-close').toggleClass('glyphicon glyphicon-eye-open');
 var input = $($(this).attr("toggle"));
 if (input.attr("type") == "password") {
   input.attr("type", "text");

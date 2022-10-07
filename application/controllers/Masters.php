@@ -515,7 +515,10 @@ class Masters extends CI_Controller
          if (isset($array_entity) && !empty($array_entity)) {
              $user_name = $array_entity['user_name'];
              $password = $this->encryption->encrypt($array_entity['password']);
-            
+             $firstname = $array_entity['firstname'];
+             $lastname = $array_entity['lastname'];
+             $mobile_no = $array_entity['mobile_no'];
+             $email = $array_entity['email'];
              $roles = $array_entity['roles'];
              $role_name= $this->model->getData("roles", array('id' => $roles,'status' => '1'));
              $service_name_exist = $this->model->getData("users", array('roles_name' => $user_name,'status' => '1'));
@@ -524,7 +527,7 @@ class Masters extends CI_Controller
                  $data['status'] = '0';
                  $data['msg'] = 'User Name already Exist.';
              }else{
-                 $service_id = $this->model->insertData('users', array('username' => $user_name,'password'=>$password,'roles_name'=>$role_name[0]['roles'],'roles_id'=>$roles,'status'=>'1'));
+                 $service_id = $this->model->insertData('users', array('username' => $user_name,'password'=>$password,'roles_name'=>$role_name[0]['roles'],'roles_id'=>$roles,'status'=>'1','firstname'=>$firstname,'lastname'=>$lastname,'mobile_no'=>$mobile_no,'email'=>$email));
                  if($service_id  > 0)
                  {
                      $data['status'] = '1';
@@ -621,8 +624,12 @@ class Masters extends CI_Controller
                 $password = $array_entity['password'];
                 $user_id = $array_entity['user_id'];
                 $roles = $array_entity['roles1'];
+                $firstname = $array_entity['firstname1'];
+                $lastname = $array_entity['lastname1'];
+                $mobile_no = $array_entity['mobile_no1'];
+                $email = $array_entity['email1'];
                 $role_name= $this->model->getData("roles", array('id' => $roles,'status' => '1'));
-                $this->model->updateData('users',array('username'=>$user_name,'password'=>$password,'roles_name'=>$role_name[0]['roles'],'roles_id'=>$roles), array('user_id' => $user_id));
+                $this->model->updateData('users',array('username'=>$user_name,'password'=>$password,'roles_name'=>$role_name[0]['roles'],'roles_id'=>$roles), array('user_id' => $user_id,'firstname'=>$firstname,'lastname'=>$lastname,'mobile_no'=>$mobile_no,'email'=>$email));
                 $data['status'] = '1';
                 $data['msg'] = 'Role has been updated successfully.';
                   

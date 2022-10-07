@@ -8,7 +8,7 @@
    padding:10px;
    border: 1px solid #eee;
    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-   font-size: 14px;
+   font-size: 12px;
    line-height: 24px;
    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
    color: #555;
@@ -25,6 +25,7 @@
    }
    .invoice-box table td {
    vertical-align:middle;
+   font-size:14px;
    }
    .invoice-box table tr td:nth-child(2) {
    /* text-align: right; */
@@ -98,19 +99,19 @@
          </td>
       </tr>
    </table>
-   <table cellspacing="0px" cellpadding="2px">
+   <table cellspacing="0px" cellpadding="2px" >
       <tr class="information">
          <td  colspan="3">
             <b> Invoice to: <br> <?php echo $data['getsalesrecordbyid']['client_name'];?> </b> <br>
             Company Address: <br>
             <?php echo $data['getsalesrecordbyid']['street'];?><br>
-            <?php echo $data['getsalesrecordbyid']['city'];?>, <?php echo $data['getsalesrecordbyid']['state'];?> <?php echo $data['getsalesrecordbyid']['pincode'];?> <br><br>
-            Mobile No:-<?php echo $data['getsalesrecordbyid']['mobile_1'];?>, <?php if($data['getsalesrecordbyid']['mobile_2'] != ''){echo $data['getsalesrecordbyid']['mobile_2'];} ?>, <?php if($data['getsalesrecordbyid']['alternate_number'] != ''){echo $data['getsalesrecordbyid']['alternate_number'];} ?> <br>
+            <?php echo $data['getsalesrecordbyid']['city'];?>, <?php echo $data['getsalesrecordbyid']['state']['name'];?> <?php echo $data['getsalesrecordbyid']['pincode'];?> <br><br>
+            Mobile No:-<?php echo $data['getsalesrecordbyid']['mobile_1'];?><?php if($data['getsalesrecordbyid']['mobile_2'] != '' && $data['getsalesrecordbyid']['mobile_2'] != 0){echo ', '.$data['getsalesrecordbyid']['mobile_2'];} ?><?php if($data['getsalesrecordbyid']['alternate_number'] != '' && $data['getsalesrecordbyid']['alternate_number'] != 0){echo ', '.$data['getsalesrecordbyid']['alternate_number'];} ?> <br>
             Email ID:-<?php echo $data['getsalesrecordbyid']['email_address'];?><br>
             GSTIN:-<?php echo $data['getsalesrecordbyid']['gst_no'];?><br><br>
             Invoice Date:   <?php echo $data['getsalesrecordbyid']['sale_date'];?>
          </td>
-         <td>
+         <td >
             <b> Pay to: <br>Primary bank details :</b><br>
             Bank Account No : 106603130001272<br>
             IFSC Code : SVCB0000066<br>
@@ -123,27 +124,27 @@
       
       </tr>
    </table>
-   <table cellspacing="0px" cellpadding="2px">
+   <table cellspacing="0px" cellpadding="2px" border=1>
       <tr class="heading">
-         <td style="width:15%;text-align:center;">
+         <td style="width:5%;text-align:center;">
             Sr. No.
          </td>
-         <td style="width:10%; text-align:center;">
+         <td style="width:65%; text-align:center;">
             Description.
          </td>
-         <td style="width:10%; text-align:center;">
+         <td style="width:20%; text-align:center;">
             Unit Price
          </td>
-         <td style="width:15%; text-align:center;">
+         <td style="width:5%; text-align:center;">
             Quantity 
          </td>
-         <td style="width:15%; text-align:center;">
+         <td style="width:5%; text-align:center;">
             Amount
          </td>
       </tr>
       <?php if($data['getsalesrecordbyid']['govt_fee'] != 0){ ?>
          <tr class="item">
-         <td style="width:10%;">
+         <td style="width:5%;text-align:center;">
             1
          </td>
          <td style="width:25%; text-align:center;">
@@ -152,124 +153,148 @@
          <td style="width:10%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['govt_fee']; ?>
          </td>
-         <td style="width:15%; text-align:center;">
+         <td style="width:5%; text-align:center;">
             1
          </td>
-         <td style="width:15%; text-align:center;">
+         <td style="width:5%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['govt_fee']; ?>
          </td>
       </tr>
       <?php } ?>
       
       <tr class="item">
-         <td style="width:10%;">
+         <td style="width:5%;text-align:center;">
             2
          </td>
          <td style="width:25%; text-align:center;">
             Trademark Process (Drafting,Proceeding & Professional Fees)
          </td>
-         <td style="width:10%; text-align:right;">
+         <td style="width:10%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['total_professional_amount']; ?>
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
             1
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['total_professional_amount']; ?>
          </td>
       </tr>
       <tr class="item">
-         <td style="width:10%;">
+         <td style="width:5%;text-align:center;">
             3
          </td>
          <td style="width:25%; text-align:center;">
             (HSN CODE:-0)
          </td>
-         <td style="width:10%; text-align:right;">
+         <td style="width:10%; text-align:center;">
             0
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
             0
          </td>
       </tr>
       <?php if($data['getsalesrecordbyid']['cgst'] != 0 && $data['getsalesrecordbyid']['sgst'] != 0){ ?>
          <tr class="item">
-         <td style="width:10%;">
+         <td style="width:5%;text-align:center;">
             4
          </td>
          <td style="width:25%; text-align:center;">
             CGST
          </td>
-         <td style="width:10%; text-align:right;">
+         <td style="width:10%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['cgst']; ?>
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
             1
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['cgst']; ?>
          </td>
       </tr>
       <tr class="item">
-         <td style="width:10%;">
+         <td style="width:5%;text-align:center;">
             5
          </td>
          <td style="width:25%; text-align:center;">
             SGST
          </td>
-         <td style="width:10%; text-align:right;">
+         <td style="width:5%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['sgst']; ?>
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
            1
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['sgst']; ?>
          </td>
       </tr>
       <?php } ?>
       <?php if($data['getsalesrecordbyid']['igst'] != 0 ){ ?>
       <tr class="item">
-         <td style="width:10%;">
+         <td style="width:5%;text-align:center;">
             4
          </td>
          <td style="width:25%; text-align:center;">
             IGST
          </td>
-         <td style="width:10%; text-align:right;">
+         <td style="width:10%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['igst']; ?>
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
             1
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:5%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['igst']; ?>
          </td>
       </tr>
       <?php } ?>
-      <tr class="item">
-         <td style="width:10%;text-align:right;background: #302875;color:white;" colspan="3">
+      <!-- <tr class="item" style="margin-top:10px">
+         <td style="width:10%;" colspan="3">
          </td>
-         <td style="width:15%;text-align:right;background: #302875;color:white;font-weight: bold;font-size:12px;">
+         <td style="width:15%;text-align:center;background: #302875;color:white;font-weight: bold;font-size:12px;">
           Round off
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:15%; text-align:center;">
          <?php echo $data['getsalesrecordbyid']['round_off']; ?>
          </td>
       </tr>
       <tr class="item">
-         <td style="width:10%; text-align:right;background: #302875;color:white;" colspan="3" class="">
+         <td style="width:10%;" colspan="3" class="">
          </td>
-         <td style="width:15%; text-align:right;background: #302875;color:white;font-weight: bold;font-size:12px;">
+         <td style="width:15%; text-align:center;background: #302875;color:white;font-weight: bold;font-size:12px;">
           Grand Total
          </td>
-         <td style="width:15%; text-align:right;">
+         <td style="width:15%; text-align:center;">
          <?php echo round($data['getsalesrecordbyid']['govt_fee']+$data['getsalesrecordbyid']['total_professional_amount']+$data['getsalesrecordbyid']['cgst']+$data['getsalesrecordbyid']['sgst']+$data['getsalesrecordbyid']['igst']); ?>
          </td>
-      </tr>
+      </tr> -->
       </td>
+      </tr>
+   </table>
+   <table cellspacing="0px" cellpadding="2px" border=0>
+       <tr class="item" style="margin-top:7px;">
+         <td style="width:10%;" colspan="3" >
+         </td>
+         <td style="width:15%;text-align:center;background: #302875;color:white;font-weight: bold;font-size:12px;border:1px solid">
+          Round off
+         </td>
+         <td style="width:15%; text-align:center;border:1px solid">
+         <?php echo $data['getsalesrecordbyid']['round_off']; ?>
+         </td>
+      </tr>
+      <tr class="item">
+         <td style="width:10%;" colspan="3" class="">
+         </td>
+         <td style="width:15%; text-align:center;background: #302875;color:white;font-weight: bold;font-size:12px;border:1px solid">
+          Grand Total
+         </td>
+         <td style="width:15%; text-align:center;border:1px solid">
+         <?php $totals=$data['getsalesrecordbyid']['govt_fee']+$data['getsalesrecordbyid']['total_professional_amount']+$data['getsalesrecordbyid']['cgst']+$data['getsalesrecordbyid']['sgst']+$data['getsalesrecordbyid']['igst'];
+         echo (int)$totals;
+         ?>
+         </td>
       </tr>
    </table>
    <table cellspacing="0px" cellpadding="2px">

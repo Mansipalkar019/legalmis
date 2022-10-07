@@ -1,7 +1,7 @@
 <?php $this->load->view('header'); ?>
 <!--==================breadcrumb====================-->
-<div class="container-fluid first-body bdy">
-   <div class="container-fluid">
+<div class="container first-body bdy">
+   <div class="container">
    <div class="row">
          <div class="col-md-12">
             <nav aria-label="breadcrumb">
@@ -24,8 +24,8 @@
 			?>
            
 				<a href="<?php echo base_url() . $image;?>">
-					<img src="<?php echo base_url() . $image;?>" alt="<?php echo $image;?>" style="padding: 10px;border: #eeeee4 solid 2px;width: 300px;margin-top: 20px;margin-left:15px;
-    height: 300px;">
+					<img src="<?php echo base_url() . $image;?>" alt="<?php echo $image;?>" style="padding: 10px;border: #eeeee4 solid 2px;width: 200px;margin-top: 20px;margin-left:15px;
+    height: 200px;">
 				</a>
               
 			<?php

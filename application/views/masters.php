@@ -28,7 +28,7 @@
                <li role="presentation"><a href="<?= base_url();?>Masters/invoicetype" aria-controls="invoicetype" role="tab" >Invoice Type</a></li>
                <li role="presentation"><a href="<?= base_url();?>Masters/invoicestatus" aria-controls="invoicestatus" role="tab" >Invoice Status</a></li>
                <li role="presentation"><a href="<?= base_url();?>Masters/cust_executive" aria-controls="cust_executive" role="tab" >Customer Executive</a></li>
-               <?php if(intval($this->encryption->decrypt($this->session->userdata('role_id'))) == 1 || intval($this->encryption->decrypt($this->session->userdata('role_id'))) == 2) { ?>
+               <?php if($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2) { ?>
                   <li role="presentation"><a href="<?= base_url();?>Masters/Roles" aria-controls="cust_executive" role="tab" >Add Roles</a></li>
                <?php } ?>
               </ul>
@@ -41,7 +41,7 @@
                      action=""
                      enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate"
                      onsubmit="return validate_add_banner(this);">
-                     <div class="row ml20  mb20">
+                     <div class="row ml20 mb20">
                         <div class="col-md-3">
                            <div class="form-group">
                               <label>Name<span class="text-danger">*</span></label>

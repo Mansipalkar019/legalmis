@@ -1,9 +1,56 @@
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+   }
 function validate_add_roles(ele){
     hide_message_box(ele);
     var hasError = 0;
     var user_name=$('#user_name').val();
     var password=$('#password').val();
+    var firstname=$('#firstname').val();
+    var lastname=$('#lastname').val();
+    var mobile_no=$('#mobile_no').val();
+    var email=$('#email').val();
     var roles=$('#roles').val();
+    if(jQuery.trim(firstname) == '')
+    {
+        showError("Please Enter the First Name","firstname");hasError=1;
+        
+    }
+    else {
+        changeError("firstname");
+    }
+    if(jQuery.trim(lastname) == '')
+    {
+        showError("Please Enter the Last Name","lastname");hasError=1;
+        
+    }
+    else {
+        changeError("lastname");
+    }
+    if(jQuery.trim(mobile_no) == '')
+    {
+        showError("Please Enter the Contact No","mobile_no");hasError=1;
+        
+    }
+    else {
+        changeError("mobile_no");
+    }
+    if(jQuery.trim(email) == '')
+    {
+        showError("Please Enter the Email","email");hasError=1;
+        
+    }
+    else {
+        changeError("email");
+    }
+
+
+
     if(jQuery.trim(user_name) == '')
     {
         showError("Please Enter the User Name","user_name");hasError=1;
@@ -40,6 +87,10 @@ function validate_add_roles(ele){
             user.product.user_name = user_name;
             user.product.password = password;
             user.product.roles = roles;
+            user.product.firstname = firstname;
+            user.product.lastname = lastname;
+            user.product.email = email;
+            user.product.mobile_no = mobile_no;
 
             var q = JSON.stringify(user);
             jQuery.ajax({
@@ -113,8 +164,44 @@ function validate_update_roles(ele){
     var user_name=$('#user_name1').val();
     var password=$('#password1').val();
     var roles1=$('#roles1').val();
-   
+    var firstname1=$('#firstname1').val();
+    var lastname1=$('#lastname1').val();
+    var mobile_no1=$('#mobile_no1').val();
+    var email1=$('#email1').val();
     var user_id=$('#user_id').val();
+    if(jQuery.trim(firstname1) == '')
+    {
+        showError("Please Enter the First Name","firstname1");hasError=1;
+        
+    }
+    else {
+        changeError("firstname1");
+    }
+    if(jQuery.trim(lastname1) == '')
+    {
+        showError("Please Enter the Last Name","lastname1");hasError=1;
+        
+    }
+    else {
+        changeError("lastname1");
+    }
+    if(jQuery.trim(mobile_no1) == '')
+    {
+        showError("Please Enter the Contact No","mobile_no1");hasError=1;
+        
+    }
+    else {
+        changeError("mobile_no1");
+    }
+    if(jQuery.trim(email1) == '')
+    {
+        showError("Please Enter the Email","email1");hasError=1;
+        
+    }
+    else {
+        changeError("email1");
+    }
+
     if(jQuery.trim(user_name) == '')
     {
         showError("Please Enter the User Name","user_name");hasError=1;
@@ -150,7 +237,11 @@ function validate_update_roles(ele){
             user.product.user_name = user_name;
             user.product.password = password;
             user.product.roles1 = roles1;
-            user.product.user_id = user_id;		
+            user.product.user_id = user_id;	
+            user.product.firstname1 = firstname1;
+            user.product.lastname1 = lastname1;
+            user.product.email1 = email1;
+            user.product.mobile_no1 = mobile_no1;	
 			var q = JSON.stringify(user);
             jQuery.ajax({
 				dataType: 'json',
@@ -239,7 +330,10 @@ $(document).on('click', '.a_category_view', function () {
             $('#user_id').val(data['user_id']);
                 $('#user_name1').val(data['username']);
                 $('#password1').val(data['decryptpassword']);
-              
+                $('#firstname1').val(data['firstname']);
+                $('#lastname1').val(data['lastname']);
+                $('#mobile_no1').val(data['mobile_no']);
+                $('#email1').val(data['email']);   
           }
        });
        

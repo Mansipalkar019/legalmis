@@ -14,6 +14,41 @@ class supermodel extends CI_Model {
         $this->db->where('sub_services.status',1);
 	}
 
+	public function get_user_listing($session)
+	{
+		if($session == 1 || $session == 2)
+		{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('status','1');
+			$this->db->where('roles_id','1');
+			$this->db->or_where('roles_id','2');
+			$this->db->or_where('roles_id','3');
+			$this->db->or_where('roles_id','4');
+			$this->db->limit($rowperpage,$rowno);
+			if(!empty($search_text))
+			{
+				$this->db->where("(users.username LIKE '%".$search_text."%' OR users.mobile_no LIKE '%".$search_text."%' OR users.email LIKE '%".$search_text."%')", NULL, FALSE); 
+			}
+			$query=$this->db->get();
+			return $query->result_array();
+		}else{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('status','1');
+			$this->db->where('roles_id','3');
+			$this->db->or_where('roles_id','4');
+			$this->db->limit($rowperpage,$rowno);
+			if(!empty($search_text))
+			{
+				$this->db->where("(users.username LIKE '%".$search_text."%' OR users.mobile_no LIKE '%".$search_text."%' OR users.email LIKE '%".$search_text."%')", NULL, FALSE); 
+			}
+			$query=$this->db->get();
+			return $query->result_array();
+		}
+	
+	}
+
 	public function get_sub_services()
 	{
 		$this->main_services();
@@ -75,6 +110,153 @@ class supermodel extends CI_Model {
         return $this->db->count_all_results();
 	}
 
+	public function main_users($session,$rowno="",$rowperpage="",$search_text="")
+	{
+		if($session == 1 || $session == 2)
+		{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('status','1');
+			$this->db->where('roles_id','1');
+			$this->db->or_where('roles_id','2');
+			$this->db->or_where('roles_id','3');
+			$this->db->or_where('roles_id','4');
+			$this->db->limit($rowperpage,$rowno);
+			if(!empty($search_text))
+			{
+				$this->db->where("(users.username LIKE '%".$search_text."%' OR users.mobile_no LIKE '%".$search_text."%' OR users.email LIKE '%".$search_text."%')", NULL, FALSE); 
+			}
+			$query=$this->db->get();
+			return $query->result_array();
+		}else{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('status','1');
+			$this->db->where('roles_id','3');
+			$this->db->or_where('roles_id','4');
+			$this->db->limit($rowperpage,$rowno);
+			if(!empty($search_text))
+			{
+				$this->db->where("(users.username LIKE '%".$search_text."%' OR users.mobile_no LIKE '%".$search_text."%' OR users.email LIKE '%".$search_text."%')", NULL, FALSE); 
+			}
+			$query=$this->db->get();
+			return $query->result_array();
+		}
+	
+	}
+	public function count_users_filtered($session,$rowno="",$rowperpage="",$search_text="")
+	{
+
+		if($session == 1)
+		{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('status','1');
+			$this->db->where('roles_id','1');
+			$this->db->or_where('roles_id','3');
+			$this->db->limit($rowperpage,$rowno);
+			if(!empty($search_text))
+			{
+				$this->db->where("(users.username LIKE '%".$search_text."%' OR users.mobile_no LIKE '%".$search_text."%' OR users.email LIKE '%".$search_text."%')", NULL, FALSE); 
+			}
+			$query=$this->db->get();
+        	return $query->num_rows();
+		}else{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('status','1');
+			$this->db->where('roles_id',$session);
+			$this->db->limit($rowperpage,$rowno);
+			if(!empty($search_text))
+			{
+				$this->db->where("(users.username LIKE '%".$search_text."%' OR users.mobile_no LIKE '%".$search_text."%' OR users.email LIKE '%".$search_text."%')", NULL, FALSE); 
+			}
+			$query=$this->db->get();
+        	return $query->num_rows();
+		}
+		
+	}
+	public function count_users_all($session,$rowno="",$rowperpage="",$search_text="")
+	{
+		if($session == 1)
+		{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('status','1');
+			$this->db->where('roles_id','1');
+			$this->db->or_where('roles_id','3');
+			$this->db->limit($rowperpage,$rowno);
+			if(!empty($search_text))
+			{
+				$this->db->where("(users.username LIKE '%".$search_text."%' OR users.mobile_no LIKE '%".$search_text."%' OR users.email LIKE '%".$search_text."%')", NULL, FALSE); 
+			}
+			return $this->db->count_all_results();
+		}else{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('status','1');
+			$this->db->where('roles_id',$session);
+			$this->db->limit($rowperpage,$rowno);
+			if(!empty($search_text))
+			{
+				$this->db->where("(users.username LIKE '%".$search_text."%' OR users.mobile_no LIKE '%".$search_text."%' OR users.email LIKE '%".$search_text."%')", NULL, FALSE); 
+			}
+			return $this->db->count_all_results();
+		}
+
+	}
+
+
+	public function get_allocated_work($session,$rowno="",$rowperpage="",$search_text="")
+	{ 
+		$this->db->select(' GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->from('allocated_service_users');
+		$this->db->join('services','services.id=allocated_service_users.service','left');
+		$this->db->join('users','users.user_id=allocated_service_users.user','left');
+		$this->db->where('allocated_service_users.status','1');
+		$this->db->limit($rowperpage,$rowno);
+		$this->db->group_by(array("allocated_service_users.created_on", "users.username"));
+		//$this->db->group_by('allocated_service_users.user');
+		if(!empty($search_text))
+		{
+			$this->db->where("(users.username LIKE '%".$search_text."%' OR allocated_service_users.created_on LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		$query=$this->db->get();
+		return $query->result_array();
+		
+	}
+	public function count_allocated_work_filtered($session,$rowno="",$rowperpage="",$search_text="")
+	{
+		$this->db->select('GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->from('allocated_service_users');
+		$this->db->join('services','services.id=allocated_service_users.service','left');
+		$this->db->join('users','users.user_id=allocated_service_users.user','left');
+		$this->db->where('allocated_service_users.status','1');
+		$this->db->limit($rowperpage,$rowno);
+		$this->db->group_by(array("allocated_service_users.created_on", "users.username"));
+		if(!empty($search_text))
+		{
+			$this->db->where("(users.username LIKE '%".$search_text."%' OR allocated_service_users.created_on LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		$query=$this->db->get();
+        return $query->num_rows();
+	}
+	public function count_all_allocated_work($session,$rowno="",$rowperpage="",$search_text="")
+	{
+		$this->db->select('GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->from('allocated_service_users');
+		$this->db->join('services','services.id=allocated_service_users.service','left');
+		$this->db->join('users','users.user_id=allocated_service_users.user','left');
+		$this->db->where('allocated_service_users.status','1');
+		$this->db->limit($rowperpage,$rowno);
+		$this->db->group_by(array("allocated_service_users.created_on", "users.username"));
+		if(!empty($search_text))
+		{
+			$this->db->where("(users.username LIKE '%".$search_text."%' OR allocated_service_users.created_on LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+        return $this->db->count_all_results();
+	}
+
 
 	public function getpincode($City)
 	{
@@ -96,6 +278,37 @@ class supermodel extends CI_Model {
 		}
 	}
 
+	function getviewsalerecord($from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
+    {
+        $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename');
+        $this->db->from('sales');
+        $this->db->join('sales_services','sales_services.sales_id=sales.id','left');
+        $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
+		$this->db->join('services','services.id=sales_services.services_id','left');
+		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
+		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
+        $this->db->where('sales.status',1);
+		$this->db->where('sales.sale_status','Verified');
+		$this->db->limit($rowperpage,$rowno);
+		if(!empty($from_date))
+		{
+			$this->db->where('sales.sale_date >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('sales.sale_date <=',$to_date);
+		}
+		if(!empty($search_text))
+		{
+			$this->db->where("(sales.client_name LIKE '%".$search_text."%' OR sales.company_name LIKE '%".$search_text."%' OR sales.mobile_1 LIKE '%".$search_text."%' OR sales.email_address LIKE '%".$search_text."%' OR sales.invoice_number LIKE '%".$search_text."%' OR sales.deal_id LIKE '%".$search_text."%' OR sales.services LIKE '%".$search_text."%' OR sales.sub_services LIKE '%".$search_text."%' OR sales.mobile_2 LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		$this->db->group_by('sales.id');
+        $this->db->order_by('sales.id',"DESC");
+        $query=$this->db->get();
+		return $query->result_array();
+    }
+
+
 	function getsalesrecord($from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
     {
         $this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(DISTINCT(sub_services.name)) as subserviceid,tbl_states.name as statename');
@@ -106,6 +319,7 @@ class supermodel extends CI_Model {
 		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
 		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
         $this->db->where('sales.status',1);
+		$this->db->where('sales.sale_status','Verified');
 		$this->db->limit($rowperpage,$rowno);
 		if(!empty($from_date))
 		{
@@ -136,7 +350,7 @@ class supermodel extends CI_Model {
 		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
 		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
         $this->db->where('sales.status',1);
-      
+		$this->db->where('sales.sale_status','Verified');
        
 		$this->db->limit($rowperpage,$rowno);
 		if(!empty($from_date))
@@ -168,7 +382,7 @@ class supermodel extends CI_Model {
 		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
 		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
         $this->db->where('sales.status',1);
-      
+		$this->db->where('sales.sale_status','Verified');
        $this->db->limit($rowperpage,$rowno);
 	   if(!empty($from_date))
 	   {
@@ -198,6 +412,7 @@ class supermodel extends CI_Model {
         $this->db->group_by('sales.id');
         $this->db->where('sales.status',1);
 		$this->db->where('sales.id',$id);
+		$this->db->where('sales.sale_status','Verified');
 		$query=$this->db->get();
 		//echo $this->db->last_query();die();
         return $query->row_array();
@@ -366,7 +581,198 @@ class supermodel extends CI_Model {
         return $query->row_array();
 	}
 
+	function get_allocated_work_listing($user_id="",$from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
+    {
+		$this->db->select(' GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->from('allocated_service_users');
+		$this->db->join('services','services.id=allocated_service_users.service','left');
+		$this->db->join('users','users.user_id=allocated_service_users.user','left');
+		$this->db->where('users.user_id',$user_id);
+		$this->db->limit($rowperpage,$rowno);
+		if(!empty($search_text))
+		{
+			$this->db->where("(users.username LIKE '%".$search_text."%' OR allocated_service_users.created_on LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		if(!empty($from_date))
+		{
+			$this->db->where('allocated_service_users.created_on >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('allocated_service_users.created_on <=',$to_date);
+		}
+		
+		$this->db->group_by('allocated_service_users.created_on');
+        $this->db->order_by('users.user_id',"DESC");
+        $query=$this->db->get();
+		//echo $this->db->last_query();die();
+		return $query->result_array();
+    }
 
+	function allocated_work_count_filtered($user_id="",$from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
+	{
+		$this->db->select(' GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->from('allocated_service_users');
+		$this->db->join('services','services.id=allocated_service_users.service','left');
+		$this->db->join('users','users.user_id=allocated_service_users.user','left');
+		$this->db->where('users.user_id',$user_id);
+		$this->db->limit($rowperpage,$rowno);
+		if(!empty($search_text))
+		{
+			$this->db->where("(users.username LIKE '%".$search_text."%' OR allocated_service_users.created_on LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		if(!empty($from_date))
+		{
+			$this->db->where('allocated_service_users.created_on >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('allocated_service_users.created_on <=',$to_date);
+		}
+		
+		$this->db->group_by('allocated_service_users.created_on');
+        $this->db->order_by('users.user_id',"DESC");
+        $query=$this->db->get();
+		return $query->num_rows();
+	}
+
+	function allocated_work_count_all($user_id="",$from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
+	{
+		$this->db->select(' GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->from('allocated_service_users');
+		$this->db->join('services','services.id=allocated_service_users.service','left');
+		$this->db->join('users','users.user_id=allocated_service_users.user','left');
+		$this->db->where('users.user_id',$user_id);
+		$this->db->limit($rowperpage,$rowno);
+		if(!empty($search_text))
+		{
+			$this->db->where("(users.username LIKE '%".$search_text."%' OR allocated_service_users.created_on LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		if(!empty($from_date))
+		{
+			$this->db->where('allocated_service_users.created_on >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('allocated_service_users.created_on <=',$to_date);
+		}
+		
+		$this->db->group_by('allocated_service_users.created_on');
+        $this->db->order_by('users.user_id',"DESC");
+		return $this->db->count_all_results();
+	}
+
+
+	public function get_allocated_work1($session,$from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
+	{ 
+		$this->db->select(' GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->from('allocated_service_users');
+		$this->db->join('services','services.id=allocated_service_users.service','left');
+		$this->db->join('users','users.user_id=allocated_service_users.user','left');
+		$this->db->where('allocated_service_users.status','1');
+		$this->db->limit($rowperpage,$rowno);
+		$this->db->group_by(array("allocated_service_users.created_on", "users.username"));
+		//$this->db->group_by('allocated_service_users.user');
+		if(!empty($search_text))
+		{
+			$this->db->where("(users.username LIKE '%".$search_text."%' OR allocated_service_users.created_on LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		if(!empty($from_date))
+		{
+			$this->db->where('allocated_service_users.created_on >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('allocated_service_users.created_on <=',$to_date);
+		}
+		$query=$this->db->get();
+		return $query->result_array();
+		
+	}
+	public function count_allocated_work_filtered1($session,$from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
+	{
+		$this->db->select('GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->from('allocated_service_users');
+		$this->db->join('services','services.id=allocated_service_users.service','left');
+		$this->db->join('users','users.user_id=allocated_service_users.user','left');
+		$this->db->where('allocated_service_users.status','1');
+		$this->db->limit($rowperpage,$rowno);
+		$this->db->group_by(array("allocated_service_users.created_on", "users.username"));
+		if(!empty($search_text))
+		{
+			$this->db->where("(users.username LIKE '%".$search_text."%' OR allocated_service_users.created_on LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		if(!empty($from_date))
+		{
+			$this->db->where('allocated_service_users.created_on >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('allocated_service_users.created_on <=',$to_date);
+		}
+		$query=$this->db->get();
+        return $query->num_rows();
+	}
+	public function count_all_allocated_work1($session,$from_date="",$to_date="",$rowno="",$rowperpage="",$search_text="")
+	{
+		$this->db->select('GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->from('allocated_service_users');
+		$this->db->join('services','services.id=allocated_service_users.service','left');
+		$this->db->join('users','users.user_id=allocated_service_users.user','left');
+		$this->db->where('allocated_service_users.status','1');
+		$this->db->limit($rowperpage,$rowno);
+		$this->db->group_by(array("allocated_service_users.created_on", "users.username"));
+		if(!empty($search_text))
+		{
+			$this->db->where("(users.username LIKE '%".$search_text."%' OR allocated_service_users.created_on LIKE '%".$search_text."%' OR services.name LIKE '%".$search_text."%')", NULL, FALSE); 
+		}
+		if(!empty($from_date))
+		{
+			$this->db->where('allocated_service_users.created_on >=',$from_date);
+		}
+		if(!empty($to_date))
+		{
+			$this->db->where('allocated_service_users.created_on <=',$to_date);
+		}
+        return $this->db->count_all_results();
+	}
+
+	public function get_all_dealid()
+	{
+        $this->db->select('sales.id,sales.deal_id');
+        $this->db->from('sales');
+        $this->db->join('sales_services','sales_services.sales_id=sales.id','left');
+        $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
+		$this->db->join('services','services.id=sales_services.services_id','left');
+		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
+		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
+        $this->db->where('sales.status',1);
+		$this->db->where('sales.sale_status','Verified');
+		$this->db->group_by('sales.id');
+        $this->db->order_by('sales.id',"DESC");
+        $query=$this->db->get();
+		return $query->result_array();
+    }
+
+	public function get_sale_id($sale_id)
+	{
+        $this->db->select('sales_services.*,services.name as servicename');
+        $this->db->from('sales_services');
+        $this->db->join('services','services.id=sales_services.services_id','left');
+		$this->db->where('sales_services.sales_id',$sale_id);
+		$this->db->group_by('sales_services.id');
+        $this->db->order_by('sales_services.id',"DESC");
+        $query=$this->db->get();
+		return $query->result_array();
+    }
+
+	function check_unique_order_no($id = '', $order_no) {
+        $this->db->where('deal_id', $order_no);
+        if($id) {
+            $this->db->where_not_in('deal_id', $id);
+        }
+        return $this->db->get('sales')->num_rows();
+    }
 }
 ?>
 

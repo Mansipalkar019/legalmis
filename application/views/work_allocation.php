@@ -14,60 +14,37 @@
 <div class="card-body" style="background-color: ghostwhite;padding: 20px;">
 
    <div class="row">
-   <?php echo form_open('AddBackendUsers/add_backend_users', array('id' => 'add_backend_user_form')) ?>
+   <?php echo form_open('Workallocation/add_work_allocation', array('id' => 'work_allocation_form')) ?>
       <div class="col-md-6">
          <div class="panel">
             <div class="panel-heading nopaddingbottom">
-               <h4 class="panel-title"><b>Add Users</b></h4>
+               <h4 class="panel-title"><b>Assign Service</b></h4>
             </div>
             <div class="card-body" style="padding: 20px;">
            
                <div class="form-group">
-                  <label>First Name:<span class="text-danger">*</span></label>
-                  <input type="text" name="firstname" id="firstname"
-                     class="form-control">
-                  <span class="error_msg" id="firstname_error"></span>
+                  <label>Select Deal Id:<span class="text-danger">*</span></label>
+                  <select id="dealid" class="form-control" name="dealid" onchange="getservices(this.value)">
+                    <option value="">Select Deal Id</option>
+                    <?php
+                        if (!empty($sales_deals)){
+                        foreach($sales_deals as $users_key => $users_row) 
+                        {?>
+                    <option value=<?php echo  $users_row['id'] ?> ><?php echo  $users_row['deal_id'] ?></option>
+                    <?php } }?>
+                  </select>
+                  <span class="error_msg" id="user_error"></span>
                </div>
            
-               <div class="form-group">
-                  <label>Last Name:<span class="text-danger">*</span></label>
-                  <input type="text" name="lastname" id="lastname"
-                     class="form-control" >
-                  <span class="error_msg" id="lastname_error"></span>
-               </div>
-
-               <div class="form-group">
-                  <label>Mobile No:<span class="text-danger">*</span></label>
-                  <input type="text" name="mobile_no" id="mobile_no"
-                     class="form-control"  onkeypress="return isNumber(event)">
-                  <span class="error_msg" id="mobile_no_error" maxlength="10"></span>
-               </div>
-
-               <div class="form-group">
-                  <label>Email Id:<span class="text-danger">*</span></label>
-                  <input type="text" name="email" id="email"
-                     class="form-control">
-                  <span class="error_msg" id="email_error"></span>
-               </div>
-               <div class="form-group">
-                  <label>Username:<span class="text-danger">*</span></label>
-                  <input type="text" name="username" id="username"
-                     class="form-control">
-                  <span class="error_msg" id="username_error"></span>
-               </div>
-               <div class="form-group">
-                  <label>Password:<span class="text-danger">*</span></label>
-                  <input type="password" name="password" id="password"
-                     class="form-control">
-                     <span toggle="#password" class="glyphicon glyphicon-eye-close field-icon toggle-password"></span>
-                  <span class="error_msg" id="password_error"></span>
+               <div class="services">
+                  
                </div>
             </div>
          </div>
          <div class="row">
             <div class="col-md-4">
                <div class="form-group"  style="margin-top: 15px;">
-                  <input type="submit" name="add_backend_user_submit" id="add_backend_user_submit" class="btn btn-primary" value="Save" />
+                  <input type="submit" name="work_allocation_submit" id="work_allocation_submit" class="btn btn-primary" value="Save" />
                </div>
             </div>
          </div>     
@@ -76,7 +53,7 @@
       <div class="col-md-6">
       <div class="panel">
             <div class="panel-heading nopaddingbottom">
-               <h4 class="panel-title"><b>Add Users</b></h4>
+               <h4 class="panel-title"><b>Users Listing</b></h4>
             </div>
             <div class="card-body" style="padding: 20px;">
            
@@ -84,13 +61,10 @@
                   <table id="doc_list_datatable" class="table table-striped table-bordered data-table"  cellspacing="0" width="100%">
                   <thead>
                         <tr>
-                           <th>Action</th>
                            <th>ID</th>
-                           <th>Role Name</th>
                            <th>Username</th>
-                           <th>Contact No</th>
-                           <th>Email</th>
-                          
+                           <th>Service</th>
+                           <th>Allocation Date</th>
                         </tr>
                      </thead>
                 </table>
@@ -124,7 +98,7 @@
                                     <label>Mobile No:<span class="text-danger">*</span></label>
                                     <input type="text" name="mobile_no1" id="mobile_no1"
                                        class="form-control"  onkeypress="return isNumber(event)">
-                                    <span class="error_msg" id="mobile_no1_error" maxlength="10"></span>
+                                    <span class="error_msg" id="mobile_no1_error"></span>
                                  </div>
 
                                  <div class="form-group">
@@ -143,7 +117,7 @@
                                     <label>Password:<span class="text-danger">*</span></label>
                                     <input type="password" name="password1" id="password1"
                                        class="form-control">
-                                       <span toggle="#password1" class="glyphicon glyphicon-eye-close field-icon toggle-password1"></span>
+                                       <span toggle="#password" class="glyphicon glyphicon-eye-open field-icon toggle-password"></span>
                                     <span class="error_msg" id="password1_error"></span>
                                  </div>
 
@@ -164,49 +138,51 @@
 
 </div>
 <?php  $this->load->view('footer'); ?>
-<script src="<?= base_url();?>assets_admin/view_js/backenduser.js"></script>
+<script src="<?= base_url();?>assets_admin/view_js/workallocation.js"></script>
 <script type="text/javascript">
-   var simpletable = $('#doc_list_datatable').DataTable({
-    "responsive": true,
-    'processing': true,
-    'serverSide': true,
-    'serverMethod': 'post',
-    'language': {
-        'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>',
-        searchPlaceholder: "Enter Username or Email"
-        
-    },
-   'ajax': {
-       'url': "<?= base_url() ?>AddBackendUsers/getuserlist",
-       'method': "POST",
-       'dataType':'json',
-       "data": function (data) {
-        
-       }
-   }, 
-   createdRow: function (row, data, index) {
-        $('td', row).eq(2).addClass('text-capitalize');
-    },
-});
+$("#dealid").select2({
+          placeholder: "Deal Id",
+          allowClear: true
+      });
 
-$(".toggle-password").click(function() {
+$(document).on('select2:unselect', '#dealid',function(e) {
+     var data = e.params.data;
+     var service_id = data.id
+   });
 
-$(this).toggleClass('glyphicon glyphicon-eye-close').toggleClass('glyphicon glyphicon-eye-open');
-var input = $($(this).attr("toggle"));
-if (input.attr("type") == "password") {
-  input.attr("type", "text");
-} else {
-  input.attr("type", "password");
+function getservices(saleid) {
+ 
+$.ajax({
+url: '<?php echo base_url(); ?>Workallocation/get_all_services',
+type: 'post',
+dataType: "json",
+data:{
+   saleid:saleid
+},
+success: function( data ) {    
+   console.log(data);
+   html11='';    
+   $(".services").empty();
+   $.each(data,function(i,member){
+      if(saleid == member.sales_id)
+      {
+         html11 +='<div class="row"><div class="col-md-6" id="removelabel_'+member.id+'"><div class="form-group"><label>Service: '+member.servicename+'</label></div></div><div class="col-md-6" id="show_company_content1_'+member.id+'"><div class="form-group"><label>Enter User Name For '+member.servicename+'<span class="text-danger">* </span></label><div><select class="form-control tokenizer1" multiple="multiple" style="width: 100% !important;" name="class_name_'+member.id+'['+member.id+'][]" id="class_name1_'+member.id+'" ></select></div></div><div class="col-md-6"></div></div><input type="hidden" class="form-control"  name="servicename[]" id="count'+member.id+'" value="'+member.services_id+'"></input><div id="new_brands_display_'+member.id+'"></div><div class="row"></div></div>';  
+      }
+     else{
+      html11 += "";
+     }
+     
+     
+   });
+   $('.services').append(html11);   
+      
+
+      $('.tokenizer1').select2({
+            tags: true,
+            tokenSeparators: [',', ' '],
+            });
+           
 }
 });
-
-$(".toggle-password1").click(function() {
-$(this).toggleClass('glyphicon glyphicon-eye-close').toggleClass('glyphicon glyphicon-eye-open');
-var input = $($(this).attr("toggle"));
-if (input.attr("type") == "password") {
-  input.attr("type", "text");
-} else {
-  input.attr("type", "password");
-}
-});
+} 
 </script>

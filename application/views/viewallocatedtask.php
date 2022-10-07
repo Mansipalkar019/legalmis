@@ -8,6 +8,14 @@
   padding-left: 3.5rem;
   z-index: 3;
 }
+#doc_list_datatable tbody tr.selected {
+    color: white;
+    background-color: #eeeeee;
+}
+table.dataTable tbody tr.selected {
+    color: white !important;
+    background-color: #eeeeee !important;
+}
 </style>
 <!--==================breadcrumb====================-->
 <div class="container first-body bdy">
@@ -43,105 +51,16 @@
                <div class="container-fluid" >
                 
                   <div style="overflow-y: auto;">
-                  <table id="doc_list_datatable" class="table table-striped table-bordered data-table"  cellspacing="0" width="100%">
-                  <div class="form-group" style="float:right;">
-                  <button class="btn btn-success btn-sm" type="button" id="btn-excel-download" ><i class="fa fa-search" aria-hidden="true" style="width: 200px;">&nbsp;<span>Export to Excel</span> </i></a>
-                 </div>
+                  <table id="doc_list_datatable" class="table table-striped  table-hover table-bordered data-table"  cellspacing="0" width="100%">
+                
                   <thead>
                         <tr>
-                           <th>Action</th>
                            <th>ID</th>
-                           <th>Company Name</th>
-                           <th>Sale Date</th>
-                           <th>Client Name</th>
-                           <th>Service</th>
-                           <th>Sub Service</th>
-                           <th>Contact No</th>
-                           <th>Email</th>
-                           <th>Gst No</th>
-                           <th>Deal Id</th>
-                           <th>Invoice Number</th>
-                           <!-- <th>Primary Caller</th>
-                           <th>Secondary Caller</th> -->
-                           <!-- <th>Lead Source</th> -->
-                           <th>Street</th>
-                           <th>City</th>
-                           <th>State</th>
-                           <th>Pincode</th>
-                           <th>Payment Mode</th>
-                           <th>Deal Amount</th>
-                           <th>Amount Received</th>
-                           <th>Outstanding</th>
-                           <th>Tcs</th>
-                           <th>Govt Fees</th>
-                           <th>Associate Fees</th>
-                           <th>Net Income</th>
-                           <th>Gst Amount</th>
-                           <!-- <th>Outstanding Followup Date</th> -->  
-                           <!-- <th>Invoice Status</th>
-                           <th>Invoice Name</th>
-                           <th>Invoice Type</th> -->
-                           <th>Govt Fee</th>
-                           <th>Professional Fees</th>
-                           <th>Drafting Proceeding Fees</th>
-                           <th>Drafing Proceeding Professional Fees</th>
-                           <th>Total Professional Amount</th>
-                           <th>cgst</th>
-                           <th>sgst</th>
-                           <th>igst</th>
-                           <th>Round Off</th> 
-                           <th>Remarks</th>
+                           <th>Services</th>
+                           <th>Created On</th>
                         </tr>
                      </thead>
                 </table>
-
-<div class="modal fade" id="modal_form" role="dialog" data-easein="bounceDownIns">
-    <div class="modal-dialog modal-lg" style="width:auto !important;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title">Services</h3>
-            </div>
-            <div class="modal-body form">
-              
-                    <input type="hidden" value="" name="id" class="id"/> 
-                    <div style="overflow-x:auto;">
-          <table class="table table-striped table-bordered data-table brand_list_datatable"  cellspacing="0" width="100%">
-                <thead>
-                        <tr>
-                           <th>Id</th>
-                           <th>Service</th>
-                           <th>Brand Name</th>
-                           <th>Class Name</th>
-                        </tr>
-                     </thead>
-                </table>
-              
-            </div>
-        
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="modal_form1" role="dialog" data-easein="bounceDownIns">
-    <div class="modal-dialog modal-lg" style="width:auto !important;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title">Services</h3>
-            </div>
-            <div class="modal-body form">
-              
-                    <input type="hidden" value="" name="id" class="id"/> 
-                    <div style="overflow-x:auto;">
-         
-              
-            </div>
-        
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-
                   </div>
                </div>
             </div >
@@ -173,8 +92,9 @@ var simpletable = $('#doc_list_datatable').DataTable({
         searchPlaceholder: ""
         
     },
+    
    'ajax': {
-       'url': "<?= base_url() ?>Sales/getsalesrecord",
+       'url': "<?= base_url() ?>ViewAllocatedTask/get_allocated_work_listing",
        'method': "POST",
        'dataType':'json',
        "data": function (data) {
@@ -249,7 +169,7 @@ $('#modal_form').modal('show');
       $.ajax({
 				type:"POST",
 				async: "true",
-				url:"<?php echo base_url(); ?>Sales/sales_exceldownload",
+				url:"<?php echo base_url(); ?>ViewAllocatedTask/get_allocated_work_listing",
 				dataType:"json",
 				data:{
 					fromdate:from_date,

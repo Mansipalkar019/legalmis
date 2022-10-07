@@ -14,6 +14,7 @@
    <div class="container">
       <div class="row">
          <div class="col-md-12">
+            
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Sales</a></li>
@@ -44,9 +45,7 @@
                 
                   <div style="overflow-y: auto;">
                   <table id="doc_list_datatable" class="table table-striped table-bordered data-table"  cellspacing="0" width="100%">
-                  <div class="form-group" style="float:right;">
-                  <button class="btn btn-success btn-sm" type="button" id="btn-excel-download" ><i class="fa fa-search" aria-hidden="true" style="width: 200px;">&nbsp;<span>Export to Excel</span> </i></a>
-                 </div>
+                
                   <thead>
                         <tr>
                            <th>Action</th>
@@ -94,8 +93,7 @@
                         </tr>
                      </thead>
                 </table>
-
-<div class="modal fade" id="modal_form" role="dialog" data-easein="bounceDownIns">
+                <div class="modal fade" id="modal_form" role="dialog" data-easein="bounceDownIns">
     <div class="modal-dialog modal-lg" style="width:auto !important;">
         <div class="modal-content">
             <div class="modal-header">
@@ -173,8 +171,9 @@ var simpletable = $('#doc_list_datatable').DataTable({
         searchPlaceholder: ""
         
     },
+   
    'ajax': {
-       'url': "<?= base_url() ?>Sales/getsalesrecord",
+       'url': "<?= base_url() ?>ViewSales/getsalesrecord",
        'method': "POST",
        'dataType':'json',
        "data": function (data) {
@@ -194,7 +193,6 @@ $('#btn-search-by-date').click(function () { //button filter event click
     
    $(document).on('click','.edit_service_data',function (){
       var id = $(this).attr("id");
-
    var brand_list_datatable = $('.brand_list_datatable').DataTable({
      
       destroy: true,
@@ -206,7 +204,7 @@ $('#btn-search-by-date').click(function () { //button filter event click
         'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>',
     },
    'ajax': {
-       'url': "<?= base_url() ?>Sales/getsalesrecord1",
+       'url': "<?= base_url() ?>ViewSales/getsalesrecord1",
        'method': "POST",
        'dataType':'json',
        "data": function (data) {
@@ -227,7 +225,7 @@ $('#modal_form').modal('show');
       $.ajax({
 				type:"POST",
 				async: "true",
-				url:"<?php echo base_url(); ?>Sales/getsalesdocimages",
+				url:"<?php echo base_url(); ?>ViewSales/getsalesdocimages",
 				dataType:"json",
 				data:{
 					id:id,
@@ -249,7 +247,7 @@ $('#modal_form').modal('show');
       $.ajax({
 				type:"POST",
 				async: "true",
-				url:"<?php echo base_url(); ?>Sales/sales_exceldownload",
+				url:"<?php echo base_url(); ?>ViewSales/sales_exceldownload",
 				dataType:"json",
 				data:{
 					fromdate:from_date,

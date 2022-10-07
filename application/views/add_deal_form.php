@@ -275,7 +275,7 @@
                      <div class="form-group">
                         <label>Outstanding followup date:<span class="text-danger">*</span></label>
                         <input type="date" name="outstanding_followup_date" id="outstanding_followup_date"
-                           class="form-control" value="<?php echo date('Y-m-d'); ?>">
+                           class="form-control" value="">
                         <span class="error_msg" id="outstanding_followup_date_error"></span>
                      </div>
                   </div>
@@ -485,7 +485,7 @@
             </div>
          </div>
          <?php echo form_close() ?>
-                              </div>
+         </div>
          <div style="margin-top: 10px;"></div>
          <?php echo form_open('Sales/do_upload', array('id' => 'upload_excel_form')) ?>
          <!-- <div class="row">
