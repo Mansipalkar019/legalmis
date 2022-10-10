@@ -171,7 +171,6 @@ var simpletable = $('#doc_list_datatable').DataTable({
         searchPlaceholder: ""
         
     },
-   
    'ajax': {
        'url': "<?= base_url() ?>ViewSales/getsalesrecord",
        'method': "POST",
