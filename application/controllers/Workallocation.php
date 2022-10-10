@@ -104,9 +104,9 @@ class Workallocation extends CI_Controller
     public function get_all_services()
     {
        $sale_id=$this->input->post('saleid');
-       $totalData=$this->supermodel->get_sale_id($sale_id);   
-       
-       echo json_encode($totalData);    
+       $data['services']=$this->supermodel->get_sale_id($sale_id);   
+       $data['users']=$this->supermodel->get_user_listing($this->session->userdata('role_id'));
+       echo json_encode($data);    
     }
 }
 ?>

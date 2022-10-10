@@ -209,7 +209,7 @@ class supermodel extends CI_Model {
 
 	public function get_allocated_work($session,$rowno="",$rowperpage="",$search_text="")
 	{ 
-		$this->db->select(' GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->select('GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(allocated_service_users.user)) as users,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
 		$this->db->from('allocated_service_users');
 		$this->db->join('services','services.id=allocated_service_users.service','left');
 		$this->db->join('users','users.user_id=allocated_service_users.user','left');
@@ -227,7 +227,7 @@ class supermodel extends CI_Model {
 	}
 	public function count_allocated_work_filtered($session,$rowno="",$rowperpage="",$search_text="")
 	{
-		$this->db->select('GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->select('GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(allocated_service_users.user)) as users,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
 		$this->db->from('allocated_service_users');
 		$this->db->join('services','services.id=allocated_service_users.service','left');
 		$this->db->join('users','users.user_id=allocated_service_users.user','left');
@@ -243,7 +243,7 @@ class supermodel extends CI_Model {
 	}
 	public function count_all_allocated_work($session,$rowno="",$rowperpage="",$search_text="")
 	{
-		$this->db->select('GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
+		$this->db->select('GROUP_CONCAT(DISTINCT(allocated_service_users.created_on)) as created_on,GROUP_CONCAT(DISTINCT(allocated_service_users.user)) as users,GROUP_CONCAT(DISTINCT(users.username)) as username,GROUP_CONCAT(services.name) as servicename');
 		$this->db->from('allocated_service_users');
 		$this->db->join('services','services.id=allocated_service_users.service','left');
 		$this->db->join('users','users.user_id=allocated_service_users.user','left');
@@ -763,6 +763,7 @@ class supermodel extends CI_Model {
 		$this->db->group_by('sales_services.id');
         $this->db->order_by('sales_services.id',"DESC");
         $query=$this->db->get();
+		//echo $this->db->last_query();die();
 		return $query->result_array();
     }
 
