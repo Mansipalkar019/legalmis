@@ -18,13 +18,10 @@ class BackendUsers extends CI_Controller
         $this->load->view('footer');
     }
 
-    
-
     public function logout()
 	{
         // destroy and logout user session
 		$this->session->sess_destroy();
 		redirect('');
 	}
-
 }

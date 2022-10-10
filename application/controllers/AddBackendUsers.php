@@ -10,11 +10,23 @@ class AddBackendUsers extends CI_Controller
         date_default_timezone_set('Asia/Kolkata');
         $this->load->model('model');
         $this->load->model('supermodel');
+<<<<<<< HEAD
     
+=======
+        if ($this->session->userdata('role_id') == 3){
+            redirect(base_url()."AddBackendUsers");
+            return false;
+           }
+           elseif($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2){
+            redirect(base_url()."dashboard");
+            return false;
+        }
+>>>>>>> b1160d673d8a15c6ecce2be3756f3fc879185dbb
     }
 
     public function index()
     {
+<<<<<<< HEAD
         $this->load->view('addbackendusers');
        
     }
@@ -203,5 +215,11 @@ class AddBackendUsers extends CI_Controller
         $totalData['decrytpassword']=$this->encryption->decrypt($totalData['password']);
         echo json_encode($totalData);
     }
+=======
+
+        $this->load->view('addbackendusers');
+       
+    }
+>>>>>>> b1160d673d8a15c6ecce2be3756f3fc879185dbb
 }
 ?>

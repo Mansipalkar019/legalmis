@@ -1,61 +1,51 @@
-function validate_add_banner(ele){
+function validate_add_roles(ele){
     hide_message_box(ele);
     var hasError = 0;
-    var servicename=$('#servicename').val();
-    var terms=$('#terms').val();
-    alert(terms);
-    if(jQuery.trim(servicename) == '')
+    var user_name=$('#user_name').val();
+    var password=$('#password').val();
+    var roles=$('#roles').val();
+    if(jQuery.trim(user_name) == '')
     {
-        showError("Please Enter the Service Name","servicename");hasError=1;
+        showError("Please Enter the User Name","user_name");hasError=1;
         
     }
     else {
-        changeError("servicename");
+        changeError("user_name");
     }
 
-    if(jQuery.trim(terms) == '')
+    if(jQuery.trim(password) == '')
     {
-        showError("Please Enter the Terms & Condition","terms");hasError=1;
+        showError("Please Enter the Password","password");hasError=1;
         
     }
     else {
-        changeError("terms");
+        changeError("password");
+    }
+
+    if(jQuery.trim(roles) == '')
+    {
+        showError("Please Select Role","roles");hasError=1;
+        
+    }
+    else {
+        changeError("roles");
     }
 
     if(hasError==1){
         return false;
-    }
-    else{
+    }else{
         
             var user = {};
             user.product = {};
-            //   var brandname = document.getElementById('brandname').checked = true;
-            //   alert(brandname);
-            //  var classname = document.getElementById('classname').checked = true;
-            user.product.servicename = servicename;
-            user.product.terms=terms;
-            //  user.product.brandname = brandname;
-            //  user.product.classname = classname;
-           
-                if (document.getElementById('brandname').checked == true) {
-                    user.product.brandname="Yes";
-                } else {
-                    user.product.brandname="NA";
-                }
-          
-          
-                if (document.getElementById('classname').checked == true) {
-                    user.product.classname="Yes";
-                } else {
-                    user.product.classname="NA";
-                }
-          
-                 
+            user.product.user_name = user_name;
+            user.product.password = password;
+            user.product.roles = roles;
+
             var q = JSON.stringify(user);
             jQuery.ajax({
                 dataType: 'json',
                 type: "POST",
-                url: bases_url+"Masters/addservice",
+                url: bases_url+"Masters/add_role",
                 data: {'jsonObj' : q},
                 cache: false,
                 beforeSend: function(){ 
@@ -73,7 +63,7 @@ function validate_add_banner(ele){
                             icon: "success",
                             timer: 1000
                           });
-                        $('#service_datatable').DataTable().ajax.reload(null,false);
+                        $('#roles_datatable').DataTable().ajax.reload(null,false);
                         //window.setTimeout(function() { $(".alert-success").alert('close'); }, 2000);
                       }else{ // Failed
                         swal({
@@ -91,38 +81,17 @@ function validate_add_banner(ele){
     return false;
 }
 
-function validate_add_banner1(ele){
-    hide_message_box(ele);
-    var hasError = 0;
-    var image_file=$('#names').val();
-   if(jQuery.trim(image_file) == '')
-    {
-        showError("Please Select the File","names");hasError=1;
-        
-    }
-    else {
-        changeError("names");
-    }
-
-    if(hasError==1){
-        return false;
-    }else{
-        
-    }
-}
-
-
-function delete_services(ele,service_id){
-    if(confirm("Are you sure wanted to delete this Service?")){
+function delete_role(ele,role_id){
+    if(confirm("Are you sure wanted to delete this Role?")){
         var user = {};
         user.product = {};
-        user.product.service_id = service_id;
+        user.product.role_id = role_id;
                     
         var q = JSON.stringify(user);
         jQuery.ajax({
             dataType: 'json',
             type: "POST",
-            url: bases_url+"Masters/delete_service",
+            url: bases_url+"Masters/delete_roles",
             data: {'jsonObj' : q},
             cache: false,
             beforeSend: function(){ 
@@ -138,50 +107,55 @@ function delete_services(ele,service_id){
     return false;
 }
 
-function validate_update_services(ele){
+function validate_update_roles(ele){
 
 	var hasError = 0;
-	var serviceid = $("#serviceid").val();
-	var service_name = $("#service_name").val();
-    var terms1 = $("#terms1").val();
+    var user_name=$('#user_name1').val();
+    var password=$('#password1').val();
+    var roles1=$('#roles1').val();
    
-	if(jQuery.trim(service_name)==''){
-		 showError("Please Enter Service Name","service_name"); hasError = 1; 
-	}else{
-		changeError("service_name");
-	}
+    var user_id=$('#user_id').val();
+    if(jQuery.trim(user_name) == '')
+    {
+        showError("Please Enter the User Name","user_name");hasError=1;
+        
+    }
+    else {
+        changeError("user_name");
+    }
 
-    if(jQuery.trim(terms1)==''){
-        showError("Please Enter Service Name","terms1"); hasError = 1; 
-   }else{
-       changeError("terms1");
-   }
+    if(jQuery.trim(password) == '')
+    {
+        showError("Please Enter the Password","password");hasError=1;
+        
+    }
+    else {
+        changeError("password");
+    }
+
+    if(jQuery.trim(roles1) == '')
+    {
+        showError("Please Select Role","roles1");hasError=1;
+        
+    }
+    else {
+        changeError("roles1");
+    }
 
 	if(hasError==1){
 		return false;
 	}else{
 			var user = {};
 			user.product = {};
-			user.product.serviceid = serviceid;
-			user.product.service_name = service_name;
-            user.product.terms1 = terms1;
-            if (document.getElementById('brand').checked == true) {
-                user.product.brandname="Yes";
-            } else {
-                user.product.brandname="NA";
-            }
-        
-        
-            if (document.getElementById('class').checked == true) {
-                user.product.classname="Yes";
-            } else {
-                user.product.classname="NA";
-            }	
+            user.product.user_name = user_name;
+            user.product.password = password;
+            user.product.roles1 = roles1;
+            user.product.user_id = user_id;		
 			var q = JSON.stringify(user);
-        	jQuery.ajax({
+            jQuery.ajax({
 				dataType: 'json',
 				type: "POST",
-				url: bases_url+"Masters/Update_Service",
+				url: bases_url+"Masters/Update_roles",
 				data: {'jsonObj' : q},
 				cache: false,
 				beforeSend: function(){ 
@@ -189,7 +163,7 @@ function validate_update_services(ele){
 				},
 				success: function(response){
 					if(response.status=='1'){ // Success
-                        $('#myModal').modal('hide');
+                        $('#roleModal').modal('hide');
                         swal({
                             title: "Success",
                             text: response.msg,
@@ -197,10 +171,10 @@ function validate_update_services(ele){
                             timer: 1000
                           });
                       
-                        $('#service_datatable').DataTable().ajax.reload(null,false);
-                        //window.setTimeout(function() { $(".alert-success").alert('close'); }, 1000);
+                        $('#roles_datatable').DataTable().ajax.reload(null,false);
+                        window.setTimeout(function() { $(".alert-success").alert('close'); }, 1000);
 		          	}else{ // Failed
-                        $('#myModal').modal('hide');
+                        $('#roleModal').modal('hide');
                         swal({
                             title: "Warning",
                             text: response.msg,
@@ -208,7 +182,7 @@ function validate_update_services(ele){
                             dangerMode: true,
                             timer: 1000
                           });
-                        //window.setTimeout(function() { $(".alert-danger").alert('close'); }, 1000);
+                        window.setTimeout(function() { $(".alert-danger").alert('close'); }, 1000);
 		          	}
 	      		}
 	  		});
@@ -253,35 +227,21 @@ function isValidEmailAddress(emailAddress) {
 $(document).on('click', '.a_category_view', function () {
     var id = $(this).attr("id");
        $.ajax({
-          url: bases_url+"Masters/get_all_services",
+          url: bases_url+"Masters/get_all_roles",
           method: "POST",
           data: {
              id: id
           },
           dataType: "json",
           success: function (data) {
-                $('#serviceid').val(data['id']);
-                $('#service_name').val(data['name']);
-                //$('#terms1').val(data['terms']);
-                $("#terms1").summernote("code", data["terms"]);
-                if(data['brand_name'] == "Yes")
-                {
-                    $('.brand').prop('checked', true);
-
-                }else{
-                    $('.brand').prop('checked', false);
-                }
-
-                if(data['class_name'] == "Yes")
-                {
-                    $('.class').prop('checked', true);
-
-                }else{
-                    $('.class').prop('checked', false);
-                }
+            $('#roles1').val(data['roles_id']);
+            $('#roles1').select2().trigger('change');
+            $('#user_id').val(data['user_id']);
+                $('#user_name1').val(data['username']);
+                $('#password1').val(data['decryptpassword']);
+              
           }
        });
        
     });
 
-   

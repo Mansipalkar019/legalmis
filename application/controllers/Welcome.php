@@ -41,6 +41,7 @@ class Welcome extends CI_Controller
 				$userPassword = $this->input->post('password');
 				// FETCH: check user credentials are correct
 				$users = $this->model->getData("users", array('username' => $userName,'status' => '1'));
+				
 				if($this->encryption->decrypt($users[0]['password']) == $userPassword){
 					$sessionArray = array(
 						'username' => $users[0]['username'],
@@ -52,7 +53,7 @@ class Welcome extends CI_Controller
 					// redirect to dashboard; login successfull
 					$role_id = $this->session->userdata('role_id');
 					$user_id = $this->session->userdata('user_id');
-					if ($role_id == 1 || $role_id == 2){
+					if ($role_id == 1 || $role_id == 3){
 						redirect('Dashboard');
 					}else{
 						redirect('BackendUsers');

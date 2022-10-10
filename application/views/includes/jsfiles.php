@@ -65,4 +65,5 @@
 <script>
         var bases_url="<?=base_url() ?>";
         $("#services_chosen").addClass('textbox');
-    </script>
+</script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets_admin/js/simple-lightbox.min.js"></script>
