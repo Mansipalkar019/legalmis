@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2022 at 02:32 PM
+-- Generation Time: Oct 03, 2022 at 07:27 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -20857,26 +20857,27 @@ INSERT INTO `resources` (`id`, `name`, `desc`, `users_id`, `permissions_id`, `co
 
 CREATE TABLE `sales` (
   `id` bigint(20) NOT NULL,
-  `clients_id` bigint(20) NOT NULL DEFAULT 0,
-  `company_name` varchar(100) DEFAULT NULL,
-  `brand_name` varchar(100) DEFAULT NULL,
-  `class_name` varchar(100) DEFAULT NULL,
   `sale_date` varchar(50) DEFAULT NULL,
   `client_name` varchar(100) DEFAULT NULL,
+  `deal_id` varchar(100) DEFAULT NULL,
+  `clients_id` bigint(20) NOT NULL DEFAULT 0,
   `mobile_1` tinytext DEFAULT NULL,
   `mobile_2` tinytext DEFAULT NULL,
   `alternate_number` longtext DEFAULT NULL,
   `email_address` varchar(100) DEFAULT NULL,
+  `alternate_email` varchar(100) DEFAULT NULL,
+  `street` longtext DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `pincode` int(11) DEFAULT NULL,
   `gst_no` varchar(100) DEFAULT NULL,
-  `deal_id` varchar(100) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `industry` varchar(255) DEFAULT NULL,
+  `company_name` varchar(100) DEFAULT NULL,
   `invoice_number` varchar(100) DEFAULT NULL,
   `primary_caller` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `secondary_caller` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `lead_source` varchar(100) DEFAULT NULL,
-  `street` longtext DEFAULT NULL,
-  `city` int(11) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
-  `pincode` int(11) DEFAULT NULL,
   `payment_mode` varchar(100) DEFAULT NULL,
   `deal_amount` double NOT NULL,
   `amount_received` double DEFAULT NULL,
@@ -20904,13 +20905,8 @@ CREATE TABLE `sales` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `commission` varchar(255) DEFAULT NULL,
-  `date_of_birth` date DEFAULT NULL,
-  `industry` varchar(255) DEFAULT NULL,
   `legal_remarks` varchar(255) DEFAULT NULL,
   `accounts_remarks` varchar(255) DEFAULT NULL,
-  `alternate_email` varchar(100) DEFAULT NULL,
-  `services` varchar(255) DEFAULT NULL,
-  `sub_services` varchar(255) DEFAULT NULL,
   `document_list` varchar(255) DEFAULT NULL,
   `image_url` varchar(255) DEFAULT NULL,
   `status` int(5) NOT NULL DEFAULT 1,
@@ -20925,9 +20921,9 @@ CREATE TABLE `sales` (
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`id`, `clients_id`, `company_name`, `brand_name`, `class_name`, `sale_date`, `client_name`, `mobile_1`, `mobile_2`, `alternate_number`, `email_address`, `gst_no`, `deal_id`, `invoice_number`, `primary_caller`, `secondary_caller`, `lead_source`, `street`, `city`, `state`, `pincode`, `payment_mode`, `deal_amount`, `amount_received`, `outstanding`, `tcs`, `govt_fees`, `associate_fees`, `net_income`, `gst_amount`, `outstanding_followup_date`, `remarks`, `invoice_status`, `invoice_name`, `invoice_type`, `govt_fee`, `professional_fees`, `drafting_proceeding_fees`, `drafting_proceeding_professional_fees`, `total_professional_amount`, `cgst`, `sgst`, `igst`, `round_off`, `updated_by`, `updated_at`, `created_at`, `commission`, `date_of_birth`, `industry`, `legal_remarks`, `accounts_remarks`, `alternate_email`, `services`, `sub_services`, `document_list`, `image_url`, `status`, `account`, `invoice_mail_status`, `gag_recieved`, `bifurcation`, `pdfpath`) VALUES
-(1, 0, 'fgfh', NULL, NULL, '2022-09-17', 'fhdgjkfb', '6456457465', '6547856476', '7465475677', 'demostzsoft@gmail.com', 'yghu454', 'rergj23652', NULL, '1', '2', 'rfed', 'fhgh', 0, 22, 400002, '3', 7200, 0, '0', '0', '4500', '0', '2288', '2534', '2022-09-17', '', '2', 'hfgdhg', '3', '4500', '2288', '0', '0', '2288', '205.92', '205.92', '0', '0.16', 1, '2022-09-17 05:58:38', '2022-09-17 05:58:38', NULL, '2022-09-17', '56tgffg', 'edsfdsfvd', 'gfhgfhgfh', 'demostzsoft@gmail.com', NULL, NULL, NULL, 'uploads/images/LEG_fgfh_LEG_fgfh_1.png,uploads/images/LEG_fgfh_LEG_fgfh_11.png,uploads/images/LEG_fgfh_LEG_fgfh_12.png,uploads/images/LEG_fgfh_LEG_fgfh_13.png', 1, NULL, NULL, NULL, NULL, 'http://localhost/legalmis/uploads/invoice/rergj23652legal_invoice.pdf'),
-(2, 0, 'fgfh', NULL, NULL, '2022-09-17', 'abcdgd', '6456457465', '6547856476', '7465475677', 'demostzsoft@gmail.com', 'yghu454', 'rgg65767', NULL, '1', '2', 'rfed', 'fhgh', 0, 22, 400002, '3', 7200, 0, '0', '0', '4500', '0', '2288', '2534', '2022-09-17', '', '2', 'hfgdhg', '3', '4500', '2288', '0', '0', '2288', '205.92', '205.92', '0', '0.16', 1, '2022-09-17 06:12:21', '2022-09-17 06:12:21', NULL, '2022-09-17', '56tgffg', 'edsfdsfvd', 'gfhgfhgfh', 'demostzsoft@gmail.com', NULL, NULL, NULL, 'uploads/images/LEG_fgfh_LEG_fgfh_14.png,uploads/images/LEG_fgfh_LEG_fgfh_15.png,uploads/images/LEG_fgfh_LEG_fgfh_16.png,uploads/images/LEG_fgfh_LEG_fgfh_17.png', 1, NULL, NULL, NULL, NULL, 'http://localhost/legalmis/uploads/invoice/rgg65767legal_invoice.pdf');
+INSERT INTO `sales` (`id`, `sale_date`, `client_name`, `deal_id`, `clients_id`, `mobile_1`, `mobile_2`, `alternate_number`, `email_address`, `alternate_email`, `street`, `state`, `city`, `pincode`, `gst_no`, `date_of_birth`, `industry`, `company_name`, `invoice_number`, `primary_caller`, `secondary_caller`, `lead_source`, `payment_mode`, `deal_amount`, `amount_received`, `outstanding`, `tcs`, `govt_fees`, `associate_fees`, `net_income`, `gst_amount`, `outstanding_followup_date`, `remarks`, `invoice_status`, `invoice_name`, `invoice_type`, `govt_fee`, `professional_fees`, `drafting_proceeding_fees`, `drafting_proceeding_professional_fees`, `total_professional_amount`, `cgst`, `sgst`, `igst`, `round_off`, `updated_by`, `updated_at`, `created_at`, `commission`, `legal_remarks`, `accounts_remarks`, `document_list`, `image_url`, `status`, `account`, `invoice_mail_status`, `gag_recieved`, `bifurcation`, `pdfpath`) VALUES
+(1, '2022-09-24', 'test', 'test deal id', 0, '232333333', '232333333', '232333333', 'shirin@stzsoft.com', 'shirin@stzsoft.com', 'test', 22, 'Mumbai', 400004, 'ew34dd', '1992-05-24', 'sssa', 'ssassa', 'djdldkldk', '2', '2', 'ewe', '2', 4000, 0, '0', '0', '0', '0', '3390', '0', '2022-09-24', '', '1', 'fggg', '3', '0', '3390', '0', '0', '3390', '305.1', '305.1', '0', '-0.20', 1, '2022-09-29 12:58:41', '2022-09-24 06:09:50', NULL, 'djdldkldk', 'lklsklksl', NULL, 'uploads/images/LEG_ssassa_LEG_ssassa_13.jpg', 1, NULL, NULL, NULL, NULL, 'http://localhost/legalmis/uploads/invoice/test deal idlegal_invoice.pdf'),
+(2, '2022-09-29', 'test hghghhgh', 'skdkj', 0, '3983938938', '3455455545', '54565666', 'shirin@stzsoft.com', 'shirin@stzsoft.com', 'test', 22, 'Mumbai', 400005, 'ew34dd', '2022-09-29', 'sssa', 'BDS', '56', '2', '2', 'ewe', '3', 4000, 0, '0', '0', '0', '0', '3390', '0', '2022-09-29', '', '1', 'fggg', '1', '0', '3390', '0', '0', '3390', '305.1', '305.1', '0', '-0.20', 1, '2022-09-30 06:45:44', '2022-09-29 08:09:39', NULL, 'rerttrrtw', 'dfggrttttt', NULL, 'uploads/images/LEG_BDS_LEG_BDS_2.jpg', 1, NULL, NULL, NULL, NULL, 'http://localhost/legalmis/uploads/invoice/skdkjlegal_invoice.pdf');
 
 -- --------------------------------------------------------
 
@@ -20973,8 +20969,14 @@ CREATE TABLE `sales_services` (
 --
 
 INSERT INTO `sales_services` (`id`, `sales_id`, `services_id`) VALUES
-(1, 1, 1),
-(2, 2, 1);
+(1, 1, 8),
+(2, 1, 11),
+(3, 1, 31),
+(4, 2, 1),
+(5, 2, 2),
+(6, 2, 3),
+(7, 2, 4),
+(8, 2, 16);
 
 -- --------------------------------------------------------
 
@@ -20994,10 +20996,75 @@ CREATE TABLE `sales_sub_services` (
 --
 
 INSERT INTO `sales_sub_services` (`id`, `sales_id`, `services_id`, `sub_services_id`) VALUES
-(1, 1, 1, 2),
-(2, 1, 1, 3),
-(3, 2, 1, 2),
-(4, 2, 1, 3);
+(1, 2, 1, 1),
+(2, 2, 1, 2),
+(3, 2, 1, 3),
+(4, 2, 1, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sale_service_brand`
+--
+
+CREATE TABLE `sale_service_brand` (
+  `id` bigint(20) NOT NULL,
+  `fk_sales_id` int(11) DEFAULT NULL,
+  `fk_service_id` int(11) DEFAULT NULL,
+  `brand_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sale_service_brand`
+--
+
+INSERT INTO `sale_service_brand` (`id`, `fk_sales_id`, `fk_service_id`, `brand_name`, `created_at`, `updated_at`) VALUES
+(1, 1, 8, ' Company Formation', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(2, 1, 8, ' Company Formation1', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(3, 1, 8, ' Company Formation2', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(4, 1, 11, 'GST', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(5, 1, 11, 'GST1', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(6, 1, 31, 'abc', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(7, 1, 31, 'abc1', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(8, 1, 31, 'abc2', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(9, 2, 16, 'Company Compliance', '2022-09-29 08:09:39', '2022-09-29 08:09:39'),
+(10, 2, 16, 'Company Compliance1', '2022-09-29 08:09:39', '2022-09-29 08:09:39'),
+(11, 2, 16, 'Company Compliance2', '2022-09-29 08:09:39', '2022-09-29 08:09:39'),
+(12, 2, 16, 'Company Compliance3', '2022-09-29 08:09:39', '2022-09-29 08:09:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sale_service_class`
+--
+
+CREATE TABLE `sale_service_class` (
+  `id` bigint(20) NOT NULL,
+  `fk_sale_id` int(11) DEFAULT NULL,
+  `fk_service_id` int(11) DEFAULT NULL,
+  `fk_brand_id` int(10) DEFAULT NULL,
+  `class_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sale_service_class`
+--
+
+INSERT INTO `sale_service_class` (`id`, `fk_sale_id`, `fk_service_id`, `fk_brand_id`, `class_name`, `created_at`, `updated_at`) VALUES
+(1, 1, 8, 1, '1', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(2, 1, 8, 1, '2', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(3, 1, 8, 1, '3', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(4, 1, 8, 2, '4', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(5, 1, 8, 2, '5', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(6, 1, 8, 3, '6', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(7, 1, 11, 4, '8', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(8, 1, 11, 5, '9', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(9, 1, 11, 5, '10', '2022-09-24 06:09:50', '2022-09-24 06:09:50'),
+(10, 1, 11, 5, '11', '2022-09-24 06:09:50', '2022-09-24 06:09:50');
 
 -- --------------------------------------------------------
 
@@ -28886,6 +28953,18 @@ ALTER TABLE `sales_sub_services`
   ADD KEY `sub_services_id` (`sub_services_id`);
 
 --
+-- Indexes for table `sale_service_brand`
+--
+ALTER TABLE `sale_service_brand`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sale_service_class`
+--
+ALTER TABLE `sale_service_class`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
@@ -29002,13 +29081,25 @@ ALTER TABLE `sales_document_list_files`
 -- AUTO_INCREMENT for table `sales_services`
 --
 ALTER TABLE `sales_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sales_sub_services`
 --
 ALTER TABLE `sales_sub_services`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `sale_service_brand`
+--
+ALTER TABLE `sale_service_brand`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `sale_service_class`
+--
+ALTER TABLE `sale_service_class`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `services`
