@@ -1284,7 +1284,7 @@ class Sales extends CI_Controller
                                 'associate_fees'=>$associate_fees,
                                 'net_income'=>$net_income,
                                 'govt_fee'=>$govt_fee,
-                                'professional_fees'=>$professinal_amt,
+                                'professional_fees'=>$professional_fees,
                                 'drafting_proceeding_fees'=>$drafting_proceeding_fees,
                                 'drafting_proceeding_professional_fees'=>$drafting_proceeding_professional_fees,
                                 'total_professional_amount'=>$total_professional_amount,

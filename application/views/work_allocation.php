@@ -23,6 +23,7 @@
             <div class="card-body" style="padding: 20px;">
            
                <div class="form-group">
+<<<<<<< HEAD
                   <label>Select Deal Id:<span class="text-danger">*</span></label>
                   <select id="dealid" class="form-control" name="dealid" onchange="getservices(this.value)">
                     <option value="">Select Deal Id</option>
@@ -31,13 +32,38 @@
                         foreach($sales_deals as $users_key => $users_row) 
                         {?>
                     <option value=<?php echo  $users_row['id'] ?> ><?php echo  $users_row['deal_id'] ?></option>
+=======
+                  <label>User:<span class="text-danger">*</span></label>
+                  <select id="user" class="form-control" name="user" >
+                    <option value="">Select User</option>
+                    <?php
+                        if (!empty($users)){
+                        foreach($users as $users_key => $users_row) 
+                        {?>
+                    <option value=<?php echo  $users_row['user_id'] ?> ><?php echo  $users_row['username'] ?></option>
+>>>>>>> ede66fac92f93976a0df3d953065fe2fd6ef26c6
                     <?php } }?>
                   </select>
                   <span class="error_msg" id="user_error"></span>
                </div>
            
+<<<<<<< HEAD
                <div class="services">
                  
+=======
+               <div class="form-group">
+                  <label>Service:<span class="text-danger">*</span></label>
+                  <select id="service" class="form-control" name="service[]"  multiple="">
+                    <option value="">Select Service</option>
+                    <?php
+                        if (!empty($services)){
+                        foreach($services as $services_key => $services_row) 
+                        {?>
+                    <option value=<?php echo  $services_row['id'] ?> ><?php echo  $services_row['name'] ?></option>
+                    <?php } }?>
+                  </select>
+                  <span class="error_msg" id="service_error"></span>
+>>>>>>> ede66fac92f93976a0df3d953065fe2fd6ef26c6
                </div>
             </div>
          </div>
