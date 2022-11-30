@@ -40,24 +40,28 @@ class Welcome extends CI_Controller
 				$userName = strtolower($this->security->xss_clean($this->input->post('username')));
 				$userPassword = $this->input->post('password');
 				// FETCH: check user credentials are correct
-				$users = $this->model->getData("users", array('username' => $userName,'status' => '1'));
-				if($this->encryption->decrypt($users[0]['password']) == $userPassword){
-					$sessionArray = array(
-						'username' => $users[0]['username'],
-						'user_id' => $users[0]['user_id'],
-						'role_id' => $users[0]['roles_id'],
-						'role_name' => $users[0]['roles_name']
-					);
-					$this->session->set_userdata($sessionArray);
-					// redirect to dashboard; login successfull
-					$role_id = $this->session->userdata('role_id');
-					$user_id = $this->session->userdata('user_id');
-					if ($role_id == 1 || $role_id == 2){
-						redirect('Dashboard');
-					}else{
-						redirect('BackendUsers');
-					}
+				$users = $this->model->selectWhereData("users", array('username' => $userName,'password'=>$this->encryption->decrypt($userPassword),'status' => '1'),array('*'));
+				// echo '<pre>'; print_r($users); exit;
+				if (@$users['roles_id'] == 1) {					
+					$this->session->set_userdata('superadmin_logged_in',$users);
+					redirect('Dashboard');
+				}else if (@$users['roles_id'] == 2) {
+					
+					$this->session->set_userdata('account_logged_in',$users);
+					redirect('Dashboard');
+				}else if (@$users['roles_id'] == 3) {
+					
+					$this->session->set_userdata('users_logged_in',$users);
+					redirect('BackendUsers');
 				}
+					// // redirect to dashboard; login successfull
+					// $role_id = $this->session->userdata('role_id');
+					// $user_id = $this->session->userdata('user_id');
+					// if ($role_id == 1 || $role_id == 2){
+					// 	redirect('Dashboard');
+					// }else{
+					// 	redirect('BackendUsers');
+					// }
 				else{
 					$data['theError'] = "Credentials are not valid...";
 					$data['title'] = "SignIn | " . CRM__NAME;

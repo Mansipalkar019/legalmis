@@ -95,7 +95,7 @@
                      </thead>
                 </table>
 
-<div class="modal fade" id="modal_form" role="dialog" data-easein="bounceDownIns">
+                <div class="modal fade" id="modal_form" role="dialog" data-easein="bounceDownIns">
     <div class="modal-dialog modal-lg" style="width:auto !important;">
         <div class="modal-content">
             <div class="modal-header">
@@ -123,26 +123,8 @@
     </div><!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="modal_form1" role="dialog" data-easein="bounceDownIns">
-    <div class="modal-dialog modal-lg" style="width:auto !important;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title">Services</h3>
-            </div>
-            <div class="modal-body form">
-              
-                    <input type="hidden" value="" name="id" class="id"/> 
-                    <div style="overflow-x:auto;">
-         
-              
-            </div>
-        
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-
                   </div>
+                  
                </div>
             </div >
          </div>
@@ -170,7 +152,7 @@ var simpletable = $('#doc_list_datatable').DataTable({
     'serverMethod': 'post',
     'language': {
         'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>',
-        searchPlaceholder: ""
+        searchPlaceholder: "Enter Deal Id"
         
     },
    'ajax': {
@@ -204,6 +186,8 @@ $('#btn-search-by-date').click(function () { //button filter event click
     'serverMethod': 'post',
     'language': {
         'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>',
+        searchPlaceholder: "Enter Deal Id"
+        
     },
    'ajax': {
        'url': "<?= base_url() ?>Sales/getsalesrecord1",
@@ -220,45 +204,22 @@ $('#btn-search-by-date').click(function () { //button filter event click
 $('#modal_form').modal('show'); 
    });
 
-
-
-   $(document).on('click','.edit_image_document',function (){
-      var id = $(this).attr("id");
-      $.ajax({
-				type:"POST",
-				async: "true",
-				url:"<?php echo base_url(); ?>Sales/getsalesdocimages",
-				dataType:"json",
-				data:{
-					id:id,
-				},
-				success: function(response)
-				{
-               $.each(response, function (key, value) {
-                  $('.columns').html('<img src="'+bases_url+value+'" height="64px" width="64px">');
-					})
-             
-				}
-			});
-   $('#modal_form1').modal('show'); 
-   });
-
    $('#btn-excel-download').click(function () { 
       var from_date=$('#from_date').val();
       var to_date=$('#to_date').val();
       $.ajax({
-				type:"POST",
-				async: "true",
-				url:"<?php echo base_url(); ?>Sales/sales_exceldownload",
-				dataType:"json",
-				data:{
-					fromdate:from_date,
+                type:"POST",
+                async: "true",
+                url:"<?php echo base_url(); ?>Sales/sales_exceldownload",
+                dataType:"json",
+                data:{
+                    fromdate:from_date,
                todate:to_date
-				},
-				success: function(response)
-				{
-               window.location.replace(response['url']);
-				}
-			});
+                },
+                success: function(response)
+                {
+                 window.location.replace(response['url']);
+                }
+            });
    });
 </script>

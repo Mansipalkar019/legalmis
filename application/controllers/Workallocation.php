@@ -15,7 +15,7 @@ class Workallocation extends CI_Controller
 
     public function index()
     {
-        $data['sales_deals']=$this->supermodel->get_all_dealid();
+        
         $data['users'] = $this->supermodel->get_user_listing($this->session->userdata('role_id')); 
         $data['services'] = $this->model->getData("services", array('status' => '1'));
         $this->load->view('work_allocation',$data);
@@ -24,10 +24,9 @@ class Workallocation extends CI_Controller
 
     public function add_work_allocation()
     {
+        $this->form_validation->set_rules('user', 'User Name', 'trim|required',array('required'=>' %s  is required'));
+        $this->form_validation->set_rules('service[]', 'Services', 'trim|required',array('required'=>'%s field is required'));
        
-        
-        $this->form_validation->set_rules('dealid', 'Deal Id', 'trim|required',array('required'=>' %s  is required'));
-      
         if($this->form_validation->run() == FALSE)
         {
             $response['status'] = 'failure';
@@ -37,36 +36,88 @@ class Workallocation extends CI_Controller
               
             );
         }else{
-
-            $services=$this->input->post('servicename');
-            //print_r($services);die();
-            foreach($services as $services_key => $services_row){
-                $users[$services_row]=$this->input->post('user_name_'.$services_row);
-    
-            }
-            foreach($users as $user_key =>$user_row){
-                foreach($user_row as $user_row_key =>$user_row_rows)
-                {
-                    $user_data=array(
-                    'user'=>$user_row_rows,
-                    'service'=>$user_key,
+            $user=$this->input->post('user');
+            $service=$this->input->post('service[]');
+            //print_r($service);die();
+            foreach($service as $service_key => $service_row)
+            {
+                $user_data=array(
+                    'user'=>$user,
+                    'service'=>$service_row,
                     'status'=>'1',
                     'created_on'=>date('Y-m-d'),
-                    );
-                    if($this->model->insertData('allocated_service_users',$user_data))
-                      {
-                          $response['status']='success';
-                          $response['error']=array('msg' => "Service Allocated Successfully !");
-                      }else{
-                          $response['status']='failure';
-                          $response['error']=array('msg' => "Service Allocated UnSuccessfully !"); 
-                      }
+                );
+                if($this->model->insertData('allocated_service_users',$user_data))
+                {
+                    $response['status']='success';
+                    $response['error']=array('msg' => "Service Allocated Successfully !");
+                }else{
+                    $response['status']='failure';
+                    $response['error']=array('msg' => "Service Allocated UnSuccessfully !"); 
                 }
             }
             
             }
         echo json_encode($response);
     }
+
+    // public function update_backend_users()
+    // {
+    //     $this->form_validation->set_rules('firstname1', 'First Name', 'trim|required',array('required'=>' %s  is required'));
+    //     $this->form_validation->set_rules('lastname1', 'Last Name', 'trim|required',array('required'=>'%s is required'));
+    //     $this->form_validation->set_rules('mobile_no1', 'Mobile No', 'trim|required',array('required'=>'%s is required'));
+    //     $this->form_validation->set_rules('email1', 'Email', 'trim|required',array('required'=>'%s is required'));
+    //     $this->form_validation->set_rules('username1', 'Username', 'trim|required',array('required'=>'%s is required'));
+    //     $this->form_validation->set_rules('password1', 'Password', 'trim|required',array('required'=>'%s is required'));
+    
+    //     if($this->form_validation->run() == FALSE)
+    //     {
+    //         $response['status'] = 'failure';
+    //         $response['error'] = array(
+    //             'firstname1'=>strip_tags(form_error('firstname1')),
+    //             'lastname1'=>strip_tags(form_error('lastname1')),
+    //             'mobile_no1'=>strip_tags(form_error('mobile_no1')),
+    //             'email1'=>strip_tags(form_error('email1')),
+    //             'username1'=>strip_tags(form_error('username1')),
+    //             'password1'=>strip_tags(form_error('password1')),
+    //         );
+    //     }else{
+    //         $firstname=$this->input->post('firstname1');
+    //         $lastname=$this->input->post('lastname1');
+    //         $mobile_no=$this->input->post('mobile_no1');
+    //         $email=$this->input->post('email1');
+    //         $username=$this->input->post('username1');
+    //         $password=$this->input->post('password1');
+    //         $password=$this->encryption->encrypt($this->input->post('password1'));
+    //         $user_id=$this->input->post('userid');
+           
+    //         $roleid=$this->model->selectWhereData('roles',array('id'=>$this->session->userdata('role_id')),array('roles'));
+    //         //echo $roleid['roles'];die();
+
+            
+    //             $user_data=array(
+    //                 'firstname'=>$firstname,
+    //                 'lastname'=>$lastname,
+    //                 'mobile_no'=>$mobile_no,
+    //                 'email'=>$email,
+    //                 'username'=>$username,
+    //                 'password'=>$password,
+    //                 'roles_id'=>$this->session->userdata('role_id'),
+    //                 'roles_name'=>$roleid['roles'],
+    //             );
+    //             if($this->model->updateData('users',$user_data,array('user_id'=>$user_id)))
+    //             {
+    //                 $response['status']='success';
+    //                 $response['error']=array('msg' => "User Updated Successfully !");
+    //             }
+    //             else{
+    //                 $response['status']='failure';
+    //                 $response['error']=array('msg' => "User Updated UnSuccessfully !"); 
+
+    //             }
+    //         }
+    //     echo json_encode($response);
+    // }
 
     public function getuserlist()
     {
@@ -99,14 +150,6 @@ class Workallocation extends CI_Controller
         
         // Output to JSON format
         echo json_encode($output);    
-    }
-
-    public function get_all_services()
-    {
-       $sale_id=$this->input->post('saleid');
-       $data['services']=$this->supermodel->get_sale_id($sale_id);   
-       $data['users']=$this->supermodel->get_user_listing($this->session->userdata('role_id'));
-       echo json_encode($data);    
     }
 }
 ?>

@@ -80,6 +80,8 @@ function delete_invoice_status(ele,service_id){
                 if(res.status=='1'){ // Success
                       jQuery(ele).closest('tr').remove();
                   }
+                $('#invoicestatus_datatable').DataTable().ajax.reload(null,false);
+
               }
           });
     }
@@ -147,10 +149,10 @@ function validate_update_invoice_status(ele){
 	return false;
 }
 
-$(document).on('click', '.a_category_view', function () {
+$(document).on('click', '.edit_payment_status', function () {
     var id = $(this).attr("id");
        $.ajax({
-          url: bases_url+"Masters/get_all_invoicestatus",
+          url: bases_url+"Masters/get_invoice_status_on_id",
           method: "POST",
           data: {
              id: id

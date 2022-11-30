@@ -1905,3 +1905,17 @@ page[size="A4"] {
 .gallery{
   margin-left: 30px;
 }
+.error_msg {
+    color: #eb3d4e;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+td.details-control {
+    background: url("https://stzsoft.in/legalcrm/assets_admin/images/details_open.png") no-repeat center center;
+    cursor: pointer;
+}
+
+tr.shown td.details-control {
+    background: url("https://stzsoft.in/legalcrm/assets_admin/images/details_close.png") no-repeat center center;
+}

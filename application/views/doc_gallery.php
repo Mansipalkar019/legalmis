@@ -1,7 +1,30 @@
+<style>
+	.sl-wrapper .sl-navigation button.sl-prev {
+  left: 20px;
+  font-size: 7rem !important;
+}
+.sl-wrapper .sl-close {
+  font-size: 5rem !important;
+}
+.sl-wrapper .sl-counter {
+  font-size: 2rem !important;
+}
+.sl-overlay {
+  background: #fff;
+  opacity: inherit !important;
+}
+.sl-wrapper .sl-navigation button.sl-next {
+  right: 20px;
+  font-size: 7rem !important;
+}
+.gallery{
+  margin-left: 30px !important;
+}
+</style>
 <?php $this->load->view('header'); ?>
 <!--==================breadcrumb====================-->
-<div class="container first-body bdy">
-   <div class="container">
+<div class="container-fluid first-body bdy">
+   <div class="container-fluid">
    <div class="row">
          <div class="col-md-12">
             <nav aria-label="breadcrumb">
@@ -24,8 +47,8 @@
 			?>
            
 				<a href="<?php echo base_url() . $image;?>">
-					<img src="<?php echo base_url() . $image;?>" alt="<?php echo $image;?>" style="padding: 10px;border: #eeeee4 solid 2px;width: 200px;margin-top: 20px;margin-left:15px;
-    height: 200px;">
+					<img src="<?php echo base_url() . $image;?>" alt="<?php echo $image;?>" style="padding: 10px;border: #eeeee4 solid 2px;width: 300px;margin-top: 20px;margin-left:15px;
+    height: 300px;">
 				</a>
               
 			<?php

@@ -23,16 +23,6 @@
             <div class="card-body" style="padding: 20px;">
            
                <div class="form-group">
-<<<<<<< HEAD
-                  <label>Select Deal Id:<span class="text-danger">*</span></label>
-                  <select id="dealid" class="form-control" name="dealid" onchange="getservices(this.value)">
-                    <option value="">Select Deal Id</option>
-                    <?php
-                        if (!empty($sales_deals)){
-                        foreach($sales_deals as $users_key => $users_row) 
-                        {?>
-                    <option value=<?php echo  $users_row['id'] ?> ><?php echo  $users_row['deal_id'] ?></option>
-=======
                   <label>User:<span class="text-danger">*</span></label>
                   <select id="user" class="form-control" name="user" >
                     <option value="">Select User</option>
@@ -41,16 +31,11 @@
                         foreach($users as $users_key => $users_row) 
                         {?>
                     <option value=<?php echo  $users_row['user_id'] ?> ><?php echo  $users_row['username'] ?></option>
->>>>>>> ede66fac92f93976a0df3d953065fe2fd6ef26c6
                     <?php } }?>
                   </select>
                   <span class="error_msg" id="user_error"></span>
                </div>
            
-<<<<<<< HEAD
-               <div class="services">
-                 
-=======
                <div class="form-group">
                   <label>Service:<span class="text-danger">*</span></label>
                   <select id="service" class="form-control" name="service[]"  multiple="">
@@ -63,7 +48,6 @@
                     <?php } }?>
                   </select>
                   <span class="error_msg" id="service_error"></span>
->>>>>>> ede66fac92f93976a0df3d953065fe2fd6ef26c6
                </div>
             </div>
          </div>
@@ -166,10 +150,10 @@
 <?php  $this->load->view('footer'); ?>
 <script src="<?= base_url();?>assets_admin/view_js/workallocation.js"></script>
 <script type="text/javascript">
-// $("#user").select2({
-//           placeholder: "Deal Id",
-//           allowClear: true
-//       });
+$("#user").select2({
+          placeholder: " Select User",
+          allowClear: true
+      });
 $("#service").select2({
     placeholder: " Select Service",
     allowClear: true
@@ -196,53 +180,4 @@ var simpletable = $('#doc_list_datatable').DataTable({
         $('td', row).eq(2).addClass('text-capitalize');
     },
 });
-
-$("#dealid").select2({
-          placeholder: "Deal Id",
-          allowClear: true
-      });
-      $(".userlist").select2({
-          placeholder: "Deal Id",
-          allowClear: true
-      });
-$(document).on('select2:unselect', '#dealid',function(e) {
-     var data = e.params.data;
-     var service_id = data.id
-   });
-
-function getservices(saleid) {
-
-$.ajax({
-url: '<?php echo base_url(); ?>Workallocation/get_all_services',
-type: 'post',
-dataType: "json",
-data:{
-   saleid:saleid
-},
-success: function( data ) {  
-   console.log(data);  
-   html11='';    
-   $(".services").empty();
-   $.each(data.services,function(i,member){
-      if(saleid == member.sales_id)
-      {
-         html11 +='<div class="row"><div class="col-md-6" id="removelabel_'+member.services_id+'"><div class="form-group"><label>Service: '+member.servicename+'</label></div></div><div class="col-md-6" id="show_company_content1_'+member.services_id+'"><div class="form-group"><label>Enter User Name For '+member.servicename+'<span class="text-danger">* </span></label><div><select id="user_name1_'+member.services_id+'" class="form-control userlist" name="user_name_'+member.services_id+'[]" multiple="multiple"></select></div></div><div class="col-md-6"></div></div><input type="hidden" class="form-control"  name="servicename[]" id="count'+member.id+'" value="'+member.services_id+'"></input><div id="new_brands_display_'+member.services_id+'"></div><div class="row"></div></div>';  
-      }
-     else{
-      html11 += "";
-     }
-     
-   });
-  
-   $('.services').append(html11);   
-      
-
-      // $('.tokenizer1').select2({
-      //       tags: true,
-      //       tokenSeparators: [',', ' '],
-      //       });
-           
-}
-});
-} 
 </script>

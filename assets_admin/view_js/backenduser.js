@@ -1,3 +1,5 @@
+
+
 function error_msg(t) {
     for (var i in t) "" != t[i] ? $("#" + i + "_error").html(t[i]).show() : $("#" + i + "_error").html("").hide();
         $(".error_msg").delay(10000).fadeOut()
@@ -21,6 +23,8 @@ $("#add_backend_user_form").submit(function(e) {
         },
         success: function(response) {
           if (response.status == 'success') {
+            $('form#add_backend_user_form').trigger('reset');
+             $('#user_list_datatable').DataTable().ajax.reload(null,false);
             swal({
               title: "success",
               text: response.status.msg,
@@ -28,16 +32,8 @@ $("#add_backend_user_form").submit(function(e) {
               dangerMode: true,
               timer: 1500
            });
-           window.location.replace(bases_url+'AddBackendUsers');
             } else if (response.status == 'failure') {
              error_msg(response.error);
-            swal({
-              title: "Warning",
-              text: response.error.msg,
-              icon: "warning",
-              dangerMode: true,
-              timer: 1500
-           });
             }  else {
                 window.location.replace(response["url"]);
             }
@@ -73,23 +69,26 @@ $("#add_backend_user_form").submit(function(e) {
     return false;
 }
 
-$(document).on('click', '.a_category_view', function () {
+$(document).on('click', '.edit_user_list_data', function () {
     var id = $(this).attr("id");
       $.ajax({
-          url: bases_url+"AddBackendUsers/get_all_users",
+          url: bases_url+"AddBackendUsers/get_users_data_on_id",
           method: "POST",
           data: {
              id: id
           },
           dataType: "json",
           success: function (data) {
-            $('#firstname1').val(data.firstname);
-            $('#lastname1').val(data.lastname);
-            $('#mobile_no1').val(data.mobile_no);
-            $('#email1').val(data.email);
-            $('#username1').val(data.username);
-            $('#password1').val(data.decrytpassword);
-            $('#userid').val(data.user_id);
+             var data =  data.user_data
+                $('#edit_first_name').val(data.firstname);
+                $('#edit_last_name').val(data.lastname);
+                $('#edit_mobile_no').val(data.mobile_no);
+                $('#edit_email').val(data.email);
+                $('#edit_user_name').val(data.username);
+                $('#edit_password').val(data.decrytpassword);
+                $('#edit_user_id').val(data.user_id);
+                $('#edit_roles').val(data.roles_id);
+                $('#edit_roles').trigger('change.select2')
           }
        });
        
@@ -113,6 +112,7 @@ $(document).on('click', '.a_category_view', function () {
             },
             success: function(response) {
               if (response.status == 'success') {
+                 $('#user_list_datatable').DataTable().ajax.reload(null,false);
                 swal({
                   title: "success",
                   text: response.status.msg,
@@ -120,16 +120,9 @@ $(document).on('click', '.a_category_view', function () {
                   dangerMode: true,
                   timer: 1500
                });
-               window.location.replace(bases_url+'AddBackendUsers');
+
                 } else if (response.status == 'failure') {
                  error_msg(response.error);
-                swal({
-                  title: "Warning",
-                  text: response.error.msg,
-                  icon: "warning",
-                  dangerMode: true,
-                  timer: 1500
-               });
                 }  else {
                     window.location.replace(response["url"]);
                 }
@@ -147,3 +140,42 @@ $(document).on('click', '.a_category_view', function () {
         }
         return true;
        }
+
+        $(document).ready(function() {
+         $(document).on('click', '.delete_user_list', function(e) {
+             var id = $(this).attr("id");
+             confirmDelete(id);
+             e.preventDefault();
+         });
+    });
+
+ function confirmDelete(id) {
+     swal({
+         title: "Delete?",
+         text: "Are you sure you want to delete ?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#DD6B55",
+         confirmButtonText: "Delete",
+         closeOnConfirm: false
+     }, function() {
+         $.ajax({
+             type: "post",
+             url: bases_url+"AddBackendUsers/delete_users",
+             data: {
+                 id: id,
+             },
+             dataType: 'json',
+             success: function(res) {
+                swal({
+                     title: "Deleted!",
+                     text: res.message,
+                     timer: 1700,
+                     showConfirmButton: false,
+                     type: 'success'
+                });
+                $('#user_list_datatable').DataTable().ajax.reload(null,false);
+             }
+         })
+     });
+ }

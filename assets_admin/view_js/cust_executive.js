@@ -100,6 +100,8 @@ function delete_cust_exec(ele,service_id){
                 if(res.status=='1'){ // Success
                       jQuery(ele).closest('tr').remove();
                   }
+                        $('#cust_exec_datatable').DataTable().ajax.reload(null,false);
+                  
               }
           });
     }

@@ -121,7 +121,8 @@
                   <table id="roles_datatable" class="table table-striped table-bordered" style="width:100%">
                      <thead>
                         <tr>
-                           <th>ID</th>
+                           <th>Sr No.</th>
+                           <th>Full Name</th>
                            <th>Role</th>
                            <th>Username</th>
                            <th>Action</th>
@@ -221,33 +222,28 @@
            $(this).attr('style', 'width: 100%');
        });
    }
-   var simpletable = $('#roles_datatable').DataTable({
-     // "dom": 'lBfrtip',
-     dom: 'lBfrtip',
-            buttons: [
-   
-   'csvHtml5',
-   'pdfHtml5'
-   ],
-   'processing': true,
-   'serverSide': true,
-   'serverMethod': 'post',
-   'language': {
-       'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>'
-   },
-   'ajax': {
-       'url': "<?= base_url() ?>Masters/getallroles",
-       "data": function (data) {
-           
-       }
-   }, 
 
-   });
+    $(document).ready(function() {
+     load_customer_executive_data();
+ });
+
+ function load_customer_executive_data() {
+     var simpletable = $('#roles_datatable').DataTable({
+         rowReorder: {
+             selector: 'td:nth-child(2)'
+         },
+         responsive: true,
+         "ajax": {
+             url: '<?= base_url() ?>Masters/getallroles',
+             type: "POST"
+         },
+     });
+ }
    
    $("#roles").select2({
          placeholder: "Select Role",
          allowClear: true
-     });
+   });
 
    $("#roles1").select2({
       placeholder: "Select Role",

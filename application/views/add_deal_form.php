@@ -62,7 +62,7 @@
                   </div>
                   <div class="col-md-3">
                      <div class="form-group">
-                        <label>Mobile Number 2:<span class="text-danger">*</span></label>
+                        <label>Mobile Number 2:</label>
                         <input type="text" name="mobile_2" id="mobile_2" maxlength="10"
                            class="form-control" onkeypress="return isNumber(event)">
                         <span class="error_msg" id="mobile_2_error"></span>
@@ -70,7 +70,7 @@
                   </div>
                   <div class="col-md-3">
                      <div class="form-group">
-                        <label>Alternate Number:<span class="text-danger">* </span> <span style="font-size:9px;">(You can add multiple comma seperated numbers)</span></label>
+                        <label>Alternate Number:<span style="font-size:9px;">(You can add multiple comma seperated numbers)</span></label>
                         <input type="text" name="alternate_number" id="alternate_number"
                            class="form-control" >
                         <span class="error_msg" id="alternate_number_error"></span>
@@ -86,7 +86,7 @@
                   </div>
                   <div class="col-md-3">
                      <div class="form-group">
-                        <label>Alternate Email Address:<span class="text-danger">*</span></label>
+                        <label>Alternate Email Address:</label>
                         <input type="text" name="email_address1" id="email_address1"
                            class="form-control" >
                         <span class="error_msg" id="email_address1_error"></span>
@@ -243,7 +243,7 @@
                      <div class="form-group">
                         <label>Govt fees:<span class="text-danger">*</span></label>
                         <input type="text" name="govt_fees" id="govt_fees"
-                           class="form-control" onkeypress="return isNumber(event)">
+                           class="form-control cal_outstanding" onkeypress="return isNumber(event)">
                         <span class="error_msg" id="govt_fees_error"></span>
                      </div>
                   </div>
@@ -273,7 +273,7 @@
                   </div>
                   <div class="col-md-3">
                      <div class="form-group">
-                        <label>Outstanding followup date:<span class="text-danger">*</span></label>
+                        <label>Outstanding followup date:</label>
                         <input type="date" name="outstanding_followup_date" id="outstanding_followup_date"
                            class="form-control" value="">
                         <span class="error_msg" id="outstanding_followup_date_error"></span>
@@ -360,7 +360,7 @@
                            <?php
                               foreach($payment_mode as $payment_mode_key => $payment_mode_row) 
                               {?>
-                           <option value=<?php echo  $payment_mode_row['name'] ?> ><?php echo  $payment_mode_row['name'] ?></option>
+                           <option value=<?php echo  $payment_mode_row['id'] ?> ><?php echo  $payment_mode_row['name'] ?></option>
                            <?php } ?>
                         </select>
                         <span class="error_msg" id="payment_mode_error"></span>
@@ -485,7 +485,7 @@
             </div>
          </div>
          <?php echo form_close() ?>
-         </div>
+                              </div>
          <div style="margin-top: 10px;"></div>
          <?php echo form_open('Sales/do_upload', array('id' => 'upload_excel_form')) ?>
          <!-- <div class="row">
@@ -666,21 +666,21 @@
       dataType: "json",
       data: {service_id: service_id},
       success: function( response ) {  
-
          var html11="";
          var service_id_1 = response.service_details.id;
-           var latest_count = $('#count'+service_id_1+'').val();
-               var new_count = parseInt(latest_count) + 1;     
-         if(response.service_details.brand_name == "Yes" && response.service_details.class_name == "NA")
+     
+       if(response.service_details.brand_name == "Yes" && response.service_details.class_name == "NA")
          {
-            html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>';    
+            html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>'; 
+   
          }
+
          if(response.service_details.class_name == "Yes" && response.service_details.class_name == "Yes")
          {
-             html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-4" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'['+new_count+'][]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>'; 
-         }         
-         $('#brands_display').append(html11);   
-        
+             html11 +='<div class="row"><div class="col-md-2" id="removelabel_'+service_id_1+'"><div class="form-group"><label>Service: '+response.service_details.name+'</label></div></div><div class="col-md-4" id="show_brand_content_'+service_id_1+'"><div class="form-group"><label>Enter Brand Name<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer" " style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name_'+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-4" id="show_company_content_'+service_id_1+'"><div class="form-group"><label>Enter Class Name<span class="text-danger">* </span></label><div><select class="form-control tokenizer" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'[0][]" id="class_name_'+service_id_1+'" onchange="get_class_name(this.value)"></select></div></div></div><div class="col-md-2"><button id="addRows_'+service_id_1+'" type="button" class="btn btn-info" style="height:35px;"><i class="glyphicon glyphicon-plus"></i></button></div></div><input type="hidden" class="form-control"  name="count'+service_id_1+'" id="count'+service_id_1+'" value="0"></input><div id="new_brands_display_'+service_id_1+'"></div><div class="row"></div></div>'; 
+         }
+       
+      $('#brands_display').append(html11);   
       // $('#'+'brand_name_'+service_id_1).select2({
       //    tags: true,
       //    tokenSeparators: [',', ' '],
@@ -689,19 +689,28 @@
          tags: true,
          tokenSeparators: [',', ' '],
       });
-      $('.tokenizer').trigger('change.select2');     
-      $('#addRows_'+service_id_1+'').click(function() {              
+    
+       $('.tokenizer').trigger('change.select2');
+
+     
+      $('#addRows_'+service_id_1+'').click(function() {
+              
                var latest_count = $('#count'+service_id_1+'').val();
-               var new_count = parseInt(latest_count) + 1;             
+             
+               var new_count = parseInt(latest_count) + 1;
+              
                var html2 = '';             
-               if(response.service_details.brand_name == "Yes" && response.service_details.class_name == "NA")
+   
+             if(response.service_details.brand_name == "Yes" && response.service_details.class_name == "NA")
                {
                   html2 += '<div class="row"><div id="inputnewrow_'+new_count+'"><div class="col-md-3" id="show_brand_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Brand Name For '+response.service_details.name+'<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer1" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name1_'+new_count+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div></div><button id="removeRow" type="button" class="btn btn-danger btn-sm removeRow" style="height:30px;margin-top:5px;">Remove</button></div></div></div>';    
                }
+
                if(response.service_details.class_name == "Yes" && response.service_details.class_name == "Yes")
                {
                   html2 += '<div class="row"><div id="inputnewrow_'+new_count+'"><div class="col-md-3" id="show_brand_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Brand Name For '+response.service_details.name+'<span class="text-danger">* </span></label><div><input type="text" class="form-control tokenizer1" style="width: 100% !important;" name="brand_name_'+service_id_1+'[]" id="brand_name1_'+new_count+service_id_1+'" onchange="get_brand_name(this.value)"></input></div></div></div><div class="col-md-3" id="show_company_content1_'+new_count+service_id_1+'"><div class="form-group"><label>Enter Class Name For '+response.service_details.name+'<span class="text-danger">* </span></label><div><select class="form-control tokenizer1" multiple="multiple" style="width: 100% !important;" name="class_name_'+service_id_1+'['+new_count+'][]" id="class_name1_'+new_count+service_id_1+'" ></select></div></div></div><button id="removeRow" type="button" class="btn btn-danger btn-sm removeRow" style="height:30px;margin-top:5px;">Remove</button></div></div></div>';   
-               }                  
+               }        
+               
                $('#new_brands_display_'+service_id_1+'').append(html2);
             
             // $('#'+'brand_name_'+count1+service_id_1).select2({
@@ -729,7 +738,10 @@
             });
 
             $('.tokenizer1').trigger('change.select2');
-            if(response.html != ""){               
+
+         
+            if(response.html != ""){
+               
                $("#sub_services").html(response.html);
                $('#sub_services').trigger('change.select2');
             }
@@ -747,14 +759,14 @@
    
    $(document).on('select2:unselect', '#services',function(e) {
      var data = e.params.data;
-     var service_id = data.id
+     var service_id = data.id;
+     
+   //   $('#brand_name_'+service_id). select2('destroy');
      $('#brand_name_'+service_id). remove();
      $('#show_brand_content_'+service_id).remove();
      $('#show_company_content_'+service_id).remove();
      $('#removelabel_'+service_id).remove();
      $('#addRows_'+service_id).remove();
-     $("#sub_services").html("");
-     $('#sub_services').trigger('change.select2');
    });
 
    

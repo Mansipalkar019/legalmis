@@ -106,6 +106,7 @@ function validate_add_roles(ele){
                     jQuery(".btn-quirk").text('Submit').prop('disabled', false);
                       if(res.status=='1'){ // Success
                         $('form#basicForm').trigger('reset');
+                        $('#roles').val(null).trigger('change');
                         // $('.alert-success').css('display','block').html(res.msg); 
                         // $('.alert-danger').css('display','none'); 
                         swal({
@@ -152,6 +153,8 @@ function delete_role(ele,role_id){
                 if(res.status=='1'){ // Success
                       jQuery(ele).closest('tr').remove();
                   }
+                $('#roles_datatable').DataTable().ajax.reload(null,false);
+
               }
           });
     }

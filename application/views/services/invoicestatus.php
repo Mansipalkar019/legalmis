@@ -28,8 +28,8 @@
                <li role="presentation"><a href="<?= base_url();?>Masters/invoicetype" aria-controls="invoicetype" role="tab" >Invoice Type</a></li>
                <li role="presentation" class="active"><a href="<?= base_url();?>Masters/invoicestatus" aria-controls="invoicestatus" role="tab" >Invoice Status</a></li>
                <li role="presentation"><a href="<?= base_url();?>Masters/cust_executive" aria-controls="cust_executive" role="tab" >Customer Executive</a></li>
-               <?php if($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2) { ?>
-                   <li role="presentation"><a href="<?= base_url();?>Masters/Roles" aria-controls="cust_executive" role="tab" >Add Roles</a></li>
+                <?php if($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2) { ?>
+               <!-- <li role="presentation"><a href="<?= base_url();?>Masters/Roles" aria-controls="cust_executive" role="tab" >Add Roles</a></li> -->
                <?php } ?>
             </ul>
             <!-- Tab panes -->
@@ -37,29 +37,27 @@
                <div role="tabpanel" class="tab-pane fade in active" id="invoicestatus">
                   <div class="alert alert-success" style="display:none;"></div>
                   <div class="alert alert-danger" style="display:none;"></div>
-                  <form id="basicForm" method="post"
-                     action=""
-                     enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate"
-                     onsubmit="return validate_add_invoice_status(this);">
+                 <?php echo form_open('masters/add_invoice_status', array('id' => 'add_invoice_status_form')) ?>
                      <div class="row ml20  mb20">
                         <div class="col-md-4">
                            <div class="form-group">
-                              <label>Name<span class="text-danger">*</span></label>
-                              <input type="text" name="servicename" dir="ltl" id="servicename" class="form-control" required="">
+                              <label>Invoice Status<span class="text-danger">*</span></label>
+                              <input type="text" name="invoice_status" id="invoice_status" class="form-control">
+                               <span class="error_msg" id="invoice_status_error"></span>
                            </div>
                         </div>
                         <div class="col-sm-4" style="margin-top:30px;">
-                           <button class="btn btn-success">Submit</button>
+                           <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                      </div>
                      <br>
-                  </form>
+                   <?php echo form_close() ?>
                   <hr>
                   <table id="invoicestatus_datatable" class="table table-striped table-bordered" style="width:100%">
                      <thead>
                         <tr>
                            <th>ID</th>
-                           <th>Name</th>
+                           <th>Invoice Status</th>
                            <th>Action</th>
                         </tr>
                      </thead>
@@ -71,15 +69,13 @@
                            <div class="modal-header">
                               <h4 class="modal-title">Edit Invoice Status</h4>
                            </div>
-                           <form id="basicForm" method="post"
-                              enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate"
-                              onsubmit="return validate_update_invoice_status(this);">
+                            <?php echo form_open('masters/update_invoice_status', array('id' => 'update_invoice_status_form')) ?>
                               <div class="modal-body">
                                  <div class="col-md-12">
                                     <div class="form-group">
-                                       <label>Name<span class="text-danger">*</span></label>
-                                       <input type="text" name="service_name" dir="ltl" id="service_name" class="form-control" required="">
-                                       <input type="hidden" name="serviceid" dir="ltl" id="serviceid" class="form-control" required="">
+                                       <label>Invoice Status<span class="text-danger">*</span></label>
+                                       <input type="text" name="edit_invoice_status" id="edit_invoice_status" class="form-control">
+                                       <input type="hidden" name="edit_invoice_status_id" id="edit_invoice_status_id" class="form-control">
                                     </div>
                                  </div>
                               </div>
@@ -99,37 +95,151 @@
    </div>
 </div>
 <?php  $this->load->view('footer'); ?>
-<script src="<?php echo base_url();?>assets_admin/view_js/invoicestatus.js"></script>
+<!-- <script src="assets_admin/view_js/invoicestatus.js"></script> -->
 <script type="text/javascript">
-    $(".chosen-select").chosen({width: "95%"}); 
-   function resizeChosen() {
-        $(".chosen-container").each(function () {
-            $(this).attr('style', 'width: 100%');
-        });
-    }
-var simpletable = $('#invoicestatus_datatable').DataTable({
-      // "dom": 'lBfrtip',
-      dom: 'lBfrtip',
-             buttons: [
- 'csvHtml5',
- 'pdfHtml5'
- ],
-    'processing': true,
-    'serverSide': true,
-    'serverMethod': 'post',
-    'language': {
-        'processing': '<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>'
-    },
-    'ajax': {
-        'url': "<?= base_url() ?>Masters/getallinvoicestatus",
-        "data": function (data) {
-            
-        }
-    }, 
-    // createdRow: function (row, data, index) {
-    //     $('td', row).eq(2).addClass('text-capitalize');
-    // },
+ $(document).ready(function() {
+     load_payment_status_data();
+ });
+
+ function load_payment_status_data() {
+     var simpletable = $('#invoicestatus_datatable').DataTable({
+         rowReorder: {
+             selector: 'td:nth-child(2)'
+         },
+         responsive: true,
+         "ajax": {
+             url: '<?= base_url() ?>Masters/getallinvoicestatus',
+             type: "POST"
+         },
+     });
+ }
+$('#add_invoice_status_form').submit(function(e) {
+       e.preventDefault();
+       var formData = new FormData($("#add_invoice_status_form")[0]);
+       var InvoiceTypeForm = $(this);
+       jQuery.ajax({
+           dataType: 'json',
+           type: 'POST',
+           url: InvoiceTypeForm.attr('action'),
+           data: formData,
+           cache: false,
+           processData: false,
+           contentType: false,
+           mimeType: "multipart/form-data",
+           success: function(response) {
+               if (response.status == 'success') {
+                   $('form#add_invoice_status_form').trigger('reset');
+   
+                   $('#invoicestatus_datatable').DataTable().ajax.reload(null,false);
+                    swal({
+                        title: "success",
+                        text: response.msg,
+                        icon: "success",
+                        dangerMode: true,
+                        timer: 1500
+                     });
+               } else if (response.status == 'failure') {
+                   error_msg(response.error)
+               } else {
+                   window.location.replace(response['url']);
+               }
+           },
+           error: function(error, message) {
+   
+           }
+       });
+       return false;
 });
+$(document).on('click', '.edit_payment_status', function () {
+    var id = $(this).attr("id");
+       $.ajax({
+          url: bases_url+"Masters/get_invoice_status_on_id",
+          method: "POST",
+          data: {
+             id: id
+          },
+          dataType: "json",
+          success: function (data) {
+            var data = data.invoice_status;
+                $('#edit_invoice_status_id').val(data['id']);
+                $('#edit_invoice_status').val(data['name']);
+          }
+       });       
+});
+$('#update_invoice_status_form').submit(function(e) {
+       e.preventDefault();
+       var formData = new FormData($("#update_invoice_status_form")[0]);
+       var InvoiceTypeForm = $(this);
+       jQuery.ajax({
+           dataType: 'json',
+           type: 'POST',
+           url: InvoiceTypeForm.attr('action'),
+           data: formData,
+           cache: false,
+           processData: false,
+           contentType: false,
+           mimeType: "multipart/form-data",
+           success: function(response) {
+               if (response.status == 'success') {
+                   $('form#update_invoice_status_form').trigger('reset');
+                   $('#invoicestatusModal').modal('hide');
+                   $('#invoicestatus_datatable').DataTable().ajax.reload(null,false);
+                    swal({
+                        title: "success",
+                        text: response.msg,
+                        icon: "success",
+                        dangerMode: true,
+                        timer: 1500
+                     });
+               } else if (response.status == 'failure') {
+                   error_msg(response.error)
+               } else {
+                   window.location.replace(response['url']);
+               }
+           },
+           error: function(error, message) {
+   
+           }
+       });
+       return false;
+});
+$(document).ready(function() {
+     $(document).on('click', '.delete_invoice_status', function(e) {
+         var id = $(this).attr("id");
+         // alert(id);
+         confirmDelete(id);
+         e.preventDefault();
+     });
+ });
 
-
+ function confirmDelete(id) {
+     swal({
+         title: "Delete?",
+         text: "Are you sure you want to delete ?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#DD6B55",
+         confirmButtonText: "Delete",
+         closeOnConfirm: false
+     }, function() {
+         $.ajax({
+             type: "post",
+             url: bases_url+"Masters/delete_invoice_status",
+             data: {
+                 id: id,
+             },
+             dataType: 'json',
+             success: function(res) {
+                 swal({
+                     title: "Deleted!",
+                     text: res.message,
+                     timer: 1700,
+                     showConfirmButton: false,
+                     type: 'success'
+                 });
+                $('#invoicestatus_datatable').DataTable().ajax.reload(null,false);
+             }
+         })
+     });
+ }
 </script>

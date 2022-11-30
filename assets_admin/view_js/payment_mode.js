@@ -101,6 +101,8 @@ function delete_payment_mode(ele,service_id){
                 if(res.status=='1'){ // Success
                       jQuery(ele).closest('tr').remove();
                   }
+                        $('#paymode_datatable').DataTable().ajax.reload(null,false);
+                  
               }
           });
     }

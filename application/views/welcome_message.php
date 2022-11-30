@@ -74,7 +74,7 @@
 	<main class="form-signin">
 		<?php //isset($validation) ? $validation->listErrors() : '' 
 		?>
-		<?php echo form_open('welcome/login_do'); ?>
+		<?php echo form_open('welcome/login-do'); ?>
 		<h1 class="w-100 btn btn-lg btn-danger disabled">BDS LEGAL MIS</h1>
 
 		<?php if (isset($theError) && !empty($theError)) : ?>
@@ -89,16 +89,16 @@
 		?>
 		<?php //echo validation_errors('<div class="error">', '</div>'); ?>
 		<div class="form-floating">
-			<input type="text" name="username" class="<?= $eError ?>" placeholder="Username" >
+			<input type="text" name="username" class="<?= $eError ?>" placeholder="Username" value="">
 			<label for="floatingInput">Username</label>
 			<div class="invalid-feedback">
 				<?php echo form_error('username'); ?>
 			</div>
 		</div>
 		<div class="form-floating">
-			<input type="password" name="password" class="<?= $pError ?>" placeholder="Password" >
+			<input type="password" name="password" class="<?= $pError ?>" placeholder="Password" value="">
 			<label for="floatingPassword">Password</label>
-			<!-- <div class="invalid-feedback">12346</div> -->
+			
 		</div>
 
 		<!-- <div class="checkbox mb-3"><label><input type="checkbox" value="remember-me"> Remember me</label></div> -->

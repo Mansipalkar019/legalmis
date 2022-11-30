@@ -3,12 +3,9 @@ function validate_add_banner(ele){
     var hasError = 0;
     var servicename=$('#servicename').val();
     var terms=$('#terms').val();
-    alert(terms);
     if(jQuery.trim(servicename) == '')
     {
-        showError("Please Enter the Service Name","servicename");hasError=1;
-        
-    }
+        showError("Please Enter the Service Name","servicename");hasError=1;    }
     else {
         changeError("servicename");
     }
@@ -16,7 +13,6 @@ function validate_add_banner(ele){
     if(jQuery.trim(terms) == '')
     {
         showError("Please Enter the Terms & Condition","terms");hasError=1;
-        
     }
     else {
         changeError("terms");
@@ -65,8 +61,7 @@ function validate_add_banner(ele){
                     jQuery(".btn-quirk").text('Submit').prop('disabled', false);
                       if(res.status=='1'){ // Success
                         $('form#basicForm').trigger('reset');
-                        // $('.alert-success').css('display','block').html(res.msg); 
-                        // $('.alert-danger').css('display','none'); 
+                        $('#terms').code('');
                         swal({
                             title: "Success",
                             text: res.msg,
@@ -74,7 +69,6 @@ function validate_add_banner(ele){
                             timer: 1000
                           });
                         $('#service_datatable').DataTable().ajax.reload(null,false);
-                        //window.setTimeout(function() { $(".alert-success").alert('close'); }, 2000);
                       }else{ // Failed
                         swal({
                             title: "Warning",
@@ -83,7 +77,6 @@ function validate_add_banner(ele){
                             dangerMode: true,
                             timer: 1000
                           });
-                        //window.setTimeout(function() { $(".alert-danger").alert('close'); }, 2000);
                       }
                   }
               });
@@ -132,6 +125,7 @@ function delete_services(ele,service_id){
                 if(res.status=='1'){ // Success
                       jQuery(ele).closest('tr').remove();
                   }
+                    $('#service_datatable').DataTable().ajax.reload(null,false);
               }
           });
     }
@@ -170,8 +164,6 @@ function validate_update_services(ele){
             } else {
                 user.product.brandname="NA";
             }
-        
-        
             if (document.getElementById('class').checked == true) {
                 user.product.classname="Yes";
             } else {
@@ -250,38 +242,6 @@ function isValidEmailAddress(emailAddress) {
     return pattern.test(emailAddress);
 };
 
-$(document).on('click', '.a_category_view', function () {
-    var id = $(this).attr("id");
-       $.ajax({
-          url: bases_url+"Masters/get_all_services",
-          method: "POST",
-          data: {
-             id: id
-          },
-          dataType: "json",
-          success: function (data) {
-                $('#serviceid').val(data['id']);
-                $('#service_name').val(data['name']);
-                //$('#terms1').val(data['terms']);
-                $("#terms1").summernote("code", data["terms"]);
-                if(data['brand_name'] == "Yes")
-                {
-                    $('.brand').prop('checked', true);
 
-                }else{
-                    $('.brand').prop('checked', false);
-                }
-
-                if(data['class_name'] == "Yes")
-                {
-                    $('.class').prop('checked', true);
-
-                }else{
-                    $('.class').prop('checked', false);
-                }
-          }
-       });
-       
-    });
 
    

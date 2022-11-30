@@ -45,6 +45,7 @@ function validate_add_doclist(ele){
                     jQuery(".btn-quirk").text('Submit').prop('disabled', false);
                       if(res.status=='1'){ // Success
                         $('form#basicForm').trigger('reset');
+                        $('#services').val(null).trigger('change');
                         // $('.alert-success').css('display','block').html(res.msg); 
                         // $('.alert-danger').css('display','none'); 
                         swal({
@@ -112,6 +113,7 @@ function delete_doc_list(ele,service_id){
                 if(res.status=='1'){ // Success
                       jQuery(ele).closest('tr').remove();
                   }
+                   $('#doc_list_datatable').DataTable().ajax.reload(null,false);
               }
           });
     }
@@ -184,49 +186,22 @@ function validate_update_doclist(ele){
 }
 
 
-function delete_banner(ele,category_id){
-    if(confirm("Are you sure wanted to delete the selected banner?")){
-        var user = {};
-        user.product = {};
-        user.product.category_id = category_id;
-                    
-        var q = JSON.stringify(user);
-        jQuery.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: "delete_banner",
-            data: {'jsonObj' : q},
-            cache: false,
-            beforeSend: function(){ 
-                jQuery(ele).html('..').prop('disabled', true);
-            },
-            success: function(res){
-                if(res.status=='1'){ // Success
-                      jQuery(ele).closest('tr').remove();
-                  }
-              }
-          });
-    }
-    return false;
-}
-
-
 function isValidEmailAddress(emailAddress) {
     var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
     return pattern.test(emailAddress);
 };
 
-$(document).on('click', '.a_category_view', function () {
+$(document).on('click', '.edit_document_list', function () {
     var id = $(this).attr("id");
        $.ajax({
-          url: bases_url+"Masters/get_all_doclist",
+          url: bases_url+"masters/get_doc_list_on_id",
           method: "POST",
           data: {
              id: id
           },
           dataType: "json",
           success: function (data) {
-           
+               
                 $('#service_name').val(data['name']);
                 $('#service_id').val(data['id']);
                 $('#serviceid').val(data['service_id']);

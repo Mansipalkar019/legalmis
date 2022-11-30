@@ -8,14 +8,6 @@
   padding-left: 3.5rem;
   z-index: 3;
 }
-#doc_list_datatable tbody tr.selected {
-    color: white;
-    background-color: #eeeeee;
-}
-table.dataTable tbody tr.selected {
-    color: white !important;
-    background-color: #eeeeee !important;
-}
 </style>
 <!--==================breadcrumb====================-->
 <div class="container first-body bdy">
@@ -25,7 +17,7 @@ table.dataTable tbody tr.selected {
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Sales</a></li>
-                  <li class="breadcrumb-item active" aria-current="page" style="color: #000;">View all Sale/Deal</li>
+                  <li class="breadcrumb-item active" aria-current="page" style="color: #000;">Allocated Services</li>
                </ol>
             </nav>
          </div>
@@ -51,7 +43,7 @@ table.dataTable tbody tr.selected {
                <div class="container-fluid" >
                 
                   <div style="overflow-y: auto;">
-                  <table id="doc_list_datatable" class="table table-striped  table-hover table-bordered data-table"  cellspacing="0" width="100%">
+                  <table id="doc_list_datatable" class="table table-striped table-bordered data-table"  cellspacing="0" width="100%">
                 
                   <thead>
                         <tr>
@@ -92,7 +84,6 @@ var simpletable = $('#doc_list_datatable').DataTable({
         searchPlaceholder: ""
         
     },
-    
    'ajax': {
        'url': "<?= base_url() ?>ViewAllocatedTask/get_allocated_work_listing",
        'method': "POST",

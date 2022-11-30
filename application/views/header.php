@@ -90,13 +90,19 @@
           </ul>
           </li>
           <li class="active"><a href="<?= site_url('Masters') ?>">Masters</a></li>
-       
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add Data<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <li><a href="<?= site_url('masters/add_state') ?>">Add State</a></li>
+          <li><a href="<?= site_url('masters/add_city') ?>">Add City</a></li>
+          <li><a href="<?= site_url('masters/add_pincode') ?>">Add Pincode</a></li>
+        </ul>
+      </li>
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<span class="caret"></span></a>
           <ul class="dropdown-menu">
           <li><a href="<?= site_url('AddBackendUsers') ?>">Add Users</a></li>
           <li><a href="<?= site_url('Workallocation') ?>">Assign Services</a></li>
-          <li><a href="<?= site_url('ViewAllocatedTask1') ?>">View Allocated Task</a></li>
           </ul>
         </li>
       
@@ -105,7 +111,7 @@
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" class="" style="color:white;"><span class="glyphicon glyphicon-user" > </span> <?= $this->session->userdata('username') ?></a></li>
+      <li><a href="#" class="" style="color:white;"><span class="glyphicon glyphicon-user"> </span> <?= $this->session->userdata('username') ?></a></li>
         <li><a href="#" style="color:white;"><?= $this->session->userdata('role_name') ?></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

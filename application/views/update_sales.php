@@ -406,6 +406,7 @@
                                     <input type="file" name="image_files[]"  id="image_name" class="form-control" multiple>
                                  </div>
                                  <span class="error_msg" id="image_files_error"></span>
+                                  <input type="hidden" class="form-control" name="last_inserted_image" id="last_inserted_image" value="<?=$sales_data['image_url']?>">
                               </div>
                            </div>
                            <hr>

@@ -22,6 +22,7 @@ class Model extends CI_Model {
 					$this->db->like($like['field'], $like['keyword']);
 				}
 				$query = $this->db->get($tableName);
+                               
 				$this->db->trans_complete();
 				if ($query->num_rows() > 0){
 					$rows = $query->result_array();

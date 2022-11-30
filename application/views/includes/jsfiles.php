@@ -1,15 +1,4 @@
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-<script src="<?php echo base_url();?>assets_admin/lib/select2/select2.js"></script>
-<script src="<?php echo base_url();?>assets_admin/lib/datatables/jquery.dataTables.js"></script>
-<script src="<?php echo base_url();?>assets_admin/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js">
-</script>
-<script src="<?php echo base_url();?>assets_admin/js/sweetalert.min.js"></script>
-
-<script src="<?php echo base_url();?>assets_admin/js/admin.js"></script>
-    -->
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
@@ -26,22 +15,10 @@
     src="<?php echo base_url()?>assets-admin/js/plugins/bootstrap/bootstrap-colorpicker.js"></script>
 <script type="text/javascript"
     src="<?php echo base_url()?>assets-admin/js/plugins/bootstrap/bootstrap-file-input.js"></script>
-<!-- <script type="text/javascript" src="<?php echo base_url()?>assets-admin/js/plugins/bootstrap/bootstrap-select.js">
-</script> -->
-<!-- <script type="text/javascript"
-    src="<?php echo base_url()?>assets-admin/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>assets-admin/js/plugins.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>assets-admin/js/actions.js"></script> -->
 <script src="<?php echo base_url();?>assets-admin/summernote/summernote.js"></script>
 <script src="<?php echo base_url();?>assets_admin/lib/jquery-validate/jquery.validate.js"></script>
-<script src="<?php echo base_url();?>assets_admin/js/sweetalert.min.js"></script>
-<!-- <script src="<?php echo base_url();?>assets_admin/lib/jquery-maskedinput/jquery.maskedinput.js"></script>
-<script src="<?php echo base_url();?>assets_admin/lib/timepicker/jquery.timepicker.js"></script>
-<script src="<?php echo base_url();?>assets_admin/lib/dropzone/dropzone.js"></script>
-<script src="<?php echo base_url();?>assets_admin/lib/jquery-ui/jquery-ui.js"></script>
-<script src="<?php echo base_url();?>assets_admin/lib/jquery-toggles/toggles.js"></script>
-<script src="<?php echo base_url();?>assets_admin/lib/timepicker/jquery.timepicker.js"></script> 
-<script src="<?php echo base_url();?>assets_admin/lib/bootstrapcolorpicker/js/bootstrap-colorpicker.js"></script>-->
+<!-- <script src="<?php echo base_url();?>assets_admin/js/sweetalert.min.js"></script> -->
+
 <script src="<?php echo base_url();?>assets_admin/lib/datatables/jquery.dataTables.js"></script>
 <script src="<?php echo base_url();?>assets_admin/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js">
 </script>
@@ -67,3 +44,5 @@
         $("#services_chosen").addClass('textbox');
 </script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets_admin/js/simple-lightbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>assets_admin/view_js/form.js"></script>

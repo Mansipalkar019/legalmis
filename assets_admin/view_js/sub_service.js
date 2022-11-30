@@ -24,7 +24,6 @@ function validate_add_subservice(ele){
      if(hasError==1){
          return false;
      }else{
-         
              var user = {};
              user.product = {};
              user.product.services = services;
@@ -45,8 +44,7 @@ function validate_add_subservice(ele){
                      jQuery(".btn-quirk").text('Submit').prop('disabled', false);
                        if(res.status=='1'){ // Success
                          $('form#basicForm').trigger('reset');
-                         // $('.alert-success').css('display','block').html(res.msg); 
-                         // $('.alert-danger').css('display','none'); 
+                         $('#services').val(null).trigger('change');
                          swal({
                              title: "Success",
                              text: res.msg,
@@ -157,6 +155,7 @@ function delete_sub_service(ele,service_id){
                  if(res.status=='1'){ // Success
                        jQuery(ele).closest('tr').remove();
                    }
+                    $('#sub_service_datatable').DataTable().ajax.reload(null,false);
                }
            });
      }
@@ -174,8 +173,7 @@ function delete_sub_service(ele,service_id){
           success: function (data) {
         
             $('#serviceid').val(data['service_id']);
-                $('#serviceid').trigger('change.select2');
-               
+                $('#serviceid').trigger('change.select2');               
                 $('#name').val(data['name']);
                 $('#id').val(data['id']);
             

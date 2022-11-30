@@ -99,9 +99,9 @@
          </td>
       </tr>
    </table>
-   <table cellspacing="0px" cellpadding="2px" >
-      <tr class="information">
-         <td  colspan="3">
+   <table cellspacing="0px" cellpadding="3px" >
+      <tr class="information" >
+         <td  colspan="3" >
             <b> Invoice to: <br> <?php echo $data['getsalesrecordbyid']['client_name'];?> </b> <br>
             Company Address: <br>
             <?php echo $data['getsalesrecordbyid']['street'];?><br>

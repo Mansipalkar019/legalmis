@@ -3,30 +3,38 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ini_set("memory_limit", "-1");
 class AddBackendUsers extends CI_Controller
 {
-   
     public function __construct()
     {
         parent::__construct();
         date_default_timezone_set('Asia/Kolkata');
         $this->load->model('model');
         $this->load->model('supermodel');
-    
     }
 
     public function index()
     {
-        $this->load->view('addbackendusers');
-       
+        $roles = $this->model->selectWhereData('roles',array('status'=>'1'),array('id','roles'),false,array('id'=>'DESC'));
+        $data['roles'] = $roles;
+        $this->load->view('addbackendusers',$data);
     }
-
     public function add_backend_users()
     {
-        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required',array('required'=>' %s  is required'));
-        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required',array('required'=>'%s is required'));
-        $this->form_validation->set_rules('mobile_no', 'Mobile No', 'trim|required',array('required'=>'%s is required'));
-        $this->form_validation->set_rules('email', 'Email', 'trim|required',array('required'=>'%s is required'));
-        $this->form_validation->set_rules('username', 'Username', 'trim|required',array('required'=>'%s is required'));
+            $firstname=$this->input->post('firstname');
+            $lastname=$this->input->post('lastname');
+            $mobile_no=$this->input->post('mobile_no');
+            $email=$this->input->post('email');
+            $user_name=$this->input->post('user_name');
+            $password=$this->input->post('password');
+            $password=$this->encryption->encrypt($this->input->post('password'));
+            $roles=$this->input->post('roles');
+            
+        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|alpha',array('required'=>' %s  is required'));
+        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|alpha',array('required'=>'%s is required'));
+        $this->form_validation->set_rules('mobile_no', 'Mobile No', 'trim|required|exact_length[10]',array('required'=>'%s is required','exact_length' => 'Mobile Number should be 10 digit number'));
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email',array('required'=>'%s is required'));
+        $this->form_validation->set_rules('user_name', 'Username', 'trim|required|is_unique[users.username]',array('required'=>'%s is required',  'is_unique'=> 'This %s already exists.'));
         $this->form_validation->set_rules('password', 'Password', 'trim|required',array('required'=>'%s is required'));
+        $this->form_validation->set_rules('roles', 'Roles', 'trim|required',array('required'=>'%s is required'));
     
         if($this->form_validation->run() == FALSE)
         {
@@ -36,173 +44,138 @@ class AddBackendUsers extends CI_Controller
                 'lastname'=>strip_tags(form_error('lastname')),
                 'mobile_no'=>strip_tags(form_error('mobile_no')),
                 'email'=>strip_tags(form_error('email')),
-                'username'=>strip_tags(form_error('username')),
+                'user_name'=>strip_tags(form_error('user_name')),
                 'password'=>strip_tags(form_error('password')),
+                'roles'=>strip_tags(form_error('roles')),
             );
         }else{
-            $firstname=$this->input->post('firstname');
-            $lastname=$this->input->post('lastname');
-            $mobile_no=$this->input->post('mobile_no');
-            $email=$this->input->post('email');
-            $username=$this->input->post('username');
-            $password=$this->input->post('password');
-            $password=$this->encryption->encrypt($this->input->post('password'));
            
-            $roleid=$this->model->selectWhereData('roles',array('id'=>$this->session->userdata('role_id')),array('roles'));
-            //echo $roleid['roles'];die();
-
-            $name_exist = $this->model->getData("users", array('username' => $username,'status' => '1'));
-            //echo $this->db->last_query();die();
-            if(isset($name_exist) && empty($name_exist))
-            {
-                $user_data=array(
-                    'firstname'=>$firstname,
-                    'lastname'=>$lastname,
-                    'mobile_no'=>$mobile_no,
-                    'email'=>$email,
-                    'username'=>$username,
-                    'password'=>$password,
-                    'roles_id'=>$this->session->userdata('role_id'),
-                    'roles_name'=>$roleid['roles'],
-                );
-                $this->model->insertData('users',$user_data);
-                $response['status']='success';
-                $response['error']=array('msg' => "User Added Successfully !");
+           
+                $roles_name=$this->model->selectWhereData('roles',array('id'=>$roles),array('roles'));
+                $check_user_name_count = $this->model->CountWhereRecord('users', array('username'=>$user_name,'status'=>'1'));
+                $check_user_email_count = $this->model->CountWhereRecord('users', array('email'=>$email,'status'=>'1'));
+                if ($check_user_name_count > 0) {
+                    $response['status'] = 'failure';
+                    $response['error'] = array('user_name' => "User Name Already Exist...!",);
+                } else  if ($check_user_email_count > 0) {
+                    $response['status'] = 'failure';
+                    $response['error'] = array('user_name' => "Email Already Exist...!",);
+                } else {
+                    $user_data=array(
+                        'firstname'=>$firstname,
+                        'lastname'=>$lastname,
+                        'mobile_no'=>$mobile_no,
+                        'email'=>$email,
+                        'username'=>$user_name,
+                        'password'=>$password,
+                        'roles_id'=>$roles,
+                        'roles_name'=>$roles_name['roles'],
+                    );
+                    $this->model->insertData('users',$user_data);
+                    $response['status'] ="success";
+                    $response['msg'] ="Users Added Successfully";
             }
-            else{
-                $response['status']='failure';
-                $response['error']=array('msg' => "User Added UnSuccessfully !"); 
-            }
-            }
+        }
         echo json_encode($response);
+    }
+    public function get_user_list()
+    {
+        $this->load->model('user_list_model');
+        $user_list_data = $this->user_list_model->get_datatables();
+        $count = $this->user_list_model->count_all();
+        $count_filtered = $this->user_list_model->count_filtered();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($user_list_data as $user_list_data_key => $user_list_data_row) {
+            $edit = '<span><a href="javascript:void(0);" ><i class="glyphicon glyphicon-pencil edit_user_list_data" aria-hidden="true" data-toggle="modal" data-target="#UserModal" id="'.$user_list_data_row['user_id'].'"></i> </a></span>&nbsp;&nbsp;';
+            $delete = "<span id='".$user_list_data_row['user_id']."' class='delete_user_list' ><i class='glyphicon glyphicon-trash'></i></a></span>";
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $user_list_data_row['firstname']." ".$user_list_data_row['lastname'];
+            $row[] = $user_list_data_row['username'];
+            $row[] = $user_list_data_row['roles'];
+            $row[] = $user_list_data_row['email'];
+            $row[] = $user_list_data_row['mobile_no'];
+            $row[] = $edit . $delete;            
+            $data[] = $row;
+        }
+        $output = array("draw" => @$_POST['draw'], "recordsTotal" => $count, "recordsFiltered" => $count_filtered, "data" => $data);
+        echo json_encode($output);
+    }
+     public function get_users_data_on_id()
+    {
+        $id = $this->input->post('id');
+        $user_data = $this->model->selectWhereData('users',array('user_id'=>$id),array('*'));
+        $response['user_data'] = $user_data;
+        echo json_encode($response);
+        // $user_id=$_POST['id'];
+        // $totalData=  $this->model->selectWhereData('users',array('user_id'=>$user_id),array('*'));
+        // $totalData['decrytpassword']=$this->encryption->decrypt($totalData['password']);
+        // echo json_encode($totalData);
     }
 
     public function update_backend_users()
     {
-       
-        $this->form_validation->set_rules('firstname1', 'First Name', 'trim|required',array('required'=>' %s  is required'));
-        $this->form_validation->set_rules('lastname1', 'Last Name', 'trim|required',array('required'=>'%s is required'));
-        $this->form_validation->set_rules('mobile_no1', 'Mobile No', 'trim|required',array('required'=>'%s is required'));
-        $this->form_validation->set_rules('email1', 'Email', 'trim|required',array('required'=>'%s is required'));
-        $this->form_validation->set_rules('username1', 'Username', 'trim|required',array('required'=>'%s is required'));
-        $this->form_validation->set_rules('password1', 'Password', 'trim|required',array('required'=>'%s is required'));
+        $firstname=$this->input->post('edit_first_name');
+        $lastname=$this->input->post('edit_last_name');
+        $mobile_no=$this->input->post('edit_mobile_no');
+        $email=$this->input->post('edit_email');
+        // $username=$this->input->post('username1');
+        // $password=$this->input->post('password1');
+        // $password=$this->encryption->encrypt($this->input->post('password1'));
+        $user_id=$this->input->post('edit_user_id');
+        $roles=$this->input->post('edit_roles');
+
+
+        $this->form_validation->set_rules('edit_first_name', 'First Name', 'trim|required|alpha',array('required'=>' %s  is required'));
+        $this->form_validation->set_rules('edit_last_name', 'Last Name', 'trim|required|alpha',array('required'=>'%s is required'));
+        $this->form_validation->set_rules('edit_mobile_no', 'Mobile No', 'trim|required',array('required'=>'%s is required'));
+        $this->form_validation->set_rules('edit_email', 'Email', 'trim|required|valid_email',array('required'=>'%s is required'));
+        $this->form_validation->set_rules('edit_roles', 'Roles', 'trim|required',array('required'=>'%s is required'));
+        // $this->form_validation->set_rules('username1', 'Username', 'trim|required',array('required'=>'%s is required'));
+        // $this->form_validation->set_rules('password1', 'Password', 'trim|required',array('required'=>'%s is required'));
     
         if($this->form_validation->run() == FALSE)
         {
             $response['status'] = 'failure';
             $response['error'] = array(
-                'firstname1'=>strip_tags(form_error('firstname1')),
-                'lastname1'=>strip_tags(form_error('lastname1')),
-                'mobile_no1'=>strip_tags(form_error('mobile_no1')),
-                'email1'=>strip_tags(form_error('email1')),
-                'username1'=>strip_tags(form_error('username1')),
-                'password1'=>strip_tags(form_error('password1')),
+                'edit_first_name'=>strip_tags(form_error('edit_first_name')),
+                'edit_last_name'=>strip_tags(form_error('edit_last_name')),
+                'edit_mobile_no'=>strip_tags(form_error('edit_mobile_no')),
+                'edit_email'=>strip_tags(form_error('edit_email')),
+                'edit_roles'=>strip_tags(form_error('edit_roles')),
+                // 'username1'=>strip_tags(form_error('username1')),
+                // 'password1'=>strip_tags(form_error('password1')),
             );
-        }else{
-            $firstname=$this->input->post('firstname1');
-            $lastname=$this->input->post('lastname1');
-            $mobile_no=$this->input->post('mobile_no1');
-            $email=$this->input->post('email1');
-            $username=$this->input->post('username1');
-            $password=$this->input->post('password1');
-            $password=$this->encryption->encrypt($this->input->post('password1'));
-            $user_id=$this->input->post('userid');
-           
-            $roleid=$this->model->selectWhereData('roles',array('id'=>$this->session->userdata('role_id')),array('roles'));
-            //echo $roleid['roles'];die();
-
-            
+        }else{        
+            $role_name=$this->model->selectWhereData('roles',array('id'=>$roles),array('roles'));            
                 $user_data=array(
                     'firstname'=>$firstname,
                     'lastname'=>$lastname,
                     'mobile_no'=>$mobile_no,
                     'email'=>$email,
-                    'username'=>$username,
-                    'password'=>$password,
-                    'roles_id'=>$this->session->userdata('role_id'),
-                    'roles_name'=>$roleid['roles'],
+                    // 'username'=>$username,
+                    // 'password'=>$password,
+                    'roles_id'=>$roles,
+                    'roles_name'=>$role_name['roles'],
                 );
-                if($this->model->updateData('users',$user_data,array('user_id'=>$user_id)))
-                {
-                    $response['status']='success';
-                    $response['error']=array('msg' => "User Updated Successfully !");
-                }
-                else{
-                    $response['status']='failure';
-                    $response['error']=array('msg' => "User Updated UnSuccessfully !"); 
-
-                }
+                    $this->model->updateData("users",$user_data,array('user_id'=>$user_id));
+                    $response['status'] ="success";
+                    $response['msg'] ="Users Data Updated Successfully";
             }
         echo json_encode($response);
-    }
-
-    public function getuserlist()
-    {
-        $data[] = json_encode($_POST);  
-        $rowno = $_POST['start'];
-        $rowperpage = $_POST['length'];
-        $search_text = $_POST['search']['value'];   
-        $totalData=$this->supermodel->main_users($this->session->userdata('role_id'),$rowno,$rowperpage,$search_text);   
-        $count_filtered=$this->supermodel->count_users_filtered($this->session->userdata('role_id'),$rowno,$rowperpage,$search_text);
-        $count_all = $this->supermodel->count_users_all($this->session->userdata('role_id'),$rowno,$rowperpage,$search_text);
-        $data_array=array();
-       
-        foreach($totalData as $category_details_key => $data_row)
-        {
-           
-            $edit = '<span><a href="javascript:void(0);" >
-            <i class="glyphicon glyphicon-pencil a_category_view" aria-hidden="true" data-toggle="modal"
-            data-target="#UserModal" id="'.$data_row['user_id'].'"></i> </a></span>&nbsp;&nbsp;';
-            $delete="<span><a href='#' onclick='delete_users(this," . $data_row['user_id'] . ")' ><i class='glyphicon glyphicon-trash'></i> </a></span>&nbsp;&nbsp;";
-           
-             $nestedData=array();
-                $nestedData[] =  $edit . $delete ;
-                $nestedData[] = ++$category_details_key;
-                $nestedData[] = $data_row['roles_name'];
-                $nestedData[] = $data_row['username'];
-                $nestedData[] = $data_row['mobile_no'];
-                $nestedData[] = $data_row['email'];
-                
-                $data_array[] = $nestedData;
-              
-       }
-       
-      $output = array(
-            "draw" => intval($_POST['draw']),
-            "recordsTotal" => intval($count_all),
-            "recordsFiltered" => intval($count_filtered),
-            "data" => $data_array,
-        );
-        
-        // Output to JSON format
-        echo json_encode($output);    
-    }
-
+    } 
     public function delete_users()
     {
-        $jsonObj=$_POST['jsonObj'];
-        $array_data=json_decode($jsonObj,true);
-        $array_entity=$array_data['product'];
-        if(isset($array_entity) && !empty($array_entity))
-        {
-          $user_id=$array_entity['user_id'];
-          $this->model->updateData('users',array('status'=>'0'),array('user_id'=>$user_id));
-          $data['status'] = '1';
-          $data['msg'] = 'Service has been deleted successfully.';
-        }
-        else{
-          $data['status'] = '0';
-          $data['msg'] = 'Invalid Service details.';
-        }
-        echo json_encode($data);
+            $id = $this->input->post('id');
+            $curl_data = array('status'=>0);
+             $this->model->updateData("users",$curl_data,array('user_id'=>$id));
+            $response['status'] = 'success';
+            $response['msg'] ="User Deleted Successfully";
+            echo json_encode($response);
     }
 
-    public function get_all_users()
-    {
-        $user_id=$_POST['id'];
-        $totalData=  $this->model->selectWhereData('users',array('user_id'=>$user_id),array('*'));
-        $totalData['decrytpassword']=$this->encryption->decrypt($totalData['password']);
-        echo json_encode($totalData);
-    }
+   
 }
 ?>
