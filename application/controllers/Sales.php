@@ -209,9 +209,9 @@ class Sales extends CI_Controller {
             // $nestedData[] = $data_row['secondary_caller'];
             // $nestedData[] = $data_row['lead_source'];
             $nestedData[] = $data_row['street'];
-            $nestedData[] = $data_row['city'];
+            $nestedData[] = $data_row['city_name'];
             $nestedData[] = $data_row['statename'];
-            $nestedData[] = $data_row['pincode'];
+            $nestedData[] = $data_row['pin_code'];
             $nestedData[] = $data_row['payment_mode'];
             $nestedData[] = $data_row['deal_amount'];
             $nestedData[] = $data_row['amount_received'];
@@ -312,27 +312,33 @@ class Sales extends CI_Controller {
         echo "<br>TODO: show custom 4 column page here...";
     }
     public function add_deal() {
-        // FETCH: get all services name only & get sub_services using $this->get_background_data();
-        $data['services_list'] = $this->model->getData('services', array('status' => '1'));
-        // FETCH: get all services name only & get sub_services using $this->get_background_data();
-        $data['sub_services_list'] = $this->model->getData('sub_services', array('status' => '1'));
-        // FETCH: get all documents name
-        $data['document_list'] = $this->model->getData('document_list', array('status' => '1'));
-        // FETCH: get all the payment mode names
-        $data['payment_mode'] = $this->model->getData('payment_mode', array('status' => '1'));
-        // FETCH: get all the invoice status names
-        $data['invoice_status'] = $this->model->getData('invoice_status', array('status' => '1'));
-        // FETCH: get all the invoice type names
-        $data['invoice_type'] = $this->model->getData('invoice_type', array('status' => '1'));
-        // FETCH: get all the invoice type names
-        $data['users'] = $this->model->getData('sub_services', array('status' => '1'));
-        // FETCH: get all the invoice type names
-        $data['clients'] = $this->db->query("SELECT id,client_name,mobile_1 FROM clients ORDER BY client_name ASC")->result();
-        // FETCH: get all the invoice type names
-        $data['state'] = $this->model->getData('tbl_states');
-        // FETCH: get all customer executive
-        $data['customer_executive'] = $this->model->getData('customer_executive', array('status' => '1'));
-        $this->load->view('add_deal_form', $data);
+         if ($this->session->userdata('superadmin_logged_in')) {
+                // FETCH: get all services name only & get sub_services using $this->get_background_data();
+                $data['services_list'] = $this->model->getData('services', array('status' => '1'));
+                // FETCH: get all services name only & get sub_services using $this->get_background_data();
+                $data['sub_services_list'] = $this->model->getData('sub_services', array('status' => '1'));
+                // FETCH: get all documents name
+                $data['document_list'] = $this->model->getData('document_list', array('status' => '1'));
+                // FETCH: get all the payment mode names
+                $data['payment_mode'] = $this->model->getData('payment_mode', array('status' => '1'));
+                // FETCH: get all the invoice status names
+                $data['invoice_status'] = $this->model->getData('invoice_status', array('status' => '1'));
+                // FETCH: get all the invoice type names
+                $data['invoice_type'] = $this->model->getData('invoice_type', array('status' => '1'));
+                // FETCH: get all the invoice type names
+                $data['users'] = $this->model->getData('sub_services', array('status' => '1'));
+                // FETCH: get all the invoice type names
+                $data['clients'] = $this->db->query("SELECT id,client_name,mobile_1 FROM clients ORDER BY client_name ASC")->result();
+                // FETCH: get all the invoice type names
+                $data['state'] = $this->model->getData('tbl_states');
+                // FETCH: get all customer executive
+                $data['customer_executive'] = $this->model->getData('customer_executive', array('status' => '1'));
+                 $city_data = $this->model->selectWhereData('tbl_cities ',array('status'=>1),array('*'),false);
+            $data['city_data'] = $city_data;
+                $this->load->view('add_deal_form', $data);
+        }else{
+            redirect('welcome');
+        }
     }
     function _check_date($value) {
         // input: "30/03/2022"
@@ -381,18 +387,20 @@ class Sales extends CI_Controller {
         $query = $this->model->getData('tbl_cities', array('state_id' => $state_id));
         $html = "<option value=''>Select City</option>";
         foreach ($query as $key => $bdd) {
-            $html.= "<option value='" . $bdd['name'] . "'>" . $bdd['name'] . "</option>";
+            $html.= "<option value='" . $bdd['id'] . "'>" . $bdd['name'] . "</option>";
         }
         echo json_encode($html);
     }
     public function getpincode() {
-        $City_id = $this->input->post('city');
-        $query = $this->supermodel->getpincode($City_id);
-        $html = "<option value=''>Select Pincode</option>";
-        foreach ($query as $key => $bdd) {
-            $html.= "<option value='" . $bdd['Pincode'] . "'>" . $bdd['Pincode'] . "</option>";
-        }
-        echo json_encode($html);
+        $city_id = $this->input->post('city');
+        // echo '<pre>'; print_r($city_id); exit;
+        $pincode_data = $this->model->selectWhereData('tbl_pincode',array('fk_city_id'=>$city_id,'status'=>1),array('id','pincode'),false);
+        // $html = "<option value=''>Select Pincode</option>";
+        // foreach ($query as $key => $bdd) {
+        //     $html.= "<option value='" . $bdd['id'] . "'>" . $bdd['pincode'] . "</option>";
+        // }
+        $data['pincode_data'] = $pincode_data;
+        echo json_encode($data);
     }
     public function getselectedservices() {
         $data = array();
@@ -551,7 +559,7 @@ class Sales extends CI_Controller {
         $this->form_validation->set_rules('street', 'Street', 'trim|required', array('required' => 'This field is required'));
         $this->form_validation->set_rules('city', 'City', 'trim|required', array('required' => 'This field is required'));
         $this->form_validation->set_rules('state', 'State', 'trim|required', array('required' => 'This field is required'));
-        $this->form_validation->set_rules('pincode', 'Pincode', 'trim|required|numeric', array('required' => 'This field is required'));
+        $this->form_validation->set_rules('fk_pincode', 'Pincode', 'trim|required|numeric', array('required' => 'This field is required'));
         $this->form_validation->set_rules('deal_amount', 'Deal Amount', 'trim|required', array('required' => 'This field is required'));
         $this->form_validation->set_rules('amount_received', 'Amount Received', 'trim|required', array('required' => 'This field is required'));
         $this->form_validation->set_rules('outstanding', 'Outstanding', 'trim|required|numeric', array('required' => 'This field is required'));
@@ -592,7 +600,7 @@ class Sales extends CI_Controller {
             //'alternate_number' => strip_tags(form_error('alternate_number')),
             'email_address' => strip_tags(form_error('email_address')),
             //'email_address1' => strip_tags(form_error('email_address1')),
-            'gst_no' => strip_tags(form_error('gst_no')), 'street' => strip_tags(form_error('street')), 'city' => strip_tags(form_error('city')), 'state' => strip_tags(form_error('state')), 'pincode' => strip_tags(form_error('pincode')), 'deal_amount' => strip_tags(form_error('deal_amount')), 'amount_received' => strip_tags(form_error('amount_received')), 'outstanding' => strip_tags(form_error('outstanding')), 'tcs' => strip_tags(form_error('tcs')), 'govt_fees' => strip_tags(form_error('govt_fees')), 'associate_fees' => strip_tags(form_error('associate_fees')), 'net_income' => strip_tags(form_error('net_income')), 'gst_amount' => strip_tags(form_error('gst_amount')),
+            'gst_no' => strip_tags(form_error('gst_no')), 'street' => strip_tags(form_error('street')), 'city' => strip_tags(form_error('city')), 'state' => strip_tags(form_error('state')), 'fk_pincode' => strip_tags(form_error('fk_pincode')), 'deal_amount' => strip_tags(form_error('deal_amount')), 'amount_received' => strip_tags(form_error('amount_received')), 'outstanding' => strip_tags(form_error('outstanding')), 'tcs' => strip_tags(form_error('tcs')), 'govt_fees' => strip_tags(form_error('govt_fees')), 'associate_fees' => strip_tags(form_error('associate_fees')), 'net_income' => strip_tags(form_error('net_income')), 'gst_amount' => strip_tags(form_error('gst_amount')),
             //'outstanding_followup_date' => strip_tags(form_error('outstanding_followup_date')),
             'payment_mode' => strip_tags(form_error('payment_mode')), 'invoice_type' => strip_tags(form_error('invoice_type')),
             //'brand_name' => strip_tags(form_error('brand_name')),
@@ -612,7 +620,7 @@ class Sales extends CI_Controller {
             $street = $this->input->post('street');
             $city = $this->input->post('city');
             $state = $this->input->post('state');
-            $pincode = $this->input->post('pincode');
+            $fk_pincode = $this->input->post('fk_pincode');
             //$commission            = $this->input->post('commission');
             $dob = $this->input->post('dob');
             $industry = $this->input->post('industry');
@@ -718,7 +726,7 @@ class Sales extends CI_Controller {
                     'street' => $street, 
                     'city' => $city, 
                     'state' => $state, 
-                    'pincode' => $pincode,
+                    'pincode' => $fk_pincode,
                      //'commission'            => $commission,
                     'date_of_birth' => $dob, 
                     'industry' => $industry,
@@ -919,7 +927,7 @@ class Sales extends CI_Controller {
         $data['sale_service_brand'] = $sale_service_brand;
         $data['state'] = $this->model->getData('tbl_states');
         $data['city'] = $this->model->selectWhereData('tbl_cities',array('state_id'=>$data['sales_data']['state']),array('*'),false);
-        $data['pincode'] = $this->model->selectWhereData('location',array('city'=>$data['sales_data']['city']),array('*'),false);
+        $data['pincode'] = $this->model->selectWhereData('tbl_pincode',array('fk_city_id'=>$data['sales_data']['city']),array('*'),false);
         $data['customer_executive']  = $this->model->selectWhereData('customer_executive', array('status' => '1'),array('id','name'),false);
         $data['payment_mode'] = $this->model->getData('payment_mode', array('status' => '1'));
         $data['invoice_status'] = $this->model->getData('invoice_status', array('status' => '1'));

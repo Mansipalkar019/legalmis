@@ -40,8 +40,9 @@ class Welcome extends CI_Controller
 				$userName = strtolower($this->security->xss_clean($this->input->post('username')));
 				$userPassword = $this->input->post('password');
 				// FETCH: check user credentials are correct
-				$users = $this->model->selectWhereData("users", array('username' => $userName,'password'=>$this->encryption->decrypt($userPassword),'status' => '1'),array('*'));
+				$users = $this->model->selectWhereData("users", array('username' => $userName,'status' => '1'),array('*'));
 				// echo '<pre>'; print_r($users); exit;
+				// ,'password'=>$this->encryption->decrypt($userPassword)
 				if (@$users['roles_id'] == 1) {					
 					$this->session->set_userdata('superadmin_logged_in',$users);
 					redirect('Dashboard');

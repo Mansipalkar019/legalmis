@@ -40,19 +40,20 @@
             <div class="col-md-4">
                <div class="form-group">
                   <label>Pincode :<span class="text-danger">*</span></label>
-                  <input type="text" name="pincode[]" id="pincode_0" class="form-control" onkeypress="return isNumber(event)" >
+                  <input type="text" name="pincode[]" id="pincode_0" class="form-control" onkeypress="return isNumber(event)" maxlength="6">
                   <span class="error_msg" id="pincode_error"></span>
                </div>
-            </div>    
+            </div>
             <div class="col-md-2">
                <button id="addRows" type="button" class="btn btn-info" style="height: 33px; margin-top: 20px; margin-left: -20px;"><i class="glyphicon glyphicon-plus"></i>
                </button>
                <input type="hidden" class="form-control"  name="count" id="count" value="0">
-            </div> 
-            </div>  
-             <hr>
-         <div class="row"><div id="pincode_data_append"></div>
-         </div>  
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div id="pincode_data_append"></div>
+         </div>
          <div class="row">
             <div class="col-md-3">
                <div class="form-group"  style="margin-top: 15px;">
@@ -60,8 +61,33 @@
                </div>
             </div>
          </div>
-         <?php echo form_close(); ?>
+        
       </div>
+       <?php echo form_close(); ?>
+
+   </div>
+</div>
+<div class="col-md-12">
+   <div class="panel">
+      <div class="form-group">
+         <a href="<?=base_url()?>uploads/add_pincode.xls">Download Sample File</a>
+      </div>
+      <?php echo form_open('masters/excel_upload_pincode', array('id' => 'excel_import_pincode_form')) ?>
+      <div class="col-md-12">
+         <div class="form-group">
+            <label for="">Upload File</label>
+            <input type="file" name="upload_pincode" class="form-control" id="upload_pincode">
+            <span class="error_msg" id="upload_pincode_error"></span>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-3">
+            <div class="form-group"  style="margin-top: 15px;">
+               <input type="submit" class="btn btn-primary" value="Save" />
+            </div>
+         </div>
+      </div>
+      <?php echo form_close(); ?>
    </div>
 </div>
 <div class="col-md-12">
@@ -86,22 +112,20 @@
                   <!-- Modal content-->
                   <div class="modal-content">
                      <div class="modal-header">
-                        <h4 class="modal-title">Edit State Details</h4>
+                        <h4 class="modal-title">Edit Pincode Details</h4>
                      </div>
-                     <?php echo form_open('masters/Update_city_data', array('id' => 'update_city_form')) ?>
+                     <?php echo form_open('masters/Update_pincode_data', array('id' => 'update_pincode_form')) ?>
                      <div class="modal-body">
                         <div class="form-group">
-                           <label>State Name:<span class="text-danger">*</span></label>
-                           <div><span id="edit_pincode"></span></div>
+                           <label>City Name:<span class="text-danger">*</span></label>
+                           <div><span id="edit_city"></span></div>
                            <input type="hidden" name="edit_pincode_id" id="edit_pincode_id"
                               class="form-control">
                         </div>
                         <div class="form-group">
-                           <label>City Name:<span class="text-danger">*</span></label>
-                           <input type="text" name="edit_pincode" id="edit_pincode"
-                              class="form-control">
+                           <label>Pincode :<span class="text-danger">*</span></label>
+                           <input type="text" name="edit_pincode" id="edit_pincode" onkeypress="return isNumber(event)" class="form-control" maxlength="6">
                            <span class="error_msg" id="edit_pincode_error"></span>
-                           
                         </div>
                         <div class="modal-footer">
                            <button type="submit" class="btn btn-success">Submit</button>
@@ -187,7 +211,7 @@
          success: function (data) {
            var data = data.pincode_data;
                $('#edit_pincode_id').val(data['id']);
-               $('#edit_pincode').text(data['name']);
+               $('#edit_city').text(data['name']);
                $('#edit_pincode').val(data['pincode']);
            
          }
@@ -196,9 +220,9 @@
    });
    
    
-   $('#update_city_form').submit(function(e) {
+   $('#update_pincode_form').submit(function(e) {
        e.preventDefault();
-       var formData = new FormData($("#update_city_form")[0]);
+       var formData = new FormData($("#update_pincode_form")[0]);
        var InvoiceTypeForm = $(this);
        jQuery.ajax({
            dataType: 'json',
@@ -211,8 +235,8 @@
            mimeType: "multipart/form-data",
            success: function(response) {
                if (response.status == 'success') {
-                   $('form#update_city_form').trigger('reset');
-                   $('#City_Modal').modal('hide');
+                   $('form#update_pincode_form').trigger('reset');
+                   $('#pincode_Modal').modal('hide');
                    $('#pincode_list_datatable').DataTable().ajax.reload(null,false);
                     swal({
                         title: "success",
@@ -234,7 +258,7 @@
        return false;
    });
     $(document).ready(function() {
-     $(document).on('click', '.delete_city', function(e) {
+     $(document).on('click', '.delete_pincode', function(e) {
          var id = $(this).attr("id");
          // alert(id);
          confirmDelete(id);
@@ -254,7 +278,7 @@
      }, function() {
          $.ajax({
              type: "post",
-             url: bases_url+"masters/delete_city",
+             url: bases_url+"masters/delete_pincode",
              data: {
                  id: id,
              },
@@ -278,7 +302,7 @@
        var new_count = parseInt(latest_count) + 1;
       
        var html2 = '';             
-          html2 += '<div class="col-md-4"><div class="form-group"><label>Pincode <span class="text-danger">* </span></label><input type="text" class="form-control" style="width: 100% !important;" name="pincode[]" id="pincode_'+new_count+'"  onkeypress="return isNumber(event)"   ></div><button id="removeRow" type="button" class="btn btn-danger btn-sm removeRow" style="height: 29px;margin-top: 23px;">-</button></div></div></div></div></div></div>';   
+          html2 += '<div class="col-md-4"><div class="form-group"><label>Pincode <span class="text-danger">* </span></label><input type="text" class="form-control" style="width: 100% !important;" name="pincode[]" id="pincode_'+new_count+'"  onkeypress="return isNumber(event)" maxlength="6"></div><button id="removeRow" type="button" class="btn btn-danger btn-sm removeRow" style="height: 29px;margin-top: 23px;">-</button></div></div></div></div></div></div>';   
    
        $('#pincode_data_append').append(html2);
    
@@ -289,4 +313,44 @@
             $('#count').val(new_count);
             $(this).closest("div").remove();      
          });
+
+
+        $('#excel_import_pincode_form').submit(function(e) {
+       e.preventDefault();
+       var formData = new FormData($("#excel_import_pincode_form")[0]);
+       var InvoiceTypeForm = $(this);
+       jQuery.ajax({
+           dataType: 'json',
+           type: 'POST',
+           url: InvoiceTypeForm.attr('action'),
+           data: formData,
+           cache: false,
+           processData: false,
+           contentType: false,
+           mimeType: "multipart/form-data",
+           success: function(response) {
+               if (response.status == 'success') {
+                   $('form#excel_import_pincode_form').trigger('reset');
+                   // $('#city_id').val(null).trigger('change');
+                   // $('#pincode_data_append').html('');
+                   $('#pincode_list_datatable').DataTable().ajax.reload(null,false);
+                    swal({
+                        title: "success",
+                        text: response.msg,
+                        icon: "success",
+                        dangerMode: true,
+                        timer: 1500
+                     });
+               } else if (response.status == 'failure') {
+                   error_msg(response.error)
+               } else {
+                   window.location.replace(response['url']);
+               }
+           },
+           error: function(error, message) {
+   
+           }
+       });
+       return false;
+   });
 </script>

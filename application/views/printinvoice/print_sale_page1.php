@@ -95,18 +95,18 @@
    <table cellpadding="0" cellspacing="0" style="margin-top: 150px;">
       <tr>
          <td style="text-align:center;">
-            <b> Proforma Invoice : <?php echo $data['getsalesrecordbyid']['invoice_number'];?> </b>  
+            <b> <?=$data['getsalesrecordbyid']['invoice_type_name']?> : <?php echo $data['getsalesrecordbyid']['invoice_number'];?> </b>  
          </td>
       </tr>
    </table>
    <table cellspacing="0px" cellpadding="3px" >
       <tr class="information" >
          <td  colspan="3" >
-            <b> Invoice to: <br> <?php echo $data['getsalesrecordbyid']['client_name'];?> </b> <br>
+            <b> Invoice to: <br> <?php echo $data['getsalesrecordbyid']['invoice_name'];?> </b> <br>
             Company Address: <br>
             <?php echo $data['getsalesrecordbyid']['street'];?><br>
             <?php echo $data['getsalesrecordbyid']['city'];?>, <?php echo $data['getsalesrecordbyid']['state']['name'];?> <?php echo $data['getsalesrecordbyid']['pincode'];?> <br><br>
-            Mobile No:-<?php echo $data['getsalesrecordbyid']['mobile_1'];?><?php if($data['getsalesrecordbyid']['mobile_2'] != '' && $data['getsalesrecordbyid']['mobile_2'] != 0){echo ', '.$data['getsalesrecordbyid']['mobile_2'];} ?><?php if($data['getsalesrecordbyid']['alternate_number'] != '' && $data['getsalesrecordbyid']['alternate_number'] != 0){echo ', '.$data['getsalesrecordbyid']['alternate_number'];} ?> <br>
+            Mobile No:-<?php echo $data['getsalesrecordbyid']['mobile_1'];?><?php if($data['getsalesrecordbyid']['mobile_2'] != '' && $data['getsalesrecordbyid']['mobile_2'] != 0){echo ', '.$data['getsalesrecordbyid']['mobile_2'];} ?><?php if($data['getsalesrecordbyid']['alternate_number'] != '' && $data['getsalesrecordbyid']['alternate_number'] != 0){echo ' / '.$data['getsalesrecordbyid']['alternate_number'];} ?> <br>
             Email ID:-<?php echo $data['getsalesrecordbyid']['email_address'];?><br>
             GSTIN:-<?php echo $data['getsalesrecordbyid']['gst_no'];?><br><br>
             Invoice Date:   <?php echo $data['getsalesrecordbyid']['sale_date'];?>

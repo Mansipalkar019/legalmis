@@ -150,7 +150,7 @@
                                                 $selected ="";
                                              }
                                              ?>
-                                       <option value=<?php echo  $city_row['name'] ?> <?=$selected?> ><?php echo  $city_row['name'] ?></option>
+                                       <option value=<?php echo  $city_row['id'] ?> <?=$selected?> ><?php echo  $city_row['name'] ?></option>
                                        <?php } }?>
                                     </select>
                                     <span class="error_msg" id="city_error"></span>
@@ -172,7 +172,7 @@
                                                 $selected ="";
                                              }
                                              ?>
-                                       <option value=<?php echo  $pincode_row['pincode'] ?> <?=$selected?> ><?php echo  $pincode_row['pincode'] ?></option>
+                                       <option value=<?php echo  $pincode_row['id'] ?> <?=$selected?> ><?php echo  $pincode_row['pincode'] ?></option>
                                        <?php } }?>
                                     </select>
                                     <span class="error_msg" id="pincode_error"></span>

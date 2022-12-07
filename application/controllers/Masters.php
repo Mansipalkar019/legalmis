@@ -1162,11 +1162,12 @@ class Masters extends CI_Controller
                                 'fk_city_id'=>$city_id
                             );
                             $this->model->insertData("tbl_pincode",$curl_data);
-                        }                        
+                        }  
+                         $response['status'] ="success";
+                         $response['msg'] ="Pincode Added Successfully";                      
                     }                   
                 }
-                $response['status'] ="success";
-                $response['msg'] ="Pincode Added Successfully";
+               
             }
             echo json_encode($response);
     }
@@ -1205,20 +1206,20 @@ class Masters extends CI_Controller
     {
         $edit_pincode_id = $this->input->post('edit_pincode_id');
         $edit_pincode = $this->input->post('edit_pincode');
-        $this->form_validation->set_rules('edit_pincode', 'Name', 'required|trim', array('required' => 'You must provide a %s'));
+        $this->form_validation->set_rules('edit_pincode', 'Pincode', 'required|trim', array('required' => 'You must provide a %s'));
         if ($this->form_validation->run() == FALSE) {
                 $response['status'] = 'failure';
                 $response['error'] = array(
                     'edit_pincode' => strip_tags(form_error('edit_pincode')), 
                 );
             } else {
-                $check_edit_pincode_count = $this->model->CountWhereRecord('tbl_pincode', array('name'=>$edit_pincode,'status'=>'1','id !=' => $edit_pincode_id));
+                $check_edit_pincode_count = $this->model->CountWhereRecord('tbl_pincode', array('pincode'=>$edit_pincode,'status'=>'1','id !=' => $edit_pincode_id));
                 if ($check_edit_pincode_count > 0) {
                     $response['status'] = 'failure';
-                    $response['error'] = array('edit_pincode' => "Name Already Exist...!",);
+                    $response['error'] = array('edit_pincode' => "pincode Already Exist...!",);
                 } else {
                     $curl_data = array(
-                        'name' =>$edit_pincode,
+                        'pincode' =>$edit_pincode,
                     );
                     $this->model->updateData("tbl_pincode",$curl_data,array('id'=>$edit_pincode_id));
                     $response['status'] ="success";
@@ -1236,5 +1237,47 @@ class Masters extends CI_Controller
         $response['status'] = 'success';
         $response['msg'] ="State Deleted Successfully";
         echo json_encode($response);
+    }
+
+    public function excel_upload_pincode() {
+        $session_data = $this->session->userdata('superadmin_logged_in');
+        // error_reporting(0);
+        $this->load->library('excel');
+        if (!empty($_FILES["upload_pincode"]["name"])) {
+            $path = $_FILES["upload_pincode"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach ($object->getWorksheetIterator() as $worksheet) {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                $img = 0;
+                for ($row = 2;$row <= $highestRow;$row++) {
+                    $city_name = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $pincode = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $city_id = $this->model->selectWhereData('tbl_cities',array('name'=>$city_name),array('id'));
+                    $check_pincode_count = $this->model->CountWhereRecord('tbl_pincode', array('pincode'=>$pincode,'status'=>'1'));
+                        if ($check_pincode_count > 0) {
+                            $response['status'] = 'failure';
+                            $response['error'] = array('upload_pincode' => "Pincode Already Exist...!",);
+                        } else {
+                            if(!empty($city_id['id']) && !empty($pincode)){
+                                $curl_data = array(
+                                'pincode' =>$pincode,
+                                'fk_city_id'=>$city_id['id']
+                            );
+                             $this->model->insertData("tbl_pincode",$curl_data);
+                             $response['status'] ="success";
+                             $response['msg'] ="Pincode Added Successfully";
+                            }else{
+                                  $response['status'] ="failure";
+                                  $response['error'] = array('upload_pincode' => "Pincode Already Exist...!",);
+                            }                             
+                        }
+                }
+            }
+        }else{
+            $response['status'] ="failure";
+            $response['msg'] ="Something went wrong";
+        }
+             echo json_encode($response);
     }
 }
