@@ -105,21 +105,39 @@
             <b> Invoice to: <br> <?php echo $data['getsalesrecordbyid']['invoice_name'];?> </b> <br>
             Company Address: <br>
             <?php echo $data['getsalesrecordbyid']['street'];?><br>
-            <?php echo $data['getsalesrecordbyid']['city'];?>, <?php echo $data['getsalesrecordbyid']['state']['name'];?> <?php echo $data['getsalesrecordbyid']['pincode'];?> <br><br>
-            Mobile No:-<?php echo $data['getsalesrecordbyid']['mobile_1'];?><?php if($data['getsalesrecordbyid']['mobile_2'] != '' && $data['getsalesrecordbyid']['mobile_2'] != 0){echo ', '.$data['getsalesrecordbyid']['mobile_2'];} ?><?php if($data['getsalesrecordbyid']['alternate_number'] != '' && $data['getsalesrecordbyid']['alternate_number'] != 0){echo ' / '.$data['getsalesrecordbyid']['alternate_number'];} ?> <br>
+            <?php echo $data['getsalesrecordbyid']['city_name'];?>, <?php echo $data['getsalesrecordbyid']['statename'];?> <?php echo $data['getsalesrecordbyid']['pin_code'];?> <br><br>
+            Mobile No:-<?php echo $data['getsalesrecordbyid']['mobile_1'];?><?php if($data['getsalesrecordbyid']['mobile_2'] != '' && $data['getsalesrecordbyid']['mobile_2'] != 0){echo ' / '.$data['getsalesrecordbyid']['mobile_2'];} ?><?php if($data['getsalesrecordbyid']['alternate_number'] != '' && $data['getsalesrecordbyid']['alternate_number'] != 0){echo ', '.$data['getsalesrecordbyid']['alternate_number'];} ?> <br>
             Email ID:-<?php echo $data['getsalesrecordbyid']['email_address'];?><br>
             GSTIN:-<?php echo $data['getsalesrecordbyid']['gst_no'];?><br><br>
-            Invoice Date:   <?php echo $data['getsalesrecordbyid']['sale_date'];?>
+            Invoice Date:   <?php echo $newdat=date("d-M-Y",strtotime($data['getsalesrecordbyid']['sale_date']));;
+            
+            ?>
          </td>
          <td >
+             <?php
+                if($data['getsalesrecordbyid']['invoice_type']==1){ ?>
             <b> Pay to: <br>Primary bank details :</b><br>
+            
+            Bank Account Name – BDS Services Pvt Ltd<br>
+            Bank Account No – 10059310498<br>
+            IFSC Code – IDFB0040103<br><br>
+            Bank – IDFC First Bank<br>
+            Branch – Vashi, Thane – 400705<br><br>
+            <?php } ?>
+            
+            <?php if($data['getsalesrecordbyid']['invoice_type']==2){ ?>
+             <b> Pay to: <br>Primary bank details :</b><br>
+            
+            Primary bank details :
+            Payee Name - Vijaypal Jaiswal<br>
             Bank Account No : 106603130001272<br>
             IFSC Code : SVCB0000066<br>
-            Bank: SVC Co-Operative Bank Ltd<br><br>
+            Bank: SVC Co-Operative Bank Ltd<br>
             Branch: Vikhroli West<br>
-            City : Mumbai<br><br>
+            City : Mumbai<br>
             G-PAY - +91 84529 31503<br>
             PAYTM - +91 84529 31503<br>
+            <?php }?>
          </td>
       
       </tr>
@@ -184,7 +202,7 @@
             3
          </td>
          <td style="width:25%; text-align:center;">
-            (HSN CODE:-0)
+            (HSN CODE:-998213)
          </td>
          <td style="width:10%; text-align:center;">
             0
@@ -299,19 +317,17 @@
    </table>
    <table cellspacing="0px" cellpadding="2px">
       <tr class="information">
+           <?php
+                if($data['getsalesrecordbyid']['invoice_type']==1){ ?>
          <td  colspan="3">
             <b>Secondary Bank details :</b> <br>
-            Payee Name: BDS Services Pvt Ltd <br>
-            Bank Account No : 9313790257<br>
-            IFSC : KKBK0001429<br>
-            Bank : KOTAK MAHINDRA BANK LTD<br>
-         </td>
-         <td>
-            Branch : Vikhroli (W)
-         </td>
-         <td>
-            City : Mumbai
-         </td>
+            Payee Name – BDS Services Pvt Ltd<br>
+            Bank Account No – 9313790257<br>
+            IFSC – KKBK0001429<br>
+            Bank – Kotak Mahindra Bank Ltd<br>
+            Branch – Vikhroli (W), Mumbai<br>
+             <?php }
+             ?>
       </tr>
    </table>
 </div>

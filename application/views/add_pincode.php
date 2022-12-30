@@ -315,7 +315,7 @@
          });
 
 
-        $('#excel_import_pincode_form').submit(function(e) {
+   $('#excel_import_pincode_form').submit(function(e) {
        e.preventDefault();
        var formData = new FormData($("#excel_import_pincode_form")[0]);
        var InvoiceTypeForm = $(this);

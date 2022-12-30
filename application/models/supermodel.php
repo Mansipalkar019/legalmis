@@ -404,14 +404,17 @@ class Supermodel extends CI_Model {
 		$this->db->order_by('sales.id',"DESC");
 		return $this->db->count_all_results();
 	}
-	public function getsalesrecordbyid($id='')
+public function getsalesrecordbyid($id='')
 	{
-		$this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(sub_services.name) as subserviceid,invoice_type.name as invoice_type_name');
+		$this->db->select('sales.*,GROUP_CONCAT(DISTINCT(services.name)) as serviceid,GROUP_CONCAT(sub_services.name) as subserviceid,invoice_type.name as invoice_type_name,tbl_states.name as statename,tbl_cities.name as city_name,tbl_pincode.pincode as pin_code');
         $this->db->from('sales');
         $this->db->join('sales_services','sales_services.sales_id=sales.id','left');
         $this->db->join('sales_sub_services','sales_sub_services.sales_id=sales.id','left');
 		$this->db->join('services','services.id=sales_services.services_id','left');
 		$this->db->join('invoice_type','sales.invoice_type=invoice_type.id','left');
+		$this->db->join('tbl_states','sales.state=tbl_states.id','left');
+		$this->db->join('tbl_cities','sales.city=tbl_cities.id','left');
+		$this->db->join('tbl_pincode','sales.pincode=tbl_pincode.id','left');
 		$this->db->distinct('services');
 		$this->db->join('sub_services','sub_services.id=sales_sub_services.sub_services_id','left');
         $this->db->group_by('sales.id');

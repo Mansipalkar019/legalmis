@@ -191,6 +191,7 @@ $("#upload_excel_form").submit(function(e) {
    // });
 
    $('.cal_outstanding').on('keyup',function(){
+      var invoice_type=$('#invoice_type').val();
       var deal_amt=$('#deal_amount').val();
       var govt_fees=$('#govt_fees').val();
       var associate_fees=$('#associate_fees').val();
@@ -200,7 +201,7 @@ $("#upload_excel_form").submit(function(e) {
       type: 'post',
       dataType: "json",
       data:{
-         deal_amt:deal_amt,govt_fees:govt_fees,associate_fees:associate_fees,state:state
+         deal_amt:deal_amt,govt_fees:govt_fees,associate_fees:associate_fees,state:state,invoice_type:invoice_type
       },
       success: function( data ) {   
          //$("#outstanding").val(data.outstanding);
@@ -223,13 +224,13 @@ $("#upload_excel_form").submit(function(e) {
             $("#igst").val(data.igst);
             $("#round_off").val(data.final_round_off);
          }
-       
          //$("#govt_fees").val(data.govt_fees);
       }
       });
    });
 
    $('#state').on('change', function (e) {
+      var invoice_type=$('#invoice_type').val();
       var state = $("#state").val();
       var deal_amt=$('#deal_amount').val();
       var govt_fees=$('#govt_fees').val();
@@ -273,12 +274,11 @@ $("#upload_excel_form").submit(function(e) {
             dataType: "json",
             data:{
                professional_fees:professional_fees,drafting_proceeding_fees:drafting_proceeding_fees,
-               drafting_proceeding_professional_fees:drafting_proceeding_professional_fees,state:state
+               drafting_proceeding_professional_fees:drafting_proceeding_professional_fees,state:state,invoice_type:invoice_type
             },
             success: function( data ) {   
                   if(data.msg)
-                  {
-                      
+                  {                     
                      swal({
                         title: "Warning",
                         text: data.msg,

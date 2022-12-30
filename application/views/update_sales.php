@@ -144,7 +144,7 @@
                                           foreach($city as $city_key => $city_row) 
                                           { 
                                              $selected="";
-                                             if($city_row['name']== $sales_data['city']){
+                                             if($city_row['id']== $sales_data['city']){
                                                 $selected ="selected";
                                              }else{
                                                 $selected ="";
@@ -166,7 +166,7 @@
                                           foreach($pincode as $pincode_key => $pincode_row) 
                                           { 
                                              $selected="";
-                                             if($pincode_row['pincode']== $sales_data['pincode']){
+                                             if($pincode_row['id']== $sales_data['pincode']){
                                                 $selected ="selected";
                                              }else{
                                                 $selected ="";
@@ -674,17 +674,28 @@
          
          function getpincode(city) {
             $.ajax({
-               url: '<?php echo base_url(); ?>Sales/getpincode',
-               type: 'post',
-               dataType: "json",
-               data: {
-                  city: city
-               },
-               success: function (data) {
-                  $("#pincode").html(data);
-                  $('#pincode').trigger("chosen:updated");
-               }
-            });
+                              url: bases_url +'Sales/getpincode',
+                              type: 'post',
+                              dataType: "json",
+                              data:{
+                              city:city
+                              },
+                              success: function( data ) { 
+                                    if(data!==""){        
+                                       var pincode_data = data.pincode_data;
+                                       var html = "";
+                                        html += '<option value=""></option>';
+                                        $.each(pincode_data, function(pincode_data_index, pincode_data_row) {
+                                            html += '<option value="' + pincode_data_row.id + '">' + pincode_data_row.pincode + "</option>";
+                                        });
+                                       $("#pincode").html(html);
+                                       $('#pincode').trigger('change.select2');
+                                    }else{
+                                       $("#pincode").html("");
+                                       $("#pincode").trigger('change.select2');               
+                                    }
+                              }
+                        });
          }
          
          function get_brand_name(city) {
@@ -924,6 +935,7 @@
              $("#sub_services").html("");
                      $('#sub_services').trigger('change.select2');
          });
+                      
       </script>
    </body>
 </html>

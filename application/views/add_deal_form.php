@@ -213,6 +213,20 @@
                      </div>
                      <div class="col-md-3">
                         <div class="form-group">
+                           <label>Invoice Type:<span class="text-danger">*</span></label>
+                           <select id="invoice_type" class="selectpicker form-control" name="invoice_type" title="select Primary Caller..." data-max-options="1" max-options-text="Only 1 selection is allowed">
+                              <option value="">Select Invoice Type</option>
+                              <?php
+                                 foreach($invoice_type as $invoice_type_key => $invoice_type_row) 
+                                 {?>
+                              <option value=<?php echo  $invoice_type_row['id'] ?> ><?php echo  $invoice_type_row['name'] ?></option>
+                              <?php } ?>
+                           </select>
+                           <span class="error_msg" id="invoice_type_error"></span>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="form-group">
                            <label>Deal Amount:<span class="text-danger">*</span></label>
                            <input type="text" name="deal_amount"
                               id="deal_amount" class="form-control cal_outstanding" onkeypress="return isNumber(event)">
@@ -313,7 +327,10 @@
                            <span class="error_msg" id="secondary_caller_error"></span>
                         </div>
                      </div>
-                     <div class="col-md-3">
+                    
+                  </div>
+                  <div class="row">
+                      <div class="col-md-3">
                         <div class="form-group">
                            <label>Select Services:<span class="text-danger">*</span></label>
                            <select id="services" class=" form-control " multiple="" name="services[]"  data-max-options="1" max-options-text="Only 1 selection is allowed" >
@@ -329,8 +346,6 @@
                            <span class="error_msg" id="services_error"></span>
                         </div>
                      </div>
-                  </div>
-                  <div class="row">
                      <div class="col-md-3">
                         <div class="form-group">
                            <label>Select Sub Services:<span class="text-danger">*</span></label>
@@ -369,20 +384,7 @@
                            <span class="error_msg" id="payment_mode_error"></span>
                         </div>
                      </div>
-                     <div class="col-md-4">
-                        <div class="form-group">
-                           <label>Invoice Type:<span class="text-danger">*</span></label>
-                           <select id="invoice_type" class="selectpicker form-control" name="invoice_type" title="select Primary Caller..." data-max-options="1" max-options-text="Only 1 selection is allowed">
-                              <option value="">Select Invoice Type</option>
-                              <?php
-                                 foreach($invoice_type as $invoice_type_key => $invoice_type_row) 
-                                 {?>
-                              <option value=<?php echo  $invoice_type_row['id'] ?> ><?php echo  $invoice_type_row['name'] ?></option>
-                              <?php } ?>
-                           </select>
-                           <span class="error_msg" id="invoice_type_error"></span>
-                        </div>
-                     </div>
+                     
                      <div class="col-md-4">
                         <div class="form-group">
                            <label>Invoice status:<span class="text-danger">*</span></label>
@@ -868,7 +870,6 @@
                         city:city_data
                         },
                         success: function( data ) { 
-                           // console.log(data);return;
                               if(data!==""){        
                                  var pincode_data = data.pincode_data;
                                  var html = "";

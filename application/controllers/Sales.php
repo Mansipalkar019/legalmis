@@ -10,11 +10,10 @@ class Sales extends CI_Controller {
     }
     public function index() {
         if ($this->session->userdata('superadmin_logged_in')) {
-                $this->load->view('sales-index');
+            $this->load->view('sales-index');
         }else{
             redirect('welcome');
         }
-
     }
     public function print_sales1() {
         $sales_id = base64_decode($_GET['id']);
@@ -266,10 +265,8 @@ class Sales extends CI_Controller {
     }
     public function doc_gallery() {
         $sales_id = base64_decode($_GET['id']);
-
-        $get_doc_list = $this->model->selectWhereData('sales', array('id' => $sales_id), array('image_url'));
-        $data['doc_list'] = explode(',', $get_doc_list['image_url']);
-        // echo '<pre>'; print_r($data['doc_list']); exit;
+        $get_doc_list = $this->model->selectWhereData('sales', array('id' => $sales_id), array('image_url'), false);
+        $data['doc_list'] = explode(',', $get_doc_list[0]['image_url']);
         $this->load->view('doc_gallery', $data);
     }
     // only for Rashi and Administrator as of now
@@ -312,7 +309,7 @@ class Sales extends CI_Controller {
         echo "<br>TODO: show custom 4 column page here...";
     }
     public function add_deal() {
-         if ($this->session->userdata('superadmin_logged_in')) {
+          if ($this->session->userdata('superadmin_logged_in')) {
                 // FETCH: get all services name only & get sub_services using $this->get_background_data();
                 $data['services_list'] = $this->model->getData('services', array('status' => '1'));
                 // FETCH: get all services name only & get sub_services using $this->get_background_data();
@@ -334,11 +331,11 @@ class Sales extends CI_Controller {
                 // FETCH: get all customer executive
                 $data['customer_executive'] = $this->model->getData('customer_executive', array('status' => '1'));
                  $city_data = $this->model->selectWhereData('tbl_cities ',array('status'=>1),array('*'),false);
-            $data['city_data'] = $city_data;
+                    $data['city_data'] = $city_data;
                 $this->load->view('add_deal_form', $data);
-        }else{
+          }else{
             redirect('welcome');
-        }
+        }  
     }
     function _check_date($value) {
         // input: "30/03/2022"
@@ -423,57 +420,87 @@ class Sales extends CI_Controller {
         $govt_fees = $this->input->post('govt_fees');
         $associate_fees = $this->input->post('associate_fees');
         $state = $this->input->post('state');
+        $invoice_type = $this->input->post('invoice_type');       
+
         $outstanding = 0;
         $tcs = 0;
-        if (!empty($deal_amt)) {
-            $deal_amt = $deal_amt;
-        } else {
-            $deal_amt = 0;
-        }
-        if (!empty($govt_fees)) {
-            $govt_fees = $govt_fees;
-        } else {
-            $govt_fees = 0;
-        }
-        if (!empty($associate_fees)) {
-            $associate_fees = $associate_fees;
-        } else {
-            $associate_fees = 0;
-        }
-        $professionalwithgst = $deal_amt - $govt_fees;
-        $gstamt = $professionalwithgst / 118;
-        $final_gstamt = round($gstamt * 18);
-        $professinal_amt = $professionalwithgst - $final_gstamt;
-        //echo 'deal_amt'.$deal_amt.'govt_fees'.$govt_fees.'associate_fees'.$associate_fees.'  '.'professionalwithgst'.$professionalwithgst.'  '.'gstamt'.$gstamt.' '.'final_gstamt'.$final_gstamt.' '.'professinal_amt'.$professinal_amt;die();
-        if ($associate_fees != 0) {
-            $final_net_amount = abs($professinal_amt - $associate_fees);
-        } else {
-            $final_net_amount = abs($professinal_amt);
+        $cgst = 0;
+        $sgst = 0;
+        $igst = 0;
+        $final_round_off = 0;
+        if($invoice_type==1){
+                if (!empty($deal_amt)) {
+                    $deal_amt = $deal_amt;
+                } else {
+                    $deal_amt = 0;
+                }
+                if (!empty($govt_fees)) {
+                    $govt_fees = $govt_fees;
+                } else {
+                    $govt_fees = 0;
+                }
+                if (!empty($associate_fees)) {
+                    $associate_fees = $associate_fees;
+                } else {
+                    $associate_fees = 0;
+                }
+                $professionalwithgst = $deal_amt - $govt_fees;
+                $gstamt = $professionalwithgst / 118;
+                $final_gstamt = round($gstamt * 18);
+                $professinal_amt = $professionalwithgst - $final_gstamt;
+               
+                if ($associate_fees != 0) {
+                    $final_net_amount = abs($professinal_amt - $associate_fees);
+                } else {
+                    $final_net_amount = abs($professinal_amt);
+                }
+        }else{
+            $final_net_amount = $deal_amt - $govt_fees - $associate_fees;
+            
         }
         if ($state == 22) {
-            $net_income = $final_net_amount + $associate_fees;
-            $sum = 100;
-            $cgst_amt = (($net_income * 18) / $sum);
-            $cgst = $cgst_amt / 2;
-            $sgst = $cgst;
-            $igst = 0;
-            $gstround = (int)($cgst + $sgst);
-            $final_round_off = number_format($gstround - $cgst - $sgst, 2);
+            if($invoice_type==1){
+                    $net_income = $final_net_amount + $associate_fees;
+                    $sum = 100;
+                    $cgst_amt = (($net_income * 18) / $sum);
+                    $cgst = $cgst_amt / 2;
+                    $sgst = $cgst;
+                    $igst = 0;
+                    $gstround = (int)($cgst + $sgst);
+                    $final_round_off = number_format($gstround - $cgst - $sgst, 2);
+            }else{
+                $net_income = $deal_amt - $govt_fees - $associate_fees;
+                    
+                    $cgst_amt = 0;
+                    $cgst = 0;
+                    $sgst = 0;
+                    $igst = 0;
+                    $gstround =0 ;
+                    $final_round_off = 0;
+            }          
+         
             $data = array('outstanding' => $outstanding, 'tcs' => $tcs, 'associate_fees' => $associate_fees, 'final_net_amount' => $final_net_amount, 'cgst' => $cgst, 'sgst' => $sgst, 'igst' => $igst, 'final_round_off' => $final_round_off);
         } else if ($state != 22 && !empty($state)) {
-            $net_income = $final_net_amount + $associate_fees;
-            $sum = 100;
-            $cgst_amt = (($net_income * 18) / $sum);
-            $igst = $cgst_amt;
-            $cgst = 0;
-            $sgst = 0;
-            $gstround = (int)($igst);
-            $final_round_off = number_format($gstround - $igst, 2);
+            if($invoice_type==1){
+                $net_income = $final_net_amount + $associate_fees;
+                $sum = 100;
+                $cgst_amt = (($net_income * 18) / $sum);
+                $igst = $cgst_amt;
+                $cgst = 0;
+                $sgst = 0;
+                $gstround = (int)($igst);
+                $final_round_off = number_format($gstround - $igst, 2);
+            }else  if($invoice_type == 2){
+                $cgst_amt = 0;
+                $igst = 0;
+                $cgst = 0;
+                $sgst = 0;
+                $gstround = (int)($igst);
+                $final_round_off = number_format($gstround - $igst, 2);
+            }
             $data = array('outstanding' => $outstanding, 'tcs' => $tcs, 'associate_fees' => $associate_fees, 'final_net_amount' => $final_net_amount, 'cgst' => $cgst, 'sgst' => $sgst, 'igst' => $igst, 'final_round_off' => $final_round_off);
         } else {
-            $data = array('msg' => 'Please Select State',);
-            // print_r();die();
-            
+            $data = array('msg' => 'Please Select State',);        
         }
         echo json_encode($data);
     }
@@ -482,50 +509,73 @@ class Sales extends CI_Controller {
         $drafting_proceeding_fees = $this->input->post('drafting_proceeding_fees');
         $drafting_proceeding_professional_fees = $this->input->post('drafting_proceeding_professional_fees');
         $state = $this->input->post('state');
+        $invoice_type = $this->input->post('invoice_type');   
         $total_prof_amt = 0;
-        if (!empty($professional_fees)) {
-            $professional_fees = $professional_fees;
-        } else {
-            $professional_fees = 0;
-        }
-        if (!empty($drafting_proceeding_fees)) {
-            $drafting_proceeding_fees = $drafting_proceeding_fees;
-        } else {
-            $drafting_proceeding_fees = 0;
-        }
-        if (!empty($drafting_proceeding_professional_fees)) {
-            $drafting_proceeding_professional_fees = $drafting_proceeding_professional_fees;
-        } else {
-            $drafting_proceeding_professional_fees = 0;
+        if($invoice_type==1){
+                if (!empty($professional_fees)) {
+                    $professional_fees = $professional_fees;
+                } else {
+                    $professional_fees = 0;
+                }
+                if (!empty($drafting_proceeding_fees)) {
+                    $drafting_proceeding_fees = $drafting_proceeding_fees;
+                } else {
+                    $drafting_proceeding_fees = 0;
+                }
+                if (!empty($drafting_proceeding_professional_fees)) {
+                    $drafting_proceeding_professional_fees = $drafting_proceeding_professional_fees;
+                } else {
+                    $drafting_proceeding_professional_fees = 0;
+                }
         }
         //if state Maharastra
         if ($state == 22) {
-            $total_prof_amt = $professional_fees + $drafting_proceeding_fees + $drafting_proceeding_professional_fees;
-            $sum = 100;
-            $cgst_amt = (($total_prof_amt * 18) / $sum);
-            $cgst = $cgst_amt / 2;
-            $sgst = $cgst;
-            $igst = 0;
-            $gstround = (int)($cgst + $sgst);
-            $final_round_off = number_format($gstround - $cgst - $sgst, 2);
+             if($invoice_type==1){
+                    $total_prof_amt = $professional_fees + $drafting_proceeding_fees + $drafting_proceeding_professional_fees;
+                    $sum = 100;
+                    $cgst_amt = (($total_prof_amt * 18) / $sum);
+                    $cgst = $cgst_amt / 2;
+                    $sgst = $cgst;
+                    $igst = 0;
+                    $gstround = (int)($cgst + $sgst);
+                    $final_round_off = number_format($gstround - $cgst - $sgst, 2);
+            }else{
+                    $total_prof_amt = $professional_fees + $drafting_proceeding_fees + $drafting_proceeding_professional_fees;
+                    $cgst_amt = 0;
+                    $cgst = 0;
+                    $sgst = 0;
+                    $igst = 0;
+                    $gstround = 0;
+                    $final_round_off = 0;
+            }
             $data = array('total_prof_amt' => $total_prof_amt, 'cgst' => $cgst, 'sgst' => $sgst, 'igst' => $igst, 'final_round_off' => $final_round_off);
         } else if ($state != 22) {
-            $total_prof_amt = $professional_fees + $drafting_proceeding_fees + $drafting_proceeding_professional_fees;
-            $data['total_prof_amt'] = $total_prof_amt;
-            $sum = 100;
-            $cgst_amt = (($total_prof_amt * 18) / $sum);
-            $igst = $cgst_amt;
-            $cgst = 0;
-            $sgst = 0;
-            $gstround = (int)($igst);
-            $final_round_off = number_format($gstround - $igst, 2);
+            if($invoice_type==1){
+                $total_prof_amt = $professional_fees + $drafting_proceeding_fees + $drafting_proceeding_professional_fees;
+                $data['total_prof_amt'] = $total_prof_amt;
+                $sum = 100;
+                $cgst_amt = (($total_prof_amt * 18) / $sum);
+                $igst = $cgst_amt;
+                $cgst = 0;
+                $sgst = 0;
+                $gstround = (int)($igst);
+                $final_round_off = number_format($gstround - $igst, 2);
+            }else{
+                    $total_prof_amt = $professional_fees + $drafting_proceeding_fees + $drafting_proceeding_professional_fees;
+                    $cgst_amt = 0;
+                    $cgst = 0;
+                    $sgst = 0;
+                    $igst = 0;
+                    $gstround = 0;
+                    $final_round_off = 0;
+            }
             $data = array('total_prof_amt' => $total_prof_amt, 'cgst' => $cgst, 'sgst' => $sgst, 'igst' => $igst, 'final_round_off' => $final_round_off);
         } else {
             $data = array('msg' => 'Please Select State',);
         }
         echo json_encode($data);
     }
-    private function set_upload_options() {
+     private function set_upload_options() {
         $config = array();
         $config['upload_path'] = 'uploads/images/';
         $config['allowed_types'] = 'jpeg|jpg|png';
@@ -562,7 +612,7 @@ class Sales extends CI_Controller {
         $this->form_validation->set_rules('fk_pincode', 'Pincode', 'trim|required|numeric', array('required' => 'This field is required'));
         $this->form_validation->set_rules('deal_amount', 'Deal Amount', 'trim|required', array('required' => 'This field is required'));
         $this->form_validation->set_rules('amount_received', 'Amount Received', 'trim|required', array('required' => 'This field is required'));
-        $this->form_validation->set_rules('outstanding', 'Outstanding', 'trim|required|numeric', array('required' => 'This field is required'));
+        // $this->form_validation->set_rules('outstanding', 'Outstanding', 'trim|required|numeric', array('required' => 'This field is required'));
         $this->form_validation->set_rules('tcs', 'TCS', 'trim|required', array('required' => 'This field is required'));
         $this->form_validation->set_rules('govt_fees', 'GOVT Fees', 'trim|required|numeric', array('required' => 'This field is required'));
         $this->form_validation->set_rules('associate_fees', 'Associate Fees', 'trim|required|numeric', array('required' => 'This field is required'));
@@ -620,7 +670,7 @@ class Sales extends CI_Controller {
             $street = $this->input->post('street');
             $city = $this->input->post('city');
             $state = $this->input->post('state');
-            $fk_pincode = $this->input->post('fk_pincode');
+            $pincode = $this->input->post('fk_pincode');
             //$commission            = $this->input->post('commission');
             $dob = $this->input->post('dob');
             $industry = $this->input->post('industry');
@@ -726,7 +776,7 @@ class Sales extends CI_Controller {
                     'street' => $street, 
                     'city' => $city, 
                     'state' => $state, 
-                    'pincode' => $fk_pincode,
+                    'pincode' => $pincode,
                      //'commission'            => $commission,
                     'date_of_birth' => $dob, 
                     'industry' => $industry,
@@ -926,7 +976,7 @@ class Sales extends CI_Controller {
          }
         $data['sale_service_brand'] = $sale_service_brand;
         $data['state'] = $this->model->getData('tbl_states');
-        $data['city'] = $this->model->selectWhereData('tbl_cities',array('state_id'=>$data['sales_data']['state']),array('*'),false);
+                $data['city'] = $this->model->selectWhereData('tbl_cities',array('state_id'=>$data['sales_data']['state']),array('*'),false);
         $data['pincode'] = $this->model->selectWhereData('tbl_pincode',array('fk_city_id'=>$data['sales_data']['city']),array('*'),false);
         $data['customer_executive']  = $this->model->selectWhereData('customer_executive', array('status' => '1'),array('id','name'),false);
         $data['payment_mode'] = $this->model->getData('payment_mode', array('status' => '1'));
